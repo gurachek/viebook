@@ -141,13 +141,16 @@ a.desc:after {
 
 .books_searched .book {
     margin-bottom: 20px;
-    width: 23%;
-    float: left;
     border-right: 1px solid #dedede;
-    margin-right: 10px;
-    padding-left: 10px;
-    padding-right: 5px;
+    text-align: center;
     min-height: 500px;
+}
+
+@media(max-width: 1100px) {
+    .books_searched .book .image {
+        width: 140px !important;
+        height: 260px !important;
+    }
 }
 
 .books_searched .book .name {
@@ -167,14 +170,6 @@ a.desc:after {
 .books_searched .book .read_reviews {
     margin-top: 10px;
     text-align: center;
-}
-
-.books_searched .book .image .read_reviews .read_reviews_button {
-    position: relative;
-    top: 277px;
-    background: #444;
-    color: white;
-    padding: 20px 45px;
 }
 
 .books_searched .book:last-child {
@@ -204,4 +199,20 @@ a.desc:after {
 .book_reviews .review_text {
     width: 90%;
     margin: 0 auto;
+}
+
+.review_page .estimate .like {
+color: green; font-size: 25px; margin-right: 10px; cursor: pointer;
+}
+
+.review_page .estimate .dislike {
+color: red; font-size: 25px; margin-left: 10px; cursor: pointer;
+}
+
+.ty_for_estimate {
+    display: none;
+}
+
+.review_text {
+    cursor: pointer;
 }

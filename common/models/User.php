@@ -6,6 +6,7 @@ use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 use yii\web\IdentityInterface;
+use common\models\User_estimates;
 
 /**
  * User model
@@ -62,6 +63,13 @@ class User extends ActiveRecord implements IdentityInterface
     public static function findIdentity($id)
     {
         return static::findOne(['id' => $id, 'status' => self::STATUS_ACTIVE]);
+    }
+
+    public function estimates($user_id)
+    {
+        $estimates = User_estimates::find()->where(['user_id' => $user_id])->asArray()->all();
+
+        return $estimates;
     }
 
     /**

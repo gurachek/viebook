@@ -39,21 +39,20 @@ if (!is_array($search_results)) {
 } else { ?>
 
     <div class="books_searched">
-
+    <div class="row">
     <?php foreach($search_results as $book): ?>
         <?php
         $author = $book->author['first_name'] .' '. $book->author['second_name'] .' '. $book->author['surname'];
         $category = $book->cat['name'];
         ?>
 
+            <div class="col-md-3">
             <div class="book">
                 <div class="name">
-                    <h3 style="margin: 0;"><?= $book->name ?></h3>
+                    <?= Html::a("<h3 style='margin: 0;'>$book->name</h3>", ['book/view', 'id' => $book->id]); ?>
                 </div>
                 <div class="image" style="background: url(images/books/<?= $book->image ?>); background-size: cover;">
-                    <div class="read_reviews">
-                        <?= Html::a('Читать рецензии', ['book/view', 'id' => $book->id], ['class' => 'read_reviews_button']) ?>
-                    </div>
+
                 </div>
                 <div class="publish_date">
                     <span class="publish_label">Дата публикации: </span>
@@ -68,7 +67,9 @@ if (!is_array($search_results)) {
                     <?= $category ?>
                 </div>
             </div>
+            </div>
         <?php endforeach; ?>
+    </div>
     </div>
 <?php } ?>
 
