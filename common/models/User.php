@@ -65,13 +65,6 @@ class User extends ActiveRecord implements IdentityInterface
         return static::findOne(['id' => $id, 'status' => self::STATUS_ACTIVE]);
     }
 
-    public function estimates($user_id)
-    {
-        $estimates = User_estimates::find()->where(['user_id' => $user_id])->asArray()->all();
-
-        return $estimates;
-    }
-
     /**
      * @inheritdoc
      */

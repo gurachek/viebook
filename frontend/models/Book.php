@@ -12,12 +12,24 @@ use yii\db\ActiveRecord;
 use frontend\models\Category;
 use frontend\models\Author;
 use frontend\models\Review;
+use frontend\models\Book_tags;
 
 class Book extends ActiveRecord
 {
+
+    public function authorFullname()
+    {
+        return @$this->author->first_name . ' '. @$this->author->second_name . ' ' . @$this->author->surname;
+    }
+
     public static function tableName()
     {
         return 'books';
+    }
+
+    public function getTags()
+    {
+        return $this->hasMany(Book_tags::className(), ['book_id' => 'id' ]);
     }
 
     public function getCat()

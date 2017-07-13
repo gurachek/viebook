@@ -1,6 +1,8 @@
 <?php
 use yii\helpers\Html;
 
+$this->title = '"'. $book->name .'" '. $book->authorFullname();
+
 $url = Yii::$app->request->baseUrl;
 
 $readReviewButton = <<<JS
@@ -45,7 +47,7 @@ $this->registerJs($readReviewButton);
                 <img src="images/books/<?= $book->image ?>" width="200" height="315">
                 <br>
                 <br>
-                <?= Html::a("Написать рецензию", ['review/write', 'bookid' => $book->id], ['class' => 'btn btn-primary']); ?>
+                <?= Html::a("Написать рецензию", ['review/write', 'bookid' => $book->id], ['class' => 'btn btn-default']); ?>
             </div>
         </div>
     </div>
@@ -76,7 +78,7 @@ $this->registerJs($readReviewButton);
                         </div>
                         <br>
                         <div class="go_read">
-                            <?= Html::a("Читать дальше", ['review/view', 'id' => $review->id], ['class' => 'btn btn-default pull-right read_this_review']); ?>
+                            <?= Html::a("Читать дальше", ['review/view', 'id' => $review->id], ['class' => 'btn btn-danger pull-right read_this_review']); ?>
 
                         </div>
                     </div>
@@ -85,7 +87,7 @@ $this->registerJs($readReviewButton);
         <?php else: ?>
 
             <div class="text-center">
-                Нет ни одной рецензии. Нажмите кнопку слева, чтобы написать.
+                Нет рецензий к этой вниге. Но вы можете написать ее сами.
             </div>
 
         <?php endif; ?>

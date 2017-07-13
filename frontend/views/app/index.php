@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\widgets\Pjax;
 
-$this->title = "Search something you interesting in";
+$this->title = "Viebook - search for something here.";
 
 ?>
 
@@ -22,11 +22,13 @@ $this->title = "Search something you interesting in";
     ]
 ]); ?>
 
-    <h3>Введите название книги</h3>
+    <h3 class="text-center">Начните вводить название книги</h3>
 
-    <?= $form->field($model, 'search')->label(false) ?>
+    <div style="width: 80%; float: left; padding-right: 5px;">
+        <?= $form->field($model, 'search')->label(false) ?>
+    </div>
 
-    <?= Html::submitButton('Submit', ['class' => 'btn btn-primary']); ?>
+    <?= Html::submitButton('Submit', ['class' => 'btn btn-danger']); ?>
 
 <?php ActiveForm::end(); ?>
 
@@ -35,7 +37,10 @@ $this->title = "Search something you interesting in";
 <?php
 
 if (!is_array($search_results)) {
-    echo "<h3>$search_results</h3>";
+    echo "<h4 class='text-center'>На сайте нет такой книги</h4>";
+    echo "<p class='text-center'>";
+    echo Html::a('Добавить', ['book/add'], ['class' => 'btn btn-default']);
+    echo "</p>";
 } else { ?>
 
     <div class="books_searched">
@@ -47,7 +52,7 @@ if (!is_array($search_results)) {
         ?>
 
             <div class="col-md-3">
-            <div class="book">
+            <div class="book" style="border: 1px solid #d2d2d2;background: #F6F7F2; padding-top: 10px; margin-bottom: 10px;">
                 <div class="name">
                     <?= Html::a("<h3 style='margin: 0;'>$book->name</h3>", ['book/view', 'id' => $book->id]); ?>
                 </div>

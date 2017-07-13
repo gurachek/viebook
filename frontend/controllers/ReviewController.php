@@ -8,6 +8,8 @@ use frontend\models\Review;
 use frontend\models\Category;
 use yii\helpers\Json;
 use common\models\User_estimates;
+use common\models\WritereviewModel;
+use frontend\models\Book;
 
 class ReviewController extends Controller
 {
@@ -100,7 +102,28 @@ class ReviewController extends Controller
 
     public function actionWrite($bookid = null)
     {
-        // Write review
+
+        if(!Yii::$app->user->getId()) {
+            return $this->render('write_need_login', [
+                'bookid' => $bookid,
+            ]);
+        }
+
+        if ($bookid === null || $bookid === false) {
+            return $this->render('write_instructions');
+        }
+
+        $book = Book::findOne(['id' => intval($bookid)]);
+        $model = new WritereviewModel;
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            Yii::$app->session->setFlash('success_review_post', 'Рецензия добавлена на сайт');
+        }
+
+        return $this->render('write', [
+            'model' => $model,
+            'book' => $book,
+        ]);
     }
 
 }

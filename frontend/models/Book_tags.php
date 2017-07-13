@@ -11,7 +11,7 @@ namespace frontend\models;
 
 use yii\db\ActiveRecord;
 
-class Book_tag extends ActiveRecord
+class Book_tags extends ActiveRecord
 {
 
 }

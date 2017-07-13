@@ -10,6 +10,13 @@ use yii\bootstrap\ActiveForm;
 $this->title = 'Login';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+
+<?php if ($message): ?>
+    <div class="alert alert-info" role="alert">
+        <?= $message ?>
+    </div>
+<?php endif; ?>
+
 <div class="site-login">
     <h1><?= Html::encode($this->title) ?></h1>
 

@@ -1,10 +1,11 @@
 <?php
 use yii\helpers\Url;
+use yii\helpers\Html;
 
 $this->title = 'Viebook: '. $review->title;
 
 // For estimate
-$url = "http://localhost/".Url::to(['review/estimate']);
+$url = Yii::$app->getUrlManager()->createAbsoluteUrl(['review/estimate']);
 $userId = Yii::$app->user->getId();
 $reviewId = $review->id;
 
@@ -59,10 +60,21 @@ $this->registerJs($estimateReview);
             </span>
         </div>
 
-        <div class="estimate" style="text-align: center;">
-            <span title="Понравилось" class="glyphicon glyphicon-thumbs-up like" data-id="1"></span>
-            <span title="Не понравилось" class="glyphicon glyphicon-thumbs-down dislike" data-id="0"></span>
-        </div>
+        <?php if (Yii::$app->user->getId()): ?>
+
+            <div class="estimate" style="text-align: center;">
+                <span title="Понравилось" class="glyphicon glyphicon-thumbs-up like" data-id="1"></span>
+                <span title="Не понравилось" class="glyphicon glyphicon-thumbs-down dislike" data-id="0"></span>
+            </div>
+
+        <?php else: ?>
+
+            <div>
+                <?= Html::a('Войдите, чтобы оценить рецензию', ['site/login'], ['class' => 'btn btn-success pull-right']); ?>
+            </div>
+
+        <?php endif; ?>
+
     </div>
     <div class="col-md-2"></div>
 </div>

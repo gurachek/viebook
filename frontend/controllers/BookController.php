@@ -5,6 +5,8 @@ namespace frontend\controllers;
 use Yii;
 use yii\web\Controller;
 use frontend\models\Book;
+use frontend\models\AddbookModel;
+use yii\web\UploadedFile;
 
 class BookController extends Controller
 {
@@ -30,5 +32,29 @@ class BookController extends Controller
       return $this->render('view', [
           'book' => $book,
       ]);
+  }
+
+  public function actionAdd()
+  {
+
+    if (Yii::$app->user->isGuest) {
+        return $this->redirect(['site/login', 'a' => 'add_book']);
+    }
+
+    $model = new AddbookModel();
+
+    if ($model->load(Yii::$app->request->post())) {
+        
+        $model->image = UploadedFile::getInstance($model, 'image');
+        
+        if ($model->add()) {
+            Yii::$app->session->setFlash('success_book_add', 'Книга добавлена');
+        }
+    }
+
+    return $this->render('add', [
+        'model' => $model,
+        'lol' => Yii::$app->request->post()
+    ]);
   }
 }

@@ -1,6 +1,7 @@
 html,
 body {
     height: 100%;
+    background: #FFFFF7; 
 }
 
 .wrap {
@@ -97,6 +98,7 @@ a.desc:after {
 
 /* align the logout "link" (button in form) of the navbar */
 .nav li > form > button.logout {
+    color: white !important;
     padding: 15px;
     border: none;
 }
@@ -129,9 +131,8 @@ a.desc:after {
 }
 
 .search_input {
-    position: absolute;
-    top: 20%;
     width: 80%;
+    margin: 0 auto;
 }
 
 .books_searched {

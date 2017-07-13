@@ -11,6 +11,7 @@ namespace frontend\models;
 use yii\db\ActiveRecord;
 use frontend\models\Book;
 use common\models\User;
+use frontend\models\Analytics;
 
 class Review extends ActiveRecord
 {
@@ -24,8 +25,13 @@ class Review extends ActiveRecord
         return $this->hasOne(Book::className(), ['id' => 'book_id']);
     }
 
+    public function getAnalytics()
+    {
+        return $this->hasMany(Analytics::className(), ['review_id' => 'id']);
+    }
+
     public function getAuthor()
     {
-      return $this->hasOne(User::className(), ['id' => 'author_id']);
+      return $this->hasOne(User::className(), ['id' => 'user_id']);
     }
 }

@@ -26,13 +26,8 @@ class SiteController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['logout', 'signup'],
+                'only' => ['logout'],
                 'rules' => [
-                    [
-                        'actions' => ['signup'],
-                        'allow' => true,
-                        'roles' => ['?'],
-                    ],
                     [
                         'actions' => ['logout'],
                         'allow' => true,
@@ -80,18 +75,37 @@ class SiteController extends Controller
      *
      * @return mixed
      */
-    public function actionLogin()
+    public function actionLogin($a = null, $id = null)
     {
         if (!Yii::$app->user->isGuest) {
             return $this->goHome();
         }
 
+        $backURL = Yii::$app->request->referrer;
+        $message = '';
+
+        if ($a !== null) {
+            switch($a) {
+                case 'add_book':
+                    $message = 'Вы должны войти, чтобы добавить книгу на сайт';
+                    $backURL = ['book/add'];
+                    break;
+                case 'write_review':
+                    $backURL = ['review/write', 'bookid' => $id];
+            }
+        }
+
+        if(!Yii::$app->session->has("backURL")) {
+            Yii::$app->session->set("backURL", $backURL);
+        }
+
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
+            return $this->redirect(Yii::$app->session->get("backURL")); 
         } else {
             return $this->render('login', [
                 'model' => $model,
+                'message' => $message
             ]);
         }
     }
@@ -105,7 +119,7 @@ class SiteController extends Controller
     {
         Yii::$app->user->logout();
 
-        return $this->goHome();
+        return $this->redirect(Yii::$app->request->referrer);
     }
 
     /**
@@ -148,6 +162,11 @@ class SiteController extends Controller
      */
     public function actionSignup()
     {
+
+        if (Yii::$app->user->getId()) {
+            return $this->goHome();
+        }
+
         $model = new SignupForm();
         if ($model->load(Yii::$app->request->post())) {
             if ($user = $model->signup()) {

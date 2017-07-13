@@ -9,7 +9,9 @@
 namespace frontend\models;
 
 
-class Analytics
+use yii\db\ActiveRecord;
+
+class Analytics extends ActiveRecord
 {
 
 }

@@ -1,3 +1,9 @@
 <?php
 
-var_dump($users);
+$this->title = "Пользователь ". $user['username'];
+
+?>
+
+<div class="row">
+
+</div>

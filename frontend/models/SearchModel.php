@@ -12,7 +12,7 @@ class SearchModel extends Model
     public function rules()
     {
         return[
-            ['search', 'required'],
+            ['search', 'required', 'message' => 'Нужно что-то ввести. Например, Лолита']
         ];
     }
 

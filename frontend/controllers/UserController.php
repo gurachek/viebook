@@ -8,14 +8,20 @@ use common\models\User;
 
 class UserController extends Controller
 {
-  public function actionIndex($id = null)
-  {
-      if ($id !== null) return Yii::$app->runAction('user/view', ['id' => $id]);
 
-      $users = User::find()->all();
+  // user account
+  public function actionIndex()
+  {
+      if (Yii::$app->user->isGuest) {
+        return $this->redirect(['site/login']);
+      }
+
+      $userId = Yii::$app->user->getId();
+
+      $user = User::find()->where(['id' => $userId])->asArray()->one();
 
       return $this->render('index', [
-          'users' => $users,
+          'user' => $user,
       ]);
   }
 
