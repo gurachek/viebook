@@ -9,11 +9,19 @@ $this->title = 'Написание рецензии на книгу "'. $book->n
 
 <h3>Вы пишете рецензию на книгу "<?= Html::a($book->name, ['book/view', 'id' => $book->id]); ?>"</h3>
 <br>
+
 <?php if (Yii::$app->session->hasFlash("success_review_post")): ?>
 	<div class="alert alert-success" role="alert">
 		<?= Yii::$app->session->getFlash("success_review_post") ?>
 	</div>
 <?php endif; ?>
+
+<?php if (Yii::$app->session->hasFlash("failure_review_post")): ?>
+	<div class="alert alert-warning" role="alert">
+		<?= Yii::$app->session->getFlash("failure_review_post") ?>
+	</div>
+<?php endif; ?>
+
 <br>
 <?php $form =  ActiveForm::begin(); ?>
     <?= $form->field($model, 'title'); ?>

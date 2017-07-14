@@ -116,8 +116,11 @@ class ReviewController extends Controller
         $book = Book::findOne(['id' => intval($bookid)]);
         $model = new WritereviewModel;
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            Yii::$app->session->setFlash('success_review_post', 'Рецензия добавлена на сайт');
+        if ($model->load(Yii::$app->request->post())) {
+            if ($model->save())
+                Yii::$app->session->setFlash('success_review_post', 'Рецензия добавлена на сайт');
+            else
+                Yii::$app->session->setFlash('failure_review_post', 'Что-то пошло не так');
         }
 
         return $this->render('write', [

@@ -533,7 +533,7 @@ class Component extends Object
         $this->ensureBehaviors();
         if (!empty($this->_events[$name])) {
             if ($event === null) {
-                $event = new Event;
+                $event = new Event();
             }
             if ($event->sender === null) {
                 $event->sender = $this;
@@ -669,13 +669,13 @@ class Component extends Object
         if (is_int($name)) {
             $behavior->attach($this);
             $this->_behaviors[] = $behavior;
+        } else {
+            if (isset($this->_behaviors[$name])) {
+                $this->_behaviors[$name]->detach();
+            }
+            $behavior->attach($this);
+            $this->_behaviors[$name] = $behavior;
         }
-
-        if (isset($this->_behaviors[$name])) {
-            $this->_behaviors[$name]->detach();
-        }
-        $behavior->attach($this);
-        $this->_behaviors[$name] = $behavior;
 
         return $behavior;
     }

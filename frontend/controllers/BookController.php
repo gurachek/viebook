@@ -7,6 +7,7 @@ use yii\web\Controller;
 use frontend\models\Book;
 use frontend\models\AddbookModel;
 use yii\web\UploadedFile;
+use frontend\models\Author;
 
 class BookController extends Controller
 {
@@ -52,9 +53,17 @@ class BookController extends Controller
         }
     }
 
+    $allAuthors = Author::find()->all();
+    $authorsFullName = [];
+
+    foreach ($allAuthors as $singleAuthor) {
+       $authorsFullName[] = $singleAuthor->getFullname();
+     } 
+
+
     return $this->render('add', [
         'model' => $model,
-        'lol' => Yii::$app->request->post()
+        'authors' => $authorsFullName
     ]);
   }
 }

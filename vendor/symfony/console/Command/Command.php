@@ -61,10 +61,6 @@ class Command
         }
 
         $this->configure();
-
-        if (!$this->name) {
-            throw new LogicException(sprintf('The command defined in "%s" cannot have an empty name.', get_class($this)));
-        }
     }
 
     /**
@@ -203,6 +199,8 @@ class Command
      *
      * @return int The command exit code
      *
+     * @throws \Exception When binding input fails. Bypass this by calling {@link ignoreValidationErrors()}.
+     *
      * @see setCode()
      * @see execute()
      */
@@ -284,7 +282,7 @@ class Command
         if ($code instanceof \Closure) {
             $r = new \ReflectionFunction($code);
             if (null === $r->getClosureThis()) {
-                if (PHP_VERSION_ID < 70000) {
+                if (\PHP_VERSION_ID < 70000) {
                     // Bug in PHP5: https://bugs.php.net/bug.php?id=64761
                     // This means that we cannot bind static closures and therefore we must
                     // ignore any errors here.  There is no way to test if the closure is

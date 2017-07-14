@@ -3,6 +3,8 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\widgets\Pjax;
+use yii\jui\AutoComplete;
+use yii\web\JsExpression;
 
 $this->title = "Viebook - search for something here.";
 
@@ -25,7 +27,24 @@ $this->title = "Viebook - search for something here.";
     <h3 class="text-center">Начните вводить название книги</h3>
 
     <div style="width: 80%; float: left; padding-right: 5px;">
-        <?= $form->field($model, 'search')->label(false) ?>
+        <?= $form->field($model, 'search')->label(false)->widget(AutoComplete::classname(), [
+            'clientOptions' => [
+                'source' => $books,
+                'minLength' => '2', // U need change it to 3
+                '_renderItem' => new JsExpression('function( ul, item ) {
+                    return $("<li>")
+                    .append("<img src=../images/"+item.Image +" alt=\"img\" />")
+                    .append("<a>" + item.value  + "<br>" + item.label  + "</a>")
+                    .appendTo(ul);
+                }'),
+            ],
+            'clientEvents' => [
+                'onSelect' => "function () { alert('lol'); }"
+            ],
+            'options' => [
+                'class' => 'form-control'
+            ]
+        ]) ?>
     </div>
 
     <?= Html::submitButton('Submit', ['class' => 'btn btn-danger']); ?>

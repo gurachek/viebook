@@ -87,7 +87,7 @@ $this->registerJs($readReviewButton);
         <?php else: ?>
 
             <div class="text-center">
-                Нет рецензий к этой вниге. Но вы можете написать ее сами.
+                Нет рецензий к этой книге. Но вы можете написать ее сами.
             </div>
 
         <?php endif; ?>
