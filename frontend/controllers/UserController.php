@@ -18,7 +18,7 @@ class UserController extends Controller
 
       $userId = Yii::$app->user->getId();
 
-      $user = User::find()->where(['id' => $userId])->asArray()->one();
+      $user = User::find()->where(['id' => $userId])->one();
 
       return $this->render('index', [
           'user' => $user,

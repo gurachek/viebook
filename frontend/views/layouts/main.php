@@ -71,7 +71,7 @@ AppAsset::register($this);
     <div class="container">
         <p class="pull-left">&copy; VieBook <?= date('Y') ?></p>
 
-        <p class="pull-right">Gurachek/Svernyuk</p>
+        <p class="pull-right">Gurachek</p>
     </div>
 </footer>
 

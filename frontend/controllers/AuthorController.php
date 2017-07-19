@@ -5,6 +5,8 @@ namespace frontend\controllers;
 use Yii;
 use yii\web\Controller;
 use frontend\models\Author;
+use frontend\models\AddAuthorModel;
+use yii\web\UploadedFile;
 
 class AuthorController extends Controller
 {
@@ -30,5 +32,30 @@ class AuthorController extends Controller
       return $this->render('view', [
           'author' => $author,
       ]);
+  }
+
+  public function actionAdd()
+  {
+    if (Yii::$app->user->isGuest) {
+        return $this->redirect(['site/login', 'a' => 'add_author']);
+    }
+
+    $model = new AddAuthorModel();
+
+    if ($model->load(Yii::$app->request->post())) {
+
+      $model->image = UploadedFile::getInstance($model, 'image');
+
+      if ($model->add()) {
+        Yii::$app->session->setFlash('success_author_add', 'Автор добавлен на сайт. Спасибо за помощь');
+      } else {
+        Yii::$app->session->setFlash('failure_author_add', 'Не получилось добавить автора. Возможно, он уже есть.');
+      }
+
+    }
+
+    return $this->render('add', [
+      'model' => $model,
+    ]);
   }
 }

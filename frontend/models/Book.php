@@ -17,9 +17,12 @@ use frontend\models\Book_tags;
 class Book extends ActiveRecord
 {
 
-    public function authorFullname()
+    public function getAuthorIdByName($name)
     {
-        return @$this->author->first_name . ' '. @$this->author->second_name . ' ' . @$this->author->surname;
+
+        $author = Author::find()->where(['name' => $name])->asArray()->one();
+
+        return $author['id'];
     }
 
     public static function tableName()

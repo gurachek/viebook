@@ -7,6 +7,7 @@ use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 use yii\web\IdentityInterface;
 use common\models\User_estimates;
+use frontend\models\Review;
 
 /**
  * User model
@@ -26,6 +27,11 @@ class User extends ActiveRecord implements IdentityInterface
 {
     const STATUS_DELETED = 0;
     const STATUS_ACTIVE = 10;
+
+    public function getReviews()
+    {
+        return $this->hasMany(Review::className(), ['user_id' => 'id']);
+    }
 
 
     /**

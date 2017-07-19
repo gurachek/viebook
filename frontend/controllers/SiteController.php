@@ -87,11 +87,21 @@ class SiteController extends Controller
         if ($a !== null) {
             switch($a) {
                 case 'add_book':
-                    $message = 'Вы должны войти, чтобы добавить книгу на сайт';
+                    $message = 'Вам нужно войти, чтобы добавить книгу на сайт';
                     $backURL = ['book/add'];
                     break;
                 case 'write_review':
+                    $message = 'Вам нужно войти, чтобы добавить написать рецензию';
                     $backURL = ['review/write', 'bookid' => $id];
+                    break;
+                case 'add_author':
+                    $message = 'Вам нужно войти, чтобы добавить автора на сайт';
+                    $backURL = ['author/add'];
+                    break;
+                case 'review_view':
+                    $message = 'Вам нужно войти, чтобы оставить оценку рецензии';
+                    $backURL = ['review/view', 'id' => $id];
+                    break;
             }
         }
 

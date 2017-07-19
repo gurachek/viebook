@@ -8,6 +8,7 @@ use frontend\models\Book;
 use frontend\models\AddbookModel;
 use yii\web\UploadedFile;
 use frontend\models\Author;
+use frontend\models\Tag;
 
 class BookController extends Controller
 {
@@ -50,6 +51,8 @@ class BookController extends Controller
         
         if ($model->add()) {
             Yii::$app->session->setFlash('success_book_add', 'Книга добавлена');
+        } else {
+            Yii::$app->session->setFlash('failure_book_add', 'Не получилось добавить книгу. Возможно, эта книга уже есть на сайте.');
         }
     }
 
@@ -57,13 +60,16 @@ class BookController extends Controller
     $authorsFullName = [];
 
     foreach ($allAuthors as $singleAuthor) {
-       $authorsFullName[] = $singleAuthor->getFullname();
+       $authorsFullName[] = $singleAuthor['name'];
      } 
 
+     $tags = Tag::find()->asArray()->all();
+     $tags = array_column($tags, 'name');
 
-    return $this->render('add', [
-        'model' => $model,
-        'authors' => $authorsFullName
-    ]);
+     return $this->render('add', [
+         'model' => $model,
+         'authors' => $authorsFullName,
+         'tags' => $tags,
+     ]);
   }
 }

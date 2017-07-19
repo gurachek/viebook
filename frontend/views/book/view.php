@@ -1,7 +1,7 @@
 <?php
 use yii\helpers\Html;
 
-$this->title = '"'. $book->name .'" '. $book->authorFullname();
+$this->title = '"'. $book->name .'" '. $book->author['name'];
 
 $url = Yii::$app->request->baseUrl;
 
@@ -17,8 +17,9 @@ jQuery('.review_text').click(function() {
        },
        success: function (data) {
           var review = JSON.parse(data);
-          $('.modal-content').html(review.text);
           $('.review_modal').modal('show');
+          $('.modal-content #review_content').html('<h3 class="text-center">' + review.title + '</h3><span style="font-size: 16px;">' + review.text + '</span><br><br>');
+          
        }
   });
 });
@@ -32,13 +33,14 @@ $this->registerJs($readReviewButton);
 <div class="modal fade review_modal" tabindex="-1" role="dialog" aria-labelledby="read_this_review">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content" style="padding: 10px 30px;">
-        <center><img src="images/loader.gif"></center>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <div id="review_content"><center><img src="images/loader.gif"></center></div>
     </div>
   </div>
 </div>
 
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-4 col-md-push-8">
         <div class="book">
             <div class="name">
                 <h3 style="margin: 0; text-align: center;"><?= $book->name ?></h3>
@@ -51,7 +53,7 @@ $this->registerJs($readReviewButton);
             </div>
         </div>
     </div>
-    <div class="col-md-8">
+    <div class="col-md-8 col-md-pull-4">
         <h3 class="text-center">Рецензии</h3>
         <br>
         <?php if ($book->reviews): ?>
@@ -92,4 +94,17 @@ $this->registerJs($readReviewButton);
 
         <?php endif; ?>
     </div>
+    <!-- <div class="col-md-4 col-lg-push-4">
+        <div class="book">
+            <div class="name">
+                <h3 style="margin: 0; text-align: center; margin-bottom: 5px;"><?= $book->name ?></h3>
+            </div>
+            <div class="image" style="text-align: center;">
+                <img src="images/books/<?= $book->image ?>" width="200" height="315">
+                <br>
+                <br>
+                <?= Html::a("Написать рецензию", ['review/write', 'bookid' => $book->id], ['class' => 'btn btn-default']); ?>
+            </div>
+        </div>
+    </div> -->
 </div>

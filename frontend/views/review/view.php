@@ -70,7 +70,7 @@ $this->registerJs($estimateReview);
         <?php else: ?>
 
             <div>
-                <?= Html::a('Войдите, чтобы оценить рецензию', ['site/login'], ['class' => 'btn btn-success pull-right']); ?>
+                <?= Html::a('Войдите, чтобы оценить рецензию', ['site/login', 'a' => 'review_view', 'id' => $review->id], ['class' => 'btn btn-success pull-right']); ?>
             </div>
 
         <?php endif; ?>

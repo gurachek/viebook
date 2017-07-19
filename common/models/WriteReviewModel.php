@@ -5,6 +5,7 @@ namespace common\models;
 use yii\base\Model;
 use frontend\models\Review;
 use frontend\models\Analytics;
+use frontend\models\ReviewTrack;
 
 class WritereviewModel extends Model
 {
@@ -40,6 +41,19 @@ class WritereviewModel extends Model
     	$review->book_id = $this->bookid;
     	$review->text = htmlspecialchars($this->text);
 
-    	return $review->save() ? true : false;
+        if ($review->save()) {
+            $reviewTrack = new ReviewTrack();
+
+            $reviewTrack->user_id = $this->userid;
+            $reviewTrack->book_id = $this->bookid;
+            $reviewTrack->review_id = $review->id;
+            $reviewTrack->time = time();
+
+            $reviewTrack->save();
+
+            return true;
+        }
+
+    	return false;
     }
 }

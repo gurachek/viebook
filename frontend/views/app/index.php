@@ -8,11 +8,32 @@ use yii\web\JsExpression;
 
 $this->title = "Viebook - search for something here.";
 
+$js = <<<JS
+
+
+jQuery(document).ready(function () {
+    jQuery('.loader').css('display', 'none');
+    jQuery('.search_submit').on('click', function () {
+        if (jQuery('#searchmodel-search').val() != '') {
+            jQuery('#search_form').fadeTo(1000, 0.3);
+            jQuery('.loader').css('display', 'block');
+        }
+    });
+});
+
+JS;
+
+$this->registerJs($js);
+
 ?>
 
 <?php Pjax::begin(); ?>
 
 <?php if (!$search_results): ?>
+
+<div class="loader" style="display: none; position: absolute; top: 20%; left: 40%; background: url(images/loader.gif) no-repeat; width: 200px; height: 100px;">
+    
+</div>
 
 <?php $form = ActiveForm::begin([
     'options' => [
@@ -30,16 +51,10 @@ $this->title = "Viebook - search for something here.";
         <?= $form->field($model, 'search')->label(false)->widget(AutoComplete::classname(), [
             'clientOptions' => [
                 'source' => $books,
-                'minLength' => '2', // U need change it to 3
-                '_renderItem' => new JsExpression('function( ul, item ) {
-                    return $("<li>")
-                    .append("<img src=../images/"+item.Image +" alt=\"img\" />")
-                    .append("<a>" + item.value  + "<br>" + item.label  + "</a>")
-                    .appendTo(ul);
-                }'),
+                'minLength' => '3',
             ],
             'clientEvents' => [
-                'onSelect' => "function () { alert('lol'); }"
+
             ],
             'options' => [
                 'class' => 'form-control'
@@ -47,7 +62,7 @@ $this->title = "Viebook - search for something here.";
         ]) ?>
     </div>
 
-    <?= Html::submitButton('Submit', ['class' => 'btn btn-danger']); ?>
+    <?= Html::submitButton('Submit', ['class' => 'btn btn-danger search_submit']); ?>
 
 <?php ActiveForm::end(); ?>
 
@@ -65,10 +80,7 @@ if (!is_array($search_results)) {
     <div class="books_searched">
     <div class="row">
     <?php foreach($search_results as $book): ?>
-        <?php
-        $author = $book->author['first_name'] .' '. $book->author['second_name'] .' '. $book->author['surname'];
-        $category = $book->cat['name'];
-        ?>
+        <?php $category = $book->cat['name']; ?>
 
             <div class="col-md-3">
             <div class="book" style="border: 1px solid #d2d2d2;background: #F6F7F2; padding-top: 10px; margin-bottom: 10px;">
@@ -84,7 +96,7 @@ if (!is_array($search_results)) {
                 </div>
                 <div class="author">
                     <span class="author_label">Автор: </span>
-                    <?= $author ?>
+                    <?= $book->author['name'] ?>
                 </div>
                 <div class="category">
                     <span class="category_label">Категория: </span>

@@ -5,6 +5,11 @@ namespace frontend\models;
 use Yii;
 use yii\base\Model;
 use yii\web\UploadedFile;
+use frontend\models\Book;
+use frontend\models\Tags;
+use frontend\models\BookTags;
+use frontend\models\BookTrack;
+use frontend\models\Author;
 
 class AddbookModel extends Model
 {
@@ -30,10 +35,59 @@ class AddbookModel extends Model
 
 	public function add()
 	{
+
 		if ($this->validate()) {
-			$this->image->saveAs(Yii::getAlias('@webroot') . '/images/books/' . $this->image->baseName . '.' . $this->image->extension);
-			return true;
-		}
+
+			$issetBook = Book::findOne(['like', 'name', $this->name]);
+
+			if (!$issetBook) {
+				$book = new Book();
+
+				if (!$authorId = $book->getAuthorIdByName($this->author)) {
+					$author = new Author();
+					$author->name = $this->author;
+					$author->save();
+
+					$authorId = $author->id;
+				}
+
+				$book->name = htmlspecialchars($this->name);
+				$book->image = $this->image->baseName . '.' . $this->image->extension;
+				$book->author_id = $authorId;
+				$book->publish_date = $this->publish_date;
+				$book->category = 2;
+
+				$book->save();
+
+				$tags = explode(',', $this->tags);
+
+				foreach($tags as $tag) {
+					$tag = trim($tag);
+
+					if (!$issetTag = Tag::findOne(['name' => $tag])) {
+						$issetTag = new Tag();
+						$issetTag->name = $tag;
+						$issetTag->save();
+					}
+
+					$bookTag = new BookTags();
+					$bookTag->book_id = $book->id;
+					$bookTag->tag_id = $issetTag->id;
+
+					$bookTag->save();
+				}
+
+				$track = new BookTrack();
+				$track->user_id = Yii::$app->user->getId();
+				$track->book_id = $book->id;
+				$track->time = time();
+				$track->save();
+
+				$this->image->saveAs(Yii::getAlias('@webroot') . '/images/books/' . $this->image->baseName . '.' . $this->image->extension);
+
+				return true;
+			}
+		} 
 
 		return false;
 	}

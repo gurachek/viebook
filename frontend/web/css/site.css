@@ -147,6 +147,12 @@ a.desc:after {
     min-height: 500px;
 }
 
+@media only screen and (max-width: 768px) {
+    .search_input {
+        width: 100%;
+    }
+}
+
 @media(max-width: 1100px) {
     .books_searched .book .image {
         width: 140px !important;
@@ -200,6 +206,7 @@ a.desc:after {
 .book_reviews .review_text {
     width: 90%;
     margin: 0 auto;
+    font-size: 2.1vh;
 }
 
 .review_page .estimate .like {
@@ -216,4 +223,20 @@ color: red; font-size: 25px; margin-left: 10px; cursor: pointer;
 
 .review_text {
     cursor: pointer;
+}
+
+.book {
+    position: fixed;
+    width: 30%;
+    border: 1px solid #f0f0f0;
+    background: white;
+    /*margin-top: 10px;*/
+    padding: 15px 5px;
+}
+
+@media only screen and (max-width: 1100px) {
+    .book {
+        position: relative;
+        width: 100%;
+    }
 }

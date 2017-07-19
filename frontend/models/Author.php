@@ -16,9 +16,4 @@ class Author extends ActiveRecord
     {
         return 'authors';
     }
-
-    public function getFullname()
-    {
-        return @$this->first_name . ' '. @$this->second_name . ' ' . @$this->surname;
-    }
 }
