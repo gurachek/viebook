@@ -6,7 +6,26 @@ $this->title = "Пользователь ". $user->getName();
 ?>
 
 <div class="row">
-	<div class="col-md-9">
+	<div class="col-md-3 col-md-push-9">
+		<div class="user_info">
+			<br>
+			<div class="user_account_image" style="background: url(images/users/<?= $user->image ?>) no-repeat center; background-size: cover;"></div>
+			<br>
+			
+			<p class="text-center" style="font-size: 17px;">
+				<?= $user->getName(); ?>
+				<br>
+				<small style="color: gray;">Рейтинг: <?= $user->rating ?></small>
+			</p>
+			
+			<ul class="user_menu">
+			<li>Книг добавлено: <?= $booksAdded ?></li>
+			<li>Авторов добавлено: <?= $authorsAdded ?></li>
+			<li>Рецензий написано: <?= $reviewsWrote ?></li>
+			</ul>
+		</div>
+	</div>
+	<div class="col-md-9 col-md-pull-3">
 		<?php if (!$user->reviews): ?>
 			<h2 class="text-center">
 				Пользователь не писал рецензий
@@ -37,22 +56,5 @@ $this->title = "Пользователь ". $user->getName();
 			</p>
 			<br>
 		<?php endforeach; ?>
-	</div>
-	<div class="col-md-3">
-		<br>
-		<div class="user_account_image" style="background: url(images/users/<?= $user->image ?>) no-repeat center; background-size: cover;"></div>
-		<br>
-		
-		<p class="text-center" style="font-size: 17px;">
-			<?= $user->getName(); ?>
-			<br>
-			<small style="color: gray;">Рейтинг: <?= $user->rating ?></small>
-		</p>
-		
-		<ul class="user_menu">
-		<li>Книг добавлено: <?= $booksAdded ?></li>
-		<li>Авторов добавлено: <?= $authorsAdded ?></li>
-		<li>Рецензий написано: <?= $reviewsWrote ?></li>
-		</ul>
 	</div>
 </div>

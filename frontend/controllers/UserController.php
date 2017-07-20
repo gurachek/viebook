@@ -94,9 +94,12 @@ class UserController extends Controller
       ]);
   }
 
-  public function actionSettings()
+  public function actionList()
   {
-
+    $users = User::find()->all();
+    return $this->render('list', [
+      'users' => $users
+    ]);
   }
 
 }

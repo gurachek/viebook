@@ -7,26 +7,23 @@
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 
-$this->title = 'Signup';
-$this->params['breadcrumbs'][] = $this->title;
+$this->title = 'Регистрация';
 ?>
 <div class="site-signup">
-    <h1><?= Html::encode($this->title) ?></h1>
-
-    <p>Please fill out the following fields to signup:</p>
+    <h1 class="text-center"><?= Html::encode($this->title) ?></h1>
 
     <div class="row">
-        <div class="col-lg-5">
+        <div class="col-md-4 col-md-offset-4">
             <?php $form = ActiveForm::begin(['id' => 'form-signup']); ?>
 
-                <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
+                <?= $form->field($model, 'username')->textInput(['placeholder' => 'Придумайте себе никнейм', 'autofocus' => true])->label('') ?>
 
-                <?= $form->field($model, 'email') ?>
+                <?= $form->field($model, 'email')->textInput(['placeholder' => 'Введите email-адрес']) ?>
 
-                <?= $form->field($model, 'password')->passwordInput() ?>
-
+                <?= $form->field($model, 'password')->passwordInput(['placeholder' => 'Придумайте пароль']) ?>
+                
                 <div class="form-group">
-                    <?= Html::submitButton('Signup', ['class' => 'btn btn-primary', 'name' => 'signup-button']) ?>
+                    <?= Html::submitButton('Зарегестрироваться', ['class' => 'btn btn-danger', 'name' => 'signup-button']) ?>
                 </div>
 
             <?php ActiveForm::end(); ?>

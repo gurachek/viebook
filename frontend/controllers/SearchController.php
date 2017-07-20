@@ -5,6 +5,10 @@ namespace frontend\controllers;
 use Yii;
 use yii\web\Controller;
 use frontend\models\Review;
+use frontend\models\UserInterested;
+use frontend\models\Tag;
+use frontend\models\BookTags;
+use frontend\models\Book;
 
 class SearchController extends Controller
 {
@@ -26,8 +30,19 @@ class SearchController extends Controller
   		return $this->redirect(['app/index']);
   	}
 
-  	return $this->render('tag', [
+    $books = null;
 
+    if ($tag = Tag::findOne(['id' => $id])) {
+      if ($bookTags = BookTags::find()->where(['tag_id' => $tag->id])->asArray()->all()) {
+        $books_id = array_column($bookTags, 'book_id');
+
+        $books = Book::find()->where(['id' => $books_id])->all();
+      }
+    }
+
+  	return $this->render('tag', [
+      'tag' => $tag,
+      'books' => $books
   	]);
   }
 }

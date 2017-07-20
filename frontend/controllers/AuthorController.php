@@ -58,4 +58,14 @@ class AuthorController extends Controller
       'model' => $model,
     ]);
   }
+
+
+  public function actionList()
+  {
+    $authors = Author::find()->all();
+
+    return $this->render('list', [
+      'authors' => $authors
+    ]);
+  }
 }

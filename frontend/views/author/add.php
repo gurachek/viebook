@@ -15,7 +15,7 @@ use yii\helpers\Html;
 	</div>
 <?php endif; ?>
 
-<h3>There you can add author</h3>
+<h3>Добавление автора на сайт</h3>
 <br>
 <?php $form = ActiveForm::begin(); ?>
 	

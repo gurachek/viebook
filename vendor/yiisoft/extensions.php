@@ -57,4 +57,13 @@ return array (
       '@yii/faker' => $vendorDir . '/yiisoft/yii2-faker',
     ),
   ),
+  'yii2mod/yii2-selectize' => 
+  array (
+    'name' => 'yii2mod/yii2-selectize',
+    'version' => '9999999-dev',
+    'alias' => 
+    array (
+      '@yii2mod/selectize' => $vendorDir . '/yii2mod/yii2-selectize',
+    ),
+  ),
 );
