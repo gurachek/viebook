@@ -26,18 +26,20 @@ class UserSettingsModel extends Model
 	{
 		if ($this->validate()) {
 
-			$this->image->saveAs(Yii::getAlias('@webroot') . '/images/users/' . $this->image->baseName . '.' . $this->image->extension);
-
 			$user = User::findOne(['id' => Yii::$app->user->getId()]);
 
 			if (empty($user->nicename))
 				Yii::$app->user->identity->increaseRating(5);
 
-			if ($user->image == 'no-photo.jpg')
+			if ($user->image == 'no-photo.jpg' || $user->image == '')
 				Yii::$app->user->identity->increaseRating(5);
 
 			$user->nicename = htmlspecialchars($this->nicename);
-			$user->image = $this->image->baseName .'.'. $this->image->extension;
+
+			if ($this->image) {
+				$this->image->saveAs(Yii::getAlias('@webroot') . '/images/users/' . $this->image->baseName . '.' . $this->image->extension);
+				$user->image = $this->image->baseName .'.'. $this->image->extension;
+			}
 
 			$user->save();
 
