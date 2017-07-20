@@ -66,6 +66,63 @@ $this->registerJs($js);
 
 <?php ActiveForm::end(); ?>
 
+<br>
+
+<?php if ($dailyBooks): ?>
+<div class="text-center">
+<br>
+
+<ul class="list-inline">
+    <li><?= Html::a("Список книг", ['book/list']) ?></li>
+    <li><?= Html::a("Список авторов", ['author/list']) ?></li>
+    <li><?= Html::a("Список пользователей", ['user/list']) ?></li>
+</ul>
+</div>
+
+<?php foreach($dailyBooks as $book): ?>
+    <?php 
+        if (!$book['reviews']) {
+            continue;
+        }
+    ?>
+    <div class="row" style="margin-bottom: 15px;">
+        <div class="col-md-12">
+            <div class="col-md-9 daily_book col-md-offset-1" style="padding-left: 15px;">
+                <?= Html::a('
+                <div class="daily_image" style="background: url(images/books/'.$book['image'].') no-repeat center; background-size: contain;"></div>
+                ', ['book/view', 'id' => $book['id']]) ?>
+                <p>
+                <h4 class="text-center"><?= $book['name']; ?></h4>
+                    <?php foreach ($book['reviews'] as $review) : ?>
+                        <p style="color: gray;">Рейтинг: <?= $review->rating ?></p>
+                        <?php $text = intval(strlen($review->text) / 4) ?>
+                        <?= mb_substr($review->text, 0, $text, "utf-8") ?>...
+                        <?= Html::a('Читать', ['review/view', 'id' => $review->id]) ?>
+                        <br>
+                        
+                        <?php if ($book->tags): ?>
+                            <br>
+                            
+                            <p style="display:table-cell;vertical-align:bottom;">
+                            Теги: 
+                            
+                            <?php foreach($book->tags as $tag): ?>
+                                <?php foreach($tag->name as $name): ?>
+                                    <?= Html::a($name['name'], ['search/tag', 'id' => $name->id]) ?>,                                <?php endforeach; ?>
+                            <?php endforeach; ?>
+                            </p>
+
+                        <?php endif; ?>
+                        
+                        <?php break; ?>
+                    <?php endforeach; ?>
+                </p>
+            </div>
+        </div>
+    </div>
+<?php endforeach; ?>
+<?php endif; ?>
+
 <?php else: ?>
 
 <?php
@@ -82,10 +139,10 @@ if (!is_array($search_results)) {
     <?php foreach($search_results as $book): ?>
         <?php $category = $book->cat['name']; ?>
 
-            <div class="col-md-3">
+            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
             <div class="book" style="border: 1px solid #d2d2d2;background: #F6F7F2; padding-top: 10px; margin-bottom: 10px;">
                 <div class="name">
-                    <?= Html::a("<h3 style='margin: 0;'>$book->name</h3>", ['book/view', 'id' => $book->id]); ?>
+                    <?= Html::a("<h4 style='margin: 0;'>$book->name</h4>", ['book/view', 'id' => $book->id]); ?>
                 </div>
                 <div class="image" style="background: url(images/books/<?= $book->image ?>); background-size: cover;">
 

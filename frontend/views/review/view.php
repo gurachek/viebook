@@ -44,6 +44,10 @@ $this->registerJs($estimateReview);
         <h3 class="text-center"><?= $review->title ?></h3>
         <br>
         <p>
+            Книга: <?= Html::a($review->book['name'], ['book/view', 'id' => $review->book['id']]) ?>
+        </p>
+        <br>
+        <p>
             Рейтинг: <?= $review->rating ?>
         </p>
         <p>

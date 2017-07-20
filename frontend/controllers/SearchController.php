@@ -19,4 +19,15 @@ class SearchController extends Controller
       'q' => $q,
     ]);
   }
+
+  public function actionTag($id = null)
+  {
+  	if ($id == null || $id == false) {
+  		return $this->redirect(['app/index']);
+  	}
+
+  	return $this->render('tag', [
+
+  	]);
+  }
 }

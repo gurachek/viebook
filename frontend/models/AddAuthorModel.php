@@ -42,6 +42,8 @@ class AddAuthorModel extends Model
 
 			$track->save();
 
+			Yii::$app->user->identity->increaseRating(2);
+
 			$this->image->saveAs(Yii::getAlias('@webroot') . '/images/authors/' . $this->image->baseName . '.' . $this->image->extension);
 		
 			return true;

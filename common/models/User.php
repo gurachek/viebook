@@ -30,9 +30,30 @@ class User extends ActiveRecord implements IdentityInterface
 
     public function getReviews()
     {
-        return $this->hasMany(Review::className(), ['user_id' => 'id']);
+        return $this->hasMany(Review::className(), ['user_id' => 'id'])->orderBy('created_at DESC');
     }
 
+
+    public function increaseRating($score) 
+    {
+        $this->rating += intval($score);
+        $this->save();
+    }
+
+    public function reduceRating($score) 
+    {
+        $this->rating -= intval($score);
+        $this->save();
+    }
+
+    public function getName()
+    {
+        if ($this->nicename) {
+            return $this->nicename;
+        }
+               
+        return $this->username; 
+    }
 
     /**
      * @inheritdoc

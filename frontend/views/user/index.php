@@ -6,34 +6,42 @@ $this->title = "Ваш личный кабинет";
 ?>
 
 <div class="row">
-	<div class="col-md-12">
-		<h2 class="text-center">Рецензии, которые Вы написали</h2>
+	<div class="col-md-12" style="border: 1px solid #dedede; padding: 5px; background: white; padding-left: 10px;">
+		<span class="glyphicon glyphicon-pencil"></span>
+		<?= Html::a('Написать рецензию', ['review/write']) ?>
+		
+		&nbsp;&nbsp;
+
+		<span class="glyphicon glyphicon-book"></span>
+		<?= Html::a('Добавить книгу', ['book/add']) ?>
+
+		&nbsp;&nbsp;
+
+		<span class="glyphicon glyphicon-user"></span>
+		<?= Html::a('Добавить автора', ['author/add']) ?>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-md-9">
+		<?= $this->render('content_'.$content, ['data' => $data]); ?>
+	</div>
+	<div class="col-md-3">
 		<br>
-		<?php foreach($user->reviews as $review): ?>
-			<h4>
-				<?= Html::a($review['title'], ['review/view', 'id' => $review['id']]) ?>
-				<small>
-					<span class="glyphicon glyphicon-menu-right"></span>
-					<?= $review['book']['name'] ?>
-				</small>
-			</h4>
-			<p>
-				Рейтинг: <?= $review['rating'] ?>
-			</p>
-			<p>
-				<?php $text = intval(strlen($review['text']) / 5) ?>
-                <?= mb_substr($review['text'], 0, $text, "utf-8") ?>...
-                <p class="text-right">
-                	<span class="glyphicon glyphicon-pencil"></span>
-                	<?= Html::a('Редактировать', ['review/edit', 'id' => $review['id']]) ?>
-                	
-                	&nbsp;&nbsp;
-                	
-                	<span class="glyphicon glyphicon-remove"></span>
-                	<?= Html::a('Удалить', ['review/delete', 'id' => $review['id']]) ?>
-                </p>
-			</p>
+		<div class="user_account_image" style="background: url(images/users/<?= $user->image ?>) no-repeat center; background-size: cover;"></div>
+		<br>
+		
+		<p class="text-center" style="font-size: 17px;">
+			<?= $user->getName(); ?>
 			<br>
-		<?php endforeach; ?>
+			<small style="color: gray;">Рейтинг: <?= $user->rating ?></small>
+		</p>
+		
+		<ul class="user_menu">
+		<li><?= Html::a('Мои добавленные книги', ['user/index', 'content' => 'books']) ?></li>
+		<li><?= Html::a('Мои добавленные авторы', ['user/index', 'content' => 'authors']) ?></li>
+		<li><?= Html::a('Мои рецензии', ['user/index', 'content' => 'reviews']) ?></li>
+		<li><?= Html::a('Мои настройки', ['user/index', 'content' => 'settings']) ?></li>
+		</ul>
 	</div>
 </div>

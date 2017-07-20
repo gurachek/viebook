@@ -2,6 +2,7 @@
 
 namespace common\models;
 
+use Yii;
 use yii\base\Model;
 use frontend\models\Review;
 use frontend\models\Analytics;
@@ -50,6 +51,8 @@ class WritereviewModel extends Model
             $reviewTrack->time = time();
 
             $reviewTrack->save();
+
+            Yii::$app->user->identity->increaseRating(10);
 
             return true;
         }

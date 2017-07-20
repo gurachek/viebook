@@ -41,7 +41,7 @@ $this->registerJs($readReviewButton);
 
 <div class="row">
     <div class="col-md-4 col-md-push-8">
-        <div class="book">
+        <div class="book_page">
             <div class="name">
                 <h3 style="margin: 0; text-align: center;"><?= $book->name ?></h3>
             </div>
@@ -62,7 +62,7 @@ $this->registerJs($readReviewButton);
                     <div class="single_review">
                         <div class="status_line">
                             <span class="glyphicon glyphicon-pencil"></span>
-                            <?= Html::a($review->author['username'], ['user/view', 'id' => $review->author['id']]) ?>
+                            <?= Html::a($review->author->getName(), ['user/view', 'id' => $review->author['id']]) ?>
 
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
@@ -94,17 +94,4 @@ $this->registerJs($readReviewButton);
 
         <?php endif; ?>
     </div>
-    <!-- <div class="col-md-4 col-lg-push-4">
-        <div class="book">
-            <div class="name">
-                <h3 style="margin: 0; text-align: center; margin-bottom: 5px;"><?= $book->name ?></h3>
-            </div>
-            <div class="image" style="text-align: center;">
-                <img src="images/books/<?= $book->image ?>" width="200" height="315">
-                <br>
-                <br>
-                <?= Html::a("Написать рецензию", ['review/write', 'bookid' => $book->id], ['class' => 'btn btn-default']); ?>
-            </div>
-        </div>
-    </div> -->
 </div>

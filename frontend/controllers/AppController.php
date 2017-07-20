@@ -13,6 +13,7 @@ use yii\web\Controller;
 use frontend\models\Review;
 use frontend\models\SearchModel;
 use frontend\models\Book;
+use frontend\models\Tag;
 
 class AppController extends Controller
 {
@@ -46,10 +47,15 @@ class AppController extends Controller
             ];
         }
 
+        // Daily Books
+
+        $dailyBooks = Book::find()->limit(10)->with('reviews')->all();
+
         return $this->render('index', [
             'model' => $model,
             'search_results' => $search_results,
             'books' => $booksName,
+            'dailyBooks' => $dailyBooks
         ]);
     }
 

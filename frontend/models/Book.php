@@ -12,7 +12,7 @@ use yii\db\ActiveRecord;
 use frontend\models\Category;
 use frontend\models\Author;
 use frontend\models\Review;
-use frontend\models\Book_tags;
+use frontend\models\BookTags;
 
 class Book extends ActiveRecord
 {
@@ -32,7 +32,7 @@ class Book extends ActiveRecord
 
     public function getTags()
     {
-        return $this->hasMany(Book_tags::className(), ['book_id' => 'id' ]);
+        return $this->hasMany(BookTags::className(), ['book_id' => 'id' ]);
     }
 
     public function getCat()
@@ -47,6 +47,6 @@ class Book extends ActiveRecord
 
     public function getReviews()
     {
-        return $this->hasMany(Review::className(), ['book_id' => 'id']);
+        return $this->hasMany(Review::className(), ['book_id' => 'id'])->orderBy('rating ASC');
     }
 }

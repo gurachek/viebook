@@ -72,4 +72,12 @@ class BookController extends Controller
          'tags' => $tags,
      ]);
   }
+
+  public function actionList() 
+  {
+    $books = Book::find()->all();
+    return $this->render('list', [
+      'books' => $books,
+    ]);
+  }
 }

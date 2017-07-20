@@ -81,6 +81,8 @@ class SiteController extends Controller
             return $this->goHome();
         }
 
+        Yii::$app->session->remove('backURL');
+
         $backURL = Yii::$app->request->referrer;
         $message = '';
 
@@ -91,7 +93,7 @@ class SiteController extends Controller
                     $backURL = ['book/add'];
                     break;
                 case 'write_review':
-                    $message = 'Вам нужно войти, чтобы добавить написать рецензию';
+                    $message = 'Вам нужно войти, чтобы написать рецензию';
                     $backURL = ['review/write', 'bookid' => $id];
                     break;
                 case 'add_author':
@@ -102,11 +104,22 @@ class SiteController extends Controller
                     $message = 'Вам нужно войти, чтобы оставить оценку рецензии';
                     $backURL = ['review/view', 'id' => $id];
                     break;
+                case 'edit_review':
+                    $message = 'Вам нужно войти, чтобы редактировать рецензию';
+                    $backURL = ['review/edit', 'id' => $id];
+                    break;
+                case 'delete_review':
+                    $message = 'Вам нужно войти, чтобы удалить свою рецензию';
+                    $backURL = ['review/delete', 'id' => $id];
+                    break;
+                default:
+                    $backURL = Yii::$app->request->referrer;
+                    break;
             }
         }
 
         if(!Yii::$app->session->has("backURL")) {
-            Yii::$app->session->set("backURL", $backURL);
+            Yii::$app->session->set("backURL", $backURL, true);
         }
 
         $model = new LoginForm();

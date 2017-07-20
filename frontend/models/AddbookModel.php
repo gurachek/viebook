@@ -35,7 +35,6 @@ class AddbookModel extends Model
 
 	public function add()
 	{
-
 		if ($this->validate()) {
 
 			$issetBook = Book::findOne(['like', 'name', $this->name]);
@@ -82,6 +81,8 @@ class AddbookModel extends Model
 				$track->book_id = $book->id;
 				$track->time = time();
 				$track->save();
+
+				Yii::$app->user->identity->increaseRating(2);
 
 				$this->image->saveAs(Yii::getAlias('@webroot') . '/images/books/' . $this->image->baseName . '.' . $this->image->extension);
 

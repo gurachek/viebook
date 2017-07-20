@@ -1,8 +1,8 @@
-<h3>Write review instructions</h3>
+<h3>Как писать рецензии к книгам</h3>
 
 <ul>
-    <li>Find book</li>
-    <li>Go on book page</li>
-    <li>Left block has button "Write review". Click it!</li>
-    <li>Write review</li>
+    <li>Найдите нужную Вам книгу на сайте</li>
+    <li>Перейдите на страницу книги</li>
+    <li>Под изображением самой книги расположена кнопка "Написать рецензию"</li>
+    <li>Нажмите на нее и пишите рецензию</li>
 </ul>

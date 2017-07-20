@@ -10,6 +10,8 @@ use yii\helpers\Json;
 use common\models\UserEstimates;
 use common\models\WriteReviewModel;
 use frontend\models\Book;
+use frontend\models\EditReviewModel;
+use common\models\User;
 use frontend\models\ReviewTrack;
 
 class ReviewController extends Controller
@@ -23,6 +25,8 @@ class ReviewController extends Controller
     public function actionIndex($id = null)
     {
         if ($id !== null) return Yii::$app->runAction('review/view', ['id' => $id]);
+
+        return $this->redirect(['book/index']);
 
         $reviews = Review::find()->where(['active' => '1'])
             ->where(['shedule_date' => null])
@@ -78,12 +82,13 @@ class ReviewController extends Controller
 
                 if ($data['estimate']) {
 
-                    $review->rating += 5;
+                    $review->rating += 10;
+                    Yii::$app->user->identity->increaseRating(2);
 
                 } else {
 
-                    $review->rating -= 10;
-
+                    $review->rating -= 5;
+                    Yii::$app->user->identity->reduceRating(1);
                 }
 
                 $estimate = new UserEstimates();
@@ -108,12 +113,12 @@ class ReviewController extends Controller
             return $this->redirect(['site/login', 'a' => 'write_review', 'id' => $bookid]);
         }
 
-        if ($bookid === null || $bookid === false) {
+        if ($bookid === null || $bookid == false) {
             return $this->render('write_instructions');
         }
 
         if ($checkReview = ReviewTrack::findOne(['user_id' => Yii::$app->user->getId(), 'book_id' => $bookid])) {
-            return $this->redirect(['review/edit', 'id' => $checkReview->id]);
+            return $this->redirect(['review/edit', 'id' => $checkReview->book_id]);
         }
 
         $book = Book::findOne(['id' => intval($bookid)]);
@@ -134,7 +139,60 @@ class ReviewController extends Controller
 
     public function actionEdit($id = null)
     {
-        
+
+        $book = Book::findOne(['id' => intval($id)]);
+        $model = new EditReviewModel();
+
+        if (!$checkReview = ReviewTrack::findOne(['user_id' => Yii::$app->user->getId(), 'book_id' => $id])) {
+            return $this->redirect(['review/write', 'bookid' => $id]);
+        } else {
+            $review = Review::findOne(['id' => $checkReview->review_id]);
+        }
+
+        if ($model->load(Yii::$app->request->post())) {
+            if ($model->edit())
+                Yii::$app->session->setFlash('success_edit_review', 'Рецензия отредактирована');
+            else
+                Yii::$app->session->setFlash('failure_edit_review', 'Не удалось редактировать рецензию');
+        }
+
+        return $this->render('edit', [
+            'model' => $model,
+            'book' => $book,
+            'review' => $review,
+        ]);
+    }
+
+    public function actionDelete($id = null, $sure = null)
+    {
+        if (Yii::$app->user->isGuest) {
+            return $this->redirect(['site/login', 'a' => 'delete_review', 'id' => $id]);
+        }
+
+        if ($id === null || $id === false) {
+            return $this->render('no-reviewid');
+        }
+
+        if ($review = Review::findOne(['book_id' => $id, 'user_id' => Yii::$app->user->getId()])) {
+            if ($sure && $sure == '1') {
+                
+                if ($reviewTrack = ReviewTrack::findOne(['user_id' => Yii::$app->user->getId(), 'review_id' => $review->id])) {
+                    $reviewTrack->delete();
+                }
+
+                UserEstimates::deleteAll(['entry_id' => $review->id]);
+
+                $review->delete();
+
+                return $this->render('deleted');
+            }
+        } else {
+           return $this->render('u_havnt_review', ['id' => $id]);
+        }
+
+        return $this->render('delete', [
+            'id' => $id,
+        ]);
     }
 
 }
