@@ -8,9 +8,8 @@
 namespace yii\console\controllers;
 
 use Yii;
-use yii\console\Controller;
 use yii\console\Exception;
-use yii\console\ExitCode;
+use yii\console\Controller;
 use yii\helpers\Console;
 use yii\helpers\FileHelper;
 use yii\helpers\VarDumper;
@@ -217,8 +216,7 @@ class AssetController extends Controller
     protected function loadConfiguration($configFile)
     {
         $this->stdout("Loading configuration from '{$configFile}'...\n");
-        $config = require $configFile;
-        foreach ($config as $name => $value) {
+        foreach (require($configFile) as $name => $value) {
             if (property_exists($this, $name) || $this->canSetProperty($name)) {
                 $this->$name = $value;
             } else {
@@ -322,9 +320,9 @@ class AssetController extends Controller
             usort($target['depends'], function ($a, $b) use ($bundleOrders) {
                 if ($bundleOrders[$a] == $bundleOrders[$b]) {
                     return 0;
+                } else {
+                    return $bundleOrders[$a] > $bundleOrders[$b] ? 1 : -1;
                 }
-
-                return $bundleOrders[$a] > $bundleOrders[$b] ? 1 : -1;
             });
             if (!isset($target['class'])) {
                 $target['class'] = $name;
@@ -614,7 +612,7 @@ EOD;
         $inputFilePathPartsCount = count($inputFilePathParts);
         $outputFilePathParts = explode('/', $outputFilePath);
         $outputFilePathPartsCount = count($outputFilePathParts);
-        for ($i = 0; $i < $inputFilePathPartsCount && $i < $outputFilePathPartsCount; $i++) {
+        for ($i =0; $i < $inputFilePathPartsCount && $i < $outputFilePathPartsCount; $i++) {
             if ($inputFilePathParts[$i] == $outputFilePathParts[$i]) {
                 $sharedPathParts[] = $inputFilePathParts[$i];
             } else {
@@ -729,15 +727,15 @@ return [
 EOD;
         if (file_exists($configFile)) {
             if (!$this->confirm("File '{$configFile}' already exists. Do you wish to overwrite it?")) {
-                return ExitCode::OK;
+                return self::EXIT_CODE_NORMAL;
             }
         }
         if (!file_put_contents($configFile, $template)) {
             throw new Exception("Unable to write template file '{$configFile}'.");
+        } else {
+            $this->stdout("Configuration file template created at '{$configFile}'.\n\n", Console::FG_GREEN);
+            return self::EXIT_CODE_NORMAL;
         }
-
-        $this->stdout("Configuration file template created at '{$configFile}'.\n\n", Console::FG_GREEN);
-        return ExitCode::OK;
     }
 
     /**
@@ -768,7 +766,7 @@ EOD;
      */
     private function isBundleExternal($bundle)
     {
-        return empty($bundle->sourcePath) && empty($bundle->basePath);
+        return (empty($bundle->sourcePath) && empty($bundle->basePath));
     }
 
     /**

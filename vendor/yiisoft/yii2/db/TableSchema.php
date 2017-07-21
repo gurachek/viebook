@@ -7,8 +7,8 @@
 
 namespace yii\db;
 
+use yii\base\Object;
 use yii\base\InvalidParamException;
-use yii\base\BaseObject;
 
 /**
  * TableSchema represents the metadata of a database table.
@@ -18,7 +18,7 @@ use yii\base\BaseObject;
  * @author Qiang Xue <qiang.xue@gmail.com>
  * @since 2.0
  */
-class TableSchema extends BaseObject
+class TableSchema extends Object
 {
     /**
      * @var string the name of the schema that this table belongs to.

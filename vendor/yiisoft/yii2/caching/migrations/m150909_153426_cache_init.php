@@ -17,6 +17,7 @@ use yii\db\Migration;
  */
 class m150909_153426_cache_init extends Migration
 {
+
     /**
      * @throws yii\base\InvalidConfigException
      * @return DbCache

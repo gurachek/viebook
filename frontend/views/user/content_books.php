@@ -13,9 +13,9 @@ use yii\helpers\Html;
 
 <?php foreach($data as $book): ?>
 	<div class="book_in_list">
-		<?= Html::a("<div class='image' 
-		title='". $book['name'] ."' 
-		style='background: url(images/books/". $book['image'] .")
+		<?= Html::a("<div class='image'
+		title='". $book['name'] ."'
+		style='background: url(/images/books/". $book['image'] .")
 		no-repeat center; background-size: contain;'></div>",
 		['book/view', 'id' => $book['id']]) ?>
 	</div>

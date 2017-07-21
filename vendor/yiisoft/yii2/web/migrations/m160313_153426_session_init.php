@@ -15,6 +15,7 @@ use yii\db\Migration;
  */
 class m160313_153426_session_init extends Migration
 {
+
     /**
      * @inheritdoc
      */

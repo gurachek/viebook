@@ -57,7 +57,7 @@
                 showToolbar(findToolbar());
             },
             error: function (xhr) {
-                toolbarEl.innerText = xhr.responseText;
+                toolbarEl.innerHTML = xhr.responseText;
             }
         });
     }

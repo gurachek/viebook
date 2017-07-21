@@ -71,6 +71,7 @@ class IpValidator extends Validator
      *  - `localhost`: `127.0.0.0/8', ::1`
      *  - `documentation`: `192.0.2.0/24, 198.51.100.0/24, 203.0.113.0/24, 2001:db8::/32`
      *  - `system`: `multicast, linklocal, localhost, documentation`
+     *
      */
     public $networks = [
         '*' => ['any'],
@@ -297,9 +298,9 @@ class IpValidator extends Validator
         if (is_array($result)) {
             $result[1] = array_merge(['ip' => is_array($value) ? 'array()' : $value], $result[1]);
             return $result;
+        } else {
+            return null;
         }
-
-        return null;
     }
 
     /**
@@ -564,17 +565,16 @@ class IpValidator extends Validator
     {
         if ($this->getIpVersion($ip) === 4) {
             return str_pad(base_convert(ip2long($ip), 10, 2), static::IPV4_ADDRESS_LENGTH, '0', STR_PAD_LEFT);
-        }
-
-        $unpack = unpack('A16', inet_pton($ip));
-        $binStr = array_shift($unpack);
-        $bytes = static::IPV6_ADDRESS_LENGTH / 8; // 128 bit / 8 = 16 bytes
+        } else {
+            $unpack = unpack('A16', inet_pton($ip));
+            $binStr = array_shift($unpack);
+            $bytes = static::IPV6_ADDRESS_LENGTH / 8; // 128 bit / 8 = 16 bytes
             $result = '';
-        while ($bytes-- > 0) {
-            $result = sprintf('%08b', isset($binStr[$bytes]) ? ord($binStr[$bytes]) : '0') . $result;
+            while ($bytes-- > 0) {
+                $result = sprintf('%08b', isset($binStr[$bytes]) ? ord($binStr[$bytes]) : '0') . $result;
+            }
+            return $result;
         }
-
-        return $result;
     }
 
     /**

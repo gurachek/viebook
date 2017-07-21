@@ -3,9 +3,7 @@
 /* @var $exception \Exception */
 /* @var $handler \yii\web\ErrorHandler */
 ?>
-<?php if (method_exists($this, 'beginPage')): ?>
-    <?php $this->beginPage() ?>
-<?php endif ?>
+<?php if (method_exists($this, 'beginPage')) $this->beginPage(); ?>
 <!doctype html>
 <html lang="en">
 
@@ -372,9 +370,9 @@ body.mousedown pre {
         <?php endif; ?>
         <h2><?= nl2br($handler->htmlEncode($exception->getMessage())) ?></h2>
 
-        <?php if ($exception instanceof \yii\db\Exception && !empty($exception->errorInfo)): ?>
-            <pre>Error Info: <?php print_r($exception->errorInfo, true) ?></pre>
-        <?php endif ?>
+        <?php if ($exception instanceof \yii\db\Exception && !empty($exception->errorInfo)) {
+            echo '<pre>Error Info: ' . print_r($exception->errorInfo, true) . '</pre>';
+        } ?>
 
         <?= $handler->renderPreviousExceptions($exception) ?>
     </div>
@@ -450,12 +448,8 @@ window.onload = function() {
     document.onmousedown = function() { document.getElementsByTagName('body')[0].classList.add('mousedown'); }
     document.onmouseup = function() { document.getElementsByTagName('body')[0].classList.remove('mousedown'); }
     </script>
-    <?php if (method_exists($this, 'endBody')): ?>
-        <?php $this->endBody() // to allow injecting code into body (mostly by Yii Debug Toolbar)?>
-    <?php endif ?>
+    <?php if (method_exists($this, 'endBody')) $this->endBody(); // to allow injecting code into body (mostly by Yii Debug Toolbar) ?>
 </body>
 
 </html>
-<?php if (method_exists($this, 'endPage')): ?>
-    <?php $this->endPage() ?>
-<?php endif ?>
+<?php if (method_exists($this, 'endPage')) $this->endPage(); ?>

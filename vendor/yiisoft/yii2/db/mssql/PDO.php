@@ -76,7 +76,7 @@ class PDO extends \PDO
             return parent::getAttribute($attribute);
         } catch (\PDOException $e) {
             switch ($attribute) {
-                case self::ATTR_SERVER_VERSION:
+                case PDO::ATTR_SERVER_VERSION:
                     return $this->query("SELECT CAST(SERVERPROPERTY('productversion') AS VARCHAR)")->fetchColumn();
                 default:
                     throw $e;

@@ -8,7 +8,7 @@
 namespace yii\web;
 
 use Yii;
-use yii\base\BaseObject;
+use yii\base\Object;
 
 /**
  * CompositeUrlRule is the base class for URL rule classes that consist of multiple simpler rules.
@@ -19,7 +19,7 @@ use yii\base\BaseObject;
  * @author Qiang Xue <qiang.xue@gmail.com>
  * @since 2.0
  */
-abstract class CompositeUrlRule extends BaseObject implements UrlRuleInterface
+abstract class CompositeUrlRule extends Object implements UrlRuleInterface
 {
     /**
      * @var UrlRuleInterface[] the URL rules contained in this composite rule.
@@ -60,7 +60,7 @@ abstract class CompositeUrlRule extends BaseObject implements UrlRuleInterface
                 Yii::trace([
                     'rule' => method_exists($rule, '__toString') ? $rule->__toString() : get_class($rule),
                     'match' => $result !== false,
-                    'parent' => self::className(),
+                    'parent' => self::className()
                 ], __METHOD__);
             }
             if ($result !== false) {

@@ -52,7 +52,7 @@ trait QueryTrait
      */
     public $indexBy;
     /**
-     * @var bool whether to emulate the actual query execution, returning empty or false results.
+     * @var boolean whether to emulate the actual query execution, returning empty or false results.
      * @see emulateExecution()
      * @since 2.0.11
      */
@@ -360,19 +360,18 @@ trait QueryTrait
             return [$columns];
         } elseif (is_array($columns)) {
             return $columns;
-        }
-
-        $columns = preg_split('/\s*,\s*/', trim($columns), -1, PREG_SPLIT_NO_EMPTY);
-        $result = [];
-        foreach ($columns as $column) {
-            if (preg_match('/^(.*?)\s+(asc|desc)$/i', $column, $matches)) {
-                $result[$matches[1]] = strcasecmp($matches[2], 'desc') ? SORT_ASC : SORT_DESC;
-            } else {
-                $result[$column] = SORT_ASC;
+        } else {
+            $columns = preg_split('/\s*,\s*/', trim($columns), -1, PREG_SPLIT_NO_EMPTY);
+            $result = [];
+            foreach ($columns as $column) {
+                if (preg_match('/^(.*?)\s+(asc|desc)$/i', $column, $matches)) {
+                    $result[$matches[1]] = strcasecmp($matches[2], 'desc') ? SORT_ASC : SORT_DESC;
+                } else {
+                    $result[$column] = SORT_ASC;
+                }
             }
+            return $result;
         }
-
-        return $result;
     }
 
     /**

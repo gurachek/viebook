@@ -37,7 +37,7 @@ trait SchemaBuilderTrait
     /**
      * @return Connection the database connection to be used for schema building.
      */
-    abstract protected function getDb();
+    protected abstract function getDb();
 
     /**
      * Creates a primary key column.

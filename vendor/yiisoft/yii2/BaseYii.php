@@ -10,8 +10,8 @@ namespace yii;
 use yii\base\InvalidConfigException;
 use yii\base\InvalidParamException;
 use yii\base\UnknownClassException;
-use yii\di\Container;
 use yii\log\Logger;
+use yii\di\Container;
 
 /**
  * Gets the application start timestamp.
@@ -93,7 +93,7 @@ class BaseYii
      */
     public static function getVersion()
     {
-        return '2.0.13-dev';
+        return '2.0.12';
     }
 
     /**
@@ -289,7 +289,7 @@ class BaseYii
             return;
         }
 
-        include $classFile;
+        include($classFile);
 
         if (YII_DEBUG && !class_exists($className, false) && !interface_exists($className, false) && !trait_exists($className, false)) {
             throw new UnknownClassException("Unable to find '$className' in file: $classFile. Namespace missing?");
@@ -474,7 +474,7 @@ class BaseYii
     {
         return \Yii::t('yii', 'Powered by {yii}', [
             'yii' => '<a href="http://www.yiiframework.com/" rel="external">' . \Yii::t('yii',
-                    'Yii Framework') . '</a>',
+                    'Yii Framework') . '</a>'
         ]);
     }
 

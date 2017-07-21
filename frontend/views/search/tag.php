@@ -19,7 +19,7 @@ $this->title = 'Поиск по теме "'. $tag->name .'"';
 	            <div class="name">
 	                <?= Html::a("<h4 style='margin: 0;'>$book->name</h4>", ['book/view', 'id' => $book->id]); ?>
 	            </div>
-	            <div class="image" style="background: url(images/books/<?= $book->image ?>); background-size: cover;">
+	            <div class="image" style="background: url(/images/books/<?= $book->image ?>); background-size: cover;">
 
 	            </div>
 	            <div class="publish_date">

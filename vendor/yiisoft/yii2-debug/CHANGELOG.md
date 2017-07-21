@@ -4,20 +4,7 @@ Yii Framework 2 debug extension Change Log
 2.0.10 under development
 ------------------------
 
-- Bug #242: Fixed silent crash by omitting AssetsPanel creation when yii/web/AssetManager not being used like in REST apps (tunecino)
-- Enh #208: All identity models get converted to arrays when saving User panel data now, not just ActiveRecord models (brandonkelly)
-- Enh #208: Identity model packaging for User panels is now done in an `identityData()` method, making it easier for subclasses to customize (brandonkelly) 
-- Enh #218: Hide the debug toolbar when an HTML page is printed (githubjeka) 
-- Bug #221: Fixed the decimal point issue in Timeline when using various locales (bashkarev)
-- Bug #223: Limit the height during the opening animation (nkovacs)
-- Enh #225: Added classes to use bootstrap styles for filter inputs in Timeline panel (johonunu)
-- Bug #226: Fixed issue in user panel when you use custom RBAC module that does not implement `\yii\rbac\ManagerInterface` (pana1990)
-- Enh #204: Switch users from the panel (sam002)
-- Bug #236: Fixed rendering AJAX errors to use `innerText` instead of `innerHTML` (samdark)
-- Bug #241: Fixed double query to the user table (LAV45)
-- Bug #244: Fixed copying SQL via triple-click in Firefox (arzzen)
-- Bug #239: Fixed an issue in the user panel when using console application with debug module enabled (pana1990)
-- Bug #249: Fixed toolbar not displayed because of misconfigured authManager (samdark)
+- no changes in this release.
 
 
 2.0.9 February 21, 2017

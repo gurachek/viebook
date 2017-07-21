@@ -28,7 +28,7 @@ class AddbookModel extends Model
 			['tags', 'required', 'message' => 'На основе тагов мы составляем фид-ленту и разделы, введите пожалуйста'],
 			['image', 'required', 'message' => 'Вы должны загрузить обложку, чтобы добавить книгу на сайт'],
 			[['image'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg, jpeg'],
-			[['image'], 'file', 'maxSize' => '50000'],
+			[['image'], 'file', 'maxSize' => '100000'],
 			[['image'], 'file', 'maxFiles'=> 1],
 		];
 	}
@@ -88,7 +88,7 @@ class AddbookModel extends Model
 
 				return true;
 			}
-		} 
+		}
 
 		return false;
 	}

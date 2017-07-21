@@ -42,7 +42,6 @@ abstract class Client
 
     private $maxRedirects = -1;
     private $redirectCount = 0;
-    private $redirects = array();
     private $isMainRequest = true;
 
     /**
@@ -124,7 +123,7 @@ abstract class Client
     public function setServerParameters(array $server)
     {
         $this->server = array_merge(array(
-            'HTTP_USER_AGENT' => 'Symfony BrowserKit',
+            'HTTP_USER_AGENT' => 'Symfony2 BrowserKit',
         ), $server);
     }
 
@@ -329,8 +328,6 @@ abstract class Client
         }
 
         if ($this->followRedirects && $this->redirect) {
-            $this->redirects[serialize($this->history->current())] = true;
-
             return $this->crawler = $this->followRedirect();
         }
 
@@ -433,11 +430,7 @@ abstract class Client
      */
     public function back()
     {
-        do {
-            $request = $this->history->back();
-        } while (array_key_exists(serialize($request), $this->redirects));
-
-        return $this->requestFromRequest($request, false);
+        return $this->requestFromRequest($this->history->back(), false);
     }
 
     /**
@@ -447,11 +440,7 @@ abstract class Client
      */
     public function forward()
     {
-        do {
-            $request = $this->history->forward();
-        } while (array_key_exists(serialize($request), $this->redirects));
-
-        return $this->requestFromRequest($request, false);
+        return $this->requestFromRequest($this->history->forward(), false);
     }
 
     /**
@@ -486,7 +475,7 @@ abstract class Client
 
         $request = $this->internalRequest;
 
-        if (in_array($this->internalResponse->getStatus(), array(301, 302, 303))) {
+        if (in_array($this->internalResponse->getStatus(), array(302, 303))) {
             $method = 'GET';
             $files = array();
             $content = null;

@@ -18,7 +18,7 @@ namespace yii\caching;
  * @author Qiang Xue <qiang.xue@gmail.com>
  * @since 2.0
  */
-abstract class Dependency extends \yii\base\BaseObject
+abstract class Dependency extends \yii\base\Object
 {
     /**
      * @var mixed the dependency data that is saved in cache and later is compared with the
@@ -42,7 +42,7 @@ abstract class Dependency extends \yii\base\BaseObject
     /**
      * Evaluates the dependency by generating and saving the data related with dependency.
      * This method is invoked by cache before writing data into it.
-     * @param CacheInterface $cache the cache component that is currently evaluating this dependency
+     * @param Cache $cache the cache component that is currently evaluating this dependency
      */
     public function evaluateDependency($cache)
     {
@@ -68,7 +68,7 @@ abstract class Dependency extends \yii\base\BaseObject
 
     /**
      * Checks whether the dependency is changed
-     * @param CacheInterface $cache the cache component that is currently evaluating this dependency
+     * @param Cache $cache the cache component that is currently evaluating this dependency
      * @return bool whether the dependency has changed.
      * @since 2.0.11
      */
@@ -111,7 +111,7 @@ abstract class Dependency extends \yii\base\BaseObject
     /**
      * Generates the data needed to determine if dependency is changed.
      * Derived classes should override this method to generate the actual dependency data.
-     * @param CacheInterface $cache the cache component that is currently evaluating this dependency
+     * @param Cache $cache the cache component that is currently evaluating this dependency
      * @return mixed the data needed to determine if dependency has been changed.
      */
     abstract protected function generateDependencyData($cache);

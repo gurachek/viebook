@@ -14,27 +14,25 @@ use yii\mail\BaseMailer;
 /**
  * Mailer implements a mailer based on SwiftMailer.
  *
- * To use Mailer, you should configure it in the application configuration like the following:
+ * To use Mailer, you should configure it in the application configuration like the following,
  *
- * ```php
- * [
- *     'components' => [
- *         'mailer' => [
- *             'class' => 'yii\swiftmailer\Mailer',
- *             'transport' => [
- *                 'class' => 'Swift_SmtpTransport',
- *                 'host' => 'localhost',
- *                 'username' => 'username',
- *                 'password' => 'password',
- *                 'port' => '587',
- *                 'encryption' => 'tls',
- *             ],
+ * ~~~
+ * 'components' => [
+ *     ...
+ *     'mailer' => [
+ *         'class' => 'yii\swiftmailer\Mailer',
+ *         'transport' => [
+ *             'class' => 'Swift_SmtpTransport',
+ *             'host' => 'localhost',
+ *             'username' => 'username',
+ *             'password' => 'password',
+ *             'port' => '587',
+ *             'encryption' => 'tls',
  *         ],
- *         // ...
  *     ],
- *     // ...
+ *     ...
  * ],
- * ```
+ * ~~~
  *
  * You may also skip the configuration of the [[transport]] property. In that case, the default
  * PHP `mail()` function will be used to send emails.
@@ -43,7 +41,7 @@ use yii\mail\BaseMailer;
  * You can also specify the list of plugins, which should be registered to the transport using
  * 'plugins' key. For example:
  *
- * ```php
+ * ~~~
  * 'transport' => [
  *     'class' => 'Swift_SmtpTransport',
  *     'constructArgs' => ['localhost', 25]
@@ -54,17 +52,17 @@ use yii\mail\BaseMailer;
  *         ],
  *     ],
  * ],
- * ```
+ * ~~~
  *
  * To send an email, you may use the following code:
  *
- * ```php
+ * ~~~
  * Yii::$app->mailer->compose('contact/html', ['contactForm' => $form])
  *     ->setFrom('from@domain.com')
  *     ->setTo($form->email)
  *     ->setSubject($form->subject)
  *     ->send();
- * ```
+ * ~~~
  *
  * @see http://swiftmailer.org
  *
@@ -85,7 +83,6 @@ class Mailer extends BaseMailer
      * @var bool whether to enable writing of the SwiftMailer internal logs using Yii log mechanism.
      * If enabled [[Logger]] plugin will be attached to the [[transport]] for this purpose.
      * @see Logger
-     * @since 2.0.4
      */
     public $enableSwiftMailerLogging = false;
 

@@ -19,7 +19,7 @@ jQuery('.review_text').click(function() {
           var review = JSON.parse(data);
           $('.review_modal').modal('show');
           $('.modal-content #review_content').html('<h3 class="text-center">' + review.title + '</h3><span style="font-size: 16px;">' + review.text + '</span><br><br>');
-          
+
        }
   });
 });
@@ -46,7 +46,7 @@ $this->registerJs($readReviewButton);
                 <h3 style="margin: 0; text-align: center;"><?= $book->name ?></h3>
             </div>
             <div class="image" style="text-align: center;">
-                <img src="images/books/<?= $book->image ?>" width="200" height="315">
+                <img src="/images/books/<?= $book->image ?>" width="200" height="315">
                 <br>
                 <br>
                 <?= Html::a("Написать рецензию", ['review/write', 'bookid' => $book->id], ['class' => 'btn btn-default']); ?>

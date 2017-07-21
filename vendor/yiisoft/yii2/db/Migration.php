@@ -9,7 +9,6 @@ namespace yii\db;
 
 use yii\base\Component;
 use yii\di\Instance;
-use yii\helpers\StringHelper;
 
 /**
  * Migration is the base class for representing a database migration.
@@ -66,12 +65,6 @@ class Migration extends Component implements MigrationInterface
      */
     public $db = 'db';
 
-    /**
-     * @var int max number of characters of the SQL outputted. Useful for reduction of long statements and making
-     * console output more compact.
-     * @since 2.0.13
-     */
-    public $maxSqlOutputLength;
 
     /**
      * Initializes the migration.
@@ -205,12 +198,7 @@ class Migration extends Component implements MigrationInterface
      */
     public function execute($sql, $params = [])
     {
-        $sqlOutput = $sql;
-        if ($this->maxSqlOutputLength !== null) {
-            $sqlOutput = StringHelper::truncate($sql, $this->maxSqlOutputLength, '[... hidden]');
-        }
-
-        echo "    > execute SQL: $sqlOutput ...";
+        echo "    > execute SQL: $sql ...";
         $time = microtime(true);
         $this->db->createCommand($sql)->bindValues($params)->execute();
         echo ' done (time: ' . sprintf('%.3f', microtime(true) - $time) . "s)\n";

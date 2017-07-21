@@ -8,12 +8,12 @@
 namespace yii\filters;
 
 use Closure;
-use yii\base\Action;
 use yii\base\Component;
-use yii\base\Controller;
+use yii\base\Action;
 use yii\base\InvalidConfigException;
-use yii\web\Request;
 use yii\web\User;
+use yii\web\Request;
+use yii\base\Controller;
 
 /**
  * This class represents an access rule defined by the [[AccessControl]] action filter
