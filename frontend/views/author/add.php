@@ -1,6 +1,8 @@
 <?php
 use yii\widgets\ActiveForm;
 use yii\helpers\Html;
+
+$this->title = "Добавить автора на сайт";
 ?>
 
 <?php if (Yii::$app->session->hasFlash('success_author_add')): ?>
