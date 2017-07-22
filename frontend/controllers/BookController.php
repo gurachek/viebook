@@ -14,6 +14,8 @@ class BookController extends Controller
 {
   public function actionIndex($id = null)
   {
+    return $this->redirect(['book/list']);
+
       if ($id !== null) return Yii::$app->runAction('book/view');
 
       $books = Book::find()->all();

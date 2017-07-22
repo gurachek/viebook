@@ -3,21 +3,21 @@ use yii\helpers\Html;
 
 $this->title = '"'. $book->name .'" '. $book->author['name'];
 
-$url = Yii::$app->request->baseUrl;
+$url = Yii::$app->getUrlManager()->createAbsoluteUrl(['review/ajax', 'id' => $book->id]);
 
 $readReviewButton = <<<JS
 
 jQuery('.review_text').click(function() {
+    $('.review_modal').modal('show');
     var id = jQuery(this).data('id');
     $.ajax({
-       url: "$url?r=review/ajax&id=$book->id",
+       url: "$url",
        type: 'GET',
        data: {
            review_id: id,
        },
        success: function (data) {
           var review = JSON.parse(data);
-          $('.review_modal').modal('show');
           $('.modal-content #review_content').html('<h3 class="text-center">' + review.title + '</h3><span style="font-size: 16px;">' + review.text + '</span><br><br>');
 
        }
@@ -34,7 +34,7 @@ $this->registerJs($readReviewButton);
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content" style="padding: 10px 30px;">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <div id="review_content"><center><img src="images/loader.gif"></center></div>
+        <div id="review_content"><center><img src="/images/loader.gif"></center></div>
     </div>
   </div>
 </div>

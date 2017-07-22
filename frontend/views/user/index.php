@@ -6,19 +6,29 @@ $this->title = "Ваш личный кабинет";
 ?>
 
 <div class="row">
-	<div class="col-md-12" style="border: 1px solid #dedede; padding: 5px; background: white; padding-left: 10px;">
-		<span class="glyphicon glyphicon-pencil"></span>
-		<?= Html::a('Написать рецензию', ['review/write']) ?>
+	<div class="col-md-12" >
+		<ul class="list-unstyled list-inline" style="border: 1px solid #dedede; padding: 5px; background: white; padding-left: 10px;">
+			<li>
+			<span class="glyphicon glyphicon-pencil"></span>
+			<?= Html::a('Написать рецензию', ['review/write']) ?>			
+			</li>
 
-		&nbsp;&nbsp;
+			<li>
+			<span class="glyphicon glyphicon-book"></span>
+			<?= Html::a('Добавить книгу', ['book/add']) ?>
+			</li>
 
-		<span class="glyphicon glyphicon-book"></span>
-		<?= Html::a('Добавить книгу', ['book/add']) ?>
+			<li>
+			<span class="glyphicon glyphicon-user"></span>
+			<?= Html::a('Добавить автора', ['author/add']) ?>
+			</li>
 
-		&nbsp;&nbsp;
-
-		<span class="glyphicon glyphicon-user"></span>
-		<?= Html::a('Добавить автора', ['author/add']) ?>
+			<li style="padding: 0px;">
+			<?= Html::beginForm(['/site/logout'], 'post') ?>
+	        <?= Html::submitButton('<span class="glyphicon glyphicon-log-out"></span> Выход', ['class' => 'btn btn-link', 'style' => 'padding: 0;']) ?>
+	        <?= Html::endForm() ?>
+    		</li>
+    	</ul>
 	</div>
 </div>
 
