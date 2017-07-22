@@ -17,7 +17,7 @@ class UserController extends Controller
 {
 
   // user account
-  public function actionIndex($content = 'reviews') 
+  public function actionIndex($content = 'reviews')
   {
       if (Yii::$app->user->isGuest) {
         return $this->redirect(['site/login']);
@@ -41,14 +41,15 @@ class UserController extends Controller
           $authorsId = array_column($authors, 'author_id');
           $data = Author::find()->where(['id' => $authorsId])->asArray()->all();
           break;
-        
+
         case 'settings':
           $data = new UserSettingsModel();
           break;
-        
+
         default:
           $data = $user;
-          break;  
+          $content = 'reviews';
+          break;
       }
 
       if ($data instanceof \yii\base\Model) {

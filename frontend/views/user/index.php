@@ -23,10 +23,7 @@ $this->title = "Ваш личный кабинет";
 </div>
 
 <div class="row">
-	<div class="col-md-9">
-		<?= $this->render('content_'.$content, ['data' => $data]); ?>
-	</div>
-	<div class="col-md-3">
+	<div class="col-md-3 col-md-push-9">
 		<br>
 		<div class="user_account_image" style="background: url(/images/users/<?= $user->image ?>) no-repeat center; background-size: cover;"></div>
 		<br>
@@ -43,5 +40,8 @@ $this->title = "Ваш личный кабинет";
 		<li><?= Html::a('Мои рецензии', ['user/index', 'content' => 'reviews']) ?></li>
 		<li><?= Html::a('Мои настройки', ['user/index', 'content' => 'settings']) ?></li>
 		</ul>
+	</div>
+	<div class="col-md-9 col-md-pull-3">
+		<?= $this->render('content_'.$content, ['data' => $data]); ?>
 	</div>
 </div>

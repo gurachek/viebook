@@ -28,7 +28,7 @@ class AddbookModel extends Model
 			['tags', 'required', 'message' => 'На основе тагов мы составляем фид-ленту и разделы, введите пожалуйста'],
 			['image', 'required', 'message' => 'Вы должны загрузить обложку, чтобы добавить книгу на сайт'],
 			[['image'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg, jpeg'],
-			[['image'], 'file', 'maxSize' => '100000'],
+			[['image'], 'file', 'maxSize' => '5000000'],
 			[['image'], 'file', 'maxFiles'=> 1],
 		];
 	}
@@ -45,13 +45,14 @@ class AddbookModel extends Model
 				if (!$authorId = $book->getAuthorIdByName($this->author)) {
 					$author = new Author();
 					$author->name = $this->author;
+					$author->image = 'no-photo.gif'; 
 					$author->save();
 
 					$authorId = $author->id;
 				}
 
 				$book->name = htmlspecialchars($this->name);
-				$book->image = $this->image->baseName . '.' . $this->image->extension;
+				$book->image = time() . '.' . $this->image->extension;
 				$book->author_id = $authorId;
 				$book->publish_date = $this->publish_date;
 				$book->category = 2;
@@ -84,7 +85,7 @@ class AddbookModel extends Model
 
 				Yii::$app->user->identity->increaseRating(2);
 
-				$this->image->saveAs(Yii::getAlias('@webroot') . '/images/books/' . $this->image->baseName . '.' . $this->image->extension);
+				$this->image->saveAs(Yii::getAlias('@webroot') . '/images/books/' . time() . '.' . $this->image->extension);
 
 				return true;
 			}

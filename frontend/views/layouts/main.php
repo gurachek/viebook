@@ -75,6 +75,10 @@ AppAsset::register($this);
     </div>
 </footer>
 
+<footer class="mobile-footer">
+    <p class="text-center">Не придумал пока что вместо футера будет.</p>
+</div>
+
 <?php $this->endBody() ?>
 </body>
 </html>

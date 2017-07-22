@@ -175,8 +175,9 @@ class ReviewController extends Controller
 
         if ($review = Review::findOne(['book_id' => $id, 'user_id' => Yii::$app->user->getId()])) {
             if ($sure && $sure == '1') {
-                
+
                 if ($reviewTrack = ReviewTrack::findOne(['user_id' => Yii::$app->user->getId(), 'review_id' => $review->id])) {
+                    Yii::$app->user->identity->reduceRating(10);
                     $reviewTrack->delete();
                 }
 

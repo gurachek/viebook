@@ -1,7 +1,7 @@
 html,
 body {
     height: 100%;
-    background: #FFFFF7; 
+    background: #FFFFF7;
 }
 
 .wrap {
@@ -322,4 +322,17 @@ color: red; font-size: 25px; margin-left: 10px; cursor: pointer;
     .user_info {
         position: relative;
     }
-} 
+}
+
+.mobile-footer {
+    display: none;
+}
+
+@media (max-width: 1100px) {
+    .footer {
+        display: none;
+    }
+    .mobile-footer {
+        display: block;
+    }
+}
