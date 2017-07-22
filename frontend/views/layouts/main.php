@@ -47,8 +47,8 @@ AppAsset::register($this);
     <?php
     // <h3 style="margin: 0; margin-top: -1.3px; float: left; margin-left: 10px;">Вайбук</h3>
     NavBar::begin([
-        'brandLabel' => '<img src="/images/logo.png" width="50" height="50" style="margin-top: -10px; float: left">
-            <img src="/images/logo_text.svg" width="172" height="60" style="margin-top: -9px; padding-left: 6px;">',
+        'brandLabel' => '<img src="/images/logo.png" width="50" height="50" style="margin-top: -9px; float: left">
+            <img src="/images/logo_text.svg" width="168" height="56" style="margin-top: -9px; padding-left: 6px;">',
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
             'class' => 'navbar-inverse navbar-fixed-top',
@@ -90,7 +90,7 @@ AppAsset::register($this);
         <p class="pull-left">&copy; VieBook <?= date('Y') ?></p>
         <p class="pull-right">Gurachek</p>
         <p class="text-center">
-            <a href="https://vk.com/viebook/">
+            <a href="https://vk.com/viebook" target="_blank">
                 <img src="/images/vk.png" width="30" height="30">
             </a>
         </p>
