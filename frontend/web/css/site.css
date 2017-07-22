@@ -226,9 +226,9 @@ color: red; font-size: 25px; margin-left: 10px; cursor: pointer;
 }
 
 .book_page {
-    position: fixed;
-    width: 30%;
-    border: 1px solid #f0f0f0;
+    position: relative;
+    /*width: 30%;*/
+    /*border: 1px solid #f0f0f0;*/
     background: white;
     padding: 15px 5px;
 }
@@ -307,7 +307,8 @@ color: red; font-size: 25px; margin-left: 10px; cursor: pointer;
 
 .daily_book {
     padding: 10px;
-    border: 1px solid #dedede;
+    border: 1px solid #F2F8EA;
+    /*background: #ECF0F1;*/
 }
 
 .site-signup {
