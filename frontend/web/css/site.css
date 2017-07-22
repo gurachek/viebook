@@ -443,3 +443,7 @@ color: red; font-size: 25px; margin-left: 10px; cursor: pointer;
 .navbar-inverse .btn-link:focus {
   color: black;
 }
+
+.wrap > .container {
+    padding: 10px 15px 20px !important;
+}
