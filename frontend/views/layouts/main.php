@@ -47,8 +47,8 @@ AppAsset::register($this);
     <?php
     // <h3 style="margin: 0; margin-top: -1.3px; float: left; margin-left: 10px;">Вайбук</h3>
     NavBar::begin([
-        'brandLabel' => '<img src="/images/logo.png" width="50" height="50" style="margin-top: -11px; float: left">
-            <img src="/images/logo_text.svg" width="170" height="70" style="margin-top: -18px; padding-left: 5px;">',
+        'brandLabel' => '<img src="/images/logo.png" width="50" height="50" style="margin-top: -10px; float: left">
+            <img src="/images/logo_text.svg" width="172" height="60" style="margin-top: -9px; padding-left: 6px;">',
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
             'class' => 'navbar-inverse navbar-fixed-top',
