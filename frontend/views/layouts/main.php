@@ -47,13 +47,26 @@ AppAsset::register($this);
     <?php
     // <h3 style="margin: 0; margin-top: -1.3px; float: left; margin-left: 10px;">Вайбук</h3>
     NavBar::begin([
-        'brandLabel' => '<img src="/images/logo.png" width="50" height="50" style="margin-top: -9px; float: left">
-            <img src="/images/logo_text.svg" width="168" height="56" style="margin-top: -9px; padding-left: 6px;">',
+        'brandLabel' => '<img src="/images/logo.png" width="40" height="40" style="margin-top: -9px; float: left">
+            <img src="/images/logo_text.svg" width="130" height="30" style="margin-top: -3px;">',
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
             'class' => 'navbar-inverse navbar-fixed-top',
         ],
     ]);
+
+    $leftMenu = [
+        ['label' => 'Книги', 'url' => ['/book/list']],
+    ];
+
+    $leftMenu[] = ['label' => 'Авторы', 'url' => ['/author/list']];
+    $leftMenu[] = ['label' => 'Пользователи', 'url' => ['/user/list']];
+
+     echo Nav::widget([
+        'options' => ['class' => 'navbar-nav navbar-left'],
+        'items' => $leftMenu,
+    ]);
+
     $menuItems = [
         ['label' => 'Главная', 'url' => ['/app/index']],
     ];
@@ -61,25 +74,27 @@ AppAsset::register($this);
         $menuItems[] = ['label' => 'Регистрация', 'url' => ['/site/signup']];
         $menuItems[] = ['label' => 'Вход', 'url' => ['/site/login']];
     } else {
-        $menuItems[] = ['label' => 'Фид-лента', 'url' => ['feed/index']];
+        $menuItems[] = ['label' => 'Фид-лента', 'url' => ['feed/index']] ;
         $menuItems[] = '<li>'
-        .'<a href="'. Yii::$app->getUrlManager()->createAbsoluteUrl(['user/index']) .'">'
+        .'<a href="'. Yii::$app->getUrlManager()->createAbsoluteUrl(['user/index']) .'" style="width: 30px; height: 30px;">'
         .'<div style="background: url(/images/users/'. Yii::$app->user->identity->image .')' 
         .'no-repeat center; background-size: cover; width: 30px; height: 30px;'
-        .'border-radius: 100px;"></div></li>'
+        .'border-radius: 100px; margin-top: -5px;"></div></li>'
         .'</a>';
     }
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => $menuItems,
     ]);
-    NavBar::end();
+
+    NavBar::end(); 
     ?>
     <br>
     <br>
     <br>
-    <div class="container" style="background: white; border: 1px solid #dedede;">
+    <div class="container" style="background: #FFFFF9; border: 1px solid #FFFFF7;">
         <?php Alert::widget() ?>
+
         <?= $content ?>
         </div>
     </div>
@@ -87,7 +102,7 @@ AppAsset::register($this);
 
 <footer class="footer">
     <div class="container">
-        <p class="pull-left">&copy; VieBook <?= date('Y') ?></p>
+        <p class="pull-left">&copy; Viebook <?= date('Y') ?></p>
         <p class="pull-right">Gurachek</p>
         <p class="text-center">
             <a href="https://vk.com/viebook" target="_blank">

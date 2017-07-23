@@ -1,7 +1,8 @@
 html,
 body {
     height: 100%;
-    background: #FFFFF7;
+    /*background: #FFFFF7;*/
+    background: #e8e8e8;
 }
 
 .wrap {
@@ -130,9 +131,17 @@ a.desc:after {
     margin-bottom: 10px;
 }
 
+
 .search_input {
-    width: 80%;
     margin: 0 auto;
+    padding-top: 10px;
+    margin-left: 13%;
+}
+
+.search_submit {
+    background: #E74C3C;
+    color: white;
+    float: left;
 }
 
 .books_searched {
@@ -150,6 +159,7 @@ a.desc:after {
 @media only screen and (max-width: 768px) {
     .search_input {
         width: 100%;
+        margin-left: 5%;
     }
 }
 
@@ -344,9 +354,13 @@ color: red; font-size: 25px; margin-left: 10px; cursor: pointer;
 
 /* Navbar custom */
 
+.navbar {
+    
+}
+
 .navbar-inverse {
   background-color: #FFFFF7;  
-  border: 1px solid #FFFFF7;
+  border-bottom: 1px solid #e8e8e8;
 }
 .navbar-inverse .navbar-brand {
   color: #344146;
@@ -361,7 +375,11 @@ color: red; font-size: 25px; margin-left: 10px; cursor: pointer;
 }
 .navbar-inverse .navbar-nav > li > a {
   color: #344146;
+  padding-top: 15px;
+  /*margin-bottom: 0px;*/
+  /*padding-bottom: 0px;*/
 }
+
 .navbar-inverse .navbar-nav > li > a:hover,
 .navbar-inverse .navbar-nav > li > a:focus {
   color: #344146;
@@ -372,9 +390,10 @@ color: red; font-size: 25px; margin-left: 10px; cursor: pointer;
 .navbar-inverse .navbar-nav > .active > a:focus {
   color: #344146;
   background-color: #FFFFF7;
-  border-bottom: 5px solid red;
-
+  border-top: 5px solid #E74C3C;
+  padding-top: 10px;
 }
+
 .navbar-inverse .navbar-nav > .disabled > a,
 .navbar-inverse .navbar-nav > .disabled > a:hover,
 .navbar-inverse .navbar-nav > .disabled > a:focus {
@@ -383,7 +402,10 @@ color: red; font-size: 25px; margin-left: 10px; cursor: pointer;
 }
 .navbar-inverse .navbar-toggle {
   border-color: #d2d2d2;
+  margin-top: 9px;
+
 }
+
 .navbar-inverse .navbar-toggle:hover,
 .navbar-inverse .navbar-toggle:focus {
   background-color: rgba(0, 0, 0, 0.05);
@@ -396,6 +418,7 @@ color: red; font-size: 25px; margin-left: 10px; cursor: pointer;
 .navbar-inverse .navbar-form {
   border-color: #FFFFF7;
 }
+
 .navbar-inverse .navbar-nav > .open > a,
 .navbar-inverse .navbar-nav > .open > a:hover,
 .navbar-inverse .navbar-nav > .open > a:focus {
@@ -403,6 +426,13 @@ color: red; font-size: 25px; margin-left: 10px; cursor: pointer;
   background-color: #344146;
 }
 @media (max-width: 767px) {
+  .navbar-inverse .navbar-nav > .active > a,
+  .navbar-inverse .navbar-nav > .active > a:hover,
+  .navbar-inverse .navbar-nav > .active > a:focus {
+    color: #E74C3C;
+    border: 0;
+  }
+
   .navbar-inverse .navbar-nav .open .dropdown-menu > .dropdown-header {
     border-color: #FFFFF7;
   }

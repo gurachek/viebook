@@ -31,53 +31,45 @@ $this->registerJs($js);
 
 <?php if (!$search_results): ?>
 
-<div class="loader" style="display: none; position: absolute; top: 20%; left: 40%; background: url(images/loader.gif) no-repeat; width: 200px; height: 100px;">
+<div class="loader" style="display: none; position: absolute; top: 18%; left: 40%; background: url(images/loader.gif) no-repeat; width: 200px; height: 100px;">
     
 </div>
-
-<?php $form = ActiveForm::begin([
-    'options' => [
-        'id' => 'search_form',
-        'class' => 'search_input',
-        'data' => [
-            'pjax' => true,
-        ]
-    ]
-]); ?>
-
-    <h3 class="text-center">Начните вводить название книги</h3>
-
-    <div style="width: 80%; float: left; padding-right: 5px;">
-        <?= $form->field($model, 'search')->label(false)->widget(AutoComplete::classname(), [
-            'clientOptions' => [
-                'source' => $books,
-                'minLength' => '3',
-            ],
-            'clientEvents' => [
-
-            ],
+<div class="row">
+    <div class="col-md-8 col-md-offset-2">
+        <?php $form = ActiveForm::begin([
             'options' => [
-                'class' => 'form-control'
+                'id' => 'search_form',
+                'class' => 'search_input',
+                'data' => [
+                    'pjax' => true,
+                ]
             ]
-        ]) ?>
+        ]); ?>
+
+        <div style="width: 80%; float: left; padding-right: 5px;">
+            <?= $form->field($model, 'search')->label(false)->widget(AutoComplete::classname(), [
+                'clientOptions' => [
+                    'source' => $books,
+                    'minLength' => '3',
+                ],
+                'clientEvents' => [
+
+                ],
+                'options' => [
+                    'class' => 'form-control'
+                ]
+            ])->textInput(['placeholder' => 'Начните вводить название книги...']) ?>
+        </div>
+
+        <?= Html::submitButton('<span class="glyphicon glyphicon-search" aria-hidden="true"></span>', ['class' => 'btn search_submit']); ?>
+
+        <?php ActiveForm::end(); ?>
     </div>
-
-    <?= Html::submitButton('Submit', ['class' => 'btn btn-danger search_submit']); ?>
-
-<?php ActiveForm::end(); ?>
+</div>
 
 <br>
 
 <?php if ($dailyBooks): ?>
-<div class="text-center">
-<br>
-
-<ul class="list-inline">
-    <li><?= Html::a("Список книг", ['book/list']) ?></li>
-    <li><?= Html::a("Список авторов", ['author/list']) ?></li>
-    <li><?= Html::a("Список пользователей", ['user/list']) ?></li>
-</ul>
-</div>
 
 <?php foreach($dailyBooks as $book): ?>
     <?php 
@@ -87,7 +79,7 @@ $this->registerJs($js);
     ?>
     <div class="row" style="margin-bottom: 15px;">
         <div class="col-md-12">
-            <div class="col-md-9 daily_book col-md-offset-1" style="padding-left: 15px;">
+            <div class="col-md-8 daily_book col-md-offset-2" style="padding-left: 15px;">
                 <?= Html::a('
                 <div class="daily_image" style="background: url(images/books/'.$book['image'].') no-repeat center; background-size: contain;"></div>
                 ', ['book/view', 'id' => $book['id']]) ?>
