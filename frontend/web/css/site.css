@@ -354,12 +354,8 @@ color: red; font-size: 25px; margin-left: 10px; cursor: pointer;
 
 /* Navbar custom */
 
-.navbar {
-    
-}
-
 .navbar-inverse {
-  background-color: #FFFFF7;  
+  background-color: #FFFFFF;  
   border-bottom: 1px solid #e8e8e8;
 }
 .navbar-inverse .navbar-brand {

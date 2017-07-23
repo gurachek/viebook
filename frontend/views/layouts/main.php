@@ -92,7 +92,7 @@ AppAsset::register($this);
     <br>
     <br>
     <br>
-    <div class="container" style="background: #FFFFF9; border: 1px solid #FFFFF7;">
+    <div class="container" style="background: #FFFFFF; border: 1px solid #FFFFF7;">
         <?php Alert::widget() ?>
 
         <?= $content ?>
