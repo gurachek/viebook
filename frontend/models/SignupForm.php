@@ -56,12 +56,14 @@ class SignupForm extends Model
         $user->generateAuthKey();
         
         if ($user->save()) {
-            if ($this->setConfirmCode($user->id)) {
-                // $this->sendEmail();
-                return $user;            
+            if ($confirmation = $this->setConfirmCode($user->id)) {
+                $link = Yii::$app->getUrlManager()->createAbsoluteUrl(['user/confirm', 'code' => $confirmation->code]);
+                $this->sendEmail($link);
+                return $user;
             }
         }
 
+        return false;
     }
 
     private function setConfirmCode($userId)
@@ -71,20 +73,15 @@ class SignupForm extends Model
         $confirmation->code = md5($this->email.time());
         $confirmation->time = time();
 
-        if ($confirmation->save()) {
-            return true;
-        }
-
-        return false;
+        return $confirmation->save() ? $confirmation : false;
     }
 
-    private function sendEmail()
+    private function sendEmail($link)
     {
-        Yii::$app->mail->compose()
-        ->setTo($this->email)
-        ->setFrom(['no-reply@viebook.ru' => 'Viebook'])
-        ->setSubject('Подтверждение регистрации')
-        ->setTextBody('hallo')
-        ->send();
+        Yii::$app->mail->compose(['html' => 'userConfirmation-html'], ['link' => $link])
+            ->setFrom(['webcrash091@gmail.com' => 'Viebook'])
+            ->setTo($this->email)
+            ->setSubject('Подтверждение регистрации')
+            ->send();
     }
 }
