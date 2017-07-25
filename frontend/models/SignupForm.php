@@ -57,7 +57,7 @@ class SignupForm extends Model
         
         if ($user->save()) {
             if ($this->setConfirmCode($user->id)) {
-                $this->sendEmail();
+                // $this->sendEmail();
                 return $user;            
             }
         }
