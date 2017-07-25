@@ -49,7 +49,7 @@ class AppController extends Controller
 
         // Daily Books
 
-        $dailyBooks = Book::find()->limit(20)->with('reviews')->all();
+        $dailyBooks = Book::find()->limit(20)->with('reviews')->orderBy('id DESC')->all();
 
         return $this->render('index', [
             'model' => $model,
