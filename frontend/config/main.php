@@ -50,7 +50,7 @@ return [
             'useFileTransport' => false,
             'transport' => [
                 'class' => 'Swift_SmtpTransport',
-                'host' => 'scp62.hosting.reg.ru',
+                'host' => 'localhost',
                 'username' => 'no-reply@u0354827.cp.regruhosting.ru',
                 'password' => 'nirvanadeviant1K',
                 'port' => '465',
