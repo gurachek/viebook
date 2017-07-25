@@ -79,7 +79,7 @@ class SignupForm extends Model
     private function sendEmail($link)
     {
         Yii::$app->mail->compose(['html' => 'userConfirmation-html'], ['link' => $link])
-            ->setFrom(['webcrash091@gmail.com' => 'Viebook'])
+            ->setFrom(['no-reply@viebook.ru' => 'Viebook'])
             ->setTo($this->email)
             ->setSubject('Подтверждение регистрации')
             ->send();
