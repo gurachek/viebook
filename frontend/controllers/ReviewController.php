@@ -113,6 +113,10 @@ class ReviewController extends Controller
             return $this->redirect(['site/login', 'a' => 'write_review', 'id' => $bookid]);
         }
 
+        if (!Yii::$app->user->identity->isActive()) {
+            return $this->render('unconfirmed');
+        }
+
         if ($bookid === null || $bookid == false) {
             return $this->render('write_instructions');
         }

@@ -46,6 +46,11 @@ class User extends ActiveRecord implements IdentityInterface
         $this->save();
     }
 
+    public function isActive()
+    {
+        return $this->active;
+    }
+
     public function getName()
     {
         if ($this->nicename) {

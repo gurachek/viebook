@@ -45,6 +45,10 @@ class BookController extends Controller
         return $this->redirect(['site/login', 'a' => 'add_book']);
     }
 
+    if (!Yii::$app->user->identity->isActive()) {
+      return $this->render('unconfirmed');
+    }
+
     $model = new AddbookModel();
 
     if ($model->load(Yii::$app->request->post())) {

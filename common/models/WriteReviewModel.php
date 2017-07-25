@@ -19,6 +19,7 @@ class WritereviewModel extends Model
     {
     	return [
     		['title', 'required', 'message' => 'Вы должны ввести заголовок'],
+            ['title', 'unique', 'targetClass' => 'frontend\models\Review', 'message' => 'На сайте уже существует рецензия с таким заголовком. Выберите другой'],
     		['text', 'required', 'message' => 'Рецензия без текста?'],
     		[['bookid', 'userid'], 'required']
     	];

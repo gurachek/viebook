@@ -12,6 +12,7 @@ use frontend\models\Book;
 use frontend\models\Author;
 use frontend\models\UserSettingsModel;
 use yii\web\UploadedFile;
+use frontend\models\UserConfirmation;
 
 class UserController extends Controller
 {
@@ -101,6 +102,25 @@ class UserController extends Controller
     return $this->render('list', [
       'users' => $users
     ]);
+  }
+
+  public function actionConfirm($code = null)
+  {
+    if ($code === null || $code == false) {
+      return $this->render('no-confirm-code');
+    }
+
+    if ($confirm = UserConfirmation::findOne(['code' => $code])) {
+      $user = User::findIdentity($confirm->user_id);
+      $user->active = 1;
+      if ($user->save()) {
+        if ($confirm->delete()) {
+          return $this->render('confirm');
+        }
+      }
+    }
+
+    return $this->render('invalid-confirm-code');
   }
 
 }

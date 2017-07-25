@@ -23,9 +23,10 @@ class AddbookModel extends Model
 	{
 		return [
 			['name', 'required', 'message' => 'Люди часто ищут книги по названию. Пожалуйста, не игнорируйте это'],
+			['name', 'unique', 'targetClass' => 'frontend\models\Book', 'message' => 'Эта книга уже есть на сайте'],
 			['author', 'required', 'message' => 'Нам нужно знать кто автор этой книги'],
 			['publish_date', 'required', 'message' => 'Не знаю зачем, но это тоже нам нужно'],
-			['tags', 'required', 'message' => 'На основе тагов мы составляем фид-ленту и разделы, введите пожалуйста'],
+			['tags', 'required', 'message' => 'На основе тегов мы составляем фид-ленту и разделы, введите пожалуйста'],
 			['image', 'required', 'message' => 'Вы должны загрузить обложку, чтобы добавить книгу на сайт'],
 			[['image'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg, jpeg'],
 			[['image'], 'file', 'maxSize' => '5000000'],

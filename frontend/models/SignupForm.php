@@ -1,8 +1,10 @@
 <?php
 namespace frontend\models;
 
+use Yii;
 use yii\base\Model;
 use common\models\User;
+use frontend\models\UserConfirmation;
 
 /**
  * Signup form
@@ -53,6 +55,36 @@ class SignupForm extends Model
         $user->setPassword($this->password);
         $user->generateAuthKey();
         
-        return $user->save() ? $user : null;
+        if ($user->save()) {
+            if ($this->setConfirmCode($user->id)) {
+                $this->sendEmail();
+                return $user;            
+            }
+        }
+
+    }
+
+    private function setConfirmCode($userId)
+    {
+        $confirmation = new UserConfirmation();
+        $confirmation->user_id = $userId;
+        $confirmation->code = md5($this->email.time());
+        $confirmation->time = time();
+
+        if ($confirmation->save()) {
+            return true;
+        }
+
+        return false;
+    }
+
+    private function sendEmail()
+    {
+        Yii::$app->mail->compose()
+        ->setTo($this->email)
+        ->setFrom(['no-reply@viebook.ru' => 'Viebook'])
+        ->setSubject('Подтверждение регистрации')
+        ->setTextBody('hallo')
+        ->send();
     }
 }

@@ -103,7 +103,7 @@ AppAsset::register($this);
 <footer class="footer">
     <div class="container">
         <p class="pull-left">&copy; Viebook <?= date('Y') ?></p>
-        <p class="pull-right">Gurachek</p>
+        <p class="pull-right">Gurachek/Svernyuk</p>
         <p class="text-center">
             <a href="https://vk.com/viebook" target="_blank">
                 <img src="/images/vk.png" width="30" height="30">

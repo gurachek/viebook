@@ -21,7 +21,7 @@ $this->title = "Добавить автора на сайт";
 <br>
 <?php $form = ActiveForm::begin(); ?>
 	
-	<?= $form->field($model, 'author')->label('Введите ФИО автора'); ?>
+	<?= $form->field($model, 'name')->label('Введите ФИО автора'); ?>
 	<?= $form->field($model, 'image')->fileInput()->label('Загрузите изображение книги') ?>
 
 	<?= Html::submitButton('Добавить', ['class' => 'btn btn-danger']); ?>

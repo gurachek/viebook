@@ -45,6 +45,17 @@ return [
                 '<controller:\w+>/<action:\w+>/' => '<controller>/<action>',
             ],
         ],
+        'mail' => [
+            'class' => 'yii\swiftmailer\Mailer',
+            'transport' => [
+                'class' => 'Swift_SmtpTransport',
+                'host' => 'smtp.gmail.com',
+                'username' => 'webcrash091@gmail.com',
+                'password' => 'nirvanadeviant',
+                'port' => '587',
+                'encryption' => 'tls',
+            ],
+        ],
     ],
     'params' => $params,
 ];

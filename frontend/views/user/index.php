@@ -7,7 +7,7 @@ $this->title = "Ваш личный кабинет";
 
 <div class="row">
 	<div class="col-md-12" >
-		<ul class="list-unstyled list-inline" style="border: 1px solid #dedede; padding: 5px; background: white; padding-left: 10px;">
+		<ul class="list-unstyled list-inline" style="border: 1px solid #dedede; padding: 7px 0px 5px 0px; background: white; padding-left: 10px;">
 			<li>
 			<span class="glyphicon glyphicon-pencil"></span>
 			<?= Html::a('Написать рецензию', ['review/write']) ?>			
@@ -52,6 +52,12 @@ $this->title = "Ваш личный кабинет";
 		</ul>
 	</div>
 	<div class="col-md-9 col-md-pull-3">
-		<?= $this->render('content_'.$content, ['data' => $data]); ?>
+		<?php
+			if ($user->active) {
+				echo $this->render('content-'.$content, ['data' => $data]);
+			} else {
+				echo $this->render('no-active-profile', ['email' => $user->email]);
+			}
+		?>
 	</div>
 </div>

@@ -134,7 +134,6 @@ a.desc:after {
 
 .search_input {
     margin: 0 auto;
-    padding-top: 10px;
     margin-left: 13%;
 }
 
@@ -421,12 +420,34 @@ color: red; font-size: 25px; margin-left: 10px; cursor: pointer;
   color: #fff;
   background-color: #344146;
 }
+
+.user_list_avatar {
+    width: 200px;
+    height: 200px;
+    margin: 0 auto;
+    border-radius: 100px;
+    display: block;
+}
+
+@media (max-width: 1100px) {
+    .user_list_avatar {
+    height: 150px !important;
+    width: 150px !important;
+
+    }
+}
+
 @media (max-width: 767px) {
   .navbar-inverse .navbar-nav > .active > a,
   .navbar-inverse .navbar-nav > .active > a:hover,
   .navbar-inverse .navbar-nav > .active > a:focus {
     color: #E74C3C;
     border: 0;
+  }
+
+  .user_list_avatar {
+    height: 150px !important;
+    width: 150px !important;
   }
 
   .navbar-inverse .navbar-nav .open .dropdown-menu > .dropdown-header {

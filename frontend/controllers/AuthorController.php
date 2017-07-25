@@ -44,6 +44,10 @@ class AuthorController extends Controller
         return $this->redirect(['site/login', 'a' => 'add_author']);
     }
 
+    if (!Yii::$app->user->identity->isActive()) {
+      return $this->render('unconfirmed');
+    }
+
     $model = new AddAuthorModel();
 
     if ($model->load(Yii::$app->request->post())) {

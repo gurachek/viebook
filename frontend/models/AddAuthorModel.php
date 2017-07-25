@@ -10,14 +10,15 @@ use frontend\models\AuthorTrack;
 
 class AddAuthorModel extends Model
 {
-	public $author;
+	public $name;
 	public $image;
 
 	public function rules()
 	{
 		return [
-			['author', 'required', 'message' => 'Это обязательно'],
+			['name', 'required', 'message' => 'Это обязательно'],
 			['image', 'required', 'message' => 'Это тоже обязательно'],
+			['name', 'unique', 'targetClass' => 'frontend\models\Author', 'message' => 'Этот автор уже есть на сайте'],
 
 			[['image'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg, jpeg'],
 			[['image'], 'file', 'maxSize' => '5000000'],
@@ -30,7 +31,7 @@ class AddAuthorModel extends Model
 		if ($this->validate()) {
 
 			$author = new Author();
-			$author->name = $this->author;
+			$author->name = $this->name;
 			$author->image = time() . '.' . $this->image->extension;
 
 			$author->save();

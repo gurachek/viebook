@@ -25,6 +25,10 @@ $this->params['breadcrumbs'][] = $this->title;
 
                 <?= $form->field($model, 'rememberMe')->hiddenInput(['value' => 1])->label(false) ?>
 
+                <p>
+                    <?= Html::a('Восстановить пароль', ['site/restore-password']) ?>
+                </p>
+
                 <div class="form-group">
                     <?= Html::submitButton('Войти', ['class' => 'btn btn-danger', 'name' => 'login-button']) ?>
                 </div>
