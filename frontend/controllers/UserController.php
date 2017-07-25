@@ -13,6 +13,7 @@ use frontend\models\Author;
 use frontend\models\UserSettingsModel;
 use yii\web\UploadedFile;
 use frontend\models\UserConfirmation;
+use frontend\models\ResetPasswordForm;
 
 class UserController extends Controller
 {
@@ -121,6 +122,31 @@ class UserController extends Controller
     }
 
     return $this->render('invalid-confirm-code');
+  }
+
+  public function actionResetPassword($code = null)
+  {
+    if ($code === null || $code == false) {
+      return $this->render('no-password-reset-code');
+    }
+    if ($user = User::findByPasswordResetToken($code)) {
+      
+      $model = new ResetPasswordForm();
+      
+      if ($model->load(Yii::$app->request->post())) {
+        if ($model->setNewPassword($user)) {
+          return $this->render('password-is-set');
+        } else {
+          return $this->render('password-set-error');
+        }
+      }
+
+      return $this->render('password-reset', [
+        'model' => $model
+      ]);    
+    }
+    
+    return $this->render('invalid-reset-code');
   }
 
 }

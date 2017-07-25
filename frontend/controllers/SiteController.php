@@ -8,11 +8,9 @@ use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use common\models\LoginForm;
-use frontend\models\PasswordResetRequestForm;
-use frontend\models\ResetPasswordForm;
+use frontend\models\ResetPasswordRequestForm;
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
-use frontend\models\RestorePasswordForm;
 
 /**
  * Site controller
@@ -172,11 +170,21 @@ class SiteController extends Controller
         ]);
     }
 
-    public function actionRestorePassword()
+    public function actionResetPasswordRequest()
     {
-        $model = new RestorePasswordForm();
+        $model = new ResetPasswordRequestForm();
 
-        return $this->render('restore_password');
+        if ($model->load(Yii::$app->request->post())) {
+            if ($model->createResetToken()) {
+                return $this->render('success-restore-password-request');
+            } else {
+                return $this->render('cant-create-reset-token');
+            }
+        }
+
+        return $this->render('restore-password-request', [
+            'model' => $model,
+        ]);
     }
 
 }

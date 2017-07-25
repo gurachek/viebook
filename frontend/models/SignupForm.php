@@ -58,7 +58,7 @@ class SignupForm extends Model
         if ($user->save()) {
             if ($confirmation = $this->setConfirmCode($user->id)) {
                 $link = Yii::$app->getUrlManager()->createAbsoluteUrl(['user/confirm', 'code' => $confirmation->code]);
-                $this->sendEmail($link);
+                $this->sendMail($link);
                 return $user;
             }
         }
@@ -76,7 +76,7 @@ class SignupForm extends Model
         return $confirmation->save() ? $confirmation : false;
     }
 
-    private function sendEmail($link)
+    private function sendMail($link)
     {
         Yii::$app->mail->compose(['html' => 'userConfirmation-html'], ['link' => $link])
             ->setFrom(['no-reply@viebook.ru' => 'Viebook'])

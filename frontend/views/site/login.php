@@ -26,7 +26,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 <?= $form->field($model, 'rememberMe')->hiddenInput(['value' => 1])->label(false) ?>
 
                 <p>
-                    <?= Html::a('Восстановить пароль', ['site/restore-password']) ?>
+                    <?= Html::a('Восстановить пароль', ['site/reset-password-request']) ?>
                 </p>
 
                 <div class="form-group">
