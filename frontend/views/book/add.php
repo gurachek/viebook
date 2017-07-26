@@ -46,7 +46,7 @@ $this->title = "Добавить книгу на сайт";
     		'max' => 6,
         	'highlightItem' =>  true,
         	'multiple' => true,
-        	'multipleSeparator' => " ",
+        	'multipleSeparator' => ",",
     	]
 	])  ?>
 	<?= $form->field($model, 'image')->fileInput()->label('Загрузите изображение книги') ?>

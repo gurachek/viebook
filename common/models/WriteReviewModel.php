@@ -36,12 +36,12 @@ class WritereviewModel extends Model
     public function save()
     {
     	$review = new Review();
-    	$review->title = htmlspecialchars($this->title);
+    	$review->title = $this->title;
     	$review->user_id = $this->userid;
     	$review->created_at = time();
     	$review->active = 0;
     	$review->book_id = $this->bookid;
-    	$review->text = htmlspecialchars($this->text);
+    	$review->text = $this->text;
 
         if ($review->save()) {
             $reviewTrack = new ReviewTrack();

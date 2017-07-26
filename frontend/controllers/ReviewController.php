@@ -83,12 +83,12 @@ class ReviewController extends Controller
                 if ($data['estimate']) {
 
                     $review->rating += 10;
-                    Yii::$app->user->identity->increaseRating(2);
+                    // Yii::$app->user->identity->increaseRating(2);
 
                 } else {
 
                     $review->rating -= 5;
-                    Yii::$app->user->identity->reduceRating(1);
+                    // Yii::$app->user->identity->reduceRating(1);
                 }
 
                 $estimate = new UserEstimates();

@@ -65,6 +65,10 @@ class AddbookModel extends Model
 				foreach($tags as $tag) {
 					$tag = trim($tag);
 
+					if (!$tag) {
+						continue;
+					}
+
 					if (!$issetTag = Tag::findOne(['name' => $tag])) {
 						$issetTag = new Tag();
 						$issetTag->name = $tag;
