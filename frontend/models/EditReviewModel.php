@@ -24,8 +24,9 @@ class EditReviewModel extends Model
 	{
 		$review = Review::findOne(['id' => $this->reviewid]);
 
-		$review->title = htmlspecialchars($this->title);
-		$review->text = htmlspecialchars($this->text);
+		$review->title = $this->title;
+		$review->text = $this->text;
+		$review->active = 0;
 
 		if ($review->save()) {
 			return true;

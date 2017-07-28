@@ -2,13 +2,14 @@
 
 namespace frontend\controllers;
 
-use Yii;
-use yii\web\Controller;
-use frontend\models\Book;
 use frontend\models\AddbookModel;
-use yii\web\UploadedFile;
 use frontend\models\Author;
+use yii\web\UploadedFile;
+use frontend\models\Book;
 use frontend\models\Tag;
+use yii\web\Controller;
+use yii\web\Response;
+use Yii;
 
 class BookController extends Controller
 {
@@ -85,5 +86,19 @@ class BookController extends Controller
     return $this->render('list', [
       'books' => $books,
     ]);
+  }
+
+  public function actionTags()
+  {
+    Yii::$app->response->format = Response::FORMAT_JSON;
+    
+    $tags = Tag::find()->asArray()->all();
+    $return = [];
+
+    foreach ($tags as $tag) {
+      $return[]['name'] = $tag['name'];
+    }
+
+    return $return;
   }
 }

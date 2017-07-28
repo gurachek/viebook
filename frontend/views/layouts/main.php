@@ -62,6 +62,9 @@ AppAsset::register($this);
     $leftMenu[] = ['label' => 'Авторы', 'url' => ['/author/list']];
     $leftMenu[] = ['label' => 'Пользователи', 'url' => ['/user/list']];
 
+    if (Yii::$app->user->can('godmode'))
+        $leftMenu[] = ['label' => 'Рецензии', 'url' => ['/god/reviews']];
+
      echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-left'],
         'items' => $leftMenu,

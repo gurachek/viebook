@@ -10,4 +10,14 @@ class UserEstimates extends ActiveRecord
 	{
 		return 'user_estimates';
 	}    
+
+	public function numberOfPositive()
+	{
+		return static::find()->where(['estimate' => 1, 'entry_id' => $this->entry_id])->count();
+	}
+
+	public function numberOfNegative()
+	{
+		return static::find()->where(['estimate' => 0, 'entry_id' => $this->entry_id])->count();
+	}
 }

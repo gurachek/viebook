@@ -17,9 +17,18 @@ use yii\helpers\Html;
 			<?= $review['book']['name'] ?>
 		</small>
 	</h4>
-	<p style="color: gray;">
-		Рейтинг: <?= $review['rating'] ?>
-	</p>
+
+	<?php if ($review->active): ?>
+		<p style="color: gray;">
+			Рейтинг: <?= $review['rating'] ?>
+		</p>
+	<?php else: ?>
+		<p style="color: orange;">
+			<span class="glyphicon glyphicon-exclamation-sign"></span>
+			На модерации
+		</p>
+	<?php endif; ?>
+
 	<p>
 		<?php $text = intval(strlen($review['text']) / 5) ?>
         <?= mb_substr($review['text'], 0, $text, "utf-8") ?>...

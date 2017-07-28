@@ -38,8 +38,11 @@ class UserSettingsModel extends Model
 			$user->nicename = $nicename ?? $user->username;
 
 			if ($this->image) {
-				$this->image->saveAs(Yii::getAlias('@webroot') . '/images/users/' . time() . '.' . $this->image->extension);
-				$user->image = time() .'.'. $this->image->extension;
+
+				$image = time() . '.' . $this->image->extension;
+
+				$this->image->saveAs(Yii::getAlias('@webroot') . '/images/users/' . $image);
+				$user->image = $image;
 			}
 
 			$user->save();

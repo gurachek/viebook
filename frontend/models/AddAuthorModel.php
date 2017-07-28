@@ -30,9 +30,13 @@ class AddAuthorModel extends Model
 	{
 		if ($this->validate()) {
 
+			$image = time() . '.' . $this->image->extension;
+
+			$this->image->saveAs(Yii::getAlias('@webroot') . '/images/authors/' . $image);
+
 			$author = new Author();
 			$author->name = $this->name;
-			$author->image = time() . '.' . $this->image->extension;
+			$author->image = $image;
 
 			$author->save();
 
@@ -44,8 +48,6 @@ class AddAuthorModel extends Model
 			$track->save();
 
 			Yii::$app->user->identity->increaseRating(2);
-
-			$this->image->saveAs(Yii::getAlias('@webroot') . '/images/authors/' . time() . '.' . $this->image->extension);
 
 			return true;
 		}

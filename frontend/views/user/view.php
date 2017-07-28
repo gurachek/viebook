@@ -28,7 +28,7 @@ $this->title = "Пользователь ". $user->getName();
 	<div class="col-md-9 col-md-pull-3">
 		<?php if (!$user->reviews): ?>
 			<h2 class="text-center">
-				Пользователь не писал рецензий
+				У пользователя нет опубликованных рецензий
 			</h2>
 		<?php else: ?>
 			<h3>Последние рецензии:</h3>

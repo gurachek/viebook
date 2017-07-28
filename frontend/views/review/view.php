@@ -2,7 +2,7 @@
 use yii\helpers\Url;
 use yii\helpers\Html;
 
-$this->title = 'Viebook: '. $review->title;
+$this->title = $review->title .' - "'. $review->book->name .'" '. $review->book->author->name ;
 
 // For estimate
 $url = Yii::$app->getUrlManager()->createAbsoluteUrl(['review/estimate']);
@@ -14,6 +14,9 @@ $estimateReview = <<< JS
 jQuery(document).ready(function () {
     jQuery('.estimate span').click(function () {
         var id = jQuery(this).data('id');
+
+        jQuery('.estimate').addClass('estimate_opacity');
+        jQuery(this).addClass('estimate_rotate');
 
         jQuery.ajax({
             url: "$url",
@@ -27,6 +30,8 @@ jQuery(document).ready(function () {
                 if (!data)
                     jQuery('.ty_for_estimate .text').html('<span class="glyphicon glyphicon-warning-sign"></span> Вы уже оценивали эту рецензию');
                 jQuery('.ty_for_estimate').css('display', 'block');
+                jQuery('.estimate').removeClass('estimate_opacity');
+                jQuery('.estimate span').removeClass('estimate_rotate');
             },
         });
     });
@@ -48,10 +53,13 @@ $this->registerJs($estimateReview);
         </p>
         <br>
         <p>
+            Автор: <?= Html::a($review->author->getName(), ['user/view', 'id' => $review->author->id]) ?>
+        </p>
+        <p>
             Рейтинг: <?= $review->rating ?>
         </p>
         <p>
-            <?= $review->text ?>
+            <?= nl2br($review->text) ?>
         </p>
 
         <div class="alert alert-success alert-dismissible fade in text-center ty_for_estimate" role="alert">
@@ -64,12 +72,24 @@ $this->registerJs($estimateReview);
             </span>
         </div>
 
-        <?php if (Yii::$app->user->getId()): ?>
+        <?php if ($id = Yii::$app->user->getId()): ?>
 
-            <div class="estimate" style="text-align: center;">
-                <span title="Понравилось" class="glyphicon glyphicon-thumbs-up like" data-id="1"></span>
-                <span title="Не понравилось" class="glyphicon glyphicon-thumbs-down dislike" data-id="0"></span>
-            </div>
+            <?php if ($review->user_id != $id): ?>
+            
+                <div class="estimate" style="text-align: center;">
+                    <span title="Понравилось" class="glyphicon glyphicon-thumbs-up like" data-id="1"></span>
+                    <span title="Не понравилось" class="glyphicon glyphicon-thumbs-down dislike" data-id="0"></span>
+                </div>
+
+            <?php else: ?>
+                <p class="text-center">
+                <span style="color: gray;">
+                Положительных оценок: <?= $review->estimates[0]->numberOfPositive() ?>
+                <br>
+                Отрицательных оценок: <?= $review->estimates[0]->numberOfNegative() ?>
+                </span>
+                </p>
+            <?php endif; ?>
 
         <?php else: ?>
 

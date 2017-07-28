@@ -61,7 +61,7 @@ $this->registerJs($js);
             ])->textInput(['placeholder' => 'Начните вводить название книги...']) ?>
         </div>
 
-        <?= Html::submitButton('<span class="glyphicon glyphicon-search" aria-hidden="true"></span>', ['class' => 'btn search_submit']); ?>
+        <?= Html::submitButton('<span class="glyphicon glyphicon-search" aria-hidden="true"></span>', ['class' => 'btn viebutton']); ?>
 
         <?php ActiveForm::end(); ?>
     </div>

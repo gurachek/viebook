@@ -46,7 +46,7 @@ class ReviewController extends Controller
     {
         if ($id == null || empty($id)) return $this->render('no-reviewid');
 
-        $review = Review::findOne(['id' => $id]);
+        $review = Review::findOne(['id' => $id, 'active' => 1]);
 
         if ($review == null) return $this->render('no-review');
 
@@ -82,13 +82,11 @@ class ReviewController extends Controller
 
                 if ($data['estimate']) {
 
-                    $review->rating += 10;
-                    // Yii::$app->user->identity->increaseRating(2);
+                    $review->rating += 5;
 
                 } else {
 
-                    $review->rating -= 5;
-                    // Yii::$app->user->identity->reduceRating(1);
+                    $review->rating -= 10;
                 }
 
                 $estimate = new UserEstimates();

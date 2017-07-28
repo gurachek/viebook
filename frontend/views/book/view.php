@@ -76,11 +76,11 @@ $this->registerJs($readReviewButton);
                         </div>
                         <div class="review_text" data-id="<?= $review->id ?>">
                             <?php $text = intval(strlen($review->text) / 3) ?>
-                            <?= mb_substr($review->text, 0, $text, "utf-8") ?>...
+                            <?= mb_substr(Html::encode($review->text), 0, $text, "utf-8") ?>...
                         </div>
                         <br>
                         <div class="go_read">
-                            <?= Html::a("Читать дальше", ['review/view', 'id' => $review->id], ['class' => 'btn btn-danger pull-right read_this_review']); ?>
+                            <?= Html::a("Читать дальше", ['review/view', 'id' => $review->id], ['class' => 'btn viebutton pull-right read_this_review']); ?>
 
                         </div>
                     </div>

@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\jui\AutoComplete;
 use yii\web\JsExpression;
+use yii2mod\selectize\Selectize;
 
 $this->title = "Добавить книгу на сайт";
 
@@ -27,30 +28,36 @@ $this->title = "Добавить книгу на сайт";
     	'clientOptions' => [
         	'source' => $authors,
             'minLength' => '3',
+            'response' => new JsExpression('function(event, ui) {
+                if (ui.content.length === 0) {
+                    var inputData = jQuery("#addbookmodel-author").val();
+                    jQuery(".author_image").html("Автора \"" + inputData + "\" нет на сайте, он будет добавлен на сайт автоматически.<br><br>");
+                } else {
+
+                }
+            }'),
     	],
     	'options' => [
     		'class' => 'form-control',
     	]
 	]) ?>
+
 	<?= $form->field($model, 'publish_date')->label('Когда книга впервые была опубликована') ?>
-	<?= $form->field($model, 'tags')->label('Начните вводить теги к этой книге')->widget(AutoComplete::classname(), [
-    	'clientOptions' => [
-        	'source' => $tags,
-        	'max' => 6,
-        	'highlightItem' =>  true,
-        	'multiple' => true,
-        	'multipleSeparator' => " ",
-    	],
-    	'options' => [
-    		'class' => 'form-control',
-    		'max' => 6,
-        	'highlightItem' =>  true,
-        	'multiple' => true,
-        	'multipleSeparator' => ",",
-    	]
-	])  ?>
+	<?= $form->field($model, 'tags')->label('Начните вводить теги к этой книге')->widget(Selectize::className(), [
+        'url' => '/book/tags',
+         'pluginOptions' => [
+            'valueField' => 'name',
+            'labelField' => 'name',
+            'searchField' => ['name'],
+            'persist' => false,
+            'createOnBlur' => true,
+            'create' => true
+        ]
+])  ?>
 	<?= $form->field($model, 'image')->fileInput()->label('Загрузите изображение книги') ?>
 
-	<?= Html::submitButton('Добавить', ['class' => 'btn btn-danger']); ?>
+    <div class="author_image"></div>
+
+	<?= Html::submitButton('Добавить', ['class' => 'btn viebutton']); ?>
 
 <?php ActiveForm::end(); ?>

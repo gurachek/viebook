@@ -12,12 +12,24 @@ use yii\db\ActiveRecord;
 use frontend\models\Book;
 use common\models\User;
 use frontend\models\Analytics;
+use common\models\UserEstimates;
 
 class Review extends ActiveRecord
 {
+    const ACTIVE = 1;
+    const MODERATION = 0;
+
     public static function tableName()
     {
         return 'reviews';
+    }
+
+    public function rules()
+    {
+        return [
+            ['active', 'default', 'value' => self::ACTIVE],
+            ['active', 'in', 'range' => [self::MODERATION, self::ACTIVE]],
+        ];
     }
 
     public function getBook()
@@ -33,5 +45,10 @@ class Review extends ActiveRecord
     public function getAuthor()
     {
       return $this->hasOne(User::className(), ['id' => 'user_id']);
+    }
+
+    public function getEstimates()
+    {
+        return $this->hasMany(UserEstimates::className(), ['entry_id' => 'id']);
     }
 }
