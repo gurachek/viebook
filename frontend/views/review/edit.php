@@ -40,4 +40,5 @@ $this->title = 'Редактирование рецензии на книгу "'
     <?= $form->field($model, 'reviewid')->hiddenInput(['value' => $review->id])->label(false); ?>
 
     <?= Html::submitButton('Редактировать', ['class' => 'btn btn-danger']); ?>
+    <?= Html::a('Перейти к рецензии', ['review/view', 'id' => $review->id], ['class' => 'btn btn-link']); ?>
 <?php ActiveForm::end() ?>

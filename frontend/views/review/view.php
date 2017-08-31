@@ -112,9 +112,9 @@ $this->registerJs($customJs);
         </h3>
         <br>
         
-        <p style="font-size: 1.2em; line-height: 1.6em;">
+        <div style="font-size: 1.2em; line-height: 1.6em;">
             <?= nl2br($review->text) ?>
-        </p>
+        </div>
 
         <div class="alert alert-success alert-dismissible fade in text-center ty_for_estimate" role="alert">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -181,7 +181,7 @@ $this->registerJs($customJs);
     <div class="col-md-4 review_display_book_block">
         <div class="book_page">
             <div class="name">
-                <h3 style="margin: 0; text-align: center;"><?= $review->book['name'] ?></h3>
+                <!-- <h3 style="margin: 0; text-align: center;"><?= $review->book['name'] ?></h3> -->
             </div>
             <div class="image" style="text-align: center;">
                 <div style="background: url(/images/books/<?= $review->book['image'] ?>) no-repeat; background-size: contain; width: 100%; height: 315px; background-position: center center; margin-top: 10px;"></div>

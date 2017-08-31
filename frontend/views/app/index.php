@@ -71,7 +71,6 @@ $this->registerJs($js);
 
 <?php if ($dailyBooks): ?>
 
-<!-- <div class="row" style="margin-bottom: 15px;"> -->
 <div id="columns">
 
 <?php foreach($dailyBooks as $book): ?>
@@ -107,7 +106,7 @@ $this->registerJs($js);
         </div>
 
         <p>
-            <?php $text = intval(strlen($review->text) / 4) ?>
+            <?php $text = intval(strlen($review->text) / 8) ?>
                     <?= mb_substr($review->text, 0, $text, "utf-8") ?>...
                     <?= Html::a('Читать', ['review/view', 'id' => $review->id]) ?>
                     <br>
@@ -144,6 +143,8 @@ if (!is_array($search_results)) {
 } else { ?>
 
     <div class="books_searched">
+    <h3 class="text-center">Все, что найдено по запросу "<?= $search_query ?>"</h3>
+    <br>
     <div class="row">
     <?php foreach($search_results as $book): ?>
         <?php $category = $book->cat['name']; ?>
@@ -151,20 +152,25 @@ if (!is_array($search_results)) {
             <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
             <div class="daily_book" style="padding: 10px;">
                 <div class="name">
-                    <?= Html::a('<div class="image" style="background: url(images/books/'.$book->image.'); background-size: contain;"></div>', ['book/view', 'id' => $book->id]); ?>
+                    <?= Html::a('<div class="image" style="background: url(images/books/'.$book->image.'); background-size: cover;"></div>', ['review/view', 'id' => $book->reviews[0]['id']]); ?>
                 </div>
 
-                <div class="publish_date">
-                    <span class="publish_label">Дата публикации: </span>
-                    <?= $book->publish_date ?>
-                </div>
-                <div class="author">
-                    <span class="author_label">Автор: </span>
-                    <?= $book->author['name'] ?>
-                </div>
-                <div class="category">
-                    <span class="category_label">Категория: </span>
-                    <?= $category ?>
+                <div style="width: 200px; margin: 0 auto;">
+                    <div class="publish_date">
+                        <!-- <span class="publish_label">Дата публикации: </span> -->
+                        <span class="glyphicon glyphicon-calendar"></span>
+                        <?= $book->publish_date ?>
+                    </div>
+                    <div class="author">
+                        <!-- <span class="author_label">Автор: </span> -->
+                        <span class="glyphicon glyphicon-user"></span>
+                        <?= $book->author['name'] ?>
+                    </div>
+                    <div class="category">
+                        <!-- <span class="category_label">Категория: </span> -->
+                        <span class="glyphicon glyphicon-book"></span>
+                        <?= $category ?>
+                    </div>
                 </div>
             </div>
             </div>

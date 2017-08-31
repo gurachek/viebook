@@ -50,7 +50,7 @@ $this->title = "Пользователь ". $user->getName();
 			</p>
 
 			<p>
-			<?php $text = intval(strlen($review['text']) / 3) ?>
+			<?php $text = intval(strlen($review['text']) / 5) ?>
 			<?= mb_substr($review['text'], 0, $text, "utf-8") ?>...
 
 			</p>

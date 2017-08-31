@@ -26,11 +26,12 @@ class AppController extends Controller
     {
         $model = new SearchModel();
         $search_results = [];
+        $search_query = '';
 
         if (Yii::$app->request->isAjax) {
             if ($model->load(Yii::$app->request->post())) {
                 if ($search_results = $model->search_book()) {
-                    
+                    $search_query = $model->search;
                 } else {
                     $search_results = 'No books';
                 }
@@ -56,6 +57,7 @@ class AppController extends Controller
             'search_results' => $search_results,
             'books' => $booksName,
             'dailyBooks' => $dailyBooks,
+            'search_query' => $search_query,
         ]);
     }
 

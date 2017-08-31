@@ -5,7 +5,7 @@ use yii\helpers\Html;
 
 <?php if (!$data->reviews): ?>
 	<p class="text-center">
-		У Вас нет активных рецензий
+		У Вас нет опубликованных рецензий
 	</p>
 <?php endif; ?>
 <br>

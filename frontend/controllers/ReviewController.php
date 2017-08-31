@@ -124,9 +124,9 @@ class ReviewController extends Controller
 
         if ($model->load(Yii::$app->request->post())) {
             if ($model->save())
-                Yii::$app->session->setFlash('success_review_post', 'Рецензия добавлена на сайт');
+                Yii::$app->session->setFlash('success_review_post', 'Рецензия отправлена на модерацию. Спасибо за помощь в развитии сайта!');
             else
-                Yii::$app->session->setFlash('failure_review_post', 'Что-то пошло не так');
+                Yii::$app->session->setFlash('failure_review_post', 'Что-то пошло не так :(');
         }
 
         if ($bookid === null || $bookid == false) {
@@ -154,10 +154,13 @@ class ReviewController extends Controller
         }
 
         if ($model->load(Yii::$app->request->post())) {
-            if ($model->edit())
-                Yii::$app->session->setFlash('success_edit_review', 'Рецензия отредактирована');
-            else
+            if ($model->edit()) {
+                Yii::$app->session->setFlash('success_edit_review', 'Рецензия отредактирована и отправлена на модерацию');
+                $review = Review::findOne(['id' => $checkReview->review_id]);
+            }
+            else {
                 Yii::$app->session->setFlash('failure_edit_review', 'Не удалось редактировать рецензию');
+            }
         }
 
         return $this->render('edit', [

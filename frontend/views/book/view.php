@@ -87,7 +87,7 @@ $this->registerJs($customJs);
                             <?= date("d M Y", $review->created_at) ?>
                         </div>
                         <div class="review_text" data-id="<?= $review->id ?>">
-                            <?php $text = intval(strlen($review->text) / 3) ?>
+                            <?php $text = intval(strlen($review->text) / 5) ?>
                             <?= mb_substr(Html::encode($review->text), 0, $text, "utf-8") ?>...
                         </div>
                         <br>
