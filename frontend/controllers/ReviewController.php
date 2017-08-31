@@ -115,10 +115,6 @@ class ReviewController extends Controller
             return $this->render('unconfirmed');
         }
 
-        if ($bookid === null || $bookid == false) {
-            return $this->render('write_instructions');
-        }
-
         if ($checkReview = ReviewTrack::findOne(['user_id' => Yii::$app->user->getId(), 'book_id' => $bookid])) {
             return $this->redirect(['review/edit', 'id' => $checkReview->book_id]);
         }
@@ -131,6 +127,12 @@ class ReviewController extends Controller
                 Yii::$app->session->setFlash('success_review_post', 'Рецензия добавлена на сайт');
             else
                 Yii::$app->session->setFlash('failure_review_post', 'Что-то пошло не так');
+        }
+
+        if ($bookid === null || $bookid == false) {
+            return $this->render('write_instructions', [
+                'model' => $model,
+            ]);
         }
 
         return $this->render('write', [
@@ -196,6 +198,19 @@ class ReviewController extends Controller
         return $this->render('delete', [
             'id' => $id,
         ]);
+    }
+
+    public function actionAjaxView()
+    {
+        if (Yii::$app->request->isAjax) {
+            $data = Yii::$app->request->get();
+            $reviewId = $data['reviewId'];
+
+            if ($review = Review::findOne(['id' => $reviewId])) {
+                $review->updateCounters(['views' => '1']);
+                $review->save();
+            }
+        }
     }
 
 }

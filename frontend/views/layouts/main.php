@@ -48,7 +48,7 @@ AppAsset::register($this);
     // <h3 style="margin: 0; margin-top: -1.3px; float: left; margin-left: 10px;">Вайбук</h3>
     NavBar::begin([
         'brandLabel' => '<img src="/images/logo.png" width="40" height="40" style="margin-top: -9px; float: left">
-            <img src="/images/logo_text.svg" width="130" height="30" style="margin-top: -3px;">',
+            <img src="/images/logo_text.svg" width="130" height="30" style="margin-top: -7px;">',
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
             'class' => 'navbar-inverse navbar-fixed-top',
@@ -62,8 +62,8 @@ AppAsset::register($this);
     $leftMenu[] = ['label' => 'Авторы', 'url' => ['/author/list']];
     $leftMenu[] = ['label' => 'Пользователи', 'url' => ['/user/list']];
 
-    if (Yii::$app->user->can('godmode'))
-        $leftMenu[] = ['label' => 'Рецензии', 'url' => ['/god/reviews']];
+    // if (Yii::$app->user->can('godmode'))
+        // $leftMenu[] = ['label' => 'Рецензии', 'url' => ['/god/reviews']];
 
      echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-left'],
@@ -71,13 +71,26 @@ AppAsset::register($this);
     ]);
 
     $menuItems = [
-        ['label' => 'Главная', 'url' => ['/app/index']],
+        // ['label' => 'Главная', 'url' => ['/app/index']],
+
     ];
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => 'Регистрация', 'url' => ['/site/signup']];
         $menuItems[] = ['label' => 'Вход', 'url' => ['/site/login']];
     } else {
+        // $menuItems[] = ['label' => 'Написать', 'url' => ['/review/write']];
+
+        $menuItems[] = '<li>'
+        .'<a href="'. Yii::$app->getUrlManager()->createAbsoluteUrl(['/review/write']) .'" class="btn btn-default" style="padding: 5px; margin-top: 10px;">'
+        .'&nbsp;'
+        .'<span class="glyphicon glyphicon-pencil"></span> '
+        .'Написать'
+        .'&nbsp;'
+        .'</a>'
+        .'</li>';
+
         $menuItems[] = ['label' => 'Фид-лента', 'url' => ['feed/index']] ;
+
         $menuItems[] = '<li>'
         .'<a href="'. Yii::$app->getUrlManager()->createAbsoluteUrl(['user/index']) .'" style="width: 30px; height: 30px;">'
         .'<div style="background: url(/images/users/'. Yii::$app->user->identity->image .')' 
@@ -95,7 +108,7 @@ AppAsset::register($this);
     <br>
     <br>
     <br>
-    <div class="container" style="background: #FFFFFF; border: 1px solid #FFFFF7;">
+    <div class="container main-block" style="">
         <?php Alert::widget() ?>
 
         <?= $content ?>
@@ -106,7 +119,7 @@ AppAsset::register($this);
 <footer class="footer">
     <div class="container">
         <p class="pull-left">&copy; Viebook <?= date('Y') ?></p>
-        <p class="pull-right">Gurachek/Svernyuk</p>
+        <p class="pull-right">Gurachek</p>
         <p class="text-center">
             <a href="https://vk.com/viebook" target="_blank">
                 <img src="/images/vk.png" width="30" height="30">

@@ -8,11 +8,7 @@ $this->title = "Ваш личный кабинет";
 <div class="row">
 	<div class="col-md-12" >
 		<ul class="list-unstyled list-inline" style="border: 1px solid #dedede; padding: 7px 0px 5px 0px; background: white; padding-left: 10px;">
-			<li>
-			<span class="glyphicon glyphicon-pencil"></span>
-			<?= Html::a('Написать рецензию', ['review/write']) ?>			
-			</li>
-
+		
 			<li>
 			<span class="glyphicon glyphicon-book"></span>
 			<?= Html::a('Добавить книгу', ['book/add']) ?>

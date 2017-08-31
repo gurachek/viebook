@@ -55,7 +55,7 @@ class AppController extends Controller
             'model' => $model,
             'search_results' => $search_results,
             'books' => $booksName,
-            'dailyBooks' => $dailyBooks
+            'dailyBooks' => $dailyBooks,
         ]);
     }
 

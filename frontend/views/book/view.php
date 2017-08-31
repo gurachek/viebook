@@ -3,9 +3,21 @@ use yii\helpers\Html;
 
 $this->title = '"'. $book->name .'" '. $book->author['name'];
 
-$url = Yii::$app->getUrlManager()->createAbsoluteUrl(['review/ajax', 'id' => $book->id]);
+$url = Yii::$app->getUrlManager()->createAbsoluteUrl(['review/ajax']);
+$bookVisitUrl = Yii::$app->getUrlManager()->createAbsoluteUrl(['book/visit']);
 
-$readReviewButton = <<<JS
+$customJs = <<<JS
+
+jQuery.ajax({
+    url: "$bookVisitUrl",
+    method: "GET",
+    data: {
+        bookId: {$book->id},
+    },
+    success: function (data) {
+
+    },
+});
 
 jQuery('.review_text').click(function() {
     $('.review_modal').modal('show');
@@ -26,7 +38,7 @@ jQuery('.review_text').click(function() {
 
 JS;
 
-$this->registerJs($readReviewButton);
+$this->registerJs($customJs);
 
 ?>
 
@@ -46,7 +58,7 @@ $this->registerJs($readReviewButton);
                 <h3 style="margin: 0; text-align: center;"><?= $book->name ?></h3>
             </div>
             <div class="image" style="text-align: center;">
-                <img src="/images/books/<?= $book->image ?>" width="200" height="315">
+                <div style="background: url(/images/books/<?= $book->image ?>) no-repeat; background-size: contain; width: 100%; height: 315px; background-position: center center; margin-top: 10px;"></div>
                 <br>
                 <br>
                 <?= Html::a("Написать рецензию", ['review/write', 'bookid' => $book->id], ['class' => 'btn btn-default']); ?>

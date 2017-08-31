@@ -20,4 +20,5 @@ class UserEstimates extends ActiveRecord
 	{
 		return static::find()->where(['estimate' => 0, 'entry_id' => $this->entry_id])->count();
 	}
+
 }

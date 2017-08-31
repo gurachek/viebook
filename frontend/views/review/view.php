@@ -6,14 +6,44 @@ $this->title = $review->title .' - "'. $review->book->name .'" '. $review->book-
 
 // For estimate
 $url = Yii::$app->getUrlManager()->createAbsoluteUrl(['review/estimate']);
+$bookVisitUrl = Yii::$app->getUrlManager()->createAbsoluteUrl(['book/visit']);
+$reviewViewUrl = Yii::$app->getUrlManager()->createAbsoluteUrl(['review/ajax-view']);
 $userId = Yii::$app->user->getId();
 $reviewId = $review->id;
 
-$estimateReview = <<< JS
+$customJs = <<< JS
+
+jQuery.ajax({
+    url: "$reviewViewUrl",
+    method: "GET",
+    data: {
+        reviewId: {$review->id},
+    },
+    success: function (data) {
+
+    },
+});
+
+jQuery.ajax({
+    url: "$bookVisitUrl",
+    method: "GET",
+    data: {
+        bookId: {$review->book->id},
+    },
+    success: function (data) {
+
+    },
+});
 
 jQuery(document).ready(function () {
     jQuery('.estimate span').click(function () {
-        var id = jQuery(this).data('id');
+        var id = parseInt(jQuery(this).data('id'));
+
+        var estimate_number = '.dislike-count';
+
+        if (id == 1) {
+            estimate_number = '.like-count';
+        }
 
         jQuery('.estimate').addClass('estimate_opacity');
         jQuery(this).addClass('estimate_rotate');
@@ -27,8 +57,15 @@ jQuery(document).ready(function () {
                 estimate: id,
             },
             success: function (data) {
-                if (!data)
+                if (!data) {
                     jQuery('.ty_for_estimate .text').html('<span class="glyphicon glyphicon-warning-sign"></span> Вы уже оценивали эту рецензию');
+                } else {
+
+                    var number = parseInt(jQuery(estimate_number).html());
+                    number += 1;
+                    jQuery(estimate_number).html(number + ' ');
+                }
+
                 jQuery('.ty_for_estimate').css('display', 'block');
                 jQuery('.estimate').removeClass('estimate_opacity');
                 jQuery('.estimate span').removeClass('estimate_rotate');
@@ -39,26 +76,43 @@ jQuery(document).ready(function () {
 
 JS;
 
-$this->registerJs($estimateReview);
+$this->registerJs($customJs);
 
 ?>
 
 <div class="row review_page">
-    <div class="col-md-2"></div>
     <div class="col-md-8">
-        <h3 class="text-center"><?= $review->title ?></h3>
+
+        <ul class="list-inline" style="color: gray;">
+            <li class="display_on_mobile_book_block">
+                <span class="glyphicon glyphicon-book"></span>
+                <?= Html::a($review->book['name'], ['book/view', 'id' => $review->book['id']]) ?>
+            </li>
+            <li>
+                <span class="glyphicon glyphicon-user"></span>
+                <?= Html::a($review->author->getName(), ['user/view', 'id' => $review->author->id]) ?>
+            </li>
+            <li>
+                <span class="glyphicon glyphicon-calendar"></span>
+                <?= date("d M Y", $review->created_at) ?>
+            </li>
+            <li>
+                <span class="glyphicon glyphicon-eye-open"></span>
+                <?= $review->views ?>
+            </li>
+        </ul>
+
+        <h3><?= $review->title ?>
+            <?php if (Yii::$app->user->getId() == $review->author['id']): ?>
+            <?= Html::a('
+            <small title="Редактировать" style="color: gray;">
+                <span class="glyphicon glyphicon-edit"></span>
+            </small>', ['review/edit', 'id' => $review->book['id']]) ?>
+            <?php endif; ?>
+        </h3>
         <br>
-        <p>
-            Книга: <?= Html::a($review->book['name'], ['book/view', 'id' => $review->book['id']]) ?>
-        </p>
-        <br>
-        <p>
-            Автор: <?= Html::a($review->author->getName(), ['user/view', 'id' => $review->author->id]) ?>
-        </p>
-        <p>
-            Рейтинг: <?= $review->rating ?>
-        </p>
-        <p>
+        
+        <p style="font-size: 1.2em; line-height: 1.6em;">
             <?= nl2br($review->text) ?>
         </p>
 
@@ -76,29 +130,63 @@ $this->registerJs($estimateReview);
 
             <?php if ($review->user_id != $id): ?>
             
+                <?php
+                    $positive = !empty($review->estimates) ? @$review->estimates[0]->numberOfPositive() : 0;
+                    $negative = !empty($review->estimates) ? @$review->estimates[0]->numberOfNegative() : 0;
+                ?>
+
                 <div class="estimate" style="text-align: center;">
-                    <span title="Понравилось" class="glyphicon glyphicon-thumbs-up like" data-id="1"></span>
-                    <span title="Не понравилось" class="glyphicon glyphicon-thumbs-down dislike" data-id="0"></span>
+                    <span class="like-count">
+                        <?= $positive ?>
+                    </span>
+                    <span title="Понравилось" class="glyphicon glyphicon-heart-empty like" data-id="1"></span>
+                    
+                    <span class="dislike-count">
+                        <?= $negative ?>
+                    </span>
+                    <span title="Не понравилось" class="glyphicon glyphicon-send dislike" data-id="0"></span>
                 </div>
 
             <?php else: ?>
                 <p class="text-center">
                 <span style="color: gray;">
-                Положительных оценок: <?= $review->estimates[0]->numberOfPositive() ?>
-                <br>
-                Отрицательных оценок: <?= $review->estimates[0]->numberOfNegative() ?>
+                    <?php if(!empty($review->estimates)): ?>
+                        Положительных оценок: <?= $review->estimates[0]->numberOfPositive() ?>
+                        <br>
+                        Отрицательных оценок: <?= $review->estimates[0]->numberOfNegative() ?>
+                    <?php else: ?>
+                        У этой рецензии нет оценок
+                    <?php endif; ?>
                 </span>
                 </p>
             <?php endif; ?>
 
+            <?php if ($review->user_id != $id) { ?>
+            <br>
+            <p>
+                Хотите написать свою рецензию на эту книгу?
+                <?= Html::a("Написать рецензию", ['review/write', 'bookid' => $review->book['id']], ['class' => '']); ?>
+            </p>
+            <?php } ?>
+
         <?php else: ?>
 
-            <div>
-                <?= Html::a('Войдите, чтобы оценить рецензию', ['site/login', 'a' => 'review_view', 'id' => $review->id], ['class' => 'btn btn-success pull-right']); ?>
+            <div class="text-center">
+                <?= Html::a('Войдите, чтобы оценить рецензию', ['site/login', 'a' => 'review_view', 'id' => $review->id], ['class' => 'btn btn-success']); ?>
             </div>
 
         <?php endif; ?>
 
     </div>
-    <div class="col-md-2"></div>
+    <div class="col-md-4 review_display_book_block">
+        <div class="book_page">
+            <div class="name">
+                <h3 style="margin: 0; text-align: center;"><?= $review->book['name'] ?></h3>
+            </div>
+            <div class="image" style="text-align: center;">
+                <div style="background: url(/images/books/<?= $review->book['image'] ?>) no-repeat; background-size: contain; width: 100%; height: 315px; background-position: center center; margin-top: 10px;"></div>
+                <?= Html::a("Другие рецензии к этой книге", ['book/view', 'id' => $review->book['id']], ['class' => 'btn btn-lnk']); ?>
+            </div>
+        </div>
+    </div>
 </div>

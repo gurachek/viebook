@@ -2,14 +2,15 @@
 
 namespace frontend\controllers;
 
-use frontend\models\AddbookModel;
-use frontend\models\Author;
+use Yii;
 use yii\web\UploadedFile;
-use frontend\models\Book;
-use frontend\models\Tag;
 use yii\web\Controller;
 use yii\web\Response;
-use Yii;
+use frontend\models\AddbookModel;
+use frontend\models\BooksVisit;
+use frontend\models\Author;
+use frontend\models\Book;
+use frontend\models\Tag;
 
 class BookController extends Controller
 {
@@ -100,5 +101,23 @@ class BookController extends Controller
     }
 
     return $return;
+  }
+
+  public function actionVisit()
+  {
+    if (Yii::$app->request->isAjax) {
+      if ($userId = Yii::$app->user->getId()) {
+        $data = Yii::$app->request->get();
+        $bookId = $data['bookId'];
+
+        $visit = new BooksVisit();
+        $visit->user_id = $userId;
+        $visit->book_id = $bookId;
+        $visit->time = time();
+
+        $visit->save();
+      }
+    }
+
   }
 }

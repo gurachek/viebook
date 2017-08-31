@@ -1,8 +1,15 @@
 html,
 body {
     height: 100%;
-    /*background: #FFFFF7;*/
-    background: #e8e8e8;
+    background: #f6f6f6;
+    color: #333333 !important;
+}
+
+.main-block {
+  background: #FFFFFF;
+  border: 1px solid #FFFFF7;
+  box-shadow: 2px 3px 4px #e8e8e8;
+  margin-bottom: 20px;
 }
 
 .wrap {
@@ -18,7 +25,6 @@ body {
 
 .footer {
     height: 30px;
-    /*background-color: #f5f5f5;*/
     border-top: 1px solid #ddd;
     padding-top: 20px;
 }
@@ -169,12 +175,12 @@ a.desc:after {
     }
 }
 
-.books_searched .book .name {
+.books_searched .name {
     margin-top: 5px;
     text-align: center;
 }
 
-.books_searched .book .image {
+.books_searched .image {
     margin: 0 auto;
     text-align: center;
     width: 200px;
@@ -219,11 +225,29 @@ a.desc:after {
 }
 
 .review_page .estimate .like {
-color: green; font-size: 25px; margin-right: 10px; cursor: pointer;
+  color: #E64354;
+  font-size: 20px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.like-count{
+  color: gray;
+  font-size: 20px;
+  padding: 0px;
+  margin: 0px;
 }
 
 .review_page .estimate .dislike {
-color: red; font-size: 25px; margin-left: 10px; cursor: pointer;
+  color: #336699;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.dislike-count {
+  color: gray;
+  font-size: 20px;
+  margin-left: 10px;
 }
 
 .ty_for_estimate {
@@ -324,7 +348,8 @@ color: red; font-size: 25px; margin-left: 10px; cursor: pointer;
 .daily_book {
     padding: 10px;
     border: 1px solid #F2F8EA;
-    /*background: #ECF0F1;*/
+    box-shadow: -1px -1px 5px #f6f6f6;
+    margin-bottom: 20px;
 }
 
 .site-signup {
@@ -444,7 +469,20 @@ color: red; font-size: 25px; margin-left: 10px; cursor: pointer;
     }
 }
 
+li.display_on_mobile_book_block {
+  display: none;
+}
+
 @media (max-width: 767px) {
+
+  .review_display_book_block {
+    display: none;
+  }
+
+  li.display_on_mobile_book_block {
+    display: inline;
+  }
+
   .navbar-inverse .navbar-nav > .active > a,
   .navbar-inverse .navbar-nav > .active > a:hover,
   .navbar-inverse .navbar-nav > .active > a:focus {
@@ -540,7 +578,70 @@ color: red; font-size: 25px; margin-left: 10px; cursor: pointer;
   -ms-animation: rotating 1s linear infinite;
   -o-animation: rotating 1s linear infinite;
   animation: rotating 1s linear infinite;
-  border: 1px solid gray;
   border-radius: 100px;
   padding: 5px;
+}
+
+
+/* Test pinterest-like grid */
+
+#columns {
+  -webkit-column-count: 2;
+  -webkit-column-gap: 10px;
+  -webkit-column-fill: auto;
+  -moz-column-count: 2;
+  -moz-column-gap: 10px;
+  -moz-column-fill: auto;
+  column-count: 2;
+  column-gap: 15px;
+  column-fill: auto;
+}
+
+.pin {
+  display: inline-block;
+  background: #FEFEFE;
+  border: 2px solid #FAFAFA;
+  box-shadow: 3px 2px 5px rgb(254, 254, 254);
+  margin: 0 2px 15px;
+  -webkit-column-break-inside: avoid;
+  -moz-column-break-inside: avoid;
+  column-break-inside: avoid;
+  padding: 15px;
+  padding-bottom: 5px;
+  color: #444;
+  background: -webkit-linear-gradient(-183deg, #F6F6F6, #FDFDFD);
+  opacity: 1;
+  
+  -webkit-transition: all .5s ease;
+  -moz-transition: all .5s ease;
+  -o-transition: all .5s ease;
+  transition: all .5s ease;
+}
+
+@media (max-width: 768px) {
+  #columns {
+    -webkit-column-count: 1;
+    -moz-column-count: 1;
+    column-count: 1;
+  }
+}
+
+@media (min-width: 960px) {
+  #columns {
+    -webkit-column-count: 2;
+    -moz-column-count: 2;
+    column-count: 2;
+  }
+}
+
+@media (min-width: 1100px) {
+  #columns {
+    -webkit-column-count: 2;
+    -moz-column-count: 2;
+    column-count: 2;
+  }
+}
+
+#columns:hover .pin:not(:hover) {
+  opacity: 0.4;
 }

@@ -49,4 +49,5 @@ class Book extends ActiveRecord
     {
         return $this->hasMany(Review::className(), ['book_id' => 'id'])->orderBy('rating ASC')->where(['active' => 1]);
     }
+
 }

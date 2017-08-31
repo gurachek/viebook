@@ -13,7 +13,7 @@ $js = <<<JS
 
 jQuery(document).ready(function () {
     jQuery('.loader').css('display', 'none');
-    jQuery('.search_submit').on('click', function () {
+    jQuery('.viebutton').on('click', function () {
         if (jQuery('#searchmodel-search').val() != '') {
             jQuery('#search_form').fadeTo(1000, 0.3);
             jQuery('.loader').css('display', 'block');
@@ -30,8 +30,8 @@ $this->registerJs($js);
 <?php Pjax::begin(); ?>
 
 <?php if (!$search_results): ?>
-
-<div class="loader" style="display: none; position: absolute; top: 18%; left: 40%; background: url(images/loader.gif) no-repeat; width: 200px; height: 100px;">
+<br>
+<div class="loader" style="display: none; position: absolute; top: 15%; left: 44%; background: url(images/loader.gif) no-repeat; width: 200px; height: 100px; z-index: 9999;">
     
 </div>
 <div class="row">
@@ -56,7 +56,7 @@ $this->registerJs($js);
 
                 ],
                 'options' => [
-                    'class' => 'form-control'
+                    'class' => 'form-control',
                 ]
             ])->textInput(['placeholder' => 'Начните вводить название книги...']) ?>
         </div>
@@ -71,48 +71,65 @@ $this->registerJs($js);
 
 <?php if ($dailyBooks): ?>
 
+<!-- <div class="row" style="margin-bottom: 15px;"> -->
+<div id="columns">
+
 <?php foreach($dailyBooks as $book): ?>
     <?php 
         if (!$book['reviews']) {
             continue;
         }
-    ?>
-    <div class="row" style="margin-bottom: 15px;">
-        <div class="col-md-12">
-            <div class="col-md-8 daily_book col-md-offset-2" style="padding-left: 15px;">
-                <?= Html::a('
-                <div class="daily_image" style="background: url(images/books/'.$book['image'].') no-repeat center; background-size: contain;"></div>
-                ', ['book/view', 'id' => $book['id']]) ?>
-                <p>
-                <h4 class="text-center"><?= $book['name']; ?></h4>
-                    <?php foreach ($book['reviews'] as $review) : ?>
-                        <p style="color: gray;">Рейтинг: <?= $review->rating ?></p>
-                        <?php $text = intval(strlen($review->text) / 4) ?>
-                        <?= mb_substr($review->text, 0, $text, "utf-8") ?>...
-                        <?= Html::a('Читать', ['review/view', 'id' => $review->id]) ?>
-                        <br>
-                        
-                        <?php if ($book->tags): ?>
-                            <br>
-                            
-                            <p style="display:table-cell;vertical-align:bottom;">
-                            Теги: 
-                            
-                            <?php foreach($book->tags as $tag): ?>
-                                <?php foreach($tag->name as $name): ?>
-                                    <?= Html::a($name['name'], ['search/tag', 'id' => $name->id]) ?>,                                <?php endforeach; ?>
-                            <?php endforeach; ?>
-                            </p>
 
-                        <?php endif; ?>
-                        
-                        <?php break; ?>
-                    <?php endforeach; ?>
-                </p>
-            </div>
+        $review = $book['reviews'][0];
+    ?>
+
+    <div class="pin">
+        <?= Html::a('
+            <div class="daily_image" style="background: url(images/books/'.$book['image'].') no-repeat center; background-size: contain;"></div>
+            ', ['book/view', 'id' => $book['id']]) ?>
+        
+        <h4 class="text-center"><?= $book['name']; ?></h4>
+
+        <?php
+            $positive = !empty($review->estimates) ? @$review->estimates[0]->numberOfPositive() : 0;
+            $negative = !empty($review->estimates) ? @$review->estimates[0]->numberOfNegative() : 0;
+        ?>
+
+        <div class="estimate" style="font-size: 15px; margin-bottom: 10px;">
+            <span class="like-count" style="font-size: 15px;">
+                <?= $positive ?>
+            </span>
+            <span title="Понравилось" class="glyphicon glyphicon-heart-empty like" data-id="1"></span>
+            <span class="dislike-count" style="font-size: 15px;">
+                <?= $negative ?>
+            </span>
+            <span title="Не понравилось" class="glyphicon glyphicon-send dislike" data-id="0"></span>
         </div>
+
+        <p>
+            <?php $text = intval(strlen($review->text) / 4) ?>
+                    <?= mb_substr($review->text, 0, $text, "utf-8") ?>...
+                    <?= Html::a('Читать', ['review/view', 'id' => $review->id]) ?>
+                    <br>
+        </p>
+
+        <?php if ($book->tags): ?>
+            <br>
+            
+            <p style="display:table-cell;vertical-align:bottom;">
+            Теги: 
+            
+            <?php foreach($book->tags as $tag): ?>
+                <?php foreach($tag->name as $name): ?>
+                    <?= Html::a($name['name'], ['search/tag', 'id' => $name->id]) ?>,                                <?php endforeach; ?>
+            <?php endforeach; ?>
+            </p>
+
+        <?php endif; ?>
     </div>
+
 <?php endforeach; ?>
+</div>
 <?php endif; ?>
 
 <?php else: ?>
@@ -132,13 +149,11 @@ if (!is_array($search_results)) {
         <?php $category = $book->cat['name']; ?>
 
             <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
-            <div class="book" style="border: 1px solid #d2d2d2;background: #F6F7F2; padding-top: 10px; margin-bottom: 10px;">
+            <div class="daily_book" style="padding: 10px;">
                 <div class="name">
-                    <?= Html::a("<h4 style='margin: 0;'>$book->name</h4>", ['book/view', 'id' => $book->id]); ?>
+                    <?= Html::a('<div class="image" style="background: url(images/books/'.$book->image.'); background-size: contain;"></div>', ['book/view', 'id' => $book->id]); ?>
                 </div>
-                <div class="image" style="background: url(images/books/<?= $book->image ?>); background-size: cover;">
 
-                </div>
                 <div class="publish_date">
                     <span class="publish_label">Дата публикации: </span>
                     <?= $book->publish_date ?>
