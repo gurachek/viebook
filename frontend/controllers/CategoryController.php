@@ -6,6 +6,7 @@ use Yii;
 use yii\web\Controller;
 use frontend\models\Book;
 use frontend\models\Review;
+use frontend\models\Category;
 
 class CategoryController extends Controller
 {

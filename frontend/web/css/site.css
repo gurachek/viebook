@@ -151,7 +151,7 @@ a.desc:after {
 
 .books_searched {
     width: 100%;
-    /*padding: 5px;*/
+    padding: 5px;
 }
 
 .books_searched .book {
@@ -173,20 +173,37 @@ a.desc:after {
         width: 200px !important;
         height: 260px !important;
     }
+
+    .books_searched .author {
+      margin-bottom: 5px;
+    }
 }
 
 .books_searched .name {
-    margin-top: 5px;
     text-align: center;
 }
 
 .books_searched .image {
     margin: 0 auto;
     text-align: center;
-    width: 200px;
-    height: 315px;
-    margin-top: 5px;
+    width: 238px;
+    height: 380px;
     margin-bottom: 10px;
+}
+
+.books_searched .author {
+    color: #444 !important;
+    background-color: rgba(246, 246, 246, .5);
+    padding: 7px;
+    text-align: center;
+}
+
+.books_searched .author a:link {
+  color: #444 !important;
+}
+
+.books_searched .author a:visited {
+  color: #444 !important;
 }
 
 .books_searched .book .read_reviews {
@@ -348,7 +365,7 @@ a.desc:after {
 .daily_book {
     padding: 10px;
     border: 1px solid #F2F8EA;
-    box-shadow: -1px -1px 5px #f6f6f6;
+    box-shadow: -3px 4px 6px #f6f6f6;
     margin-bottom: 20px;
 }
 
@@ -644,4 +661,9 @@ li.display_on_mobile_book_block {
 
 #columns:hover .pin:not(:hover) {
   opacity: 0.4;
+}
+
+#columns .pin:hover {
+  box-shadow: -3px -3px 5px #f6f6f6;
+  margin: 2px;
 }

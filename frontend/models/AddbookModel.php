@@ -14,10 +14,11 @@ use frontend\models\Author;
 class AddbookModel extends Model
 {
 	public $name;
-	public $image;
 	public $author;
+	public $category;
 	public $publish_date;
 	public $tags;
+	public $image;
 
 	public function rules()
 	{
@@ -27,6 +28,7 @@ class AddbookModel extends Model
 			['author', 'required', 'message' => 'Нам нужно знать кто автор этой книги'],
 			['publish_date', 'required', 'message' => 'Не знаю зачем, но это тоже нам нужно'],
 			['tags', 'required', 'message' => 'На основе тегов мы составляем фид-ленту и разделы, введите пожалуйста'],
+			['category', 'required', 'message' => 'Это важно, нельзя оставлять это поле пустым'],
 			['image', 'required', 'message' => 'Вам нужно загрузить обложку, чтобы добавить книгу на сайт'],
 			[['image'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg, jpeg'],
 			[['image'], 'file', 'maxSize' => '5000000'],
@@ -60,7 +62,7 @@ class AddbookModel extends Model
 				$book->image = $image;
 				$book->author_id = $authorId;
 				$book->publish_date = $this->publish_date;
-				$book->category = 2;
+				$book->category = $this->category;
 
 				$book->save();
 

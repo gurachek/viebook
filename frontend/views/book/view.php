@@ -30,7 +30,8 @@ jQuery('.review_text').click(function() {
        },
        success: function (data) {
           var review = JSON.parse(data);
-          $('.modal-content #review_content').html('<h3 class="text-center">' + review.title + '</h3><span style="font-size: 16px;">' + review.text + '</span><br><br>');
+          var reviewText = nl2br(review.text);
+          $('.modal-content #review_content').html('<h3 class="text-center">' + review.title + '</h3><br><span style="font-size: 16px; color: #444;">' + reviewText + '</span><br><br>');
 
        }
   });
@@ -41,6 +42,12 @@ JS;
 $this->registerJs($customJs);
 
 ?>
+
+<script>
+function nl2br(str) {
+   return str.replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '<br>');
+}
+</script>
 
 <div class="modal fade review_modal" tabindex="-1" role="dialog" aria-labelledby="read_this_review">
   <div class="modal-dialog modal-lg" role="document">
@@ -87,8 +94,7 @@ $this->registerJs($customJs);
                             <?= date("d M Y", $review->created_at) ?>
                         </div>
                         <div class="review_text" data-id="<?= $review->id ?>">
-                            <?php $text = intval(strlen($review->text) / 5) ?>
-                            <?= mb_substr(Html::encode($review->text), 0, $text, "utf-8") ?>...
+                            <?= mb_substr(strip_tags($review->text), 0, 1000, "utf-8") ?>...
                         </div>
                         <br>
                         <div class="go_read">

@@ -84,7 +84,7 @@ $this->registerJs($js);
 
     <div class="pin">
         <?= Html::a('
-            <div class="daily_image" style="background: url(images/books/'.$book['image'].') no-repeat center; background-size: contain;"></div>
+            <div class="daily_image" style="background: url(images/books/'.$book['image'].') no-repeat center; background-size: contain; margin-bottom: 2px; margin-left: 2px;"></div>
             ', ['book/view', 'id' => $book['id']]) ?>
         
         <h4 class="text-center"><?= $book['name']; ?></h4>
@@ -106,10 +106,9 @@ $this->registerJs($js);
         </div>
 
         <p>
-            <?php $text = intval(strlen($review->text) / 8) ?>
-                    <?= mb_substr($review->text, 0, $text, "utf-8") ?>...
-                    <?= Html::a('Читать', ['review/view', 'id' => $review->id]) ?>
-                    <br>
+            <?= mb_substr(strip_tags($review->text), 0, 1000, "utf-8") ?>...
+            <?= Html::a('Читать', ['review/view', 'id' => $review->id]) ?>
+            <br>
         </p>
 
         <?php if ($book->tags): ?>
@@ -143,33 +142,40 @@ if (!is_array($search_results)) {
 } else { ?>
 
     <div class="books_searched">
-    <h3 class="text-center">Все, что найдено по запросу "<?= $search_query ?>"</h3>
+    <h3 class="text-center"><?= $search_query ?></h3>
     <br>
     <div class="row">
     <?php foreach($search_results as $book): ?>
         <?php $category = $book->cat['name']; ?>
+        <?php $categoryId = $book->cat['id']; ?>
 
             <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
             <div class="daily_book" style="padding: 10px;">
                 <div class="name">
-                    <?= Html::a('<div class="image" style="background: url(images/books/'.$book->image.'); background-size: cover;"></div>', ['review/view', 'id' => $book->reviews[0]['id']]); ?>
+                    <div class="author">
+                            <?= Html::a($book->author['name'], ['author/view', 'id' => $book->author['id']]) ?>
+                    </div>
+
+                    <?php if (@$book->reviews[0]): ?>
+
+                        <?= Html::a('<div class="image" style="background: url(/images/books/'.$book->image.') no-repeat; background-size: contain;" title="'. $book->name .'"></div>', ['review/view', 'id' => @$book->reviews[0]['id']]); ?>
+                
+                    <?php else: ?>
+
+                        <?= Html::a('<div class="image" style="background: url(/images/books/'.$book->image.') no-repeat; background-size: contain;" title="'. $book->name .'"></div>', ['book/view', 'id' => $book->id]); ?>
+
+                    <?php endif; ?>
                 </div>
 
-                <div style="width: 200px; margin: 0 auto;">
+                <div style="width: 100%; margin: 0 auto;">
                     <div class="publish_date">
                         <!-- <span class="publish_label">Дата публикации: </span> -->
                         <span class="glyphicon glyphicon-calendar"></span>
                         <?= $book->publish_date ?>
                     </div>
-                    <div class="author">
-                        <!-- <span class="author_label">Автор: </span> -->
-                        <span class="glyphicon glyphicon-user"></span>
-                        <?= $book->author['name'] ?>
-                    </div>
                     <div class="category">
-                        <!-- <span class="category_label">Категория: </span> -->
-                        <span class="glyphicon glyphicon-book"></span>
-                        <?= $category ?>
+                        <span class="glyphicon glyphicon-menu-hamburger"></span>
+                        <?= Html::a($category, ['category/index', 'id' => $categoryId]) ?>
                     </div>
                 </div>
             </div>

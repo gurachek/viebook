@@ -112,7 +112,7 @@ $this->registerJs($customJs);
         </h3>
         <br>
         
-        <div style="font-size: 1.2em; line-height: 1.6em;">
+        <div style="font-size: 17px; line-height: 1.6em;">
             <?= nl2br($review->text) ?>
         </div>
 

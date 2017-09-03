@@ -1,10 +1,10 @@
 <?php
 use yii\helpers\Html;
 
-$this->title = 'Поиск по теме "'. $tag->name .'"';
+$this->title = 'Книги по теме "'. $tag->name .'" на Viebook';
 ?>
 
-<h1>Поиск книг по теме "<?= $tag->name ?>"</h1>
+<h3 class="text-center">Книги по теме "<?= $tag->name ?>"</h3>
 <br>
 
 <?php if ($books): ?>
@@ -13,28 +13,38 @@ $this->title = 'Поиск по теме "'. $tag->name .'"';
 	<div class="row">
 	    <?php foreach($books as $book): ?>
 	        <?php $category = $book->cat['name']; ?>
+	        <?php $categoryId = $book->cat['id']; ?>
 
 	    	<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
-	    	<div class="book" style="border: 1px solid #d2d2d2;background: #F6F7F2; padding-top: 10px; margin-bottom: 10px;">
-	            <div class="name">
-	                <?= Html::a("<h4 style='margin: 0;'>$book->name</h4>", ['book/view', 'id' => $book->id]); ?>
-	            </div>
-	            <div class="image" style="background: url(/images/books/<?= $book->image ?>); background-size: cover;">
+	    	<div class="daily_book" style="padding: 10px;">
+                <div class="name">
+                    <div class="author">
+                            <?= Html::a($book->author['name'], ['author/view', 'id' => $book->author['id']]) ?>
+                    </div>
 
-	            </div>
-	            <div class="publish_date">
-	                <span class="publish_label">Дата публикации: </span>
-	                <?= $book->publish_date ?>
-	            </div>
-	            <div class="author">
-	                <span class="author_label">Автор: </span>
-	                <?= $book->author['name'] ?>
-	            </div>
-	            <div class="category">
-	                <span class="category_label">Категория: </span>
-	                <?= $category ?>
-	            </div>
-	    	</div>
+                    <?php if (@$book->reviews[0]): ?>
+
+                    	<?= Html::a('<div class="image" style="background: url(/images/books/'.$book->image.') no-repeat; background-size: contain;" title="'. $book->name .'"></div>', ['review/view', 'id' => @$book->reviews[0]['id']]); ?>
+                
+	                <?php else: ?>
+
+	                	<?= Html::a('<div class="image" style="background: url(/images/books/'.$book->image.') no-repeat; background-size: contain;" title="'. $book->name .'"></div>', ['book/view', 'id' => $book->id]); ?>
+
+	                <?php endif; ?>
+                </div>
+
+                <div style="width: 100%; margin: 0 auto;">
+                    <div class="publish_date">
+                        <!-- <span class="publish_label">Дата публикации: </span> -->
+                        <span class="glyphicon glyphicon-calendar"></span>
+                        <?= $book->publish_date ?>
+                    </div>
+                    <div class="category">
+                        <span class="glyphicon glyphicon-menu-hamburger"></span>
+                        <?= Html::a($category, ['category/index', 'id' => $categoryId]) ?>
+                    </div>
+                </div>
+            </div>
 	    	</div>
 	    <?php endforeach; ?>
 	</div>

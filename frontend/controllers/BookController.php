@@ -11,6 +11,7 @@ use frontend\models\BooksVisit;
 use frontend\models\Author;
 use frontend\models\Book;
 use frontend\models\Tag;
+use frontend\models\Category;
 
 class BookController extends Controller
 {
@@ -74,10 +75,18 @@ class BookController extends Controller
      $tags = Tag::find()->asArray()->all();
      $tags = array_column($tags, 'name');
 
+     $category = Category::find()->all();
+     $categoryList = [];
+
+     foreach ($category as $single) {
+       $categoryList[$single['id']] = $single['name'];
+     }
+
      return $this->render('add', [
          'model' => $model,
          'authors' => $authorsFullName,
          'tags' => $tags,
+         'categoryList' => $categoryList,
      ]);
   }
 

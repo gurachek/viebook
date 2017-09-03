@@ -42,6 +42,8 @@ $this->title = "Добавить книгу на сайт";
     	]
 	]) ?>
 
+    <?= $form->field($model, 'category')->label('Категория книги')->dropDownList($categoryList); ?>
+
 	<?= $form->field($model, 'publish_date')->label('Когда книга впервые была опубликована') ?>
 	<?= $form->field($model, 'tags')->label('Начните вводить теги к этой книге')->widget(Selectize::className(), [
         'url' => '/book/tags',
