@@ -8,7 +8,7 @@ $this->title = $review->title .' - "'. $review->book->name .'" '. $review->book-
 $url = Yii::$app->getUrlManager()->createAbsoluteUrl(['review/estimate']);
 $bookVisitUrl = Yii::$app->getUrlManager()->createAbsoluteUrl(['book/visit']);
 $reviewViewUrl = Yii::$app->getUrlManager()->createAbsoluteUrl(['review/ajax-view']);
-$userId = Yii::$app->user->getId();
+$userId = Yii::$app->user->getId() ?? 0;
 $reviewId = $review->id;
 
 $customJs = <<< JS
@@ -160,22 +160,23 @@ $this->registerJs($customJs);
                 </span>
                 </p>
             <?php endif; ?>
-
-            <?php if ($review->user_id != $id) { ?>
-            <br>
-            <p>
-                Хотите написать свою рецензию на эту книгу?
-                <?= Html::a("Написать рецензию", ['review/write', 'bookid' => $review->book['id']], ['class' => '']); ?>
-            </p>
-            <?php } ?>
-
+            
         <?php else: ?>
 
+            <br>
             <div class="text-center">
                 <?= Html::a('Войдите, чтобы оценить рецензию', ['site/login', 'a' => 'review_view', 'id' => $review->id], ['class' => 'btn btn-success']); ?>
             </div>
 
         <?php endif; ?>
+
+        <?php if (@$review->user_id != $id) { ?>
+        <br>
+        <p>
+            Хотите написать свою рецензию на эту книгу?
+            <?= Html::a("Написать рецензию", ['review/write', 'bookid' => $review->book['id']], ['class' => '']); ?>
+        </p>
+        <?php } ?>
 
     </div>
     <div class="col-md-4 review_display_book_block">
