@@ -10,6 +10,8 @@ use yii\filters\AccessControl;
 use common\models\LoginForm;
 use frontend\models\ResetPasswordRequestForm;
 use frontend\models\SignupForm;
+use frontend\models\Email;
+use yii\helpers\Json;
 use frontend\models\ContactForm;
 
 /**
@@ -66,7 +68,7 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        return $this->redirect(['app/index']);
     }
 
     /**
@@ -185,6 +187,31 @@ class SiteController extends Controller
         return $this->render('restore-password-request', [
             'model' => $model,
         ]);
+    }
+
+    public function actionEmail()
+    {
+        if (Yii::$app->request->isAjax) {
+            $data = Yii::$app->request->post();
+
+            $result = [];
+
+            if (filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
+                $email = new Email();
+                $email->email = $data['email'];
+                $email->timestamp = time();
+                $email->sent = 0;
+                if ($email->save()) {
+                    $result['status'] = true;
+                }
+            } else {
+                $result['status'] = false;
+            }
+        
+            return Json::encode($result);
+        } 
+
+        return false;
     }
 
 }

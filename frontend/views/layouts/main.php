@@ -10,6 +10,46 @@ use yii\widgets\Breadcrumbs;
 use frontend\assets\AppAsset;
 use common\widgets\Alert;
 
+$emailSend = Yii::$app->getUrlManager()->createAbsoluteUrl(['site/email']);
+
+$customJs = <<<JS
+
+jQuery(document).ready(function () {
+
+    if (!$.session.get('promo_closed')) {
+        jQuery('.promo').css('display', 'block');
+    }    
+    
+    jQuery('.close-promo .sure').click(function () {
+        jQuery('.promo').css('display', 'none');
+        $.session.set('promo_closed', true);
+    });
+    
+    jQuery('.submit').click(function () {
+        var email = jQuery('.email').val();
+        jQuery.ajax({
+            url: '$emailSend',
+            method: 'POST',
+            data: {
+                email: email,
+            },
+            success: function (data) {
+                var info = JSON.parse(data);
+                if (info.status) {
+                    jQuery('.let_email').css('display', 'none');
+                    jQuery('.ty_for_email').css('display', 'block');
+                    $.session.set('promo_closed', true);
+                }
+            },
+        });
+    });
+
+});
+
+JS;
+
+$this->registerJs($customJs);
+
 AppAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
@@ -97,7 +137,38 @@ AppAsset::register($this);
     <br>
     <br>
     <br>
-    <div class="container main-block" style="">
+    <div class="container promo" style="background: rgba(123, 164, 210, 0.1); color: #444; border: 1px solid #7BA4D2;">
+        <h3 class="text-center" style="margin: 0">Минутку внимания!</h3>
+        <div style="color: #444; padding-top: 5px; width: 80%; margin: 0 auto; font-size: 16px; line-height: 1.6em;">
+            Сейчас на главной странице вы видите тестовые рецензии, которые добавлены, чтобы показать как это вообще работает. Со временем сайт будет наполняться реальными рецензиями от профессионалов своей сферы.<br>
+            Суть проекта - предоставить вам обзоры книг, чтобы вы могли выбрать только те книги, которые реально будут полезны для развития в выбранной сфере.
+            Для тех, кто не знает с чего начать и как развиваться, мы готовим к запуску функционал, который поможет четко выстроить путь развития и будем курировать вас в процессе обучения. Вы самостоятельно изучаете то, что вам интересно. А мы лишь даем инструмент, который поможет сэкономить ваше время.
+            <br>
+            <br>
+            <p class="text-center">Хотите получать еженедельную рассылку с подборкой рецензий?</p>
+            <div class="let_email">
+                <div class="form-inline" id="sendEmail">
+                <div class="form-group">
+                    <input type="email" class="form-control email" placeholder="love@viebook.ru">
+                    <button class="btn btn-success submit">
+                        <span class="glyphicon glyphicon-send"></span>
+                        &nbsp;Отправить
+                    </button>
+                </div>
+                </div>
+                <small style="font-size: 12px; line-height: 0.5em;">* Мы не будем надоедать спамом. Только полезная для Вас информация.</small>
+            </div>  
+            <div class="ty_for_email">
+                <span class="glyphicon glyphicon-ok"></span>
+                 Спасибо за доверие, ожидайте рассылку
+            </div>   
+        </div>
+        <div class="close-promo">
+            <a class="sure">Закрыть</a>
+        </div>
+    </div>
+    <br>
+    <div class="container main-block">
         <?php Alert::widget() ?>
 
         <?= $content ?>
@@ -109,16 +180,13 @@ AppAsset::register($this);
     <div class="container">
         <p class="pull-left">&copy; Viebook <?= date('Y') ?></p>
         <p class="pull-right">Gurachek</p>
-        <p class="text-center">
-            <a href="https://vk.com/viebook" target="_blank">
-                <img src="/images/vk.png" width="30" height="30">
-            </a>
+        <p class="text-center">Читайте <a href="http://blog.viebook.ru/" target="_blank">блог</a> проекта.
         </p>
     </div>
 </footer>
 
 <footer class="mobile-footer">
-    <p class="text-center">Здесь был футер.</p>
+    <p class="text-center">Хотите следить за развитием пректа? Посетите наш <a href="http://blog.viebook.ru" target="_blank">блог</a></p>
 </div>
 
 <?php $this->endBody() ?>

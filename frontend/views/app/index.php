@@ -84,14 +84,13 @@ $this->registerJs($js);
 
     <div class="pin">
         <?= Html::a('
-            <div class="daily_image" style="background: url(images/books/'.$book['image'].') no-repeat center; background-size: contain; margin-bottom: 2px; margin-left: 2px;"></div>
+            <div class="daily_image" style="background: url(images/books/'.$book['image'].') no-repeat center; background-size: contain;margin-bottom: 2px; margin-left: 2px;"></div>
             ', ['book/view', 'id' => $book['id']]) ?>
         
         <h4 class="text-center"><?= $book['name']; ?></h4>
 
         <?php
             $positive = !empty($review->estimates) ? @$review->estimates[0]->numberOfPositive() : 0;
-            $negative = !empty($review->estimates) ? @$review->estimates[0]->numberOfNegative() : 0;
         ?>
 
         <div class="estimate" style="font-size: 15px; margin-bottom: 10px;">
@@ -100,9 +99,9 @@ $this->registerJs($js);
             </span>
             <span title="Понравилось" class="glyphicon glyphicon-heart-empty like" data-id="1"></span>
             <span class="dislike-count" style="font-size: 15px;">
-                <?= $negative ?>
+                <?= $review->views ?>
             </span>
-            <span title="Не понравилось" class="glyphicon glyphicon-send dislike" data-id="0"></span>
+            <span title="Просмотров" class="glyphicon glyphicon-eye-open dislike" data-id="0"></span>
         </div>
 
         <p>

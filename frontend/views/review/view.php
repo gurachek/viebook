@@ -89,15 +89,19 @@ $this->registerJs($customJs);
                 <?= Html::a($review->book['name'], ['book/view', 'id' => $review->book['id']]) ?>
             </li>
             <li>
-                <span class="glyphicon glyphicon-user"></span>
+                <span class="glyphicon glyphicon-user"  title="Автор рецензии"></span>
                 <?= Html::a($review->author->getName(), ['user/view', 'id' => $review->author->id]) ?>
             </li>
             <li>
-                <span class="glyphicon glyphicon-calendar"></span>
+                <span class="glyphicon glyphicon-menu-hamburger" title="Категория"></span>
+                <?= Html::a($review->book->cat['name'], ['category/index', 'id' => $review->book->cat['id']]) ?>
+            </li>
+            <li>
+                <span class="glyphicon glyphicon-calendar"  title="Дата написания"></span>
                 <?= date("d M Y", $review->created_at) ?>
             </li>
             <li>
-                <span class="glyphicon glyphicon-eye-open"></span>
+                <span class="glyphicon glyphicon-eye-open"  title="Просмотры"></span>
                 <?= $review->views ?>
             </li>
         </ul>
@@ -144,7 +148,7 @@ $this->registerJs($customJs);
                     <span class="dislike-count">
                         <?= $negative ?>
                     </span>
-                    <span title="Не понравилось" class="glyphicon glyphicon-send dislike" data-id="0"></span>
+                    <span title="Не понравилось" class="glyphicon glyphicon-off dislike" data-id="0"></span>
                 </div>
 
             <?php else: ?>

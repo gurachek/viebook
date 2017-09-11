@@ -256,7 +256,7 @@ a.desc:after {
 }
 
 .review_page .estimate .dislike {
-  color: #336699;
+  color: #444444;
   font-size: 20px;
   cursor: pointer;
 }
@@ -355,7 +355,7 @@ a.desc:after {
 
 @media only screen and (max-width: 768px) {
     .daily_image {
-        float: none;
+        /*float: none;*/
         display: block;
         width: 200px;
         margin: 0 auto;
@@ -666,4 +666,52 @@ li.display_on_mobile_book_block {
 #columns .pin:hover {
   box-shadow: -3px -3px 5px #f6f6f6;
   margin: 2px;
+}
+
+.let_email {
+  padding-top: 10px;
+  text-align: center;
+  width: 90%;
+  margin: 0 auto;
+}
+
+.let_email .email {
+  width: 300px;
+}
+
+.let_email .submit {
+  width: 115px;
+}
+
+@media(max-width:767px) {
+  .let_email .email {
+    width: 100%;
+  }
+  .let_email .submit {
+    margin-top: 5px;
+    width: 100%;
+  }
+}
+
+.close-promo {
+  text-align: center;
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+.close-promo .sure {
+  cursor: pointer;
+}
+
+.promo {
+  display: none;
+}
+
+.ty_for_email {
+  display: none;
+  padding-top: 10px;
+  text-align: center;
+  width: 90%;
+  margin: 0 auto;
+  color: #27ae60;
 }
