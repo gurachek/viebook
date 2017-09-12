@@ -1,3 +1,7 @@
+<Files sitemap.xml>
+Allow from all
+Satisfy all
+</Files>
 <IfModule mod_rewrite.c>
     Options +FollowSymlinks
     RewriteEngine On
@@ -44,8 +48,3 @@ RewriteCond %{REQUEST_URI} !^/[0-9]+\..+\.cpaneldcv$
 RewriteCond %{REQUEST_URI} !^/\.well-known/pki-validation/[A-F0-9]{32}\.txt(?:\ Comodo\ DCV)?$
     RewriteRule ^.*$ frontend/web/index.php
 </IfModule>
-
-<Files sitemap.xml>
-Allow from all
-Satisfy all
-</Files>
