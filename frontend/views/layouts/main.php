@@ -137,9 +137,11 @@ AppAsset::register($this);
     <br>
     <br>
     <br>
-    <div class="container promo" style="background: rgba(123, 164, 210, 0.1); color: #444; border: 1px solid #7BA4D2;">
+    <div class="container-fluid promo" style="background: url(/images/promo-bg8.jpg) no-repeat; background-size: cover; color: #f6f6f6;">
+        <br>
         <h3 class="text-center" style="margin: 0">Минутку внимания!</h3>
-        <div style="color: #444; padding-top: 5px; width: 80%; margin: 0 auto; font-size: 16px; line-height: 1.6em;">
+        <br>
+        <div class="promo-text">
             Сейчас на главной странице вы видите тестовые рецензии, которые добавлены, чтобы показать как это вообще работает. Со временем сайт будет наполняться реальными рецензиями от профессионалов своей сферы.<br>
             Суть проекта - предоставить вам обзоры книг, чтобы вы могли выбрать только те книги, которые реально будут полезны для развития в выбранной сфере.
             Для тех, кто не знает с чего начать и как развиваться, мы готовим к запуску функционал, который поможет четко выстроить путь развития и будем курировать вас в процессе обучения. Вы самостоятельно изучаете то, что вам интересно. А мы лишь даем инструмент, который поможет сэкономить ваше время.
@@ -156,14 +158,14 @@ AppAsset::register($this);
                     </button>
                 </div>
                 </div>
-                <small style="font-size: 12px; line-height: 0.5em;">* Мы не будем надоедать спамом. Только полезная для Вас информация.</small>
+                <small style="color: #E64354; font-size: 12px; line-height: 0.5em;">* Мы не будем надоедать спамом. Только полезная для Вас информация.</small>
             </div>  
             <div class="ty_for_email">
                 <span class="glyphicon glyphicon-ok"></span>
                  Спасибо за доверие, ожидайте рассылку
             </div>   
         </div>
-        <div class="close-promo">
+        <div class="close-promo" style="margin-bottom: 10px; color: #444;">
             <a class="sure">Закрыть</a>
         </div>
     </div>

@@ -683,6 +683,15 @@ li.display_on_mobile_book_block {
   width: 115px;
 }
 
+.promo-text {
+  width: 70%;
+  color: white;
+  padding-top: 5px;
+  margin: 0 auto;
+  font-size: 16px;
+  line-height: 1.6em;
+}
+
 @media(max-width:767px) {
   .let_email .email {
     width: 100%;
@@ -691,11 +700,15 @@ li.display_on_mobile_book_block {
     margin-top: 5px;
     width: 100%;
   }
+
+  .promo-text {
+    width: 98%;
+  }
 }
 
 .close-promo {
   text-align: center;
-  font-size: 14px;
+  font-size: 12px;
   margin-top: 10px;
 }
 
@@ -713,5 +726,7 @@ li.display_on_mobile_book_block {
   text-align: center;
   width: 90%;
   margin: 0 auto;
-  color: #27ae60;
+  /*color: #27ae60;*/
+  /*color: #2ECC71;*/
+  color: #64DDBB;
 }
