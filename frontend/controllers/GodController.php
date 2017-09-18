@@ -5,6 +5,7 @@ namespace frontend\controllers;
 use Yii;
 use yii\web\Controller;
 use frontend\models\Review;
+use frontend\models\Email;
 
 class GodController extends Controller
 {
@@ -33,5 +34,16 @@ class GodController extends Controller
         }
 
         return false;
+    }
+
+    public function actionEmails()
+    {
+        $emails = Email::find()->orderBy('timestamp DESC')->all();
+        $count = Email::find()->count();
+
+        return $this->render('emails', [
+            'emails' => $emails,
+            'count' => $count,
+        ]);
     }
 }
