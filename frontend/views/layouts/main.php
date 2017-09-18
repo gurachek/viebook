@@ -56,6 +56,7 @@ AppAsset::register($this);
 <!DOCTYPE html>
 <html lang="<?= Yii::$app->language ?>">
 <head>
+    <meta name="google-site-verification" content="kjR3xvzotZkHnl8Y6NC4iF0XF_PUGrd8UMwLziGEenk" />
     <meta charset="<?= Yii::$app->charset ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="yandex-verification" content="07e19644d4902619" />
@@ -213,32 +214,6 @@ AppAsset::register($this);
                 </p>
             </div>
         </div>
-    </div>
-    <div class="container" style="display: none;">
-        <p class="pull-left">
-            &copy; Viebook <?= date('Y') ?>. All rights reserved.
-            <br>
-            По всем вопросам: <a href="mailto:vgurachek@gmail.com">vgurachek@gmail.com</a>
-        </p>
-        <p class="pull-right">
-
-            <!--LiveInternet counter--><script type="text/javascript">
-            document.write("<a href='//www.liveinternet.ru/click' "+
-            "target=_blank><img src='//counter.yadro.ru/hit?t44.6;r"+
-            escape(document.referrer)+((typeof(screen)=="undefined")?"":
-            ";s"+screen.width+"*"+screen.height+"*"+(screen.colorDepth?
-            screen.colorDepth:screen.pixelDepth))+";u"+escape(document.URL)+
-            ";"+Math.random()+
-            "' alt='' title='LiveInternet' "+
-            "border='0' width='31' height='31'><\/a>")
-            </script><!--/LiveInternet-->
-
-        </p>
-        <p class="text-center">
-            Читайте <a href="http://blog.viebook.ru/" target="_blank">блог</a> проекта.
-            <br>
-            Мы на <a href="https://spark.ru/startup/viebook">спарке</a>
-        </p>
     </div>
 <!-- </footer> -->
 
