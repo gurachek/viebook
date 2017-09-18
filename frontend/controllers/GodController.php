@@ -9,6 +9,20 @@ use frontend\models\Email;
 
 class GodController extends Controller
 {
+
+    public function beforeAction($action)
+    {
+        if (Yii::$app->user->getId()) {
+            if (!Yii::$app->user->can('admin')) {
+                return false;
+            } else {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     public function actionReviews()
     {
         $reviews = Review::find()->where(['active' => 0])->orderBy('created_at DESC')->all();

@@ -179,9 +179,47 @@ AppAsset::register($this);
     </div>
 </div>
 
-<footer class="footer">
-    <div class="container">
-        <p class="pull-left">&copy; Viebook <?= date('Y') ?></p>
+<!-- <footer class="footer" style="padding: 0;"> -->
+    <!-- <br> -->
+    <div class="container-fluid" style="background: #d2d2d2;">
+        <br>
+        <div class="row">
+            <div class="col-md-4">
+                &copy; Viebook <?= date('Y') ?>. All rights reserved.
+                <br>
+                По всем вопросам: <a href="mailto:vgurachek@gmail.com">vgurachek@gmail.com</a>   
+            </div>
+            <div class="col-md-4 text-center">
+                <script type="text/javascript">
+                document.write("<a href='//www.liveinternet.ru/click' "+
+                "target=_blank><img src='//counter.yadro.ru/hit?t44.6;r"+
+                escape(document.referrer)+((typeof(screen)=="undefined")?"":
+                ";s"+screen.width+"*"+screen.height+"*"+(screen.colorDepth?
+                screen.colorDepth:screen.pixelDepth))+";u"+escape(document.URL)+
+                ";"+Math.random()+
+                "' alt='' title='LiveInternet' "+
+                "border='0' width='31' height='31'><\/a>")
+                </script>
+            </div>
+            <div class="col-md-4">
+                <p class="text-center">
+                <a href="http://viebook.ru/about">О проекте</a>
+                <br>
+                <a href="http://viebook.ru/">Как это работает</a>
+                <br>
+                <a href="http://blog.viebook.ru/" target="_blank">Блог проекта</a>
+                <br>
+                <a href="https://spark.ru/startup/viebook" target="_blank">Мы на спарке</a>
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="container" style="display: none;">
+        <p class="pull-left">
+            &copy; Viebook <?= date('Y') ?>. All rights reserved.
+            <br>
+            По всем вопросам: <a href="mailto:vgurachek@gmail.com">vgurachek@gmail.com</a>
+        </p>
         <p class="pull-right">
 
             <!--LiveInternet counter--><script type="text/javascript">
@@ -196,10 +234,13 @@ AppAsset::register($this);
             </script><!--/LiveInternet-->
 
         </p>
-        <p class="text-center">Читайте <a href="http://blog.viebook.ru/" target="_blank">блог</a> проекта.
+        <p class="text-center">
+            Читайте <a href="http://blog.viebook.ru/" target="_blank">блог</a> проекта.
+            <br>
+            Мы на <a href="https://spark.ru/startup/viebook">спарке</a>
         </p>
     </div>
-</footer>
+<!-- </footer> -->
 
 <footer class="mobile-footer">
     <p class="text-center">Хотите следить за развитием пректа? Посетите наш <a href="http://blog.viebook.ru" target="_blank">блог</a></p>
