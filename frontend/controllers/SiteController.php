@@ -214,4 +214,9 @@ class SiteController extends Controller
         return false;
     }
 
+    public function actionAbout()
+    {
+        return $this->render('about');
+    }
+
 }

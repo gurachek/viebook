@@ -180,15 +180,19 @@ AppAsset::register($this);
     </div>
 </div>
 
-<!-- <footer class="footer" style="padding: 0;"> -->
-    <!-- <br> -->
-    <div class="container-fluid" style="background: #d2d2d2;">
+<footer class="footer" style="padding: 0;border-top: 1px solid #d2d2d2;">
+    <div style="background: #e9e9e9;">
+    <div class="container" style="color: #444 !important;background: #e9e9e9; ">
         <br>
         <div class="row">
-            <div class="col-md-4">
-                &copy; Viebook <?= date('Y') ?>. All rights reserved.
-                <br>
-                По всем вопросам: <a href="mailto:vgurachek@gmail.com">vgurachek@gmail.com</a>   
+            <div class="col-md-4 text-center">
+                <p class="text-left">
+                    <a href="http://viebook.ru/site/about" style="color: #444 !important;">О проекте</a>
+                    <br>
+                    <a href="http://blog.viebook.ru/" target="_blank" style="color: #444 !important;">Блог</a>
+                    <br>
+                    <a href="https://spark.ru/startup/viebook" target="_blank" style="color: #444 !important;">Мы на спарке</a>
+                </p>
             </div>
             <div class="col-md-4 text-center">
                 <script type="text/javascript">
@@ -203,24 +207,19 @@ AppAsset::register($this);
                 </script>
             </div>
             <div class="col-md-4">
-                <p class="text-center">
-                <a href="http://viebook.ru/about">О проекте</a>
+                &copy; Viebook <?= date('Y') ?>. All rights reserved.
                 <br>
-                <a href="http://viebook.ru/">Как это работает</a>
-                <br>
-                <a href="http://blog.viebook.ru/" target="_blank">Блог проекта</a>
-                <br>
-                <a href="https://spark.ru/startup/viebook" target="_blank">Мы на спарке</a>
-                </p>
+                По всем вопросам: <a href="mailto:vgurachek@gmail.com">vgurachek@gmail.com</a>   
             </div>
         </div>
     </div>
-<!-- </footer> -->
+    </div>
+</footer>
 
 <footer class="mobile-footer">
     <p class="text-center">Хотите следить за развитием пректа? Посетите наш <a href="http://blog.viebook.ru" target="_blank">блог</a></p>
     <p class="text-right">
-        <!--LiveInternet counter--><script type="text/javascript">
+            <script type="text/javascript">
             document.write("<a href='//www.liveinternet.ru/click' "+
             "target=_blank><img src='//counter.yadro.ru/hit?t44.6;r"+
             escape(document.referrer)+((typeof(screen)=="undefined")?"":
@@ -229,7 +228,7 @@ AppAsset::register($this);
             ";"+Math.random()+
             "' alt='' title='LiveInternet' "+
             "border='0' width='31' height='31'><\/a>")
-            </script><!--/LiveInternet-->
+            </script>
     </p>
 </div>
 

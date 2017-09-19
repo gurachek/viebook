@@ -730,3 +730,9 @@ li.display_on_mobile_book_block {
   /*color: #2ECC71;*/
   color: #64DDBB;
 }
+
+@media(max-width: 900px) {
+  .about-logo {
+    display: none;
+  }
+}
