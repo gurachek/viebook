@@ -117,4 +117,15 @@ class AppController extends Controller
         ]);
     }
 
+    public function actionEmailDelivery()
+    {
+        Yii::$app->mail->compose(['html' => 'weeklyMailDelivery-html'])
+            ->setFrom(['no-reply@viebook.ru' => 'Viebook'])
+            ->setTo('webcrash091@gmail.com')
+            ->setSubject('Программисты не читают книги, должны ли вы?')
+            ->send();
+
+        die;
+    }
+
 }
