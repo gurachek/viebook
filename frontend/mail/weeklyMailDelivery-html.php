@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Email template</title>
 </head>
-<body style="/*background: linear-gradient(to bottom right, #66A6D2, #E64557);*/ background: #d2d2d2; margin: 0;">
+<body style="background: linear-gradient(to bottom right, #66A6D2, #E64557); margin: 0;">
 	<div class="container" style="">
 		<div class="header" style="height: 140px;">
 			<div class="book-icon" style="text-align: center; padding-top: 10px;">
@@ -16,7 +16,7 @@
 		</div>
 		<br>
 		<div class="wrap" style="box-shadow: 1px 1px 2px white;background: white;border-radius: 10px;font-size: 17px;margin-bottom: 50px; width: 80%; margin: 0 auto;">
-			<div class="title-photo" style="margin: 0; padding: 0; background: url(https://www.timeshighereducation.com/sites/default/files/reading-books.jpg) no-repeat; background-size: cover; width: 100%; height: 200px; border-radius: 10px 10px 0 0;">
+			<div class="title-photo" style="margin: 0; padding: 0; background: url(https://viebook.ru/images/photo_for_email.jpg) no-repeat; background-size: cover; width: 100%; height: 200px; border-radius: 10px 10px 0 0;">
 				<div style="color: white; text-align: center; font-size: 35px; padding-top: 8%">Программисты не читают книги, должны ли вы?</div>
 			</div>
 			<div class="content" style="color: #444; font-size: 20px; padding-top: 10px; line-height: 1.2em; width: 97%; margin: 0 auto;">
