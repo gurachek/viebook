@@ -117,15 +117,33 @@ class AppController extends Controller
         ]);
     }
 
-    public function actionEmailDelivery()
+    public function actionEmailDelivery($done = 0)
     {
-        Yii::$app->mail->compose(['html' => 'weeklyMailDelivery-html'])
+
+        $emails = Email::find()->asArray()->all();
+        $users = User::find()->where(['status' => User::STATUS_ACTIVE, 'active' => 1])->asArray()->all();
+
+        $emailsList = array_column($emails, 'email');
+        $usersEmailList = array_column($users, 'email');
+
+        $common = array_merge($emailsList, $usersEmailList);
+
+        $finalEmailsBase = array_unique($common);
+
+        if ($done != 0) {
+            $finalEmailsBase = array_slice($finalEmailsBase, $done);
+        }
+
+        foreach ($finalEmailsBase as $email) {
+            Yii::$app->mail->compose(['html' => 'weeklyMailDelivery-html'])
             ->setFrom(['no-reply@viebook.ru' => 'Viebook'])
-            ->setTo('webcrash091@gmail.com')
+            ->setTo($email)
             ->setSubject('Программисты не читают книги, должны ли вы?')
             ->send();
 
-        die;
+            echo "Email send to: ". $email ." <br>";
+        }
+
     }
 
 }
