@@ -229,4 +229,5 @@ class User extends ActiveRecord implements IdentityInterface
     {
         return $this->password_reset_token;
     }
+
 }

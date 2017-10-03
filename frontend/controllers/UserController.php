@@ -19,7 +19,7 @@ class UserController extends Controller
 {
 
   // user account
-  public function actionIndex($content = 'reviews')
+  public function actionIndex($content = 'index')
   {
       if (Yii::$app->user->isGuest) {
         return $this->redirect(['site/login']);
@@ -33,24 +33,26 @@ class UserController extends Controller
 
       switch($content) {
         case 'books':
-          $books = BookTrack::find()->where(['user_id' => Yii::$app->user->getId()])->asArray()->all();
-          $booksId = array_column($books, 'book_id');
-          $data = Book::find()->where(['id' => $booksId])->asArray()->all();
+          $data = Book::getUserBooks(Yii::$app->user->getId());
           break;
 
         case 'authors':
-          $authors = AuthorTrack::find()->where(['user_id' => Yii::$app->user->getId()])->asArray()->all();
-          $authorsId = array_column($authors, 'author_id');
-          $data = Author::find()->where(['id' => $authorsId])->asArray()->all();
+          $data = Author::getUserAuthors(Yii::$app->user->getId());
           break;
 
         case 'settings':
           $data = new UserSettingsModel();
           break;
 
-        default:
+        case 'reviews':
           $data = $user;
-          $content = 'reviews';
+          break;
+
+        default:
+          $data['books'] = Book::getUserBooks(Yii::$app->user->getId(), 5);
+          $data['authors'] = Author::getUserAuthors(Yii::$app->user->getId(), 5);
+          $data['reviews'] = $user;
+          $content = 'index';
           break;
       }
 

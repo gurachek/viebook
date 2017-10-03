@@ -295,31 +295,34 @@ a.desc:after {
     width: 200px;
     height: 200px;
     border-radius: 100px;
-    /*border: 5px solid #E74C3C;*/
-    transition: transform 0.5s;
+    /*transition: transform 0.5s;*/
 }
-
+/*
 .user_account_image:hover {
   cursor: pointer;
-  /*border: 2px solid #E64354;*/
+  border: 2px solid #E64354;
   transform: scale(1.1);
-}
+}*/
 
 .user_menu {
     list-style-type: none;
     margin-top: 20px;
-    border: 1px solid #dedede;
+    /*border: 1px solid #dedede;*/
 }
 
 .user_menu li {
-    padding: 7px 10px;
+    padding: 9px 10px;
     display: block;
 }
 
 .book_in_list {
-    min-height: 210px;
+    height: 210px;
     padding: 5px 0;
-    display: inline;
+    float: left;
+}
+
+.clear_after_block {
+  clear: both;
 }
 
 .book_in_list .image {
@@ -668,21 +671,6 @@ li.display_on_mobile_book_block {
   margin: 2px;
 }
 
-.let_email {
-  padding-top: 10px;
-  text-align: center;
-  width: 90%;
-  margin: 0 auto;
-}
-
-.let_email .email {
-  width: 300px;
-}
-
-.let_email .submit {
-  width: 115px;
-}
-
 .promo-text {
   width: 70%;
   color: white;
@@ -720,19 +708,29 @@ li.display_on_mobile_book_block {
   display: none;
 }
 
-.ty_for_email {
-  display: none;
-  padding-top: 10px;
-  text-align: center;
-  width: 90%;
-  margin: 0 auto;
-  /*color: #27ae60;*/
-  /*color: #2ECC71;*/
-  color: #64DDBB;
-}
-
 @media(max-width: 900px) {
   .about-logo {
     display: none;
   }
+}
+
+.user_logout {
+   border-radius: 100px;
+   background: #dedede;
+   width: 40px;
+   line-height: 40px; 
+   text-align: center;
+   font-size: 17px;
+   float: right;
+   margin-right: 35px;
+   margin-top: -50px;
+   cursor: pointer;
+}
+
+.about-user {
+  background: #f7f7f7;
+  border: 1px solid #f7f7f7;
+  padding: 5px 10px;
+  font-size: 16px; 
+  line-height: 1.1em;
 }

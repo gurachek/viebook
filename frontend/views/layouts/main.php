@@ -10,8 +10,6 @@ use yii\widgets\Breadcrumbs;
 use frontend\assets\AppAsset;
 use common\widgets\Alert;
 
-$emailSend = Yii::$app->getUrlManager()->createAbsoluteUrl(['site/email']);
-
 $customJs = <<<JS
 
 jQuery(document).ready(function () {
@@ -23,25 +21,6 @@ jQuery(document).ready(function () {
     jQuery('.close-promo .sure').click(function () {
         jQuery('.promo').css('display', 'none');
         $.session.set('promo_closed', true);
-    });
-    
-    jQuery('.submit').click(function () {
-        var email = jQuery('.email').val();
-        jQuery.ajax({
-            url: '$emailSend',
-            method: 'POST',
-            data: {
-                email: email,
-            },
-            success: function (data) {
-                var info = JSON.parse(data);
-                if (info.status) {
-                    jQuery('.let_email').css('display', 'none');
-                    jQuery('.ty_for_email').css('display', 'block');
-                    $.session.set('promo_closed', true);
-                }
-            },
-        });
     });
 
 });
@@ -139,7 +118,10 @@ AppAsset::register($this);
     <br>
     <br>
     <br>
-    <div class="container-fluid promo" style="background: url(/images/promo-bg8.jpg) no-repeat; background-size: cover; color: #f6f6f6;">
+
+    <?php if (!Yii::$app->user->getId()): ?>
+
+    <div class="container-fluid promo" style="background: url(/images/promo-bg9.jpg) no-repeat; background-size: cover; color: #f6f6f6; margin-top: -14px;background-attachment: fixed; margin-bottom: 15px;">
         <br>
         <h3 class="text-center" style="margin: 0">Минутку внимания!</h3>
         <br>
@@ -150,28 +132,18 @@ AppAsset::register($this);
             <br>
             <br>
             <p class="text-center">Хотите получать еженедельную рассылку с подборкой рецензий?</p>
-            <div class="let_email">
-                <div class="form-inline" id="sendEmail">
-                <div class="form-group">
-                    <input type="email" class="form-control email" placeholder="love@viebook.ru">
-                    <button class="btn btn-success submit">
-                        <span class="glyphicon glyphicon-send"></span>
-                        &nbsp;Отправить
-                    </button>
-                </div>
-                </div>
-                <small style="color: #E64354; font-size: 12px; line-height: 0.5em;">* Мы не будем надоедать спамом. Только полезная для Вас информация.</small>
-            </div>  
-            <div class="ty_for_email">
-                <span class="glyphicon glyphicon-ok"></span>
-                 Спасибо за доверие, ожидайте рассылку
-            </div>   
+            <div style="width: 20%; margin: 0 auto; padding-top: 10px; margin-bottom: 10px;">
+                <?= Html::a('Зарегистрироваться', ['site/signup'], ['class' => 'btn viebutton']) ?>
+            </div>
         </div>
+        <br>
         <div class="close-promo" style="margin-bottom: 10px; color: #444;">
-            <a class="sure">Закрыть</a>
+            <a style="color: whitesmoke !important; text-decoration: underline;" class="sure">Закрыть</a>
         </div>
     </div>
-    <br>
+
+    <?php endif; ?>
+
     <div class="container main-block">
         <?php Alert::widget() ?>
 
@@ -194,22 +166,11 @@ AppAsset::register($this);
                     <a href="https://spark.ru/startup/viebook" target="_blank" style="color: #444 !important;">Мы на спарке</a>
                 </p>
             </div>
-            <div class="col-md-4 text-center">
-                <!-- <script type="text/javascript">
-                document.write("<a href='//www.liveinternet.ru/click' "+
-                "target=_blank><img src='//counter.yadro.ru/hit?t44.6;r"+
-                escape(document.referrer)+((typeof(screen)=="undefined")?"":
-                ";s"+screen.width+"*"+screen.height+"*"+(screen.colorDepth?
-                screen.colorDepth:screen.pixelDepth))+";u"+escape(document.URL)+
-                ";"+Math.random()+
-                "' alt='' title='LiveInternet' "+
-                "border='0' width='31' height='31'><\/a>")
-                </script> -->
-            </div>
+            <div class="col-md-4 text-center"></div>
             <div class="col-md-4">
                 &copy; Viebook <?= date('Y') ?>. All rights reserved.
                 <br>
-                По всем вопросам: <a href="mailto:vgurachek@gmail.com">gurachek@viebook.ru</a>   
+                По всем вопросам: <a href="mailto:vgurachek@gmail.com">vgurachek@gmail.com</a>   
             </div>
         </div>
     </div>
@@ -218,18 +179,6 @@ AppAsset::register($this);
 
 <footer class="mobile-footer">
     <p class="text-center">Хотите следить за развитием пректа? Посетите наш <a href="http://blog.viebook.ru" target="_blank">блог</a></p>
-    <p class="text-right">
-            <!-- <script type="text/javascript">
-            document.write("<a href='//www.liveinternet.ru/click' "+
-            "target=_blank><img src='//counter.yadro.ru/hit?t44.6;r"+
-            escape(document.referrer)+((typeof(screen)=="undefined")?"":
-            ";s"+screen.width+"*"+screen.height+"*"+(screen.colorDepth?
-            screen.colorDepth:screen.pixelDepth))+";u"+escape(document.URL)+
-            ";"+Math.random()+
-            "' alt='' title='LiveInternet' "+
-            "border='0' width='31' height='31'><\/a>")
-            </script> -->
-    </p>
 </div>
 
 <?php $this->endBody() ?>

@@ -189,31 +189,6 @@ class SiteController extends Controller
         ]);
     }
 
-    public function actionEmail()
-    {
-        if (Yii::$app->request->isAjax) {
-            $data = Yii::$app->request->post();
-
-            $result = [];
-
-            if (filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
-                $email = new Email();
-                $email->email = $data['email'];
-                $email->timestamp = time();
-                $email->sent = 0;
-                if ($email->save()) {
-                    $result['status'] = true;
-                }
-            } else {
-                $result['status'] = false;
-            }
-        
-            return Json::encode($result);
-        } 
-
-        return false;
-    }
-
     public function actionAbout()
     {
         return $this->render('about');

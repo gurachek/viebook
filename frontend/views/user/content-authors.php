@@ -2,7 +2,7 @@
 use yii\helpers\Html;
 ?>
 
-<h2 class="text-center">Добавленные Вами авторы</h2>
+<h2 class="text-center">Авторы</h2>
 
 <?php if (!$data): ?>
 	<p class="text-center">

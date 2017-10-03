@@ -6,7 +6,7 @@ use yii\widgets\Pjax;
 use yii\jui\AutoComplete;
 use yii\web\JsExpression;
 
-$this->title = "Viebook - путеводитель по миру профильной литературы";
+$this->title = "Viebook. Поменьше бы вашего бла-бла-бла";
 
 $js = <<<JS
 

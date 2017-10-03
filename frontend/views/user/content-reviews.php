@@ -1,11 +1,11 @@
 <?php
 use yii\helpers\Html;
 ?>
-<h2 class="text-center">Ваши рецензии</h2>
+<h2 class="text-center">Ваши обзоры книг</h2>
 
 <?php if (!$data->reviews): ?>
 	<p class="text-center">
-		У Вас нет опубликованных рецензий
+		У Вас нет опубликованных обзоров
 	</p>
 <?php endif; ?>
 <br>

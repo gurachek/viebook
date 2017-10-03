@@ -3,35 +3,25 @@ use yii\helpers\Html;
 
 $this->title = "Ваш личный кабинет";
 
+$js = <<<JS
+	jQuery(document).ready(function() {
+		jQuery('div .container').removeClass('main-block');
+	});
+JS;
+
+$this->registerJs($js);
+
 ?>
 
 <div class="row">
-	<div class="col-md-12" >
-		<ul class="list-unstyled list-inline" style="border: 1px solid #dedede; padding: 7px 0px 5px 0px; background: white; padding-left: 10px;">
-		
-			<li>
-			<span class="glyphicon glyphicon-book"></span>
-			<?= Html::a('Добавить книгу', ['book/add']) ?>
-			</li>
-
-			<li>
-			<span class="glyphicon glyphicon-user"></span>
-			<?= Html::a('Добавить автора', ['author/add']) ?>
-			</li>
-
-			<li style="padding: 0px;">
-			<?= Html::beginForm(['/site/logout'], 'post') ?>
-	        <?= Html::submitButton('<span class="glyphicon glyphicon-log-out"></span> Выход', ['class' => 'btn btn-link', 'style' => 'padding: 0;']) ?>
-	        <?= Html::endForm() ?>
-    		</li>
-    	</ul>
-	</div>
-</div>
-
-<div class="row">
-	<div class="col-md-3 col-md-push-9">
+	<div class="col-md-3 col-md-push-9 main-block">
 		<br>
 		<div class="user_account_image" style="background: url(/images/users/<?= $user->image ?>) no-repeat center; background-size: cover;"></div>
+		<div class="user_logout" title="Выход">
+			<?= Html::beginForm(['/site/logout'], 'post') ?>
+				<?= Html::submitButton('<span class="glyphicon glyphicon-log-out" style="color: #E64354;"></span>', ['class' => 'btn btn-link']) ?>
+			<?= Html::endForm() ?>
+			</div>
 		<br>
 
 		<p class="text-center" style="font-size: 17px;">
@@ -41,19 +31,35 @@ $this->title = "Ваш личный кабинет";
 		</p>
 
 		<ul class="user_menu">
-		<li><?= Html::a('Мои добавленные книги', ['user/index', 'content' => 'books']) ?></li>
-		<li><?= Html::a('Мои добавленные авторы', ['user/index', 'content' => 'authors']) ?></li>
-		<li><?= Html::a('Мои рецензии', ['user/index', 'content' => 'reviews']) ?></li>
-		<li><?= Html::a('Мои настройки', ['user/index', 'content' => 'settings']) ?></li>
+		<li>
+			<?= Html::a('Книги', ['user/index', 'content' => 'books']) ?>
+			<?= Html::a('<span title="Добавить книгу" style="float: right;" class="glyphicon glyphicon-plus"></span>', ['book/add']) ?>
+		</li>
+
+		<li>
+			<?= Html::a('Авторы', ['user/index', 'content' => 'authors']) ?>
+			<?= Html::a('<span title="Добавить автора" style="float: right;" class="glyphicon glyphicon-plus"></span>', ['author/add']) ?>
+		</li>
+
+		<li>
+			<?= Html::a('Мои обзоры', ['user/index', 'content' => 'reviews']) ?>
+			<?= Html::a('<span title="Написать рецензию" style="float: right;" class="glyphicon glyphicon-plus"></span>', ['review/write']) ?>
+		</li>
+		<li><?= Html::a('Настройки', ['user/index', 'content' => 'settings']) ?></li>
 		</ul>
 	</div>
 	<div class="col-md-9 col-md-pull-3">
-		<?php
-			if ($user->active) {
-				echo $this->render('content-'.$content, ['data' => $data]);
-			} else {
-				echo $this->render('no-active-profile', ['email' => $user->email]);
-			}
-		?>
+		<!-- <div class="main-block about-user">
+			Text about user
+		</div> -->
+		<div class="main-block" style="padding: 10px;">
+			<?php
+				if ($user->active) {
+					echo $this->render('content-'.$content, ['data' => $data]);
+				} else {
+					echo $this->render('no-active-profile', ['email' => $user->email]);
+				}
+			?>
+		</div>
 	</div>
 </div>

@@ -2,7 +2,7 @@
 use yii\helpers\Html;
 ?>
 
-<h2 class="text-center">Добавленные Вами книги</h2>
+<h2 class="text-center">Книги</h2>
 
 <?php if (!$data): ?>
 	<p class="text-center">
@@ -20,3 +20,5 @@ use yii\helpers\Html;
 		['book/view', 'id' => $book['id']]) ?>
 	</div>
 <?php endforeach; ?>
+<div class="clear_after_block">
+</div>

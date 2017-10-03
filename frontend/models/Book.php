@@ -13,6 +13,7 @@ use frontend\models\Category;
 use frontend\models\Author;
 use frontend\models\Review;
 use frontend\models\BookTags;
+use frontend\models\BookTrack;
 
 class Book extends ActiveRecord
 {
@@ -48,6 +49,16 @@ class Book extends ActiveRecord
     public function getReviews()
     {
         return $this->hasMany(Review::className(), ['book_id' => 'id'])->orderBy('rating ASC')->where(['active' => 1]);
+    }
+
+    public static function getUserBooks($userId, $limit = null) 
+    {
+
+        $books = BookTrack::find()->where(['user_id' => $userId])->asArray()->all();
+        $booksId = array_column($books, 'book_id');
+        $data = static::find()->where(['id' => $booksId])->limit($limit)->asArray()->all();
+
+        return $data;
     }
 
 }

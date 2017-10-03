@@ -99,24 +99,9 @@ class AppController extends Controller
         ]);
     }
 
-    public function actionEmail()
-    {
-
-        $emails = Email::find()->asArray()->all();
-        $users = User::find()->where(['status' => User::STATUS_ACTIVE, 'active' => 1])->asArray()->all();
-
-        $emailsList = array_column($emails, 'email');
-        $usersEmailList = array_column($users, 'email');
-
-        $common = array_merge($emailsList, $usersEmailList);
-
-        $finalEmailsBase = array_unique($common);
-
-        return $this->render('sendEmail', [
-            'emails' => $finalEmailsBase,
-        ]);
-    }
-
+    /*
+        Function used once when I needed to send emails ;) 
+    */
     public function actionEmailDelivery($done = 0)
     {
 
