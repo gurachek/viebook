@@ -49,9 +49,6 @@ $this->registerJs($js);
 		</ul>
 	</div>
 	<div class="col-md-9 col-md-pull-3">
-		<!-- <div class="main-block about-user">
-			Text about user
-		</div> -->
 		<div class="main-block" style="padding: 10px;">
 			<?php
 				if ($user->active) {

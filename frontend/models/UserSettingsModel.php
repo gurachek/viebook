@@ -11,11 +11,12 @@ class UserSettingsModel extends Model
 {
 	public $nicename;
 	public $image;
+	public $about;
 
 	public function rules()
 	{
 		return [
-			[['nicename', 'image'], 'default'],
+			[['nicename', 'image', 'about'], 'default'],
 			[['image'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg, jpeg'],
 			[['image'], 'file', 'maxSize' => '5000000'],
 			[['image'], 'file', 'maxFiles'=> 1],
@@ -36,6 +37,10 @@ class UserSettingsModel extends Model
 				Yii::$app->user->identity->increaseRating(5);
 
 			$user->nicename = $nicename ?? $user->username;
+			if (!empty($this->about)) {
+				$user->about = $this->about;
+				Yii::$app->user->identity->increaseRating(10);
+			}
 
 			if ($this->image) {
 

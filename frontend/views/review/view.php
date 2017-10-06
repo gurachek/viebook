@@ -177,8 +177,9 @@ $this->registerJs($customJs);
         <?php if (@$review->user_id != $id) { ?>
         <br>
         <p>
-            Хотите написать свою рецензию на эту книгу?
-            <?= Html::a("Написать рецензию", ['review/write', 'bookid' => $review->book['id']], ['class' => '']); ?>
+            Думаете, что можете лучше?
+            <?= Html::a("Напишите", ['review/write', 'bookid' => $review->book['id']], ['class' => '']); ?>
+            свой обзор на данную книгу.
         </p>
         <?php } ?>
 

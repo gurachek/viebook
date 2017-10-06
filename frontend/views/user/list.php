@@ -4,7 +4,7 @@ use yii\helpers\Html;
 $this->title = "Пользователи Viebook";
 ?>
 
-<h3 class="text-center">Наши пользователи</h3>
+<h3 class="text-center">Пользователи</h3>
 <br>
 
 <div class="row">

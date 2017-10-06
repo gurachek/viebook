@@ -3,10 +3,18 @@ use yii\helpers\Html;
 
 $this->title = "Пользователь ". $user->getName();
 
+$js = <<<JS
+	jQuery(document).ready(function() {
+		jQuery('div .container').removeClass('main-block');
+	});
+JS;
+
+$this->registerJs($js);
+
 ?>
 
 <div class="row">
-	<div class="col-md-3 col-md-push-9">
+	<div class="col-md-3 col-md-push-9 main-block">
 		<div class="user_info">
 			<br>
 			<div class="user_account_image" style="background: url(/images/users/<?= $user->image ?>) no-repeat center; background-size: cover;"></div>
@@ -26,35 +34,48 @@ $this->title = "Пользователь ". $user->getName();
 		</div>
 	</div>
 	<div class="col-md-9 col-md-pull-3">
-		<?php if (!$user->reviews): ?>
-			<h2 class="text-center">
-				У пользователя нет опубликованных рецензий
-			</h2>
-		<?php else: ?>
-			<h3>Последние рецензии:</h3>
+		<?php if (!empty($user->about)): ?>
+		
+			<div class="main-block about-user">
+				<p>О пользователе:</p>
+				<?= Html::encode($user->about) ?>
+			</div>
+
 		<?php endif; ?>
 
-		<br>
+		<div class="main-block" style="padding: 10px;">
 
-		<?php foreach($user->reviews as $review): ?>
-			<h4>
-				<?= Html::a($review['title'], ['review/view', 'id' => $review['id']]) ?>
-				<small>
-					<span class="glyphicon glyphicon-menu-right"></span>
-					<?= $review['book']['name'] ?>
-				</small>
-			</h4>
+			<?php if (!$user->reviews): ?>
+				<h2 class="text-center">
+					У пользователя нет опубликованных обзоров
+				</h2>
+			<?php else: ?>
+				<h3>Последние обзоры:</h3>
+			<?php endif; ?>
 
-			<p style="color: gray;">
-			Рейтинг: <?= $review['rating'] ?>
-			</p>
-
-			<p>
-			<?php $text = intval(strlen($review['text']) / 5) ?>
-			<?= mb_substr($review['text'], 0, $text, "utf-8") ?>...
-
-			</p>
 			<br>
-		<?php endforeach; ?>
+
+			<?php foreach($user->reviews as $review): ?>
+				<h4>
+					<?= Html::a($review['title'], ['review/view', 'id' => $review['id']]) ?>
+					<small>
+						<span class="glyphicon glyphicon-menu-right"></span>
+						<?= $review['book']['name'] ?>
+					</small>
+				</h4>
+
+				<p style="color: gray;">
+				Рейтинг: <?= $review['rating'] ?>
+				</p>
+
+				<p>
+				<?php $text = intval(strlen($review['text']) / 5) ?>
+				<?= mb_substr($review['text'], 0, $text, "utf-8") ?>...
+
+				</p>
+				<br>
+			<?php endforeach; ?>
+
+		</div>
 	</div>
 </div>
