@@ -23,6 +23,13 @@ class GodController extends Controller
         return false;
     }
 
+    public function actionIndex()
+    {
+        return $this->render('index', [
+            
+        ]);
+    }
+
     public function actionReviews()
     {
         $reviews = Review::find()->where(['active' => 0])->orderBy('created_at DESC')->all();

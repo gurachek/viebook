@@ -8,19 +8,19 @@ Satisfy all
 </IfModule>
 
 <IfModule mod_rewrite.c>
-    # если /fu, то в backend
-    RewriteCond %{REQUEST_URI} ^/(fu)
+    # если /admin, то в backend
+    RewriteCond %{REQUEST_URI} ^/(admin)
 RewriteCond %{REQUEST_URI} !^/[0-9]+\..+\.cpaneldcv$
 RewriteCond %{REQUEST_URI} !^/\.well-known/pki-validation/[A-F0-9]{32}\.txt(?:\ Comodo\ DCV)?$
-    RewriteRule ^fu/assets/(.*)$ backend/web/assets/$1 [L]
+    RewriteRule ^admin/assets/(.*)$ backend/web/assets/$1 [L]
 RewriteCond %{REQUEST_URI} !^/[0-9]+\..+\.cpaneldcv$
 RewriteCond %{REQUEST_URI} !^/\.well-known/pki-validation/[A-F0-9]{32}\.txt(?:\ Comodo\ DCV)?$
-    RewriteRule ^fu/css/(.*)$ backend/web/css/$1 [L]
+    RewriteRule ^admin/css/(.*)$ backend/web/css/$1 [L]
 RewriteCond %{REQUEST_URI} !^/[0-9]+\..+\.cpaneldcv$
 RewriteCond %{REQUEST_URI} !^/\.well-known/pki-validation/[A-F0-9]{32}\.txt(?:\ Comodo\ DCV)?$
-    RewriteRule ^fu/js/(.*)$ backend/web/js/$1 [L]
+    RewriteRule ^admin/js/(.*)$ backend/web/js/$1 [L]
     RewriteCond %{REQUEST_URI} !^/backend/web/(assets|js|css|js)/
-    RewriteCond %{REQUEST_URI} ^/(fu)
+    RewriteCond %{REQUEST_URI} ^/(admin)
 RewriteCond %{REQUEST_URI} !^/[0-9]+\..+\.cpaneldcv$
 RewriteCond %{REQUEST_URI} !^/\.well-known/pki-validation/[A-F0-9]{32}\.txt(?:\ Comodo\ DCV)?$
     RewriteRule ^.*$ backend/web/index.php [L]

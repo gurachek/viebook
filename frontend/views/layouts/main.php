@@ -151,12 +151,12 @@ AppAsset::register($this);
             <p class="text-center">Сайт ориентирован на три направления деятельности</p>
             <br>
             <div class="row">
-                <div class="col-md-4 text-center">
-                    <?= Html::a('<img src="/images/code2.png" width="150" height="150">', ['/category/', 'id' => 1]) ?>
+                <div class="col-md-4 text-center" style="padding-bottom: 20px;">
+                    <?= Html::a('<img src="/images/code.png" width="150" height="150">', ['/category/', 'id' => 1]) ?>
                     <br>
                     <h3>Программирование</h3>
                 </div>
-                <div class="col-md-4 text-center">
+                <div class="col-md-4 text-center" style="padding-bottom: 20px;">
                     <?= Html::a('<img src="/images/design.png" width="150" height="150">', ['/category/', 'id' => 2]) ?>
                     <br>
                     <h3>Дизайн</h3>
@@ -170,8 +170,8 @@ AppAsset::register($this);
             <br>
             <br>
             <div class="row">
-                <div class="col-md-4 col-md-offset-5">
-                    <?= Html::a('Бесплатная регистрация', ['site/signup'], ['class' => 'btn viebutton text-center', 'style' => 'margin: 0 auto;']) ?>
+                <div class="col-md-12 text-center">
+                    <?= Html::a('Бесплатная регистрация', ['site/signup'], ['class' => 'btn viebutton', 'style' => 'float: none; margin-top: -40px;']) ?>
                     
                 </div>
             </div>

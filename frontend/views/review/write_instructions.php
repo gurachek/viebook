@@ -25,7 +25,7 @@ $this->title = 'Написать рецензию - Viebook';
 <?php $form =  ActiveForm::begin(); ?>
     <?= $form->field($model, 'title'); ?>
     <?= $form->field($model, 'text')->textarea(['rows' => 20]); ?>
-    <?= $form->field($model, 'bookid')->hiddenInput(['value' => $book->id])->label(false); ?>
+    <?php //$form->field($model, 'bookid')->hiddenInput(['value' => $book->id])->label(false); ?>
     <?= $form->field($model, 'userid')->hiddenInput(['value' => Yii::$app->user->getId()])->label(false); ?>
 
     <?= Html::submitButton('Отправить', ['class' => 'btn btn-danger']); ?>

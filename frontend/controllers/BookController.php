@@ -12,6 +12,8 @@ use frontend\models\Author;
 use frontend\models\Book;
 use frontend\models\Tag;
 use frontend\models\Category;
+use yii\helpers\ArrayHelper;
+use frontend\models\BookLevel;
 
 class BookController extends Controller
 {
@@ -82,11 +84,15 @@ class BookController extends Controller
        $categoryList[$single['id']] = $single['name'];
      }
 
+     $bookLevels = BookLevel::find()->all();
+     $bookLevelsList =  ArrayHelper::map($bookLevels, 'id', 'name');
+
      return $this->render('add', [
          'model' => $model,
          'authors' => $authorsFullName,
          'tags' => $tags,
          'categoryList' => $categoryList,
+         'bookLevelsList' => $bookLevelsList, 
      ]);
   }
 

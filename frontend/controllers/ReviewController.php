@@ -216,4 +216,13 @@ class ReviewController extends Controller
         }
     }
 
+    public function actionWriteAjax()
+    {
+        if (Yii::$app->request->isAjax) {
+            $data = Yii::$app->request->get();
+
+            return Json::encode($data);
+        }
+    }
+
 }

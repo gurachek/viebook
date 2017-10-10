@@ -42,8 +42,9 @@ $this->title = "Добавить книгу на сайт";
     	]
 	]) ?>
 
-    <?= $form->field($model, 'category')->label('Категория книги')->dropDownList($categoryList); ?>
-
+    <?= $form->field($model, 'category')->label('Категория книги')->dropDownList($categoryList, ['prompt' => 'Выберите категорию...']); ?>
+    <?= $form->field($model, 'level')->label('Уровень книги')->dropDownList($bookLevelsList, ['prompt' => 'Выберите уровень...']); ?>
+    <?= $form->field($model, 'pages')->label('Количество страниц')->textInput(['type' => 'number']); ?>
 	<?= $form->field($model, 'publish_date')->label('Когда книга впервые была опубликована') ?>
 	<?= $form->field($model, 'tags')->label('Начните вводить теги к этой книге')->widget(Selectize::className(), [
         'url' => '/book/tags',

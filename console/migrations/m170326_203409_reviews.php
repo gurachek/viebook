@@ -16,6 +16,7 @@ class m170326_203409_reviews extends Migration
             'active' => $this->integer()->defaultValue(0),
             'book_id' => $this->integer()->notNull(),
             'views' =>  $this->integer()->notNull(),
+            'text' => $this->text()->notNull(),
         ]);
     }
 

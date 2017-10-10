@@ -34,8 +34,6 @@ class TraceableEventDispatcher implements TraceableEventDispatcherInterface
     private $wrappedListeners;
 
     /**
-     * Constructor.
-     *
      * @param EventDispatcherInterface $dispatcher An EventDispatcherInterface instance
      * @param Stopwatch                $stopwatch  A Stopwatch instance
      * @param LoggerInterface          $logger     A LoggerInterface instance
@@ -212,6 +210,11 @@ class TraceableEventDispatcher implements TraceableEventDispatcherInterface
         uasort($notCalled, array($this, 'sortListenersByPriority'));
 
         return $notCalled;
+    }
+
+    public function reset()
+    {
+        $this->called = array();
     }
 
     /**

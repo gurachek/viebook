@@ -19,6 +19,9 @@ class AddbookModel extends Model
 	public $publish_date;
 	public $tags;
 	public $image;
+	public $level;
+	public $pages;
+	public $active;
 
 	public function rules()
 	{
@@ -30,6 +33,8 @@ class AddbookModel extends Model
 			['tags', 'required', 'message' => 'На основе тегов мы составляем фид-ленту и разделы, введите пожалуйста'],
 			['category', 'required', 'message' => 'Это важно, нельзя оставлять это поле пустым'],
 			['image', 'required', 'message' => 'Вам нужно загрузить обложку, чтобы добавить книгу на сайт'],
+			['pages', 'required', 'message' => 'Пожалуйста, укажите количество страниц'],
+			['level', 'required', 'message' => 'Нам нужно знать уровень книги, чтобы подбор книг был точнее'],
 			[['image'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg, jpeg'],
 			[['image'], 'file', 'maxSize' => '5000000'],
 			[['image'], 'file', 'maxFiles'=> 1],
@@ -60,9 +65,13 @@ class AddbookModel extends Model
 
 				$book->name = htmlspecialchars($this->name);
 				$book->image = $image;
+				$book->pages = intval($this->pages);
+				$book->level = intval($this->level);
 				$book->author_id = $authorId;
 				$book->publish_date = $this->publish_date;
 				$book->category = $this->category;
+
+				$book->active = 0;
 
 				$book->save();
 
