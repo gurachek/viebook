@@ -68,11 +68,13 @@ class BookController extends Controller
     }
 
     $allAuthors = Author::find()->all();
-    $authorsFullName = [];
+    // $authorsFullName = [];
 
-    foreach ($allAuthors as $singleAuthor) {
-       $authorsFullName[] = $singleAuthor['name'];
-     } 
+    $authorsFullName = ArrayHelper::map($allAuthors, 'id', 'name');
+
+    // foreach ($allAuthors as $singleAuthor) {
+    //    $authorsFullName[] = $singleAuthor['name'];
+    //  } 
 
      $tags = Tag::find()->asArray()->all();
      $tags = array_column($tags, 'name');
