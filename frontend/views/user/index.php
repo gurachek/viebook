@@ -43,7 +43,7 @@ $this->registerJs($js);
 
 		<li>
 			<?= Html::a('Мои обзоры', ['user/index', 'content' => 'reviews']) ?>
-			<?= Html::a('<span title="Написать рецензию" style="float: right;" class="glyphicon glyphicon-plus"></span>', ['review/write']) ?>
+			<?= Html::a('<span title="Написать обзор" style="float: right;" class="glyphicon glyphicon-plus"></span>', ['review/write']) ?>
 		</li>
 		<li><?= Html::a('Настройки', ['user/index', 'content' => 'settings']) ?></li>
 		</ul>

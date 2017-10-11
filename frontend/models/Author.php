@@ -10,6 +10,7 @@ namespace frontend\models;
 
 use yii\db\ActiveRecord;
 use frontend\models\AuthorTrack;
+use frontend\models\Book;
 
 class Author extends ActiveRecord
 {
@@ -25,5 +26,10 @@ class Author extends ActiveRecord
 		$data = static::find()->where(['id' => $authorsId])->limit($limit)->asArray()->all();
 
 		return $data;
+    }
+
+    public function getBooks()
+    {
+        return $this->hasMany(Book::className(), ['author_id' => 'id']);
     }
 }

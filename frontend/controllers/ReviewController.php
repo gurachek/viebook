@@ -72,6 +72,9 @@ class ReviewController extends Controller
     public function actionEstimate()
     {
         if (Yii::$app->request->isAjax) {
+            
+            if (!Yii::$app->user->getId()) return false;
+
             $data = Yii::$app->request->post();
 
             $user_estimate = UserEstimates::findOne(['user_id' => $data['userId'], 'entry_id' => $data['reviewId']]);

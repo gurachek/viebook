@@ -260,7 +260,6 @@ a.write-review:hover {
   color: #E64354;
   font-size: 20px;
   margin-right: 10px;
-  cursor: pointer;
 }
 
 .like-count{
@@ -273,7 +272,6 @@ a.write-review:hover {
 .review_page .estimate .dislike {
   color: #444444;
   font-size: 20px;
-  cursor: pointer;
 }
 
 .dislike-count {
@@ -284,6 +282,14 @@ a.write-review:hover {
 
 .ty_for_estimate {
     display: none;
+    border: 1px solid #e8e8e8;
+    background: rgba(230, 67, 84, 0.9);
+    color: white;
+    padding: 10px;
+    width: 50%;
+    margin: 0 auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 .review_text {
@@ -361,22 +367,30 @@ a.write-review:hover {
 
 .daily_image {
     width: 200px;
-    float: right;
-    height: 250px;
+    float: left;
+    height: 200px;
 }
 
-@media only screen and (max-width: 1100px) {
+@media /*only screen and*/ (max-width: 1100px) {
     .daily_image {
-        float: left;
+        float: none;
+        width: 100%;
+        height: 300px;
+    }
+
+    .estimate {
+      width: 80px;
+      margin: 0 auto;
     }
 }
 
-@media only screen and (max-width: 768px) {
+@media /*only screen and*/ (max-width: 768px) {
     .daily_image {
-        /*float: none;*/
+        float: none;
         display: block;
-        width: 200px;
-        margin: 0 auto;
+        width: 100%;
+        height: 200px;
+        padding-bottom: 10px;
     }
 }
 
@@ -750,4 +764,8 @@ li.display_on_mobile_book_block {
   font-size: 17px; 
   line-height: 1.2em;
   color: #444;
+}
+
+.signup-for-estimate {
+  display: none;
 }

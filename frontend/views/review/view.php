@@ -36,6 +36,8 @@ jQuery.ajax({
 });
 
 jQuery(document).ready(function () {
+    jQuery('.estimate .like').css('cursor', 'pointer');
+    jQuery('.estimate .dislike').css('cursor', 'pointer');
     jQuery('.estimate span').click(function () {
         var id = parseInt(jQuery(this).data('id'));
 
@@ -58,17 +60,28 @@ jQuery(document).ready(function () {
             },
             success: function (data) {
                 if (!data) {
-                    jQuery('.ty_for_estimate .text').html('<span class="glyphicon glyphicon-warning-sign"></span> Вы уже оценивали эту рецензию');
+                    jQuery('.ty_for_estimate').css('background', 'rgba(0, 0, 0, 0.9)');
+                    jQuery('.ty_for_estimate .text').html('<span class="glyphicon glyphicon-remove-sign"> </span>&nbsp;&nbsp;Вы уже оценивали эту рецензию');
+                
+                    jQuery('.estimate').css('display', 'none');
                 } else {
 
                     var number = parseInt(jQuery(estimate_number).html());
                     number += 1;
                     jQuery(estimate_number).html(number + ' ');
+
+                    jQuery('.estimate').css('display', 'none');
                 }
 
                 jQuery('.ty_for_estimate').css('display', 'block');
                 jQuery('.estimate').removeClass('estimate_opacity');
                 jQuery('.estimate span').removeClass('estimate_rotate');
+
+                // jQuery('.ty_for_estimate').fadeOut(3000);
+                jQuery('.ty_for_estimate').animate({'opacity':'0.4'}, 3000, function () {
+                    jQuery('.ty_for_estimate').css('display', 'none');
+                    jQuery('.estimate').css('display', 'block');
+                });
             },
         });
     });
@@ -76,7 +89,7 @@ jQuery(document).ready(function () {
 
 JS;
 
-$this->registerJs($customJs);
+if (Yii::$app->user->getId()) $this->registerJs($customJs);
 
 ?>
 
@@ -120,19 +133,17 @@ $this->registerJs($customJs);
             <?= nl2br($review->text) ?>
         </div>
 
-        <div class="alert alert-success alert-dismissible fade in text-center ty_for_estimate" role="alert">
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">×</span>
-            </button>
+        <div class="ty_for_estimate text-center" role="alert">
             <span class="text">
-                <span class="glyphicon glyphicon-ok"></span>
+                <span class="glyphicon glyphicon-ok-sign"></span>
+                &nbsp;&nbsp;
                 Спасибо за оценку
             </span>
         </div>
 
-        <?php if ($id = Yii::$app->user->getId()): ?>
+        <?php //if ($id = Yii::$app->user->getId()): ?>
 
-            <?php if ($review->user_id != $id): ?>
+            <?php if (@$review->user_id != @$id): ?>
             
                 <?php
                     $positive = !empty($review->estimates) ? @$review->estimates[0]->numberOfPositive() : 0;
@@ -165,17 +176,16 @@ $this->registerJs($customJs);
                 </p>
             <?php endif; ?>
             
-        <?php else: ?>
+        <?php ///else: ?>
 
             <br>
-            <div class="text-center">
+            <div class="signup-for-estimate text-center">
                 <?= Html::a('Войдите, чтобы оценить рецензию', ['site/login', 'a' => 'review_view', 'id' => $review->id], ['class' => 'btn btn-success']); ?>
             </div>
 
-        <?php endif; ?>
+        <?php //endif; ?>
 
-        <?php if (@$review->user_id != $id) { ?>
-        <br>
+        <?php if (@$review->user_id != @$id) { ?>
         <p>
             Думаете, что можете лучше?
             <?= Html::a("Напишите", ['review/write', 'bookid' => $review->book['id']], ['class' => '']); ?>
