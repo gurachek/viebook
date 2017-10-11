@@ -47,13 +47,11 @@ $this->registerJs($js);
 <br>
 <?php $form =  ActiveForm::begin(); ?>
     <?= $form->field($model, 'title')->textInput(['value' => $review->title])->label('Заголовок'); ?>
-    
-    <?php //$form->field($model, 'text')->textarea(['rows' => 20, 'value' => $review->text])->label('Текст'); ?>
 
     <?= $form->field($model, 'text')->widget(CKEditor::className(), [
         'options' => ['value' => $review->text],
         'preset' => 'basic',
-    ]) ?>
+    ])->label(false) ?>
 
     <?= $form->field($model, 'reviewid')->hiddenInput(['value' => $review->id])->label(false); ?>
 

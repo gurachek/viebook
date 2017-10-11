@@ -14,6 +14,7 @@ use frontend\models\Author;
 use frontend\models\Review;
 use frontend\models\BookTags;
 use frontend\models\BookTrack;
+use frontend\models\BookLevel;
 
 class Book extends ActiveRecord
 {
@@ -59,6 +60,11 @@ class Book extends ActiveRecord
         $data = static::find()->where(['id' => $booksId])->limit($limit)->asArray()->all();
 
         return $data;
+    }
+
+    public function getLevel()
+    {
+        return $this->hasOne(BookLevel::className(), ['level' => 'id']);
     }
 
 }

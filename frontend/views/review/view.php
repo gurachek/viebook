@@ -77,9 +77,10 @@ jQuery(document).ready(function () {
                 jQuery('.estimate').removeClass('estimate_opacity');
                 jQuery('.estimate span').removeClass('estimate_rotate');
 
-                // jQuery('.ty_for_estimate').fadeOut(3000);
-                jQuery('.ty_for_estimate').animate({'opacity':'0.4'}, 3000, function () {
-                    jQuery('.ty_for_estimate').css('display', 'none');
+                jQuery('.ty_for_estimate').css('opacity', '1');
+
+                jQuery('.ty_for_estimate').animate({'opacity':'0.1'}, 1800, function () {
+                    jQuery('.ty_for_estimate').slideUp(450);
                     jQuery('.estimate').css('display', 'block');
                 });
             },
@@ -111,7 +112,10 @@ if (Yii::$app->user->getId()) $this->registerJs($customJs);
             </li>
             <li>
                 <span class="glyphicon glyphicon-calendar"  title="Дата написания"></span>
-                <?= date("d M Y", $review->created_at) ?>
+                <?php
+                    Yii::$app->formatter->locale = 'ru-RU';
+                    echo Yii::$app->formatter->asDate($review->created_at, 'long'); 
+                ?>
             </li>
             <li>
                 <span class="glyphicon glyphicon-eye-open"  title="Просмотры"></span>
@@ -128,7 +132,7 @@ if (Yii::$app->user->getId()) $this->registerJs($customJs);
             <?php endif; ?>
         </h3>
         <br>
-        
+
         <div style="font-size: 17px; line-height: 1.6em;">
             <?= nl2br($review->text) ?>
         </div>
@@ -140,8 +144,6 @@ if (Yii::$app->user->getId()) $this->registerJs($customJs);
                 Спасибо за оценку
             </span>
         </div>
-
-        <?php //if ($id = Yii::$app->user->getId()): ?>
 
             <?php if (@$review->user_id != @$id): ?>
             
@@ -175,15 +177,11 @@ if (Yii::$app->user->getId()) $this->registerJs($customJs);
                 </span>
                 </p>
             <?php endif; ?>
-            
-        <?php ///else: ?>
 
             <br>
             <div class="signup-for-estimate text-center">
                 <?= Html::a('Войдите, чтобы оценить рецензию', ['site/login', 'a' => 'review_view', 'id' => $review->id], ['class' => 'btn btn-success']); ?>
             </div>
-
-        <?php //endif; ?>
 
         <?php if (@$review->user_id != @Yii::$app->user->getId()) { ?>
         <p>
@@ -197,12 +195,17 @@ if (Yii::$app->user->getId()) $this->registerJs($customJs);
     <div class="col-md-4 review_display_book_block">
         <div class="book_page">
             <div class="name">
-                <!-- <h3 style="margin: 0; text-align: center;"><?= $review->book['name'] ?></h3> -->
+
+                <div class="image" style="text-align: center;">
+                    <div style="background: url(/images/books/<?= $review->book['image'] ?>) no-repeat; background-size: contain; width: 100%; height: 315px; background-position: center center;"></div>
+                    <?= Html::a("Другие рецензии к этой книге", ['book/view', 'id' => $review->book['id']], ['class' => 'btn btn-lnk']); ?>
+                </div>
+            
             </div>
-            <div class="image" style="text-align: center;">
-                <div style="background: url(/images/books/<?= $review->book['image'] ?>) no-repeat; background-size: contain; width: 100%; height: 315px; background-position: center center; margin-top: 10px;"></div>
-                <?= Html::a("Другие рецензии к этой книге", ['book/view', 'id' => $review->book['id']], ['class' => 'btn btn-lnk']); ?>
-            </div>
+                <div class="text-center" style="margin-top: 10px;" title="<?= $level->description ?>">
+                    <b><?= Html::a($level->name, ['book/level', 'id' => $level->id, 'catid' => $review->book['category']], ['class' => 'text-center','style' => 'color: #444 !important; text-decoration: underline !important;']) ?></b>        
+                </div>
+        
         </div>
     </div>
 </div>

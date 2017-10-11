@@ -13,6 +13,7 @@ use frontend\models\Book;
 use frontend\models\EditReviewModel;
 use common\models\User;
 use frontend\models\ReviewTrack;
+use frontend\models\BookLevel;
 
 class ReviewController extends Controller
 {
@@ -50,8 +51,11 @@ class ReviewController extends Controller
 
         if ($review == null) return $this->render('no-review');
 
+        $level = BookLevel::getById($review->book->level);
+
         return $this->render('view', [
             'review' => $review,
+            'level' => $level,
         ]);
     }
 

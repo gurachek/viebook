@@ -221,6 +221,21 @@ a.write-review:hover {
   color: #444 !important;
 }
 
+.book_page .author {
+    color: #444 !important;
+    background-color: rgba(246, 246, 246, .5);
+    padding: 7px;
+    text-align: center;
+}
+
+.book_page .author a:link {
+  color: #444 !important;
+}
+
+.book_page .author a:visited {
+  color: #444 !important;
+}
+
 .books_searched .book .read_reviews {
     margin-top: 10px;
     text-align: center;
@@ -379,7 +394,7 @@ a.write-review:hover {
     }
 
     .estimate {
-      width: 80px;
+      max-width: 120px;
       margin: 0 auto;
     }
 }
