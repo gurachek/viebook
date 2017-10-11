@@ -7,6 +7,14 @@ $this->title = "Cписок авторов, доступных на Viebook";
 <h3 class="text-center">Список всех авторов, которые есть на сайте на данный момент</h3>
 <br>
 
+<?php if (!$authors): ?>
+
+	<p class="text-center">
+		Я все удалил и буду добавлять авторов тех книг, которые сейчас необходимы для развития сайта 
+	</p>
+
+<?php else: ?>
+
 <div class="row">
 
 	<?php foreach($authors as $author): ?>
@@ -21,3 +29,5 @@ $this->title = "Cписок авторов, доступных на Viebook";
 	<?php endforeach; ?>
 
 </div>
+
+<?php endif; ?>
