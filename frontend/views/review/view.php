@@ -17,7 +17,7 @@ jQuery.ajax({
     url: "$reviewViewUrl",
     method: "GET",
     data: {
-        reviewId: {$review->id},
+        reviewId: {$review->id},    
     },
     success: function (data) {
 
@@ -185,7 +185,7 @@ if (Yii::$app->user->getId()) $this->registerJs($customJs);
 
         <?php //endif; ?>
 
-        <?php if (@$review->user_id != @$id) { ?>
+        <?php if (@$review->user_id != @Yii::$app->user->getId()) { ?>
         <p>
             Думаете, что можете лучше?
             <?= Html::a("Напишите", ['review/write', 'bookid' => $review->book['id']], ['class' => '']); ?>

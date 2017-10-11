@@ -16,8 +16,12 @@ $this->registerJs($js);
 <div class="row">
 	<div class="col-md-4">
 		<div class="main-block">
-			<div title='<?= $author->name ?>' style='background: url(/images/authors/<?= $author->image ?>) no-repeat center; background-size: contain; width: 100%; height: 350px; margin: 0 auto; border: 1px solid red;'>
+			<div title='<?= $author->name ?>' style='background: url(/images/authors/<?= $author->image ?>) no-repeat center; background-size: contain; width: 100%; height: 350px; margin: 0 auto; margin-top: 10px; margin-bottom: 10px;'>
 				</div>
+		</div>
+		<div class="main-block text-center" style="padding: 10px;">
+			<span class="glyphicon glyphicon-calendar"></span> 
+			<?= $author->birthday ?>
 		</div>
 	</div>
 	<div class="col-md-8">

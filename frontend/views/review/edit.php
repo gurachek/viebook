@@ -1,9 +1,20 @@
 <?php
-
+use dosamigos\ckeditor\CKEditor;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 $this->title = 'Редактирование рецензии на книгу "'. $book->name .'"';
+
+$js = <<<JS
+
+CKEDITOR.config.extraPlugins = 'autogrow';
+CKEDITOR.config.autoGrow_minHeight = 200;
+CKEDITOR.config.autoGrow_maxHeight = 600;
+CKEDITOR.config.autoGrow_bottomSpace = 50;
+
+JS;
+
+$this->registerJs($js);
 
 ?>
 
@@ -36,7 +47,14 @@ $this->title = 'Редактирование рецензии на книгу "'
 <br>
 <?php $form =  ActiveForm::begin(); ?>
     <?= $form->field($model, 'title')->textInput(['value' => $review->title])->label('Заголовок'); ?>
-    <?= $form->field($model, 'text')->textarea(['rows' => 20, 'value' => $review->text])->label('Текст'); ?>
+    
+    <?php //$form->field($model, 'text')->textarea(['rows' => 20, 'value' => $review->text])->label('Текст'); ?>
+
+    <?= $form->field($model, 'text')->widget(CKEditor::className(), [
+        'options' => ['value' => $review->text],
+        'preset' => 'basic',
+    ]) ?>
+
     <?= $form->field($model, 'reviewid')->hiddenInput(['value' => $review->id])->label(false); ?>
 
     <?= Html::submitButton('Редактировать', ['class' => 'btn btn-danger']); ?>
