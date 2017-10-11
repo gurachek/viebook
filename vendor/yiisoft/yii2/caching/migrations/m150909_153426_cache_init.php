@@ -10,13 +10,14 @@ use yii\caching\DbCache;
 use yii\db\Migration;
 
 /**
- * Initializes Cache tables.
+ * Initializes Cache tables
  *
  * @author Misbahul D Munir <misbahuldmunir@gmail.com>
  * @since 2.0.7
  */
 class m150909_153426_cache_init extends Migration
 {
+
     /**
      * @throws yii\base\InvalidConfigException
      * @return DbCache
@@ -27,7 +28,6 @@ class m150909_153426_cache_init extends Migration
         if (!$cache instanceof DbCache) {
             throw new InvalidConfigException('You should configure "cache" component to use database before executing this migration.');
         }
-
         return $cache;
     }
 

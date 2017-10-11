@@ -7,9 +7,9 @@
 
 namespace yii\mail;
 
-use Yii;
-use yii\base\BaseObject;
 use yii\base\ErrorHandler;
+use yii\base\Object;
+use Yii;
 
 /**
  * BaseMessage serves as a base class that implements the [[send()]] method required by [[MessageInterface]].
@@ -22,7 +22,7 @@ use yii\base\ErrorHandler;
  * @author Paul Klimov <klimov.paul@gmail.com>
  * @since 2.0
  */
-abstract class BaseMessage extends BaseObject implements MessageInterface
+abstract class BaseMessage extends Object implements MessageInterface
 {
     /**
      * @var MailerInterface the mailer instance that created this message.
@@ -45,7 +45,6 @@ abstract class BaseMessage extends BaseObject implements MessageInterface
         } elseif ($mailer === null) {
             $mailer = $this->mailer;
         }
-
         return $mailer->send($this);
     }
 

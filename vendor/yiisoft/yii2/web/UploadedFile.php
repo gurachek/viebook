@@ -7,7 +7,7 @@
 
 namespace yii\web;
 
-use yii\base\BaseObject;
+use yii\base\Object;
 use yii\helpers\Html;
 
 /**
@@ -28,7 +28,7 @@ use yii\helpers\Html;
  * @author Qiang Xue <qiang.xue@gmail.com>
  * @since 2.0
  */
-class UploadedFile extends BaseObject
+class UploadedFile extends Object
 {
     /**
      * @var string the original name of the file being uploaded
@@ -134,7 +134,6 @@ class UploadedFile extends BaseObject
                 $results[] = new static($file);
             }
         }
-
         return $results;
     }
 
@@ -166,7 +165,6 @@ class UploadedFile extends BaseObject
                 return copy($this->tempName, $file);
             }
         }
-
         return false;
     }
 
@@ -211,7 +209,6 @@ class UploadedFile extends BaseObject
                 }
             }
         }
-
         return self::$_files;
     }
 
@@ -230,7 +227,7 @@ class UploadedFile extends BaseObject
             foreach ($names as $i => $name) {
                 self::loadFilesRecursive($key . '[' . $i . ']', $name, $tempNames[$i], $types[$i], $sizes[$i], $errors[$i]);
             }
-        } elseif ((int) $errors !== UPLOAD_ERR_NO_FILE) {
+        } elseif ((int)$errors !== UPLOAD_ERR_NO_FILE) {
             self::$_files[$key] = [
                 'name' => $names,
                 'tempName' => $tempNames,

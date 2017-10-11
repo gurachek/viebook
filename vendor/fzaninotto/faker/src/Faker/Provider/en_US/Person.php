@@ -107,7 +107,7 @@ class Person extends \Faker\Provider\Person
         'Zboncak', 'Zemlak', 'Ziemann', 'Zieme', 'Zulauf'
     );
 
-    protected static $suffix = array('Jr.', 'Sr.', 'I', 'II', 'III', 'IV', 'V', 'MD', 'DDS', 'PhD', 'DVM');
+    private static $suffix = array('Jr.', 'Sr.', 'I', 'II', 'III', 'IV', 'V', 'MD', 'DDS', 'PhD', 'DVM');
 
     /**
      * @example 'PhD'

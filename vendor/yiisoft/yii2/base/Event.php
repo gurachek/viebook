@@ -24,7 +24,7 @@ namespace yii\base;
  * @author Qiang Xue <qiang.xue@gmail.com>
  * @since 2.0
  */
-class Event extends BaseObject
+class Event extends Object
 {
     /**
      * @var string the event name. This property is set by [[Component::trigger()]] and [[trigger()]].
@@ -128,7 +128,6 @@ class Event extends BaseObject
         if ($removed) {
             self::$_events[$name][$class] = array_values(self::$_events[$name][$class]);
         }
-
         return $removed;
     }
 
@@ -191,7 +190,7 @@ class Event extends BaseObject
             return;
         }
         if ($event === null) {
-            $event = new static();
+            $event = new static;
         }
         $event->handled = false;
         $event->name = $name;
@@ -215,7 +214,7 @@ class Event extends BaseObject
             if (empty(self::$_events[$name][$class])) {
                 continue;
             }
-
+            
             foreach (self::$_events[$name][$class] as $handler) {
                 $event->data = $handler[1];
                 call_user_func($handler[0], $event);

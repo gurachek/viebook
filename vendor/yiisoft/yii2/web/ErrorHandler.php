@@ -8,8 +8,8 @@
 namespace yii\web;
 
 use Yii;
-use yii\base\ErrorException;
 use yii\base\Exception;
+use yii\base\ErrorException;
 use yii\base\UserException;
 use yii\helpers\VarDumper;
 
@@ -191,14 +191,9 @@ class ErrorHandler extends \yii\base\ErrorHandler
         $url = null;
 
         $shouldGenerateLink = true;
-        if ($method !== null && substr_compare($method, '{closure}', -9) !== 0) {
-            $reflection = new \ReflectionClass($class);
-            if ($reflection->hasMethod($method)) {
-                $reflectionMethod = $reflection->getMethod($method);
-                $shouldGenerateLink = $reflectionMethod->isPublic() || $reflectionMethod->isProtected();
-            } else {
-                $shouldGenerateLink = false;
-            }
+        if ($method !== null  && substr_compare($method, '{closure}', -9) !== 0) {
+            $reflection = new \ReflectionMethod($class, $method);
+            $shouldGenerateLink = $reflection->isPublic() || $reflection->isProtected();
         }
 
         if ($shouldGenerateLink) {
@@ -247,12 +242,12 @@ class ErrorHandler extends \yii\base\ErrorHandler
             ob_start();
             ob_implicit_flush(false);
             extract($_params_, EXTR_OVERWRITE);
-            require Yii::getAlias($_file_);
+            require(Yii::getAlias($_file_));
 
             return ob_get_clean();
+        } else {
+            return Yii::$app->getView()->renderFile($_file_, $_params_, $this);
         }
-
-        return Yii::$app->getView()->renderFile($_file_, $_params_, $this);
     }
 
     /**
@@ -265,9 +260,9 @@ class ErrorHandler extends \yii\base\ErrorHandler
     {
         if (($previous = $exception->getPrevious()) !== null) {
             return $this->renderFile($this->previousExceptionView, ['exception' => $previous]);
+        } else {
+            return '';
         }
-
-        return '';
     }
 
     /**
@@ -412,7 +407,7 @@ class ErrorHandler extends \yii\base\ErrorHandler
     }
 
     /**
-     * Converts arguments array to its string representation.
+     * Converts arguments array to its string representation
      *
      * @param array $args arguments array to be converted
      * @return string string representation of the arguments array
@@ -424,8 +419,8 @@ class ErrorHandler extends \yii\base\ErrorHandler
 
         foreach ($args as $key => $value) {
             $count++;
-            if ($count >= 5) {
-                if ($count > 5) {
+            if ($count>=5) {
+                if ($count>5) {
                     unset($args[$key]);
                 } else {
                     $args[$key] = '...';
@@ -466,7 +461,7 @@ class ErrorHandler extends \yii\base\ErrorHandler
     }
 
     /**
-     * Returns human-readable exception name.
+     * Returns human-readable exception name
      * @param \Exception $exception
      * @return string human-readable exception name or null if it cannot be determined
      */
@@ -475,7 +470,6 @@ class ErrorHandler extends \yii\base\ErrorHandler
         if ($exception instanceof \yii\base\Exception || $exception instanceof \yii\base\InvalidCallException || $exception instanceof \yii\base\InvalidParamException || $exception instanceof \yii\base\UnknownMethodException) {
             return $exception->getName();
         }
-
         return null;
     }
 
@@ -485,6 +479,6 @@ class ErrorHandler extends \yii\base\ErrorHandler
      */
     protected function shouldRenderSimpleHtml()
     {
-        return YII_ENV_TEST || Yii::$app->request->getIsAjax();
+        return YII_ENV_TEST || isset($_SERVER['HTTP_X_REQUESTED_WITH']) && $_SERVER['HTTP_X_REQUESTED_WITH'] === 'XMLHttpRequest';
     }
 }

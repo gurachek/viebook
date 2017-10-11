@@ -113,7 +113,6 @@ abstract class BaseListView extends Widget
      */
     public function init()
     {
-        parent::init();
         if ($this->dataProvider === null) {
             throw new InvalidConfigException('The "dataProvider" property must be set.');
         }
@@ -131,7 +130,7 @@ abstract class BaseListView extends Widget
     public function run()
     {
         if ($this->showOnEmpty || $this->dataProvider->getCount() > 0) {
-            $content = preg_replace_callback('/{\\w+}/', function ($matches) {
+            $content = preg_replace_callback("/{\\w+}/", function ($matches) {
                 $content = $this->renderSection($matches[0]);
 
                 return $content === false ? $matches[0] : $content;

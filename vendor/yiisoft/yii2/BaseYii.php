@@ -10,8 +10,8 @@ namespace yii;
 use yii\base\InvalidConfigException;
 use yii\base\InvalidParamException;
 use yii\base\UnknownClassException;
-use yii\di\Container;
 use yii\log\Logger;
+use yii\di\Container;
 
 /**
  * Gets the application start timestamp.
@@ -31,15 +31,15 @@ defined('YII_DEBUG') or define('YII_DEBUG', false);
  */
 defined('YII_ENV') or define('YII_ENV', 'prod');
 /**
- * Whether the the application is running in production environment.
+ * Whether the the application is running in production environment
  */
 defined('YII_ENV_PROD') or define('YII_ENV_PROD', YII_ENV === 'prod');
 /**
- * Whether the the application is running in development environment.
+ * Whether the the application is running in development environment
  */
 defined('YII_ENV_DEV') or define('YII_ENV_DEV', YII_ENV === 'dev');
 /**
- * Whether the the application is running in testing environment.
+ * Whether the the application is running in testing environment
  */
 defined('YII_ENV_TEST') or define('YII_ENV_TEST', YII_ENV === 'test');
 
@@ -93,7 +93,7 @@ class BaseYii
      */
     public static function getVersion()
     {
-        return '2.0.13-dev';
+        return '2.0.12';
     }
 
     /**
@@ -253,7 +253,6 @@ class BaseYii
 
     /**
      * Class autoload loader.
-     *
      * This method is invoked automatically when PHP sees an unknown class.
      * The method will attempt to include the class file according to the following procedure:
      *
@@ -290,7 +289,7 @@ class BaseYii
             return;
         }
 
-        include $classFile;
+        include($classFile);
 
         if (YII_DEBUG && !class_exists($className, false) && !interface_exists($className, false) && !trait_exists($className, false)) {
             throw new UnknownClassException("Unable to find '$className' in file: $classFile. Namespace missing?");
@@ -382,8 +381,7 @@ class BaseYii
     /**
      * Logs a trace message.
      * Trace messages are logged mainly for development purpose to see
-     * the execution work flow of some code. This method will only log
-     * a message when the application is in debug mode.
+     * the execution work flow of some code.
      * @param string|array $message the message to be logged. This can be a simple string or a more
      * complex data structure, such as array.
      * @param string $category the category of the message.
@@ -436,7 +434,6 @@ class BaseYii
 
     /**
      * Marks the beginning of a code block for profiling.
-     *
      * This has to be matched with a call to [[endProfile]] with the same category name.
      * The begin- and end- calls must also be properly nested. For example,
      *
@@ -477,7 +474,7 @@ class BaseYii
     {
         return \Yii::t('yii', 'Powered by {yii}', [
             'yii' => '<a href="http://www.yiiframework.com/" rel="external">' . \Yii::t('yii',
-                    'Yii Framework') . '</a>',
+                    'Yii Framework') . '</a>'
         ]);
     }
 

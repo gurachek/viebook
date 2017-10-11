@@ -266,7 +266,6 @@ class Module extends ServiceLocator
         if ($this->_viewPath === null) {
             $this->_viewPath = $this->getBasePath() . DIRECTORY_SEPARATOR . 'views';
         }
-
         return $this->_viewPath;
     }
 
@@ -318,7 +317,6 @@ class Module extends ServiceLocator
                 $this->_version = call_user_func($this->_version, $this);
             }
         }
-
         return $this->_version;
     }
 
@@ -352,7 +350,6 @@ class Module extends ServiceLocator
         if ($this->module === null) {
             return '1.0';
         }
-
         return $this->module->getVersion();
     }
 
@@ -396,7 +393,6 @@ class Module extends ServiceLocator
 
             return $module === null ? false : $module->hasModule(substr($id, $pos + 1));
         }
-
         return isset($this->_modules[$id]);
     }
 
@@ -419,7 +415,7 @@ class Module extends ServiceLocator
         }
 
         if (isset($this->_modules[$id])) {
-            if ($this->_modules[$id] instanceof self) {
+            if ($this->_modules[$id] instanceof Module) {
                 return $this->_modules[$id];
             } elseif ($load) {
                 Yii::trace("Loading module: $id", __METHOD__);
@@ -465,14 +461,13 @@ class Module extends ServiceLocator
         if ($loadedOnly) {
             $modules = [];
             foreach ($this->_modules as $module) {
-                if ($module instanceof self) {
+                if ($module instanceof Module) {
                     $modules[] = $module;
                 }
             }
 
             return $modules;
         }
-
         return $this->_modules;
     }
 
@@ -572,7 +567,7 @@ class Module extends ServiceLocator
         }
 
         if (strpos($route, '/') !== false) {
-            list($id, $route) = explode('/', $route, 2);
+            list ($id, $route) = explode('/', $route, 2);
         } else {
             $id = $route;
             $route = '';
@@ -634,7 +629,7 @@ class Module extends ServiceLocator
         }
 
         $className = str_replace(' ', '', ucwords(str_replace('-', ' ', $className))) . 'Controller';
-        $className = ltrim($this->controllerNamespace . '\\' . str_replace('/', '\\', $prefix) . $className, '\\');
+        $className = ltrim($this->controllerNamespace . '\\' . str_replace('/', '\\', $prefix)  . $className, '\\');
         if (strpos($className, '-') !== false || !class_exists($className)) {
             return null;
         }
@@ -643,9 +638,8 @@ class Module extends ServiceLocator
             $controller = Yii::createObject($className, [$id, $this]);
             return get_class($controller) === $className ? $controller : null;
         } elseif (YII_DEBUG) {
-            throw new InvalidConfigException('Controller class must extend from \\yii\\base\\Controller.');
+            throw new InvalidConfigException("Controller class must extend from \\yii\\base\\Controller.");
         }
-
         return null;
     }
 
@@ -710,35 +704,5 @@ class Module extends ServiceLocator
         $event->result = $result;
         $this->trigger(self::EVENT_AFTER_ACTION, $event);
         return $event->result;
-    }
-
-    /**
-     * {@inheritdoc}
-     *
-     * Since version 2.0.13, if a component isn't defined in the module, it will be looked up in the parent module.
-     * The parent module may be the application.
-     */
-    public function get($id, $throwException = true)
-    {
-        if (!isset($this->module)) {
-            return parent::get($id, $throwException);
-        }
-        
-        $component = parent::get($id, false);
-        if ($component === null) {
-            $component = $this->module->get($id, $throwException);
-        }
-        return $component;
-    }
-
-    /**
-     * {@inheritdoc}
-     *
-     * Since version 2.0.13, if a component isn't defined in the module, it will be looked up in the parent module.
-     * The parent module may be the application.
-     */
-    public function has($id, $checkInstance = false)
-    {
-        return parent::has($id, $checkInstance) || (isset($this->module) && $this->module->has($id, $checkInstance));
     }
 }

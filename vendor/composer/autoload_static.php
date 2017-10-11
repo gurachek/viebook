@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInita8a064fb4a9f007197ffe78b960a92d7
+class ComposerStaticInitef91cc70b99dbfa2b854ae05c32616de
 {
     public static $files = array (
         '2cffec82183ee1cea088009cef9a6fc3' => __DIR__ . '/..' . '/ezyang/htmlpurifier/library/HTMLPurifier.composer.php',
@@ -67,7 +67,6 @@ class ComposerStaticInita8a064fb4a9f007197ffe78b960a92d7
         ),
         'F' => 
         array (
-            'Fxp\\Composer\\AssetPlugin\\' => 25,
             'Faker\\' => 6,
         ),
         'D' => 
@@ -188,10 +187,6 @@ class ComposerStaticInita8a064fb4a9f007197ffe78b960a92d7
         'GuzzleHttp\\Psr7\\' => 
         array (
             0 => __DIR__ . '/..' . '/guzzlehttp/psr7/src',
-        ),
-        'Fxp\\Composer\\AssetPlugin\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/fxp/composer-asset-plugin',
         ),
         'Faker\\' => 
         array (
@@ -792,10 +787,10 @@ class ComposerStaticInita8a064fb4a9f007197ffe78b960a92d7
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInita8a064fb4a9f007197ffe78b960a92d7::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInita8a064fb4a9f007197ffe78b960a92d7::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInita8a064fb4a9f007197ffe78b960a92d7::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInita8a064fb4a9f007197ffe78b960a92d7::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInitef91cc70b99dbfa2b854ae05c32616de::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInitef91cc70b99dbfa2b854ae05c32616de::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInitef91cc70b99dbfa2b854ae05c32616de::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInitef91cc70b99dbfa2b854ae05c32616de::$classMap;
 
         }, null, ClassLoader::class);
     }

@@ -127,14 +127,13 @@ class Person extends \Faker\Provider\Person
         'Pule', 'Hlophe', 'Miya', 'Moagi',
     );
 
-    protected static $licenceCodes = array('A', 'A1', 'B', 'C', 'C1', 'C2', 'EB', 'EC', 'EC1', 'I', 'L', 'L1');
-
     /**
      * @link https://en.wikipedia.org/wiki/National_identification_number#South_Africa
      *
-     * @param \DateTime $birthdate
-     * @param bool      $citizen
-     * @param string    $gender
+     * @param int    $minAge
+     * @param int    $maxAge
+     * @param bool   $citizen
+     * @param string $gender
      *
      * @return string
      */
@@ -161,15 +160,5 @@ class Person extends \Faker\Provider\Person
         $partialIdNumber = $birthDateString . $genderDigit . $sequenceDigits . $citizenDigit . $raceDigit;
 
         return $partialIdNumber . Luhn::computeCheckDigit($partialIdNumber);
-    }
-
-    /**
-     * @see https://en.wikipedia.org/wiki/Driving_licence_in_South_Africa
-     *
-     * @return string
-     */
-    public function licenceCode()
-    {
-        return static::randomElement(static::$licenceCodes);
     }
 }

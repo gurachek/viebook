@@ -221,7 +221,7 @@
                  * Clean up error status when the form is reset.
                  * Note that $form.on('reset', ...) does work because the "reset" event does not bubble on IE.
                  */
-                $form.on('reset.yiiActiveForm', methods.resetForm);
+                $form.bind('reset.yiiActiveForm', methods.resetForm);
 
                 if (settings.validateOnSubmit) {
                     $form.on('mouseup.yiiActiveForm keyup.yiiActiveForm', ':submit', function () {
@@ -260,7 +260,6 @@
                 attributes.splice(index, 1);
                 unwatchAttribute($form, attribute);
             }
-
             return attribute;
         },
 
@@ -287,7 +286,7 @@
 
         destroy: function () {
             return this.each(function () {
-                $(this).off('.yiiActiveForm');
+                $(this).unbind('.yiiActiveForm');
                 $(this).removeData('yiiActiveForm');
             });
         },
@@ -307,9 +306,9 @@
                 needAjaxValidation = false,
                 messages = {},
                 deferreds = deferredArray(),
-                submitting = data.submitting;
+                submitting = data.submitting && !forceValidate;
 
-            if (submitting) {
+            if (data.submitting) {
                 var event = $.Event(events.beforeValidate);
                 $form.trigger(event, [messages, deferreds]);
 
@@ -392,7 +391,7 @@
                     });
                 } else if (data.submitting) {
                     // delay callback so that the form can be submitted without problem
-                    window.setTimeout(function () {
+                    setTimeout(function () {
                         updateInputs($form, messages, submitting);
                     }, 200);
                 } else {
@@ -436,7 +435,7 @@
             // Because we bind directly to a form reset event instead of a reset button (that may not exist),
             // when this function is executed form input values have not been reset yet.
             // Therefore we do the actual reset work through setTimeout.
-            window.setTimeout(function () {
+            setTimeout(function () {
                 $.each(data.attributes, function () {
                     // Without setTimeout() we would get the input values that are not reset yet.
                     this.value = getValue($form, this);
@@ -536,7 +535,7 @@
         if (data.settings.timer !== undefined) {
             clearTimeout(data.settings.timer);
         }
-        data.settings.timer = window.setTimeout(function () {
+        data.settings.timer = setTimeout(function () {
             if (data.submitting || $form.is(':hidden')) {
                 return;
             }
@@ -575,7 +574,6 @@
         for (var i = 0; i < buttonOptions.length; i++) {
             attributes[buttonOptions[i]] = $form.attr(buttonOptions[i]);
         }
-
         return attributes;
     };
 
@@ -704,6 +702,7 @@
         if (!$.isArray(messages[attribute.id])) {
             messages[attribute.id] = [];
         }
+        $form.trigger(events.afterValidateAttribute, [attribute, messages[attribute.id]]);
 
         attribute.status = 1;
         if ($input.length) {
@@ -726,9 +725,6 @@
             }
             attribute.value = getValue($form, attribute);
         }
-
-        $form.trigger(events.afterValidateAttribute, [attribute, messages[attribute.id]]);
-
         return hasError;
     };
 
@@ -766,7 +762,6 @@
             if (!$realInput.length) {
                 $realInput = $form.find('input[type=hidden][name="' + $input.attr('name') + '"]');
             }
-
             return $realInput.val();
         } else {
             return $input.val();

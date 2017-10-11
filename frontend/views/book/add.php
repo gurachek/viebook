@@ -22,13 +22,12 @@ $this->title = "Добавить книгу на сайт";
 	</div>
 <?php endif; ?>
 
-<?php print_r($authors); ?>
 
 <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
 	<?= $form->field($model, 'name')->label('Введите название книги') ?>
 	<?= $form->field($model, 'author')->label('Выберите автора из списка')->widget(AutoComplete::classname(), [
     	'clientOptions' => [
-        	'source' => $authors,
+            'source' => Yii::$app->getUrlManager()->createAbsoluteUrl(['book/ajax']),
             'minLength' => '3',
             'autoFill'=> true,
             'response' => new JsExpression('function(event, ui) {

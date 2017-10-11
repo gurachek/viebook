@@ -77,7 +77,7 @@ AppAsset::register($this);
     $leftMenu[] = ['label' => 'Пользователи', 'url' => ['/user/list']];
 
     if (Yii::$app->user->can('godmode'))
-        $leftMenu[] = ['label' => 'Админ', 'url' => ['/god/index']];
+        $leftMenu[] = ['label' => '!', 'url' => ['/god/index']];
 
      echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-left'],
@@ -91,7 +91,7 @@ AppAsset::register($this);
     } else {
     
         $menuItems[] = '<li>'
-        .'<a href="'. Yii::$app->getUrlManager()->createAbsoluteUrl(['/review/write']) .'" class="btn btn-default" style="padding: 5px; margin-top: 10px;">'
+        .'<a href="'. Yii::$app->getUrlManager()->createAbsoluteUrl(['/review/write']) .'" class="btn write-review" style="padding: 5px; margin-top: 10px;">'
         .'&nbsp;'
         .'<span class="glyphicon glyphicon-pencil"></span> '
         .'Написать'

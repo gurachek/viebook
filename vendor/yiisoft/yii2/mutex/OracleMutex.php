@@ -83,14 +83,12 @@ class OracleMutex extends DbMutex
     {
         $lockStatus = null;
 
-        // clean vars before using
+        /** clean vars before using */
         $releaseOnCommit = $this->releaseOnCommit ? 'TRUE' : 'FALSE';
-        $timeout = abs((int) $timeout);
+        $timeout = abs((int)$timeout);
 
-        // inside pl/sql scopes pdo binding not working correctly :(
-        $this->db->useMaster(function ($db) use ($name, $timeout, $releaseOnCommit, &$lockStatus) {
-            /** @var \yii\db\Connection $db */
-            $db->createCommand(
+        /** inside pl/sql scopes pdo binding not working correctly :(  */
+        $this->db->createCommand(
                 'DECLARE
     handle VARCHAR2(128);
 BEGIN
@@ -101,9 +99,8 @@ END;',
             )
             ->bindParam(':lockStatus', $lockStatus, PDO::PARAM_INT, 1)
             ->execute();
-        });
 
-        return $lockStatus === 0 || $lockStatus === '0';
+        return ($lockStatus === 0 || $lockStatus === '0');
     }
 
     /**
@@ -115,9 +112,7 @@ END;',
     protected function releaseLock($name)
     {
         $releaseStatus = null;
-        $this->db->useMaster(function ($db) use ($name, &$releaseStatus) {
-            /** @var \yii\db\Connection $db */
-            $db->createCommand(
+        $this->db->createCommand(
                 'DECLARE
     handle VARCHAR2(128);
 BEGIN
@@ -128,8 +123,7 @@ END;',
             )
             ->bindParam(':result', $releaseStatus, PDO::PARAM_INT, 1)
             ->execute();
-        });
 
-        return $releaseStatus === 0 || $releaseStatus === '0';
+        return ($releaseStatus === 0 || $releaseStatus === '0');
     }
 }

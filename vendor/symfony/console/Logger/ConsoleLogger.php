@@ -101,8 +101,6 @@ class ConsoleLogger extends AbstractLogger
 
     /**
      * Returns true when any messages have been logged at error levels.
-     *
-     * @return bool
      */
     public function hasErrored()
     {

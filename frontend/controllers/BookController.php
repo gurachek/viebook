@@ -14,6 +14,7 @@ use frontend\models\Tag;
 use frontend\models\Category;
 use yii\helpers\ArrayHelper;
 use frontend\models\BookLevel;
+use yii\helpers\Json;
 
 class BookController extends Controller
 {
@@ -67,15 +68,6 @@ class BookController extends Controller
         }
     }
 
-    $allAuthors = Author::find()->all();
-    // $authorsFullName = [];
-
-    $authorsFullName = ArrayHelper::map($allAuthors, 'id', 'name');
-
-    // foreach ($allAuthors as $singleAuthor) {
-    //    $authorsFullName[] = $singleAuthor['name'];
-    //  } 
-
      $tags = Tag::find()->asArray()->all();
      $tags = array_column($tags, 'name');
 
@@ -91,7 +83,6 @@ class BookController extends Controller
 
      return $this->render('add', [
          'model' => $model,
-         'authors' => $authorsFullName,
          'tags' => $tags,
          'categoryList' => $categoryList,
          'bookLevelsList' => $bookLevelsList, 
@@ -136,5 +127,26 @@ class BookController extends Controller
       }
     }
 
+  }
+
+  public function actionAjax()
+  {
+    if (Yii::$app->request->isAjax) {
+      $data = Yii::$app->request->get();
+
+      Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+
+      $allAuthors = Author::find()->all();
+      $authorsFullName = [];
+
+      foreach ($allAuthors as $singleAuthor) {
+         if (strpos($singleAuthor['name'], $data['term']) !== false) {
+           $authorsFullName[] = $singleAuthor['name'];
+         }
+       }
+
+       return $authorsFullName;
+
+    }
   }
 }

@@ -29,7 +29,7 @@ $this->registerJs($js);
 			<ul class="user_menu">
 			<li>Книг добавлено: <?= $booksAdded ?></li>
 			<li>Авторов добавлено: <?= $authorsAdded ?></li>
-			<li>Рецензий написано: <?= $reviewsWrote ?></li>
+			<li>Обзоров написано: <?= $reviewsWrote ?></li>
 			</ul>
 		</div>
 	</div>

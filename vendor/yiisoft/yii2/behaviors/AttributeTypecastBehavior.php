@@ -280,12 +280,11 @@ class AttributeTypecastBehavior extends Behavior
             }
 
             if ($type !== null) {
-                foreach ((array) $validator->attributes as $attribute) {
+                foreach ((array)$validator->attributes as $attribute) {
                     $attributeTypes[$attribute] = $type;
                 }
             }
         }
-
         return $attributeTypes;
     }
 

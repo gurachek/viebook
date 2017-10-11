@@ -212,11 +212,6 @@ class TraceableEventDispatcher implements TraceableEventDispatcherInterface
         return $notCalled;
     }
 
-    public function reset()
-    {
-        $this->called = array();
-    }
-
     /**
      * Proxies all method calls to the original event dispatcher.
      *
