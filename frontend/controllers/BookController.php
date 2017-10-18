@@ -15,6 +15,7 @@ use frontend\models\Category;
 use yii\helpers\ArrayHelper;
 use frontend\models\BookLevel;
 use yii\helpers\Json;
+use yii\validators\Validator;
 
 class BookController extends Controller
 {
@@ -148,5 +149,43 @@ class BookController extends Controller
        return $authorsFullName;
 
     }
+  }
+
+  public function actionLevel($id = null, $catid = null)
+  {
+
+    $validator = new Validator();
+    
+    $integer = new Validator::$builtInValidators['integer']['class'];
+
+    if (!$integer->validate($id) && !$integer->validate($catid)) {
+      return $this->render('level-no-params');
+    }
+
+    $level = BookLevel::getById($id);
+    $category = Category::getById($catid);
+
+    $bookQuery = [];
+
+    if ($id != null && $integer->validate($id)) {
+      if ($catid != null && $integer->validate($id)) {
+        $bookQuery['category'] = $catid;
+      }
+        
+      $bookQuery['level_id'] = $id;
+
+    } else {
+      if ($catid != null && $integer->validate($catid)) {
+        return $this->redirect(['category/index', 'id' => $catid]);
+      }
+    }
+
+    $books = Book::find()->where($bookQuery)->all();
+
+    return $this->render('level', [
+      'books' => $books,
+      'level' => $level,
+      'category' => $category,
+    ]);
   }
 }

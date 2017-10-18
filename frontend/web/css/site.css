@@ -202,7 +202,7 @@ a.write-review:hover {
     margin: 0 auto;
     text-align: center;
     width: 238px;
-    height: 380px;
+    height: 310px;
     margin-bottom: 10px;
 }
 
@@ -725,7 +725,7 @@ li.display_on_mobile_book_block {
   line-height: 1.6em;
 }
 
-@media(max-width:767px) {
+@media(max-width: 768px) {
   .let_email .email {
     width: 100%;
   }
@@ -737,6 +737,7 @@ li.display_on_mobile_book_block {
   .promo-text {
     width: 98%;
   }
+
 }
 
 .close-promo {
@@ -784,3 +785,44 @@ li.display_on_mobile_book_block {
 .signup-for-estimate {
   display: none;
 }
+
+.edit-review_block {
+  padding: 10px;
+}
+
+@media (max-width: 991px) {
+ .edit-review_book {
+    display: none;
+
+  }
+
+  .edit-review_mobile-book {
+    display: block !important;
+  }
+}
+
+.edit-review_book {
+
+}
+
+.edit-review_mobile-book {
+  display: none;
+}
+
+
+/*
+
+Small devices (tablets, 768px and up) 
+@media (min-width: @screen-sm-min) { ... }
+
+---
+
+Medium devices (desktops, 992px and up) 
+@media (min-width: @screen-md-min) { ... }
+
+---
+
+Large devices (large desktops, 1200px and up) 
+@media (min-width: @screen-lg-min) { ... }
+
+*/

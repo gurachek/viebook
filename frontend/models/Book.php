@@ -64,7 +64,7 @@ class Book extends ActiveRecord
 
     public function getLevel()
     {
-        return $this->hasOne(BookLevel::className(), ['level' => 'id']);
+        return $this->hasOne(BookLevel::className(), ['id' => 'level_id']);
     }
 
 }

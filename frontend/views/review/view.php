@@ -13,6 +13,8 @@ $reviewId = $review->id;
 
 $customJs = <<< JS
 
+// Counter for views
+
 jQuery.ajax({
     url: "$reviewViewUrl",
     method: "GET",
@@ -24,6 +26,8 @@ jQuery.ajax({
     },
 });
 
+// Sending data about user visit
+
 jQuery.ajax({
     url: "$bookVisitUrl",
     method: "GET",
@@ -34,6 +38,8 @@ jQuery.ajax({
 
     },
 });
+
+// Estimate review
 
 jQuery(document).ready(function () {
     jQuery('.estimate .like').css('cursor', 'pointer');

@@ -14,7 +14,7 @@ class BookLevel extends ActiveRecord
 
 	public static function getById($id)
 	{
-		if (!$id) return;
+		if (!$id) return null;
 
 		return static::findOne(['id' => $id]);
 	}

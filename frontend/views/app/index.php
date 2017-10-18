@@ -168,7 +168,6 @@ if (!is_array($search_results)) {
 
                 <div style="width: 100%; margin: 0 auto;">
                     <div class="publish_date">
-                        <!-- <span class="publish_label">Дата публикации: </span> -->
                         <span class="glyphicon glyphicon-calendar"></span>
                         <?= $book->publish_date ?>
                     </div>

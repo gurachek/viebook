@@ -22,4 +22,11 @@ class Category extends ActiveRecord
     {
         return $this->hasMany(Book::className(), ['book_id' => 'id']);
     }
+
+    public static function getById($id) 
+    {
+    	if (!$id) return null;
+
+		return static::findOne(['id' => $id]);
+    }
 }
