@@ -94,10 +94,6 @@ jQuery(document).ready(function () {
     });
 });
 
-JS;
-
-$js = <<<JS
-
 // Display promo block after page scrolled book block
 
 if (window.innerWidth >= 991) {
@@ -113,65 +109,14 @@ if (window.innerWidth >= 991) {
 
 }
 
-jQuery('.navbar-inverse').removeClass('navbar-fixed-top');
-jQuery('.main-block').removeClass('container');
-jQuery('.main-block').addClass('container-fluid');
-jQuery('.container-fluid').removeClass('main-block');
-
-jQuery('.navbar-inverse').addClass('navbar-default navbar-static-top');
-jQuery('.free-space').css('height', '0');
-jQuery('.wrap').css('margin-top', '0');
-
-var arrow_pos = jQuery(window).height() - 150;
-
-jQuery('.top-arrow').css('position', 'fixed');
-jQuery('.top-arrow').css('top', arrow_pos);
-jQuery('.top-arrow').css('top', '30');
-
-$('.top-arrow').click(function() {
-    $('html, body').animate({scrollTop: 0},500);
-    return false;
-  })
-
-window.onscroll = function() {
-  var scrolled = window.pageYOffset || document.documentElement.scrollTop;
-  if (scrolled >= 200) {
-  	jQuery('.top-arrow').css('display', 'block');
-  } else {
-  	jQuery('.top-arrow').css('display', 'none');
-  }
-}
-
 JS;
 
 if (Yii::$app->user->getId()) $this->registerJs($customJs);
-$this->registerJs($js);
 
 ?>
 
 <div class="row review_page">
-	<div class="col-md-1 text-center">
-		<div class="social-buttons" style="margin-top: 10px; position: fixed; left: 30px;">
-			<ul class="list-unstyled social-button-item">
-				<li>
-					<a href="#"><img src="/images/vk-icon.png" width="40" height="40"></a>
-				</li>
-				<li>
-					<a href="#"><img src="/images/tw-icon.svg" width="40" height="40"></a>
-				</li>
-				<li>
-					<a href="#"><img src="/images/fb-icon.svg" width="40" height="40"></a>
-				</li>
-				<li>
-					<a href="#"><img src="/images/gp-icon.png" width="50" height="50"></a>
-				</li>
-			</ul>
-		</div>
-		<div class="top-arrow" title="Наверх">
-				<span class="glyphicon glyphicon-menu-up"></span>
-		</div>
-	</div>
-    <div class="col-md-7 review_text">
+    <div class="col-md-8">
 
         <ul class="list-inline" style="color: gray;">
             <li class="display_on_mobile_book_block">
@@ -207,12 +152,7 @@ $this->registerJs($js);
             </small>', ['review/edit', 'id' => $review->book['id']]) ?>
             <?php endif; ?>
         </h3>
-        
         <br>
-        	<script src="//yastatic.net/es5-shims/0.0.2/es5-shims.min.js"></script>
-			<script src="//yastatic.net/share2/share.js"></script>
-			<div class="ya-share2" data-services="vkontakte,facebook,gplus,twitter"></div>
-		<br>
 
         <div style="font-size: 17px; line-height: 1.6em;">
             <?= nl2br($review->text) ?>

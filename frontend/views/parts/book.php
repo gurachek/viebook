@@ -30,11 +30,11 @@ use yii\helpers\Html;
                     <span class="glyphicon glyphicon-calendar"></span>
                     <?= $book->publish_date ?>
                 </div>
-                <div class="category">
+                <div class="category" style="display: none;">
                     <span class="glyphicon glyphicon-menu-hamburger"></span>
                     <?= Html::a($category, ['category/index', 'id' => $categoryId]) ?>
                 </div>
-                <div class="level">
+                <div class="level" style="display: none;">
                     <span class="glyphicon glyphicon-scale"></span> 
                     <?= Html::a($book->level['name'], ['book/level', 'id' => $book->level['id'], 'catid' => $categoryId]) ?>
                 </div>

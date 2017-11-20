@@ -2,11 +2,35 @@
 use yii\helpers\Html;
 
 $this->title = 'Книги из категории "'. $books[0]->cat['name'] .'"';
+
+$js = <<<JS
+
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+})
+
+JS;
+
+$this->registerJs($js);
+
 ?>
 
 <?php if ($books): ?>
 
-	<h3 class="text-center"><?= $books[0]->cat['name'] ?></h3>
+	<div class="text-center">
+		<h3>
+			<?= $books[0]->cat['name'] ?>
+		</h3>
+
+		<?php if (Yii::$app->user->getId()): ?>
+		
+			<a class="btn btn-default follow_topic">
+					Подписаться 
+			</a>
+
+		<?php endif; ?>
+
+	</div>
 	<br>
 
 	<div class="books_searched">

@@ -115,9 +115,8 @@ AppAsset::register($this);
 
     NavBar::end(); 
     ?>
-    <br>
-    <br>
-    <br>
+
+    <div class="free-space"></div>
 
     <?php if (!Yii::$app->user->getId()): ?>
 

@@ -19,7 +19,7 @@ jQuery.ajax({
     },
 });
 
-jQuery('.review_text').click(function() {
+jQuery('.review_short_text').click(function() {
     $('.review_modal').modal('show');
     var id = jQuery(this).data('id');
     $.ajax({
@@ -36,6 +36,8 @@ jQuery('.review_text').click(function() {
        }
   });
 });
+
+jQuery('.container').removeClass('main-block');
 
 JS;
 
@@ -73,12 +75,11 @@ function nl2br(str) {
         </div>
     </div>
     <div class="col-md-8 col-md-pull-4">
-        <h3 class="text-center">Рецензии</h3>
         <br>
         <?php if ($book->reviews): ?>
-            <div class="book_reviews">
+            <div class="book_reviews" style="margin-top: -15px;">
                 <?php foreach($book->reviews as $review): ?>
-                    <div class="single_review">
+                    <div class="single_review" style="background: white; padding: 10px;">
                         <div class="status_line">
                             <span class="glyphicon glyphicon-pencil"></span>
                             <?= Html::a($review->author->getName(), ['user/view', 'id' => $review->author['id']]) ?>
@@ -91,17 +92,22 @@ function nl2br(str) {
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
                             <span class="glyphicon glyphicon-calendar"></span>
-                            <?= date("d M Y", $review->created_at) ?>
+                            <?php
+                                Yii::$app->formatter->locale = 'ru-RU';
+                                echo Yii::$app->formatter->asDate($review->created_at, 'long'); 
+                            ?>
                         </div>
-                        <div class="review_text" data-id="<?= $review->id ?>">
+                        <h3 class="text-center"><?= $review->title ?></h3>
+                        
+                        <div class="review_short_text" data-id="<?= $review->id ?>">
                             <?= mb_substr(strip_tags($review->text), 0, 1000, "utf-8") ?>...
                         </div>
                         <br>
-                        <div class="go_read">
-                            <?= Html::a("Читать дальше", ['review/view', 'id' => $review->id], ['class' => 'btn viebutton pull-right read_this_review']); ?>
-
+                        <div class="text-right" style="line-height: 30px;">
+                            <?= Html::a('Читать дальше', ['review/view', 'id' => $review->id], ['class' => 'go-read-label read-button']) ?>
                         </div>
                     </div>
+
                 <?php endforeach; ?>
             </div>
         <?php else: ?>

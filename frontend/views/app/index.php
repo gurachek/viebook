@@ -69,25 +69,18 @@ $this->registerJs($js);
 
 <br>
 
-<?php if ($dailyBooks): ?>
+<?php if ($weeklyReviews): ?>
 
 <div id="columns">
 
-<?php foreach($dailyBooks as $book): ?>
-    <?php 
-        if (!$book['reviews']) {
-            continue;
-        }
-
-        $review = $book['reviews'][0];
-    ?>
+<?php foreach($weeklyReviews as $review): ?>
 
     <div class="pin">
         <?= Html::a('
-            <div class="daily_image" style="background: url(images/books/'.$book['image'].') no-repeat center; background-size: contain;margin-bottom: 2px; margin-left: 2px;"></div>
-            ', ['book/view', 'id' => $book['id']]) ?>
+            <div class="daily_image" style="background: url(images/books/'.$review->book['image'].') no-repeat center; background-size: contain;margin-bottom: 2px; margin-left: 2px;"></div>
+            ', ['book/view', 'id' => $review->book['id']]) ?>
         
-        <h4 class="text-center"><?= $book['name']; ?></h4>
+        <h4 class="text-center"><?= $review->book['name']; ?></h4>
 
         <?php
             $positive = !empty($review->estimates) ? @$review->estimates[0]->numberOfPositive() : 0;
@@ -110,15 +103,16 @@ $this->registerJs($js);
             <br>
         </p>
 
-        <?php if ($book->tags): ?>
+        <?php if ($review->book->tags): ?>
             <br>
             
             <p style="display:table-cell;vertical-align:bottom;">
             Теги: 
             
-            <?php foreach($book->tags as $tag): ?>
+            <?php foreach($review->book->tags as $tag): ?>
                 <?php foreach($tag->name as $name): ?>
-                    <?= Html::a($name['name'], ['search/tag', 'id' => $name->id]) ?>,                                <?php endforeach; ?>
+                    <?= Html::a($name['name'], ['search/tag', 'id' => $name->id]) ?>,
+                <?php endforeach; ?>
             <?php endforeach; ?>
             </p>
 

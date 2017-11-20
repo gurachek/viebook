@@ -52,33 +52,12 @@ class AppController extends Controller
 
         // Daily Books
 
-        $dailyBooks = Book::find()->with('reviews')->all();
-        
-        return $this->render('index', [
-            'model' => $model,
-            'search_results' => $search_results,
-            'books' => $booksName,
-            'dailyBooks' => $dailyBooks,
-            'search_query' => $search_query,
-        ]);
-    }
-
-    /*
-        Algorithm for main page reviews.
-        Get all reviews was wrote during the week, calculate average rating and display only reviews where rating >= average rating.
-        Save this for days when site will be popular :DD
-    */
-    public function actionTest()
-    {
-
-        $dailyBooks = [];
-
         $pastWeekTime = strtotime("-1 week");
         $currentTime = time();
 
         $duringWeekReviews = Review::find()->where(['between', 'created_at', $pastWeekTime, $currentTime])->all();
 
-        $dailyBooks = [];
+        $weeklyReviews = [];
 
         $averageRating = 0;
 
@@ -89,13 +68,17 @@ class AppController extends Controller
         $averageRating /= count($duringWeekReviews);
 
         foreach($duringWeekReviews as $review) {
-            if ($review->rating >= $averageRating) {
-                $dailyBooks[] = $review;
-            }
+            // if ($review->rating >= $averageRating) {
+                $weeklyReviews[] = $review;
+            // }
         }
 
-        return $this->render('test', [
-            'dailyBooks' => $dailyBooks,
+        return $this->render('index', [
+            'model' => $model,
+            'search_results' => $search_results,
+            'books' => $booksName,
+            'weeklyReviews' => $weeklyReviews,
+            'search_query' => $search_query,
         ]);
     }
 

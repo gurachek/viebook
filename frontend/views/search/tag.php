@@ -1,10 +1,26 @@
 <?php
 use yii\helpers\Html;
 
-$this->title = 'Книги по теме "'. $tag->name .'" на Viebook';
+$tag_name = mb_strtoupper(mb_substr($tag->name, 0, 1, 'UTF-8'), 'UTF-8') . mb_substr($tag->name, 1, null,'UTF-8');
+
+$this->title = 'Тема "'. $tag_name .'" на Viebook';
+
 ?>
 
-<h3 class="text-center">Книги по теме "<?= $tag->name ?>"</h3>
+
+<div class="text-center">
+        <h3>
+            <?= $tag_name ?>
+            <?php if (Yii::$app->user->getId()): ?>
+        
+            <a class="btn btn-default follow_topic">
+                    Подписаться <span style="font-weight: bold; color: #66A6D2;">+</span>
+            </a>
+
+        <?php endif; ?>
+        </h3>
+
+    </div>
 <br>
 
 <?php if ($books): ?>
