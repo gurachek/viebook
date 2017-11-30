@@ -47,14 +47,14 @@ return [
         ],
         'mail' => [
             'class' => 'yii\swiftmailer\Mailer',
-            'useFileTransport' => true,
+            'useFileTransport' => false,
             'transport' => [
                 'class' => 'Swift_SmtpTransport',
                 'host' => 'scp62.hosting.reg.ru',
-                'username' => 'no-reply@u0354827.cp.regruhosting.ru',
+                'username' => 'support@viebook.ru',
                 'password' => 'nirvanadeviant1K',
-                'port' => '587',
-                'encryption' => 'tls',
+                'port' => '465',
+                'encryption' => 'ssl',
                 'streamOptions' => [
                     'ssl' => [
                         'allow_self_signed' => true,

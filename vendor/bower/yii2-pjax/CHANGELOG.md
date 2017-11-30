@@ -1,6 +1,16 @@
 yii-pjax Change Log
 ===================
 
+2.0.8 under development
+-----------------------
+
+- no changes in this release.
+
+
+v2.0.7.1 Oct 12, 2017
+------------------------
+- Bug #61: Restore the last semicolon for Yii asset/compress (tanakahisateru)
+
 2.0.7 Sep 27, 2017
 -----------------
 - Bug #46: Allow "data-pjax" attribute with no value in `handleClick` function (arogachev)
@@ -41,6 +51,4 @@ yii-pjax Change Log
 ------------------
 - Bug: Fixed avoid duplicates of _pjax parameter (tof06)
 - Bug: Fixed Pjax/GridView and back button (klevron, tof06, tonydspaniard)
-
-
 
