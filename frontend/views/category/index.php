@@ -18,19 +18,19 @@ $this->registerJs($js);
 <?php if ($books): ?>
 
 	<div class="text-center">
-		<h3>
-			<?= $books[0]->cat['name'] ?>
-		</h3>
+        <h3>
+            <?= $books[0]->cat['name'] ?>
+            <?php if (Yii::$app->user->getId()): ?>
+        
+            <a class="btn btn-default follow_topic">
+                    Подписаться <span style="font-weight: bold; color: #66A6D2;">+</span>
+            </a>
 
-		<?php if (Yii::$app->user->getId()): ?>
-		
-			<a class="btn btn-default follow_topic">
-					Подписаться 
-			</a>
+        <?php endif; ?>
+        </h3>
 
-		<?php endif; ?>
+    </div>
 
-	</div>
 	<br>
 
 	<div class="books_searched">

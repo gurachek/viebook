@@ -152,16 +152,8 @@ a.desc:after {
 a.write-review {
   background: linear-gradient(-50deg, #E64354, #66A6D2);
   border: 0;
-  /*background: #66A6D2;*/
   color: white !important;
   transition: background 0.8s ease-out;
-}
-
-a.write-review:hover {
-  background: linear-gradient(-50deg, #66A6D2, #E64354);
-  /*background: #E64354 !important;*/
-  color: white !important;
-  background-position: -96px;
 }
 
 .books_searched {
