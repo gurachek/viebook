@@ -55,22 +55,26 @@ class AppController extends Controller
         $pastWeekTime = strtotime("-1 week");
         $currentTime = time();
 
-        $duringWeekReviews = Review::find()->where(['between', 'created_at', $pastWeekTime, $currentTime])->all();
+        $duringWeekReviews = Review::find()->where(['between', 'created_at', $pastWeekTime, $currentTime])->where(['active' => 1])->all();
 
         $weeklyReviews = [];
+        
+        if ($duringWeekReviews != null) {
 
-        $averageRating = 0;
+            $averageRating = 0;
 
-        foreach($duringWeekReviews as $review) {
-            $averageRating += $review->rating;
-        }
+            foreach($duringWeekReviews as $review) {
+                $averageRating += $review->rating;
+            }
 
-        $averageRating /= count($duringWeekReviews);
+            $averageRating /= count($duringWeekReviews);
 
-        foreach($duringWeekReviews as $review) {
-            // if ($review->rating >= $averageRating) {
-                $weeklyReviews[] = $review;
-            // }
+            foreach($duringWeekReviews as $review) {
+                // if ($review->rating >= $averageRating) {
+                    $weeklyReviews[] = $review;
+                // }
+            }
+
         }
 
         return $this->render('index', [
