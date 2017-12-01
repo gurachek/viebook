@@ -137,6 +137,8 @@ class ReviewController extends Controller
         }
 
         if ($bookid === null || $bookid == false) {
+            return $this->redirect(['search/write']);
+            //
             return $this->render('write_instructions', [
                 'model' => $model,
             ]);

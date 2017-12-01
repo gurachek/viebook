@@ -795,6 +795,10 @@ li.display_on_mobile_book_block {
 
   }
 
+  .top-arrow {
+    display: none;
+  }
+
   .edit-review_mobile-book {
     display: block !important;
   }
@@ -877,6 +881,10 @@ li.display_on_mobile_book_block {
   font-size: 13px;
   padding: 5px;
   border-radius: 0;
+}
+
+.write_review_button {
+  display: none;
 }
 
 /*

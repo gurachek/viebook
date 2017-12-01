@@ -122,4 +122,13 @@ class AppController extends Controller
 
     }
 
+    public function actionFindBook()
+    {
+        $model = new SearchModel();
+
+        return $this->renderAjax('_find_book', [
+            'model' => $model,
+        ]);
+    }
+
 }

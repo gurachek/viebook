@@ -9,6 +9,7 @@ use frontend\models\UserInterested;
 use frontend\models\Tag;
 use frontend\models\BookTags;
 use frontend\models\Book;
+use frontend\models\SearchModel;
 
 class SearchController extends Controller
 {
@@ -45,4 +46,72 @@ class SearchController extends Controller
       'books' => $books
   	]);
   }
+
+  public function actionBooks()
+  {
+
+    \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+
+    if (Yii::$app->request->isAjax) {
+
+      $data = Yii::$app->request->post();
+
+      if ($data['text']) {
+
+        $return_data = [];
+
+        $book = Book::find()->where(['like', 'name', $data['text']])->one();
+
+        $reviews_count = Review::find()->where(['book_id' => $book->id])->count();
+        $book_level = $book->level['name'];
+        $category = $book->cat['name'];
+        $author = $book->author['name'];
+
+        $return_data['book'] = $book;
+        $return_data['reviews_count'] = $reviews_count;
+        $return_data['book_level'] = $book_level;
+        $return_data['category'] = $category;
+        $return_data['author'] = $author;
+
+        return $return_data;
+      }
+    } 
+
+    return false;
+  }
+
+  public function actionWrite()
+  {
+    $model = new SearchModel();
+    $search_results = [];
+    $search_query = '';
+
+    if (Yii::$app->request->isAjax) {
+      if ($model->load(Yii::$app->request->post())) {
+        if ($search_results = $model->search_book()) {
+          $search_query = $model->search;
+        } else {
+          $search_results = 'No books';
+        }
+      }
+    }
+
+    $allBooks = Book::find()->asArray()->all();
+    $booksName = [];
+
+    foreach ($allBooks as $singleBook) {
+        $booksName[] = [
+            'value' => $singleBook['name'],
+            'label' => $singleBook['name'],
+        ];
+    }
+
+    return $this->render('write', [
+      'model' => $model,
+      'search_results' => $search_results,
+      'books' => $booksName,
+      'search_query' => $search_query,
+    ]);
+  }
+
 }

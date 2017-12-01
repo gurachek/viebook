@@ -7,10 +7,10 @@ $this->title = 'Редактирование рецензии на книгу "'
 
 $js = <<<JS
 
-CKEDITOR.config.extraPlugins = 'autogrow';
-CKEDITOR.config.autoGrow_minHeight = 200;
-CKEDITOR.config.autoGrow_maxHeight = 600;
-CKEDITOR.config.autoGrow_bottomSpace = 50;
+//CKEDITOR.config.extraPlugins = 'autogrow';
+//CKEDITOR.config.autoGrow_minHeight = 200;
+//CKEDITOR.config.autoGrow_maxHeight = 600;
+//CKEDITOR.config.autoGrow_bottomSpace = 50;
 
 jQuery('.container').removeClass('main-block');
 jQuery('.container').addClass('container-fluid');

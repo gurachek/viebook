@@ -9,6 +9,7 @@ use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use frontend\assets\AppAsset;
 use common\widgets\Alert;
+use yii\bootstrap\Modal;
 
 $customJs = <<<JS
 
@@ -89,14 +90,26 @@ AppAsset::register($this);
         $menuItems[] = ['label' => 'Регистрация', 'url' => ['/site/signup']];
         $menuItems[] = ['label' => 'Вход', 'url' => ['/site/login']];
     } else {
-    
+
+        Html::a('<span class="glyphicon glyphicon-pencil"></span> Написать',
+                    ['/search/mycomment'], 
+                    [
+                        'title' => 'View Feed Comments',
+                        'data-toggle'=>'modal',
+                        'data-target'=>'#modalvote',
+                    ]
+                   );
+
         $menuItems[] = '<li>'
-        .'<a href="'. Yii::$app->getUrlManager()->createAbsoluteUrl(['/review/write']) .'" class="btn write-review" style="padding: 5px; margin-top: 10px;">'
-        .'&nbsp;'
-        .'<span class="glyphicon glyphicon-pencil"></span> '
-        .'Написать'
-        .'&nbsp;'
-        .'</a>'
+        .Html::a('&nbsp;<span class="glyphicon glyphicon-pencil"></span> Написать &nbsp;',
+                    ['/app/find-book'], 
+                    [
+                        'class' => 'btn write-review',
+                        'style' => 'padding: 5px; margin-top: 10px;',
+                        'title' => 'Find book',
+                        'data-toggle'=>'modal',
+                        'data-target'=>'#modalvote',
+                    ])
         .'</li>';
 
         $menuItems[] = ['label' => 'Фид-лента', 'url' => ['feed/index']] ;
@@ -115,6 +128,12 @@ AppAsset::register($this);
 
     NavBar::end(); 
     ?>
+
+    <div class="modal remote fade" id="modalvote">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content"></div>
+        </div>
+    </div>
 
     <div class="free-space"></div>
 

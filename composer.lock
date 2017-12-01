@@ -4,24 +4,24 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "7ae376d2691787e8a21fe47ddda5137b",
+    "content-hash": "75d23fd33d51abd9fe60ffdc3f7cefb2",
     "packages": [
         {
             "name": "2amigos/yii2-ckeditor-widget",
-            "version": "2.1.1",
+            "version": "2.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/2amigos/yii2-ckeditor-widget.git",
-                "reference": "248e671faf7ec1e6affbcc6554d991095139d379"
+                "reference": "60e4d2dbb138706c8c2195a1b29c420bda044b19"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/2amigos/yii2-ckeditor-widget/zipball/248e671faf7ec1e6affbcc6554d991095139d379",
-                "reference": "248e671faf7ec1e6affbcc6554d991095139d379",
+                "url": "https://api.github.com/repos/2amigos/yii2-ckeditor-widget/zipball/60e4d2dbb138706c8c2195a1b29c420bda044b19",
+                "reference": "60e4d2dbb138706c8c2195a1b29c420bda044b19",
                 "shasum": ""
             },
             "require": {
-                "ckeditor/ckeditor": "dev-full/4.7.x",
+                "ckeditor/ckeditor": "dev-full/stable",
                 "yiisoft/yii2": "^2.0"
             },
             "require-dev": {
@@ -31,6 +31,9 @@
             "extra": {
                 "branch-alias": {
                     "dev-master": "1.0-dev"
+                },
+                "asset-installer-paths": {
+                    "bower-asset-library": "vendor/bower"
                 }
             },
             "autoload": {
@@ -61,7 +64,7 @@
                 "yii 2",
                 "yii2"
             ],
-            "time": "2017-07-22T15:38:16+00:00"
+            "time": "2016-12-01T21:22:21+00:00"
         },
         {
             "name": "bower-asset/bootstrap",
@@ -508,7 +511,7 @@
         },
         {
             "name": "ckeditor/ckeditor",
-            "version": "dev-full/4.7.x",
+            "version": "dev-full/stable",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ckeditor/ckeditor-releases.git",
@@ -702,12 +705,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-framework.git",
-                "reference": "a5e6607bfa8074ada8cef7530e55c6b45b1a1a34"
+                "reference": "c7dc1d689fd6ec95cd5734efe557d8700d6ff576"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/a5e6607bfa8074ada8cef7530e55c6b45b1a1a34",
-                "reference": "a5e6607bfa8074ada8cef7530e55c6b45b1a1a34",
+                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/c7dc1d689fd6ec95cd5734efe557d8700d6ff576",
+                "reference": "c7dc1d689fd6ec95cd5734efe557d8700d6ff576",
                 "shasum": ""
             },
             "require": {
@@ -794,7 +797,7 @@
                 "framework",
                 "yii2"
             ],
-            "time": "2017-11-29T06:42:38+00:00"
+            "time": "2017-11-30T20:23:21+00:00"
         },
         {
             "name": "yiisoft/yii2-bootstrap",
@@ -1265,12 +1268,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/fzaninotto/Faker.git",
-                "reference": "9cda1a418ca4b2b71c9b921ebaea6c2e61e270b4"
+                "reference": "493d896b3f4a6c09ab737d53777bcfec5ff1daf1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/9cda1a418ca4b2b71c9b921ebaea6c2e61e270b4",
-                "reference": "9cda1a418ca4b2b71c9b921ebaea6c2e61e270b4",
+                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/493d896b3f4a6c09ab737d53777bcfec5ff1daf1",
+                "reference": "493d896b3f4a6c09ab737d53777bcfec5ff1daf1",
                 "shasum": ""
             },
             "require": {
@@ -1307,7 +1310,7 @@
                 "faker",
                 "fixtures"
             ],
-            "time": "2017-11-13T07:51:09+00:00"
+            "time": "2017-11-30T21:42:10+00:00"
         },
         {
             "name": "guzzlehttp/psr7",
@@ -1582,7 +1585,7 @@
         },
         {
             "name": "phpdocumentor/reflection-docblock",
-            "version": "dev-master",
+            "version": "4.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpDocumentor/ReflectionDocBlock.git",

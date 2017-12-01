@@ -46,6 +46,7 @@ jQuery(document).ready(function () {
     jQuery('.estimate .dislike').css('cursor', 'pointer');
     jQuery('.estimate span').click(function () {
         var id = parseInt(jQuery(this).data('id'));
+        var isLeft = parseInt(jQuery(this).data('left'));
 
         var estimate_number = '.dislike-count';
 
@@ -66,17 +67,26 @@ jQuery(document).ready(function () {
             },
             success: function (data) {
                 if (!data) {
+
                     jQuery('.ty_for_estimate').css('background', 'rgba(0, 0, 0, 0.9)');
                     jQuery('.ty_for_estimate .text').html('<span class="glyphicon glyphicon-remove-sign"> </span>&nbsp;&nbsp;Вы уже оценивали эту рецензию');
                 
-                    jQuery('.estimate').css('display', 'none');
+                    console.log(isLeft);
+
+                    if (isLeft != 1) {
+                        jQuery('.estimate').css('display', 'none');
+                    }
+                    
+
                 } else {
 
                     var number = parseInt(jQuery(estimate_number).html());
                     number += 1;
                     jQuery(estimate_number).html(number + ' ');
 
-                    jQuery('.estimate').css('display', 'none');
+                    if (isLeft != 1) {
+                        jQuery('.estimate').css('display', 'none');
+                    }
                 }
 
                 jQuery('.ty_for_estimate').css('display', 'block');
@@ -147,23 +157,28 @@ JS;
 if (Yii::$app->user->getId()) $this->registerJs($customJs);
 $this->registerJs($js);
 
+$positive = !empty($review->estimates) ? @$review->estimates[0]->numberOfPositive() : 0;
+$negative = !empty($review->estimates) ? @$review->estimates[0]->numberOfNegative() : 0;
+
 ?>
 
 <div class="row review_page">
 	<div class="col-md-1 text-center">
 		<div class="social-buttons" style="margin-top: 10px; position: fixed; left: 30px;">
-			<ul class="list-unstyled social-button-item">
+			<ul id="estimate_left" class="list-unstyled social-button-item estimate">
 				<li>
-					<a href="#"><img src="/images/vk-icon.png" width="40" height="40"></a>
+                    <span class="like" data-id="1" data-left="1">
+					<img src="/images/like.ico" width="40" height="40" style="margin-bottom: 5px;">
+                    </span>
+                    <br>
+                    <span class="like-count" style="color: #444; font-size: 16px; margin-left: -10px;"><?= $positive ?></span>
 				</li>
 				<li>
-					<a href="#"><img src="/images/tw-icon.svg" width="40" height="40"></a>
-				</li>
-				<li>
-					<a href="#"><img src="/images/fb-icon.svg" width="40" height="40"></a>
-				</li>
-				<li>
-					<a href="#"><img src="/images/gp-icon.png" width="50" height="50"></a>
+                    <span class="dislike" data-id="0" data-left="1">
+					<img src="/images/dislike.png" width="40" height="40" style="margin-bottom: 5px;">
+                    </span>
+                    <br>
+                    <span class="dislike-count" style="color: #444; font-size: 16px; margin-left: -10px;"><?= $negative ?></span>
 				</li>
 			</ul>
 		</div>
@@ -227,11 +242,6 @@ $this->registerJs($js);
         </div>
 
             <?php if (@$review->user_id != @$id): ?>
-            
-                <?php
-                    $positive = !empty($review->estimates) ? @$review->estimates[0]->numberOfPositive() : 0;
-                    $negative = !empty($review->estimates) ? @$review->estimates[0]->numberOfNegative() : 0;
-                ?>
 
                 <div class="estimate" style="text-align: center;">
                     <span class="like-count">
