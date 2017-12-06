@@ -87,6 +87,8 @@ class ReviewController extends Controller
 
                 $review = Review::findOne(['id' => $data['reviewId']]);
 
+                /*Increase or reduce review rating depends on estimate. Shouldnt work because of project need more "right" type of rating balance.
+                
                 if ($data['estimate']) {
 
                     $review->rating += 5;
@@ -95,6 +97,9 @@ class ReviewController extends Controller
 
                     $review->rating -= 10;
                 }
+                
+                */
+
 
                 $estimate = new UserEstimates();
                 $estimate->user_id = $data['userId'];

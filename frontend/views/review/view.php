@@ -11,7 +11,7 @@ $reviewViewUrl = Yii::$app->getUrlManager()->createAbsoluteUrl(['review/ajax-vie
 $userId = Yii::$app->user->getId() ?? 0;
 $reviewId = $review->id;
 
-$customJs = <<< JS
+$authJS = <<< JS
 
 // Counter for views
 
@@ -106,7 +106,7 @@ jQuery(document).ready(function () {
 
 JS;
 
-$js = <<<JS
+$customJS = <<<JS
 
 // Display promo block after page scrolled book block
 
@@ -154,8 +154,22 @@ window.onscroll = function() {
 
 JS;
 
-if (Yii::$app->user->getId()) $this->registerJs($customJs);
-$this->registerJs($js);
+$nonauthJS = <<<JS
+
+jQuery(document).ready(function () {
+    jQuery('.estimate .like').css('cursor', 'pointer');
+    jQuery('.estimate .dislike').css('cursor', 'pointer');
+    jQuery('.estimate span').click(function () {
+        alert("Вам нужно авторизоваться, чтобы оценить обзор.");
+    });
+});
+
+JS;
+
+if (Yii::$app->user->getId()) $this->registerJs($authJS);
+else $this->registerJs($nonauthJS);
+
+$this->registerJs($customJS);
 
 $positive = !empty($review->estimates) ? @$review->estimates[0]->numberOfPositive() : 0;
 $negative = !empty($review->estimates) ? @$review->estimates[0]->numberOfNegative() : 0;
@@ -223,6 +237,10 @@ $negative = !empty($review->estimates) ? @$review->estimates[0]->numberOfNegativ
             <?php endif; ?>
         </h3>
         
+        <p style="font-size: 17px; line-height: 1.6em;">
+            Сегодня несколько слов о книге Джима Коллинза «От хорошего к великому». Это пожалуй, лучшая книга по бизнесу, среди всех, которые я читал. Она по-настоящему заслуживает права быть настольной. В какой то степени она даже не только о бизнесе. Не только о том, как построить успешную стабильную компанию, как набирать персонал или управлять проектами. Прежде всего она открывает глаза. Как на бизнес, так и на жизнь.
+        </p>
+
         <br>
         	<script src="//yastatic.net/es5-shims/0.0.2/es5-shims.min.js"></script>
 			<script src="//yastatic.net/share2/share.js"></script>
@@ -286,16 +304,21 @@ $negative = !empty($review->estimates) ? @$review->estimates[0]->numberOfNegativ
     <div class="col-md-4 review_display_book_block">
         <div class="book_page" style="margin-bottom: 10px;">
             <div class="name">
-
+                <h3 class="text-center"><?= $review->book->name ?></h3>
+                <p class="text-center">
+                    <span class="glyphicon glyphicon-user"  title="Автор книги"> </span> 
+                    <?= Html::a($review->book->author->name, ['author/view', 'id' => $review->book->author->id]) ?>
+                    &nbsp;&nbsp;&nbsp;
+                    <span class="glyphicon glyphicon-scale"></span>
+                     <?= Html::a($level->name, ['book/level', 'id' => $level->id, 'catid' => $review->book['category']], ['class' => 'text-center','style' => 'color: #444 !important;']) ?>
+                </p>
                 <div class="image" style="text-align: center;">
-                    <div style="background: url(/images/books/<?= $review->book['image'] ?>) no-repeat; background-size: contain; width: 100%; height: 315px; background-position: center center;"></div>
+                    <div style="background: url(/images/books/<?= $review->book['image'] ?>) no-repeat; background-size: cover; width: 100%; height: 500px; background-position: center center;" title="<?= $review->book->name ?>"></div>
+                    <hr width="80%">
                     <?= Html::a("Другие рецензии к этой книге", ['book/view', 'id' => $review->book['id']], ['class' => 'btn btn-lnk']); ?>
                 </div>
             
             </div>
-                <div class="text-center" style="margin-top: 10px;" title="<?= $level->description ?>">
-                    <b><?= Html::a($level->name, ['book/level', 'id' => $level->id, 'catid' => $review->book['category']], ['class' => 'text-center','style' => 'color: #444 !important; text-decoration: underline !important;']) ?></b>        
-                </div>
         
         </div>
 

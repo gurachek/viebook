@@ -16,6 +16,7 @@ use yii\helpers\ArrayHelper;
 use frontend\models\BookLevel;
 use yii\helpers\Json;
 use yii\validators\Validator;
+use common\models\UserEstimates;
 
 class BookController extends Controller
 {
@@ -39,6 +40,27 @@ class BookController extends Controller
       $book = Book::findOne(['id' => $id]);
 
       if ($book == null) return $this->render('no-book');
+
+      /* Review rating 
+          1. like + dislike = sum
+          2. like / sum = sum2
+          3. sum2 * 100 = rating
+      */
+
+      // Need to place it in cron tasks
+      foreach($book->reviews as $review) {
+        if ($estimates = $review->estimates) {
+          $positive = $review->estimates[0]->numberOfPositive(); 
+          $negative = $review->estimates[0]->numberOfNegative();
+
+          $sum = $positive + $negative;
+          $sum2 = $positive / $sum;
+          $rating = $sum2 * 100;
+
+          $review->rating = $rating; 
+          $review->save();
+        }
+      }
 
       return $this->render('view', [
           'book' => $book,

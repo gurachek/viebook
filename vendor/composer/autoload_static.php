@@ -4,14 +4,14 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInitef91cc70b99dbfa2b854ae05c32616de
+class ComposerStaticInitd8ec559585b6d7f1ef77a209031a4999
 {
     public static $files = array (
         '2cffec82183ee1cea088009cef9a6fc3' => __DIR__ . '/..' . '/ezyang/htmlpurifier/library/HTMLPurifier.composer.php',
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
+        '2c102faa651ef8ea5874edb585946bce' => __DIR__ . '/..' . '/swiftmailer/swiftmailer/lib/swift_required.php',
         '6124b4c8570aa390c21fafd04a26c69f' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/deep_copy.php',
         'a0edc8309cc5e1d60e3047b5df6b7052' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/functions_include.php',
-        '2c102faa651ef8ea5874edb585946bce' => __DIR__ . '/..' . '/swiftmailer/swiftmailer/lib/swift_required.php',
         '180092cfc969a12e06f2132a203a3184' => __DIR__ . '/..' . '/codeception/verify/src/Codeception/function.php',
     );
 
@@ -20,11 +20,13 @@ class ComposerStaticInitef91cc70b99dbfa2b854ae05c32616de
         array (
             'yii\\swiftmailer\\' => 16,
             'yii\\jui\\' => 8,
+            'yii\\httpclient\\' => 15,
             'yii\\gii\\' => 8,
             'yii\\faker\\' => 10,
             'yii\\debug\\' => 10,
             'yii\\composer\\' => 13,
             'yii\\bootstrap\\' => 14,
+            'yii\\authclient\\' => 15,
             'yii\\' => 4,
             'yii2mod\\selectize\\' => 18,
         ),
@@ -91,6 +93,10 @@ class ComposerStaticInitef91cc70b99dbfa2b854ae05c32616de
         array (
             0 => __DIR__ . '/..' . '/yiisoft/yii2-jui',
         ),
+        'yii\\httpclient\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/yiisoft/yii2-httpclient',
+        ),
         'yii\\gii\\' => 
         array (
             0 => __DIR__ . '/..' . '/yiisoft/yii2-gii',
@@ -111,6 +117,10 @@ class ComposerStaticInitef91cc70b99dbfa2b854ae05c32616de
         array (
             0 => __DIR__ . '/..' . '/yiisoft/yii2-bootstrap',
         ),
+        'yii\\authclient\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/yiisoft/yii2-authclient',
+        ),
         'yii\\' => 
         array (
             0 => __DIR__ . '/..' . '/yiisoft/yii2',
@@ -121,8 +131,8 @@ class ComposerStaticInitef91cc70b99dbfa2b854ae05c32616de
         ),
         'phpDocumentor\\Reflection\\' => 
         array (
-            0 => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src',
-            1 => __DIR__ . '/..' . '/phpdocumentor/reflection-common/src',
+            0 => __DIR__ . '/..' . '/phpdocumentor/reflection-common/src',
+            1 => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src',
             2 => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src',
         ),
         'dosamigos\\ckeditor\\' => 
@@ -788,10 +798,10 @@ class ComposerStaticInitef91cc70b99dbfa2b854ae05c32616de
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInitef91cc70b99dbfa2b854ae05c32616de::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInitef91cc70b99dbfa2b854ae05c32616de::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInitef91cc70b99dbfa2b854ae05c32616de::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInitef91cc70b99dbfa2b854ae05c32616de::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInitd8ec559585b6d7f1ef77a209031a4999::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInitd8ec559585b6d7f1ef77a209031a4999::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInitd8ec559585b6d7f1ef77a209031a4999::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInitd8ec559585b6d7f1ef77a209031a4999::$classMap;
 
         }, null, ClassLoader::class);
     }

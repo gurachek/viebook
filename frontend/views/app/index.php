@@ -106,12 +106,11 @@ $this->registerJs($js);
         <?php if ($review->book->tags): ?>
             <br>
             
-            <p style="display:table-cell;vertical-align:bottom;">
-            Теги: 
+            <p>
             
             <?php foreach($review->book->tags as $tag): ?>
                 <?php foreach($tag->name as $name): ?>
-                    <?= Html::a($name['name'], ['search/tag', 'id' => $name->id]) ?>,
+                    <?= Html::a($name['name'], ['search/tag', 'id' => $name->id], ['class' => 'book-block-tag']) ?>
                 <?php endforeach; ?>
             <?php endforeach; ?>
             </p>

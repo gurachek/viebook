@@ -8,7 +8,7 @@ body {
 .main-block {
   background: #FFFFFF;
   border: 1px solid #FFFFF7;
-  box-shadow: 3px 5px 6px #e8e8e8;
+  box-shadow: 0px 0px 5px 4px #e8e8e8;
   margin-bottom: 20px;
 }
 
@@ -313,7 +313,7 @@ a.write-review {
     /*width: 30%;*/
     /*border: 1px solid #f0f0f0;*/
     background: white;
-    padding: 15px 5px;
+    padding: 15px 0px;
 }
 
 @media (max-width: 991px) {
@@ -796,7 +796,7 @@ li.display_on_mobile_book_block {
   }
 
   .top-arrow {
-    display: none;
+    display: none !important;
   }
 
   .edit-review_mobile-book {
@@ -885,6 +885,24 @@ li.display_on_mobile_book_block {
 
 .write_review_button {
   display: none;
+}
+
+.book-block-tag {
+  border: 1px solid #66A6D2;
+  padding: 5px;
+  margin-right: 5px;
+}
+
+.book-block-tag:hover {
+  text-decoration: none;
+  background: #66A6D2;
+  color: white;
+}
+
+.book-block-tag:active {
+  text-decoration: none;
+  background: #66A6D2;
+  color: white;
 }
 
 /*
