@@ -238,14 +238,12 @@ $negative = !empty($review->estimates) ? @$review->estimates[0]->numberOfNegativ
         </h3>
         
         <p style="font-size: 17px; line-height: 1.6em;">
-            Сегодня несколько слов о книге Джима Коллинза «От хорошего к великому». Это пожалуй, лучшая книга по бизнесу, среди всех, которые я читал. Она по-настоящему заслуживает права быть настольной. В какой то степени она даже не только о бизнесе. Не только о том, как построить успешную стабильную компанию, как набирать персонал или управлять проектами. Прежде всего она открывает глаза. Как на бизнес, так и на жизнь.
+            <?= $review->preview ?>
         </p>
 
         <br>
-        	<script src="//yastatic.net/es5-shims/0.0.2/es5-shims.min.js"></script>
-			<script src="//yastatic.net/share2/share.js"></script>
-			<div class="ya-share2" data-services="vkontakte,facebook,gplus,twitter"></div>
-		<br>
+        <div class="sharethis-inline-share-buttons"></div>
+        <br>
 
         <div style="font-size: 17px; line-height: 1.6em;">
             <?= nl2br($review->text) ?>

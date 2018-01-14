@@ -13,6 +13,7 @@ class WritereviewModel extends Model
     public $title;
     public $bookid;
     public $text;
+    public $preview;
     public $userid;
 
     public function rules()
@@ -20,7 +21,8 @@ class WritereviewModel extends Model
     	return [
     		['title', 'required', 'message' => 'Вы должны ввести заголовок'],
             ['title', 'unique', 'targetClass' => 'frontend\models\Review', 'message' => 'На сайте уже существует рецензия с таким заголовком. Выберите другой'],
-    		['text', 'required', 'message' => 'Рецензия без текста?'],
+            ['text', 'required', 'message' => 'Рецензия без текста?'],
+    		['preview', 'required', 'message' => 'Это поле не может быть пустым'],
     		[['bookid', 'userid'], 'required']
     	];
     }
@@ -30,6 +32,7 @@ class WritereviewModel extends Model
         return [
             'title' => 'Введите заголовок',
             'text' => 'Здесь текст рецензии',
+            'preview' => 'Краткое описание рецензии',
         ];
     }
 
@@ -41,6 +44,7 @@ class WritereviewModel extends Model
     	$review->created_at = time();
     	$review->active = 0;
     	$review->book_id = $this->bookid;
+        $review->preview = $this->preview;
     	$review->text = $this->text;
 
         if ($review->save()) {
@@ -53,7 +57,7 @@ class WritereviewModel extends Model
 
             $reviewTrack->save();
 
-            Yii::$app->user->identity->increaseRating(10);
+            Yii::$app->user->identity->increaseRating(80);
 
             return true;
         }

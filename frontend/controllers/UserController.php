@@ -14,6 +14,8 @@ use frontend\models\UserSettingsModel;
 use yii\web\UploadedFile;
 use frontend\models\UserConfirmation;
 use frontend\models\ResetPasswordForm;
+use frontend\models\UserPinned;
+use frontend\models\Review;
 
 class UserController extends Controller
 {
@@ -31,17 +33,20 @@ class UserController extends Controller
 
       $data = null;
 
-      switch($content) {
-        case 'books':
-          $data = Book::getUserBooks(Yii::$app->user->getId());
-          break;
+      $pinned = UserPinned::find()->where(['user_id' => $userId])->asArray()->all();
 
-        case 'authors':
-          $data = Author::getUserAuthors(Yii::$app->user->getId());
-          break;
+      $pinnedReviewsArray = array_column($pinned, 'review_id');
+
+      $pinnedReviews = Review::find()->where(['id' => $pinnedReviewsArray])->all();
+
+      switch($content) {
 
         case 'settings':
           $data = new UserSettingsModel();
+          break;
+
+        case 'pinned':
+          $data = $pinnedReviews;
           break;
 
         case 'reviews':
@@ -49,9 +54,6 @@ class UserController extends Controller
           break;
 
         default:
-          $data['books'] = Book::getUserBooks(Yii::$app->user->getId(), 5);
-          $data['authors'] = Author::getUserAuthors(Yii::$app->user->getId(), 5);
-          $data['reviews'] = $user;
           $content = 'index';
           break;
       }
@@ -149,6 +151,26 @@ class UserController extends Controller
     }
     
     return $this->render('invalid-reset-code');
+  }
+
+  public function actionUnsubsribe($email = null)
+  {
+
+    $user = User::findUserByEmail($email);
+
+    if ($email == null or $email == false or $user == false)
+      return $this->render('unsubscribe-error');
+
+    if ($user->subscribe == 0)
+      return $this->render('already-unsubscribed');
+
+    $user->subscribe = 0;
+    $user->save();
+
+    return $this->render('unsubscribe', [
+
+    ]);
+  
   }
 
 }

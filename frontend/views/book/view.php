@@ -100,7 +100,7 @@ function nl2br(str) {
                         <h3 class="text-center"><?= $review->title ?></h3>
                         
                         <div class="review_short_text" data-id="<?= $review->id ?>">
-                            <?= mb_substr(strip_tags($review->text), 0, 1000, "utf-8") ?>...
+                            <?= $review->preview ?>
                         </div>
                         <br>
                         <div class="text-right" style="line-height: 30px;">

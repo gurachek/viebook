@@ -44,6 +44,7 @@ AppAsset::register($this);
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
     <link href="/images/favicon.ico" rel="icon" type="image/x-icon" />
+    <script type="text/javascript" src="//platform-api.sharethis.com/js/sharethis.js#property=5a564e0b60405000131c1b4c&product=inline-share-buttons"></script>
 </head>
 <body>
 <?php $this->beginBody() ?>
@@ -70,15 +71,22 @@ AppAsset::register($this);
         ],
     ]);
 
+    // $leftMenu = [
+    //     ['label' => 'Книги', 'url' => ['/book/list']],
+    // ];
+
+    // $leftMenu[] = ['label' => 'Авторы', 'url' => ['/author/list']];
+    // $leftMenu[] = ['label' => 'Пользователи', 'url' => ['/user/list']];
+
     $leftMenu = [
-        ['label' => 'Книги', 'url' => ['/book/list']],
+        ['label' => 'Books', 'url' => ['/book/list']],
     ];
 
-    $leftMenu[] = ['label' => 'Авторы', 'url' => ['/author/list']];
-    $leftMenu[] = ['label' => 'Пользователи', 'url' => ['/user/list']];
+    $leftMenu[] = ['label' => 'About', 'url' => ['/author/list']];
+    $leftMenu[] = ['label' => 'DONATE', 'url' => ['/user/list']];
 
-    if (Yii::$app->user->can('godmode'))
-        $leftMenu[] = ['label' => '!', 'url' => ['/god/index']];
+    // if (Yii::$app->user->can('godmode'))
+    //     $leftMenu[] = ['label' => '!', 'url' => ['/god/index']];
 
      echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-left'],
@@ -87,11 +95,11 @@ AppAsset::register($this);
 
     $menuItems = [];
     if (Yii::$app->user->isGuest) {
-        $menuItems[] = ['label' => 'Регистрация', 'url' => ['/site/signup']];
-        $menuItems[] = ['label' => 'Вход', 'url' => ['/site/login']];
+        $menuItems[] = ['label' => 'Sign up', 'url' => ['/site/signup']];
+        $menuItems[] = ['label' => 'Sign in', 'url' => ['/site/login']];
     } else {
 
-        Html::a('<span class="glyphicon glyphicon-pencil"></span> Написать',
+        Html::a('<span class="glyphicon glyphicon-pencil"></span> Publish',
                     ['/search/mycomment'], 
                     [
                         'title' => 'View Feed Comments',
@@ -101,7 +109,7 @@ AppAsset::register($this);
                    );
 
         $menuItems[] = '<li>'
-        .Html::a('&nbsp;<span class="glyphicon glyphicon-pencil"></span> Написать &nbsp;',
+        .Html::a('&nbsp;<span class="glyphicon glyphicon-pencil"></span> Publish &nbsp;',
                     ['/app/find-book'], 
                     [
                         'class' => 'btn write-review',
@@ -112,9 +120,14 @@ AppAsset::register($this);
                     ])
         .'</li>';
 
-        $menuItems[] = ['label' => 'Фид-лента', 'url' => ['feed/index']] ;
+        // $menuItems[] = ['label' => 'Фид-лента', 'url' => ['feed/index']] ;
 
-        $menuItems[] = '<li>'
+        $menuItems[] = '<li class="user-name" style="cursor: pointer; margin-top: 14px; margin-left: 10px;">'
+        . Yii::$app->user->identity->getName()
+        .'</li>';
+
+
+        $menuItems[] = '<li id="user-name_lnk">'
         .'<a href="'. Yii::$app->getUrlManager()->createAbsoluteUrl(['user/index']) .'" style="width: 30px; height: 30px;">'
         .'<div style="background: url(/images/users/'. Yii::$app->user->identity->image .')' 
         .'no-repeat center; background-size: cover; width: 30px; height: 30px;'

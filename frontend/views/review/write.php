@@ -47,6 +47,8 @@ $this->registerJs($js);
             <?php $form =  ActiveForm::begin(); ?>
                 <?= $form->field($model, 'title'); ?>
                 
+                <?= $form->field($model, 'preview')->textArea(['placeholder' => 'Enter review\'s preview..', 'rows' => '7'])->label(false); ?>
+
                 <?= $form->field($model, 'text')->widget(CKEditor::className(), [
                     'preset' => 'basic',
                 ])->label(false) ?>

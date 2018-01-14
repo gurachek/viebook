@@ -1,7 +1,7 @@
 <?php
 use yii\helpers\Html;
 
-$this->title = "Ваш личный кабинет";
+$this->title = Yii::$app->user->identity->getName() . ' | Viebook';
 
 $js = <<<JS
 	jQuery(document).ready(function() {
@@ -27,29 +27,32 @@ $this->registerJs($js);
 		<p class="text-center" style="font-size: 17px;">
 			<?= $user->getName(); ?>
 			<br>
-			<small style="color: gray;">Рейтинг: <?= $user->rating ?></small>
+			<small style="color: gray;">Rating: <?= $user->rating ?></small>
 		</p>
 
-		<ul class="user_menu">
-		<li>
-			<?= Html::a('Книги', ['user/index', 'content' => 'books']) ?>
-			<?= Html::a('<span title="Добавить книгу" style="float: right;" class="glyphicon glyphicon-plus"></span>', ['book/add']) ?>
-		</li>
+		<ul class="user_menu" style="width: 80%; margin: 0 auto;">
 
-		<li>
-			<?= Html::a('Авторы', ['user/index', 'content' => 'authors']) ?>
-			<?= Html::a('<span title="Добавить автора" style="float: right;" class="glyphicon glyphicon-plus"></span>', ['author/add']) ?>
-		</li>
+			<li>
+				<span class="glyphicon glyphicon-bell"></span>
+				<?= Html::a('Feed list', ['user/index']) ?>
+			</li>
+			<li>
+				<span class="glyphicon glyphicon-pushpin"></span>
+				<?= Html::a('Pinned', ['user/index', 'content' => 'pinned']) ?>
+			</li>
+			<li>
+				<span class="glyphicon glyphicon-list-alt"></span>
+				<?= Html::a('My Reviews', ['user/index', 'content' => 'reviews']) ?>
+			</li>
+			<li>
+				<span class="glyphicon glyphicon-cog"></span>
+				<?= Html::a('Settings', ['user/index', 'content' => 'settings']) ?>		
+			</li>
 
-		<li>
-			<?= Html::a('Мои обзоры', ['user/index', 'content' => 'reviews']) ?>
-			<?= Html::a('<span title="Написать обзор" style="float: right;" class="glyphicon glyphicon-plus"></span>', ['review/write']) ?>
-		</li>
-		<li><?= Html::a('Настройки', ['user/index', 'content' => 'settings']) ?></li>
 		</ul>
 	</div>
-	<div class="col-md-9 col-md-pull-3">
-		<div class="main-block" style="padding: 10px;">
+	<div class="col-md-9 col-md-pull-3 user-account-content">
+		<div id="main-block" class="main-block" style="padding: 10px;">
 			<?php
 				if ($user->active) {
 					echo $this->render('content-'.$content, ['data' => $data]);

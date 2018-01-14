@@ -106,7 +106,7 @@ class AppController extends Controller
         //     $finalEmailsBase = array_slice($finalEmailsBase, $done);
         // }
 
-        $email = "webcrash@mail.ua";
+        $email = "webcrash091@gmail.com";
 
         // foreach ($finalEmailsBase as $email) {
             if (

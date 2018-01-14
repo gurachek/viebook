@@ -105,6 +105,14 @@ class User extends ActiveRecord implements IdentityInterface
         throw new NotSupportedException('"findIdentityByAccessToken" is not implemented.');
     }
 
+    public static function findUserByEmail($email = null)
+    {
+        if ($email == null or $email == false)
+            return false;
+
+        return static::findOne(['email' => $email]);
+    }
+
     /**
      * Finds user by username
      *

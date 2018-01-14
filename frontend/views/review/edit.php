@@ -58,6 +58,8 @@ $this->registerJs($js);
 			<?php $form =  ActiveForm::begin(); ?>
 			    <?= $form->field($model, 'title')->textInput(['value' => $review->title])->label('Заголовок'); ?>
 
+			    <?= $form->field($model, 'preview')->textArea(['value' => $review->preview, 'rows' => '7'])->label(false); ?>
+
 			    <?= $form->field($model, 'text')->widget(CKEditor::className(), [
 			        'options' => ['value' => $review->text],
 			        'preset' => 'basic',

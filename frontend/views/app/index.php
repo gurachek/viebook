@@ -77,7 +77,7 @@ $this->registerJs($js);
 
     <div class="pin">
         <?= Html::a('
-            <div class="daily_image" style="background: url(images/books/'.$review->book['image'].') no-repeat center; background-size: contain;margin-bottom: 2px; margin-left: 2px;"></div>
+            <div class="daily_image" style="background: url(images/books/'.$review->book['image'].') no-repeat center; background-size: contain;margin-bottom: 2px; float: right"></div>
             ', ['book/view', 'id' => $review->book['id']]) ?>
         
         <h4 class="text-center"><?= $review->book['name']; ?></h4>
@@ -98,7 +98,7 @@ $this->registerJs($js);
         </div>
 
         <p>
-            <?= mb_substr(strip_tags($review->text), 0, 1000, "utf-8") ?>...
+            <?= $review->preview ?>
             <?= Html::a('Читать', ['review/view', 'id' => $review->id]) ?>
             <br>
         </p>
@@ -106,7 +106,7 @@ $this->registerJs($js);
         <?php if ($review->book->tags): ?>
             <br>
             
-            <p>
+            <p style="margin: 12px 0px ">
             
             <?php foreach($review->book->tags as $tag): ?>
                 <?php foreach($tag->name as $name): ?>
