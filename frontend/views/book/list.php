@@ -39,14 +39,15 @@ $this->registerJS($js);
 				
 				<div class="book-list">
 					<div class="short-info text-center">
-						<span class="glyphicon glyphicon-pencil"></span>
-						<?= count($book->reviews) ?>
-						&nbsp;&nbsp;&nbsp;
+						
 						<span class="glyphicon glyphicon-tags"></span>
 						<?= Html::a($book->cat['name'], ['/category', 'id' => $book->cat['id']], ['class' => 'dark-link']) ?>
 						&nbsp;&nbsp;
 						<span class="glyphicon glyphicon-scale"></span>
 						<?= Html::a($book->level['name'], ['level', 'id' => $book->level['id'], 'catid' => $book->cat['id']], ['class' => 'dark-link']) ?>
+						&nbsp;&nbsp;&nbsp;
+						<span class="glyphicon glyphicon-pencil"></span>
+						<?= count($book->reviews) ?>
 					</div>
 					<?= Html::a("
 					<div title='{$book->name}' class='image' style='
