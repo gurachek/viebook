@@ -54,9 +54,6 @@ jQuery(document).ready(function () {
             estimate_number = '.like-count';
         }
 
-        jQuery('.estimate').addClass('estimate_opacity');
-        jQuery(this).addClass('estimate_rotate');
-
         jQuery.ajax({
             url: "$url",
             method: "POST",
@@ -73,29 +70,19 @@ jQuery(document).ready(function () {
                 
                     console.log(isLeft);
 
-                    if (isLeft != 1) {
-                        jQuery('.estimate').css('display', 'none');
-                    }
-                    
-
                 } else {
 
                     var number = parseInt(jQuery(estimate_number).html());
                     number += 1;
                     jQuery(estimate_number).html(number + ' ');
 
-                    if (isLeft != 1) {
-                        jQuery('.estimate').css('display', 'none');
-                    }
                 }
 
                 jQuery('.ty_for_estimate').css('display', 'block');
-                jQuery('.estimate').removeClass('estimate_opacity');
-                jQuery('.estimate span').removeClass('estimate_rotate');
-
+                
                 jQuery('.ty_for_estimate').css('opacity', '1');
 
-                jQuery('.ty_for_estimate').animate({'opacity':'0.1'}, 1800, function () {
+                jQuery('.ty_for_estimate').animate({'opacity':'0.1'}, 2100, function () {
                     jQuery('.ty_for_estimate').slideUp(450);
                     jQuery('.estimate').css('display', 'block');
                 });
@@ -320,6 +307,32 @@ $negative = !empty($review->estimates) ? @$review->estimates[0]->numberOfNegativ
         
         </div>
 
-        <div class="lolkek"></div>
+        <?php if (Yii::$app->user->isGuest): ?>
+
+        <div class="" style="background: #f7f7f7;width:100%;margin: 0 auto; min-height: 370px;">
+        <div class="text-right" style="padding-right: 7px; padding-top: 5px; color: gray;">
+        <span class="glyphicon glyphicon-info-sign"></span> Advertisement by <u>Viebook</u></div>
+        <div class="text-center">
+        <img src="/images/logo.png" width="80" height="80" style="margin-top: 7px; margin-bottom: -15px;">
+        </div>
+        <h1 class="text-center" style="margin-bottom: -10px">Make more with less</h1>
+        <h3 class="text-center">Just sign in and get powerfull advantages</h3>
+        <p>
+        <ul style="font-size: 16px; color: #444">
+        <li>Feed list</li>
+        <li>Design personalization</li>
+        <li>Weekly email sending</li>
+        </ul>
+        </p>
+        <div class="text-center">
+        <?= Html::a('Sign up <span class="glyphicon glyphicon-new-window"></span>', ['/site/signup'], ['class' => 'btn btn-success']); ?>
+        <br>
+        <br>
+        </div>
+        </div>
+
+        <?php endif; ?>
+
+        </div>
     </div>
 </div>

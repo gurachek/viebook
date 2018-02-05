@@ -1,7 +1,7 @@
 html,
 body {
     height: 100%;
-    background: #f1f1f1;
+    background: #ececec;
     color: #333333 !important;
 }
 
@@ -298,10 +298,11 @@ a.write-review {
     background: rgba(230, 67, 84, 0.9);
     color: white;
     padding: 10px;
-    width: 50%;
-    margin: 0 auto;
-    margin-top: 10px;
-    margin-bottom: 10px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 9999;
 }
 
 .review_short_text {
@@ -380,6 +381,20 @@ a.write-review {
     width: 200px;
     float: left;
     height: 200px;
+}
+
+.pin .daily_image {
+  width: 250px;
+  float: left;
+  height: 300px;
+  margin-right: 10px;
+}
+
+.tags {
+  float: right;
+  background: #ececec;
+  width: 100%;
+  padding: 10px;
 }
 
 @media /*only screen and*/ (max-width: 1100px) {
@@ -664,18 +679,15 @@ li.display_on_mobile_book_block {
 }
 
 .pin {
+  position: relative;
   display: inline-block;
-  background: #FEFEFE;
-  border: 2px solid #FAFAFA;
-  box-shadow: 3px 2px 5px rgb(254, 254, 254);
+  background: #f7f7f7;
+  box-shadow: 0px 0px 4px 2px #ccc;
   margin: 0 2px 15px;
   -webkit-column-break-inside: avoid;
   -moz-column-break-inside: avoid;
   column-break-inside: avoid;
-  padding: 15px;
-  padding-bottom: 5px;
   color: #444;
-  background: -webkit-linear-gradient(-183deg, #F6F6F6, #FDFDFD);
   opacity: 1;
   
   -webkit-transition: all .5s ease;
@@ -709,12 +721,8 @@ li.display_on_mobile_book_block {
 
 }
 
-#columns:hover .pin:not(:hover) {
-  /*opacity: 0.4;*/
-}
-
 #columns .pin:hover {
-  background: -webkit-linear-gradient(-183deg, #FDFDFD, #F6F6F6);
+  background: -webkit-linear-gradient(-183deg, #ececec, #f7f7f7);
   /*box-shadow: 0px 0px 3px 3px #e1e1e1;*/
   /*margin: 2px;*/
 }
@@ -961,9 +969,10 @@ li.display_on_mobile_book_block {
     margin: 0 auto;
     min-height: 300px;
     background: #f7f7f7;
-    box-shadow: 0px 0px 8px 1px #ececec;
+    box-shadow: 0px 0px 4px 2px #ccc;
     color: #333;
-    margin-bottom: 25px;
+    margin-bottom: 15px;
+    background: #f7f7f7;
 }
 
 .book-list .image {
@@ -983,6 +992,16 @@ li.display_on_mobile_book_block {
     margin: 0;
     text-align: center;
     margin-top: 10px;
+}
+
+.dark-link {
+  color: #444 !important;
+}
+
+.search-input-block {
+  padding-top: 15px;
+  background: rgb(230, 67, 84);
+  margin-top: -35px;
 }
 
 /*

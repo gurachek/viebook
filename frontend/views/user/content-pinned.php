@@ -52,13 +52,19 @@ $this->registerJs($js);
 
             <div class="pull-left">
                 
-                <span class="likes"><?= $review->estimates[0]->numberOfPositive() ?></span>
+                <?php
+
+                    $likes = @$review->estimates[0] ? @$review->estimates[0]->numberOfPositive() : 0; 
+
+                ?>
+
                 <span class="glyphicon glyphicon-heart-empty"></span>
+                <span class="likes"><?= $likes ?></span>
 
                 &nbsp;
 
-                <span class="views"><?= $review->views ?></span>
                 <span class="glyphicon glyphicon-eye-open"></span>
+                <span class="views"><?= $review->views ?></span>
             
             </div>
             

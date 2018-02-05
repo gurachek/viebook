@@ -7,11 +7,12 @@ $js = <<<JS
 
 jQuery(document).ready(function () {
 	jQuery('.image').hover(function () {
-		jQuery('.image').css('background-size', 'contain');
+		jQuery(this).css('background-size', 'contain');
 	});
 	jQuery('.image').on('mouseleave', function () {
-		jQuery('.image').css('background-size', 'cover');
+		jQuery(this).css('background-size', 'cover');
 	});
+	jQuery('.container').removeClass('main-block');
 });
 
 JS;
@@ -42,10 +43,10 @@ $this->registerJS($js);
 						<?= count($book->reviews) ?>
 						&nbsp;&nbsp;&nbsp;
 						<span class="glyphicon glyphicon-tags"></span>
-						<?= Html::a($book->cat['name'], ['/category', 'id' => $book->cat['id']]) ?>
+						<?= Html::a($book->cat['name'], ['/category', 'id' => $book->cat['id']], ['class' => 'dark-link']) ?>
 						&nbsp;&nbsp;
 						<span class="glyphicon glyphicon-scale"></span>
-						<?= Html::a($book->level['name'], ['level', 'id' => $book->level['id'], 'catid' => $book->cat['id']]) ?>
+						<?= Html::a($book->level['name'], ['level', 'id' => $book->level['id'], 'catid' => $book->cat['id']], ['class' => 'dark-link']) ?>
 					</div>
 					<?= Html::a("
 					<div title='{$book->name}' class='image' style='
@@ -72,10 +73,10 @@ $this->registerJS($js);
 	</div>
 
 <?php endif; ?>
+<!-- 
+<div class="col-lg-3 col-md-4 col-xs-6" style="padding: 0px; margin: 0px;">
 
-<!-- <div class="col-lg-3 col-md-4 col-xs-6" style="padding: 0px; margin: 0px;">
-
-<div class="" style="background: #ececec;width:95%;margin: 0 auto; min-height: 370px;">
+<div class="" style="background: #f7f7f7;width:95%;margin: 0 auto; min-height: 370px;">
 <div class="text-right" style="padding-right: 7px; padding-top: 5px; color: gray;">
 <span class="glyphicon glyphicon-info-sign"></span> Advertisement by <u>Viebook</u></div>
 <div class="text-center">
@@ -91,11 +92,12 @@ $this->registerJS($js);
 </ul>
 </p>
 <div class="text-center">
-<button class="btn btn-success">Sign up
-<span class="glyphicon glyphicon-new-window"></span></button>
+<a href="/site/signup" class="btn btn-success">Sign up 
+<span class="glyphicon glyphicon-new-window"></span></a>
 <br>
 <br>
 </div>
 </div>
 
-</div> -->
+</div>
+-->

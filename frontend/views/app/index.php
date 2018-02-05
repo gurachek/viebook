@@ -15,10 +15,22 @@ jQuery(document).ready(function () {
     jQuery('.loader').css('display', 'none');
     jQuery('.viebutton').on('click', function () {
         if (jQuery('#searchmodel-search').val() != '') {
-            jQuery('#search_form').fadeTo(1000, 0.3);
+            jQuery('#search_form').fadeTo(1500, 0.3);
             jQuery('.loader').css('display', 'block');
         }
     });
+
+    jQuery('.pin .daily_image').hover(function () {
+        jQuery(this).css('background-size', 'contain');
+    });
+    
+    jQuery('.pin .daily_image').mouseout(function () {
+        jQuery(this).css('background-size', 'cover');
+    });
+
+    jQuery('.main-block').removeClass('container');
+    jQuery('.main-block').addClass('container-fluid');
+    jQuery('.container-fluid').removeClass('main-block');
 });
 
 JS;
@@ -34,7 +46,7 @@ $this->registerJs($js);
 <div class="loader" style="display: none; position: absolute; top: 15%; left: 44%; background: url(images/loader.gif) no-repeat; width: 200px; height: 100px; z-index: 9999;">
     
 </div>
-<div class="row">
+<div class="row search-input-block">
     <div class="col-md-8 col-md-offset-2">
         <?php $form = ActiveForm::begin([
             'options' => [
@@ -77,9 +89,11 @@ $this->registerJs($js);
 
     <div class="pin">
         <?= Html::a('
-            <div class="daily_image" style="background: url(images/books/'.$review->book['image'].') no-repeat center; background-size: contain;margin-bottom: 2px; float: right"></div>
+            <div class="daily_image" style="background: url(images/books/'.$review->book['image'].') no-repeat center; background-size: cover"></div>
             ', ['book/view', 'id' => $review->book['id']]) ?>
         
+        <div style="padding: 15px; padding-bottom: 0">
+
         <h4 class="text-center"><?= $review->book['name']; ?></h4>
 
         <?php
@@ -100,20 +114,20 @@ $this->registerJs($js);
         <p>
             <?= $review->preview ?>
             <?= Html::a('Читать', ['review/view', 'id' => $review->id]) ?>
-            <br>
         </p>
 
+        </div>
+
         <?php if ($review->book->tags): ?>
-            <br>
-            
-            <p style="margin: 12px 0px ">
+
+            <div class="tags">
             
             <?php foreach($review->book->tags as $tag): ?>
                 <?php foreach($tag->name as $name): ?>
                     <?= Html::a($name['name'], ['search/tag', 'id' => $name->id], ['class' => 'book-block-tag']) ?>
                 <?php endforeach; ?>
             <?php endforeach; ?>
-            </p>
+            </div>
 
         <?php endif; ?>
     </div>
@@ -150,7 +164,7 @@ if (!is_array($search_results)) {
 
                     <?php if (@$book->reviews[0]): ?>
 
-                        <?= Html::a('<div class="image" style="background: url(/images/books/'.$book->image.') no-repeat; background-size: contain;" title="'. $book->name .'"></div>', ['review/view', 'id' => @$book->reviews[0]['id']]); ?>
+                        <?= Html::a('<div class="image" style="background: url(/images/books/'.$book->image.') no-repeat; background-size: cover;" title="'. $book->name .'"></div>', ['review/view', 'id' => @$book->reviews[0]['id']]); ?>
                 
                     <?php else: ?>
 

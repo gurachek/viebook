@@ -82,8 +82,8 @@ AppAsset::register($this);
         ['label' => 'Books', 'url' => ['/book/list']],
     ];
 
-    $leftMenu[] = ['label' => 'About', 'url' => ['/author/list']];
-    $leftMenu[] = ['label' => 'DONATE', 'url' => ['/user/list']];
+    $leftMenu[] = ['label' => 'About', 'url' => ['/site/about']];
+    //$leftMenu[] = ['label' => 'DONATE', 'url' => ['/site/donate']];
 
     // if (Yii::$app->user->can('godmode'))
     //     $leftMenu[] = ['label' => '!', 'url' => ['/god/index']];
