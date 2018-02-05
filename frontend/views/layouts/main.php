@@ -11,6 +11,8 @@ use frontend\assets\AppAsset;
 use common\widgets\Alert;
 use yii\bootstrap\Modal;
 
+$url = Yii::$app->getUrlManager()->createAbsoluteUrl(['site/opinion']);
+
 $customJs = <<<JS
 
 jQuery(document).ready(function () {
@@ -22,6 +24,32 @@ jQuery(document).ready(function () {
     jQuery('.close-promo .sure').click(function () {
         jQuery('.promo').css('display', 'none');
         $.session.set('promo_closed', true);
+    });
+
+    if ($.session.get('design_opinion')) {
+        jQuery('.opinion').css('display', 'none');
+    }    
+    
+    jQuery('.opinion .opinion-button').click(function () {
+
+        var id = jQuery(this).data('id');
+
+        $.ajax({
+            url: '$url',
+            data: {
+                'id': id,
+            },
+            method: 'POST',
+            success: function (data) {
+                if (data) {
+                    alert(true);
+                }
+            },
+        });
+
+        jQuery('.ty_for_opinion').css('display', 'block');
+        jQuery('.ty_for_opinion').fadeOut(2200);
+        $.session.set('design_opinion', true);
     });
 
 });
@@ -149,6 +177,16 @@ AppAsset::register($this);
     </div>
 
     <div class="free-space"></div>
+
+    <div class="ty_for_opinion">
+        Спасибо!
+    </div>
+
+    <div class="opinion" style="margin-bottom: 20px; width: 100%; text-align: center;">
+         <p>Вам нравится новый дизайн?</p>
+         <button class="opinion-button btn btn-success" data-id="1">Да</button>
+         <button class="opinion-button btn btn-danger" data-id="0">Нет</button>
+    </div>
 
     <?php if (!Yii::$app->user->getId()): ?>
 

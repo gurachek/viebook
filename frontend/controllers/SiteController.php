@@ -13,6 +13,7 @@ use frontend\models\SignupForm;
 use frontend\models\Email;
 use yii\helpers\Json;
 use frontend\models\ContactForm;
+use frontend\models\DesignToughts;
 
 /**
  * Site controller
@@ -192,6 +193,25 @@ class SiteController extends Controller
     public function actionAbout()
     {
         return $this->render('about');
+    }
+
+    public function actionOpinion()
+    {
+        if (Yii::$app->request->isAjax) {
+            
+            $data = Yii::$app->request->post();
+
+            $opinion = new DesignToughts();
+            $opinion->user_id = @Yii::$app->user->getId() ?? 0;
+            $opinion->time = time();
+            $opinion->opinion = $data['id'];
+
+            if ($opinion->save())
+                return true;
+
+        }
+
+        return false;
     }
 
 }
