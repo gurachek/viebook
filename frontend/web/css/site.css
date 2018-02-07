@@ -1042,8 +1042,8 @@ li.display_on_mobile_book_block {
 
 @media (min-width: 767px) {
   .book-list-col {
-    padding: 0px;
-    margin: 0px;
+    /*padding: 0px;
+    margin: 0px;*/
   }
 }
 
