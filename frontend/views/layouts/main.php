@@ -77,13 +77,13 @@ AppAsset::register($this);
 
 <?php endif; ?>
 
-    <meta name="google-site-verification" content="Rk-U-fzLha7dGP0kyRnzatleu8xBBfBP0xcYSG6Lajs" />sal;d'asd;''
     <meta charset="<?= Yii::$app->charset ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="yandex-verification" content="07e19644d4902619" />
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
+    <meta name="google-site-verification" content="Rk-U-fzLha7dGP0kyRnzatleu8xBBfBP0xcYSG6Lajs" />
     <link href="/images/favicon.ico" rel="icon" type="image/x-icon" />
     <script type="text/javascript" src="//platform-api.sharethis.com/js/sharethis.js#property=5a564e0b60405000131c1b4c&product=inline-share-buttons"></script>
 </head>
