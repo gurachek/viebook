@@ -42,14 +42,15 @@ jQuery(document).ready(function () {
             method: 'POST',
             success: function (data) {
                 if (data) {
-                    alert(true);
+                    jQuery('.opinion').hide();
+
+                    jQuery('.ty_for_opinion').css('display', 'block');
+                    jQuery('.ty_for_opinion').fadeOut(2200);
+
+                    $.session.set('design_opinion', true);
                 }
             },
         });
-
-        jQuery('.ty_for_opinion').css('display', 'block');
-        jQuery('.ty_for_opinion').fadeOut(2200);
-        $.session.set('design_opinion', true);
     });
 
 });
@@ -182,10 +183,12 @@ AppAsset::register($this);
         Спасибо!
     </div>
 
-    <div class="opinion" style="margin-bottom: 20px; width: 100%; text-align: center;">
-         <p>Вам нравится новый дизайн?</p>
-         <button class="opinion-button btn btn-success" data-id="1">Да</button>
-         <button class="opinion-button btn btn-danger" data-id="0">Нет</button>
+    <div class="opinion">
+         <p>
+             Вам нравится новый дизайн?
+             <button class="opinion-button btn btn-success" data-id="1">Да</button>
+             <button class="opinion-button btn btn-danger" data-id="0">Нет</button>
+         </p>
     </div>
 
     <?php if (!Yii::$app->user->getId()): ?>

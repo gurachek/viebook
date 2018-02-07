@@ -33,9 +33,11 @@ $this->registerJS($js);
 
 	<div class="row">
 
+		<?php $books[1] = $books[0];$books[2] = $books[0]; $books[3] = $books[0]; $books[4] = $books[0]; ?>
+
 		<?php foreach($books as $book): ?>
 
-			<div class="col-lg-3 col-md-4 col-xs-6" style="padding: 0px; margin: 0px;">
+			<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12" style="padding: 0px; margin: 0px;">
 				
 				<div class="book-list">
 					<div class="short-info text-center">
