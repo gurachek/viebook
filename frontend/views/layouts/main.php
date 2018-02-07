@@ -65,7 +65,7 @@ AppAsset::register($this);
 <!DOCTYPE html>
 <html lang="<?= Yii::$app->language ?>">
 <head>
-<?php if (trim(Yii::$app->getUrlManager()->createAbsoluteUrl(['/'])) == 'http://viebook.ru'): ?>
+<?php if (trim(Yii::$app->getUrlManager()->createAbsoluteUrl(['/'])) == 'https://viebook.ru/'): ?>
 
     <!-- Google Tag Manager -->
     <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
