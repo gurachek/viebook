@@ -214,4 +214,23 @@ class SiteController extends Controller
         return false;
     }
 
+    public function actionTrackAction()
+    {
+        if (Yii::$app->request->isAjax) {
+            
+            $data = Yii::$app->request->post();
+
+            $opinion = new DesignToughts();
+            $opinion->user_id = @Yii::$app->user->getId() ?? 0;
+            $opinion->time = time();
+            $opinion->opinion = $data['id'];
+
+            if ($opinion->save())
+                return true;
+
+        }
+
+        return false;
+    }
+
 }
