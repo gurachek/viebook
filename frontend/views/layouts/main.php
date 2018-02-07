@@ -77,7 +77,7 @@ AppAsset::register($this);
 
 <?php endif; ?>
 
-    <meta name="google-site-verification" content="kjR3xvzotZkHnl8Y6NC4iF0XF_PUGrd8UMwLziGEenk" />
+    <meta name="google-site-verification" content="Rk-U-fzLha7dGP0kyRnzatleu8xBBfBP0xcYSG6Lajs" />
     <meta charset="<?= Yii::$app->charset ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="yandex-verification" content="07e19644d4902619" />
