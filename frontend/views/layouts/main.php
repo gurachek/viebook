@@ -65,7 +65,7 @@ AppAsset::register($this);
 <!DOCTYPE html>
 <html lang="<?= Yii::$app->language ?>">
 <head>
-<?php if (trim(Yii::$app->getUrlManager()->createAbsoluteUrl(['/'])) == 'https://viebook.ru/'): ?>
+<?php if (trim(Yii::$app->getUrlManager()->createAbsoluteUrl(['/'])) != 'http://vie.local/'): ?>
 
     <!-- Google Tag Manager -->
     <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -90,7 +90,7 @@ AppAsset::register($this);
 <body>
 <?php $this->beginBody() ?>
 
-<?php if (trim(Yii::$app->getUrlManager()->createAbsoluteUrl(['/'])) == 'http://viebook.ru'): ?>
+<?php if (trim(Yii::$app->getUrlManager()->createAbsoluteUrl(['/'])) != 'http://vie.local/'): ?>
     
     <!-- Google Tag Manager (noscript) -->
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PTWNVMK"
