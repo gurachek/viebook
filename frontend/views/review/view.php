@@ -331,9 +331,9 @@ $negative = !empty($review->estimates) ? @$review->estimates[0]->numberOfNegativ
 		<img src="/images/book.png" width="80" height="80" style="margin-top: 7px; margin-bottom: -15px;">
 	</div>
 	<br>
-	<h1 class="text-center" style="margin-bottom: -10px">Make more with less</h1>
+	<h1 class="text-center" style="margin-bottom: -10px">Do more with less time</h1>
 	<br>
-	<h3 class="text-center">Just sign in and get powerfull advantages</h3>
+	<h3 class="text-center">Just sign up and get powerfull advantages</h3>
 	<br>
 	<p>
 		<ul class="list-unstyled" style="margin-left: 50px;font-size: 16px;">
@@ -357,6 +357,6 @@ $negative = !empty($review->estimates) ? @$review->estimates[0]->numberOfNegativ
 	</p>
 	<br>
 	<div class="text-center">
-		<?= Html::a('Sign up <span class="glyphicon glyphicon-new-window"></span>', ['/site/signup'], ['class' => 'btn btn-success']); ?>
+		<?= Html::a('Sign up <span class="glyphicon glyphicon-new-window"></span>', ['/signup'], ['class' => 'btn btn-success']); ?>
 	</div>
 </div>
