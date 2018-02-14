@@ -8,6 +8,8 @@ use yii2mod\selectize\Selectize;
 
 $this->title = "Добавить книгу на сайт";
 
+$this->registerJs("jQuery('.layout').addClass('main-block')");
+
 ?>
 
 <?php if (Yii::$app->session->hasFlash('success_book_add')): ?>

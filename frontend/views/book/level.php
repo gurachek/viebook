@@ -11,6 +11,8 @@ $title .= ' на Viebook';
 
 $this->title = $title;
 
+$this->registerJs("jQuery('.layout').addClass('main-block')");
+
 ?>
 
 <h3 class="text-left">

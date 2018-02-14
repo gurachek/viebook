@@ -3,6 +3,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 $this->title = "Восстановление пароля";
+$this->registerJs("jQuery('.layout').addClass('main-block')");
 ?>
 
 <div class="site-login">

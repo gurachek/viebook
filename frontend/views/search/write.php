@@ -19,6 +19,8 @@ jQuery(document).ready(function () {
     });
 });
 
+$this->registerJs("jQuery('.layout').addClass('main-block')");
+
 JS;
 
 $this->registerJs($js);

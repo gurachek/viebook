@@ -1,5 +1,6 @@
 <?php
 $this->title = "О проекте";
+$this->registerJs("jQuery('.layout').addClass('main-block')");
 ?>
 
 <div class="row">

@@ -2,6 +2,9 @@
 
 $this->title = 'Ну что вы опять наделали? Viebook';
 
+$this->registerJs("jQuery('.layout').addClass('main-block')");
+
+
 ?>
 
 <p class="text-center">

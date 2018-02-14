@@ -1,5 +1,6 @@
 <?php
 $this->title = "Неверный код подтверждения";
+$this->registerJs("jQuery('.layout').addClass('main-block')");
 ?>
 
 <h1 class="text-center">Неверный код подтверждения</h1>

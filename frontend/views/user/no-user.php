@@ -1,6 +1,7 @@
 <?php
 use yii\helpers\Html;
 $this->title = "На сайте нет такого пользователя";
+$this->registerJs("jQuery('.layout').addClass('main-block')");
 ?>
 <h4 class="text-center">На сайте нет такого пользователя</h4>
 <p class="text-center">

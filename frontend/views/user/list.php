@@ -2,6 +2,7 @@
 use yii\helpers\Html;
 
 $this->title = "Пользователи Viebook";
+$this->registerJs("jQuery('.layout').addClass('main-block')");
 ?>
 
 <h3 class="text-center">Пользователи</h3>

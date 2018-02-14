@@ -4,6 +4,7 @@ use yii\bootstrap\ActiveForm;
 
 $this->title = 'Авторизация на Viebook';
 $this->params['breadcrumbs'][] = $this->title;
+$this->registerJs("jQuery('.layout').addClass('main-block')");
 ?>
 
 <?php if ($message): ?>

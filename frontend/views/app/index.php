@@ -16,7 +16,7 @@ jQuery(document).ready(function () {
     jQuery('.viebutton').on('click', function () {
         if (jQuery('#searchmodel-search').val() != '') {
             jQuery('#search_form').fadeTo(1500, 0.3);
-            jQuery('.loader').css('display', 'block');
+            // jQuery('.loader').css('display', 'block');
         }
     });
 
@@ -28,9 +28,10 @@ jQuery(document).ready(function () {
         jQuery(this).css('background-size', 'cover');
     });
 
-    jQuery('.main-block').removeClass('container');
-    jQuery('.main-block').addClass('container-fluid');
-    jQuery('.container-fluid').removeClass('main-block');
+    jQuery('.layout').removeClass('container');
+    jQuery('.layout').addClass('container-fluid');
+
+    jQuery('.free-space').css('margin-top', '-10px');
 });
 
 JS;
@@ -43,10 +44,8 @@ $this->registerJs($js);
 
 <?php if (!$search_results): ?>
 <br>
-<div class="loader" style="display: none; position: absolute; top: 15%; left: 44%; background: url(images/loader.gif) no-repeat; width: 200px; height: 100px; z-index: 9999;">
-    
-</div>
-<div class="row search-input-block">
+
+<div class="row search-input-block2" style="display: none;">
     <div class="col-md-8 col-md-offset-2">
         <?php $form = ActiveForm::begin([
             'options' => [
@@ -79,7 +78,8 @@ $this->registerJs($js);
     </div>
 </div>
 
-<br>
+<h3 style="margin-top: 0; color: #444">Вам может понравиться</h3>
+<div class="orange-line"></div>
 
 <?php if ($weeklyReviews): ?>
 
@@ -87,7 +87,7 @@ $this->registerJs($js);
 
 <?php foreach($weeklyReviews as $review): ?>
 
-    <div class="pin">
+    <div class="pin shadow">
         <?= Html::a('
             <div class="daily_image" style="background: url(images/books/'.$review->book['image'].') no-repeat center; background-size: cover"></div>
             ', ['book/view', 'id' => $review->book['id']]) ?>

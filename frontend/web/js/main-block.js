@@ -1,0 +1,1 @@
+jQuery('.container').addClass('main-block');

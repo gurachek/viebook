@@ -10,6 +10,9 @@ $meta = [
 
 \Yii::$app->view->registerMetaTag($meta);
 $this->title = "Рецензия была удалена";
+
+$this->registerJs("jQuery('.layout').addClass('main-block')");
+
 ?>
 <h4 class="text-center">Ваша рецензия удалена</h4>
 <p class="text-center">

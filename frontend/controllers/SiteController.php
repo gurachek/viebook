@@ -144,7 +144,12 @@ class SiteController extends Controller
     {
         Yii::$app->user->logout();
 
-        return $this->redirect(Yii::$app->request->referrer);
+        return $this->redirect(['/goodbye']);
+    }
+
+    public function actionGoodbye()
+    {
+        return $this->render('goodbye');
     }
 
     /**
@@ -214,23 +219,15 @@ class SiteController extends Controller
         return false;
     }
 
-    public function actionTrackAction()
+    public function actionPricing()
     {
-        if (Yii::$app->request->isAjax) {
-            
-            $data = Yii::$app->request->post();
+        return $this->render('pricing');
+    }
 
-            $opinion = new DesignToughts();
-            $opinion->user_id = @Yii::$app->user->getId() ?? 0;
-            $opinion->time = time();
-            $opinion->opinion = $data['id'];
-
-            if ($opinion->save())
-                return true;
-
-        }
-
-        return false;
+    public function actionOffline()
+    {
+        $this->layout = 'outsite';
+        return $this->render('offline');
     }
 
 }

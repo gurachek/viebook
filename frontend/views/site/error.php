@@ -8,6 +8,7 @@
 use yii\helpers\Html;
 
 $this->title = $name;
+$this->registerJs("jQuery('.layout').addClass('main-block')");
 ?>
 <div class="site-error">
 

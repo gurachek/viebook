@@ -27,6 +27,7 @@ JS;
 
 $this->registerJs($js);
 
+$this->registerJs("jQuery('.layout').addClass('main-block')");
 ?>
     <h2 class="text-center">Новые рецензии</h2>
 

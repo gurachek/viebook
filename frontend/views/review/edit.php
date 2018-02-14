@@ -12,9 +12,8 @@ $js = <<<JS
 //CKEDITOR.config.autoGrow_maxHeight = 600;
 //CKEDITOR.config.autoGrow_bottomSpace = 50;
 
-jQuery('.container').removeClass('main-block');
-jQuery('.container').addClass('container-fluid');
-jQuery('.container-fluid').removeClass('container');
+jQuery('.layout').removeClass('container');
+jQuery('.layout').addClass('container-fluid');
 
 JS;
 

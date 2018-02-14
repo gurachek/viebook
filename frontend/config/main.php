@@ -40,9 +40,21 @@ return [
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
+            'enableStrictParsing' => false,
             'rules' => [
                 '' => 'app/index',
                 '<controller:\w+>/<action:\w+>/' => '<controller>/<action>',
+
+                'books' => 'book/list',
+                'users' => 'user/list',
+                'authors' => 'author/list',
+                'me' => 'user/index',
+
+                // 'topics' => ''
+
+                'reset-password-request' => 'site/reset-password-request',
+
+                '<action:\w+>' => 'site/<action>',
             ],
         ],
         'mail' => [
@@ -51,8 +63,8 @@ return [
             'transport' => [
                 'class' => 'Swift_SmtpTransport',
                 'host' => 'scp62.hosting.reg.ru',
-                'username' => 'support@viebook.ru',
-                'password' => 'nirvanadeviant1K',
+                'username' => 'no-reply@u0354827.cp.regruhosting.ru',
+                'password' => '^Bf-K(#~1Wg;',
                 'port' => '465',
                 'encryption' => 'ssl',
                 'streamOptions' => [

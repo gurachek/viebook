@@ -1,3 +1,6 @@
+<?php
+$this->title = "Invalid email address.. | Viebook";
+?>
 <h3 class="text-center">Invalid email address specified in the request</h3>
 
 <?php if (Yii::$app->user->getId()): ?>

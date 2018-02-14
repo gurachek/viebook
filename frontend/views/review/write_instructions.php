@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 $this->title = 'Написать рецензию - Viebook';
+$this->registerJs("jQuery('.layout').addClass('main-block')");
 
 ?>
 

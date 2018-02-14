@@ -3,6 +3,8 @@ use yii\widgets\ActiveForm;
 use yii\helpers\Html;
 
 $this->title = "Добавить автора на сайт";
+
+$this->registerJs("jQuery('.layout').addClass('main-block')");
 ?>
 
 <?php if (Yii::$app->session->hasFlash('success_author_add')): ?>

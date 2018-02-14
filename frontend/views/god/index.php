@@ -2,6 +2,8 @@
 use yii\helpers\Html;
 
 $this->title = 'Admin panel';
+
+$this->registerJs("jQuery('.layout').addClass('main-block')");
 ?>
 
 <div class="row">

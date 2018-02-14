@@ -8,6 +8,7 @@ use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 
 $this->title = 'Регистрация на Viebook';
+$this->registerJs("jQuery('.layout').addClass('main-block')");
 ?>
 <div class="site-signup">
     <h3 class="text-center">Регистрация</h3>

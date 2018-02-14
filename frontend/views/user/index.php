@@ -3,14 +3,6 @@ use yii\helpers\Html;
 
 $this->title = Yii::$app->user->identity->getName() . ' | Viebook';
 
-$js = <<<JS
-	jQuery(document).ready(function() {
-		jQuery('div .container').removeClass('main-block');
-	});
-JS;
-
-$this->registerJs($js);
-
 ?>
 
 <div class="row">

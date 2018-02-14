@@ -12,7 +12,8 @@ jQuery(document).ready(function () {
 	jQuery('.image').on('mouseleave', function () {
 		jQuery(this).css('background-size', 'cover');
 	});
-	jQuery('.container').removeClass('main-block');
+	
+	jQuery('.free-space').css('margin-top', '-20px');
 });
 
 JS;
@@ -20,85 +21,17 @@ JS;
 $this->registerJS($js);
 ?>
 
-<h3 class="text-center">Список всех книг, которые есть на сайте на данный момент</h3>
-<br>
+<h3>Список всех книг, которые есть на сайте на данный момент</h3>
+<div class="orange-line"></div>
 
 <?php if (!$books): ?>
 
 	<p class="text-center">
-			Я удалил все, чтобы заново загрузить только необходимые пользователям книги 
+			На сайте нет книг 
 	</p>
 
 <?php else: ?>
 
-	<div class="row">
-
-		<?php foreach($books as $book): ?>
-
-			<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 book-list-col">
-				
-				<div class="book-list">
-					<div class="short-info text-center">
-						
-						<span class="glyphicon glyphicon-tags"></span>
-						<?= Html::a($book->cat['name'], ['/category', 'id' => $book->cat['id']], ['class' => 'dark-link']) ?>
-						&nbsp;&nbsp;
-						<span class="glyphicon glyphicon-scale"></span>
-						<?= Html::a($book->level['name'], ['level', 'id' => $book->level['id'], 'catid' => $book->cat['id']], ['class' => 'dark-link']) ?>
-						&nbsp;&nbsp;&nbsp;
-						<span class="glyphicon glyphicon-pencil"></span>
-						<?= count($book->reviews) ?>
-					</div>
-					<?= Html::a("
-					<div title='{$book->name}' class='image' style='
-						background: url(/images/books/{$book->image}) no-repeat;
-	    				background-position: center center;
-	    				background-size: cover;
-    				'></div>", ['book/view', 'id' => $book->id]);
-					?>
-					<div class="title"><h3 class="text-center">Good to great</h3></div>
-					<div class="view">
-						<?php if (@$book->reviews[0]): ?>
-							<span class="glyphicon glyphicon-link"></span>
-							<?= Html::a('View best review', ['review/view', 'id' => $book->reviews[0]['id']]); ?>
-						<?php else: ?>
-							No reviews for this book yet.
-						<?php endif; ?>
-					</div>
-				</div>
-
-			</div>
-
-		<?php endforeach; ?>
-
-	</div>
+	<?= $this->render('/parts/_book', ['books' => $books]); ?>
 
 <?php endif; ?>
-<!-- 
-<div class="col-lg-3 col-md-4 col-xs-6" style="padding: 0px; margin: 0px;">
-
-<div class="" style="background: #f7f7f7;width:95%;margin: 0 auto; min-height: 370px;">
-<div class="text-right" style="padding-right: 7px; padding-top: 5px; color: gray;">
-<span class="glyphicon glyphicon-info-sign"></span> Advertisement by <u>Viebook</u></div>
-<div class="text-center">
-<img src="/images/logo.png" width="80" height="80" style="margin-top: 7px; margin-bottom: -15px;">
-</div>
-<h1 class="text-center" style="margin-bottom: -10px">Make more with less</h1>
-<h3 class="text-center">Just sign in and get powerfull advantages</h3>
-<p>
-<ul style="font-size: 16px; color: #444">
-<li>Feed list</li>
-<li>Design personalization</li>
-<li>Weekly email sending</li>
-</ul>
-</p>
-<div class="text-center">
-<a href="/site/signup" class="btn btn-success">Sign up 
-<span class="glyphicon glyphicon-new-window"></span></a>
-<br>
-<br>
-</div>
-</div>
-
-</div>
--->

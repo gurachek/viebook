@@ -2,6 +2,9 @@
 use yii\helpers\Html;
 
 $this->title = "Cписок авторов, доступных на Viebook";
+
+$this->registerJs("jQuery('.layout').addClass('main-block')");
+
 ?>
 
 <h3 class="text-center">Список всех авторов, которые есть на сайте на данный момент</h3>

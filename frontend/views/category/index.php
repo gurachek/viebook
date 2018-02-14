@@ -13,6 +13,8 @@ JS;
 
 $this->registerJs($js);
 
+$this->registerJs("jQuery('.layout').addClass('main-block')");
+
 ?>
 
 <?php if ($books): ?>

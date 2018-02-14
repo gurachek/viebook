@@ -12,17 +12,7 @@ class AuthorController extends Controller
 {
   public function actionIndex($id = null)
   {
-    return $this->redirect(['author/list']);
-      
-    /*
-      if ($id !== null) return Yii::$app->runAction('author/view', ['id' => $id]);
-
-      $authors = Author::find()->all();
-
-      return $this->render('index', [
-          'authors' => $authors,
-      ]);
-    */
+    return $this->redirect(['/authors']);
   }
 
   public function actionView($id = null)

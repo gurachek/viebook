@@ -2,6 +2,7 @@
 use yii\helpers\Html;
 
 $this->title = "Удаление рецензии";
+$this->registerJs("jQuery('.layout').addClass('main-block')");
 ?>
 
 <h4 class="text-center">Вы не можете удалить свою рецензию на эту книгу, так как не писали ее</h4>

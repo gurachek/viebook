@@ -3,14 +3,6 @@ use yii\helpers\Html;
 
 $this->title = $author->name . " - Viebook";
 
-$js = <<<JS
-
-jQuery('.container').removeClass('main-block');
-
-JS;
-
-$this->registerJs($js);
-
 ?>
 
 <div class="row">

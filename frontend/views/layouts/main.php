@@ -53,6 +53,47 @@ jQuery(document).ready(function () {
         });
     });
 
+    jQuery('.opinion .op-close').click(function () {
+        jQuery('.opinion').hide();
+        $.session.set('design_opinion', true);
+    });
+
+    jQuery('.search-icon').click(function () {
+        jQuery('.search-input-block').fadeIn(500);
+    });
+
+    jQuery('.search-input-block').click(function() {
+    
+        jQuery('.search-input-block').fadeOut(500);
+        jQuery('form#search-form:first').focus();
+
+    }).children().click(function(e) {
+    
+      return false;
+   
+    });
+
+    var lastScrollTop = 0;
+    $(window).scroll(function (event) {
+        var st = $(this).scrollTop();
+        
+        if (st > lastScrollTop){
+        
+            // downscroll code
+        
+        } else {
+        
+            // upscroll code
+        
+        }
+
+        lastScrollTop = st;
+    });
+
+    jQuery('.search').keyup(function (event) {
+        jQuery('.search-content').delay(300).fadeIn(1600);
+    });
+
 });
 
 JS;
@@ -77,6 +118,7 @@ AppAsset::register($this);
 
 <?php endif; ?>
 
+    <link rel="alternate" href="https://viebook.ru" hreflang="ru-RU" />
     <meta charset="<?= Yii::$app->charset ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="yandex-verification" content="07e19644d4902619" />
@@ -89,6 +131,8 @@ AppAsset::register($this);
 </head>
 <body>
 <?php $this->beginBody() ?>
+
+<span class="icon-a"></span>
 
 <?php if (trim(Yii::$app->getUrlManager()->createAbsoluteUrl(['/'])) != 'http://vie.local/'): ?>
     
@@ -109,6 +153,30 @@ AppAsset::register($this);
     </script>
 <?php endif; ?>
 
+<div class="search-input-block">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <form name="search-form" id="searchform" class="search-form">
+
+                <div style="width: 80%; float: left; padding-right: 5px;">
+                    <input type="text" name="search" class="form-control search" placeholder="Начните вводить название книги...">
+                </div>
+
+                <button type="submit" class="btn viebutton"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+
+            </form>
+        </div>
+    </div>
+    <div class="row search-content">
+        <div class="col-md-12">
+            <br>
+            <br>
+            <br>
+            <h3 class="text-center" style="color: white;">Сайт только наполняется контентом.</h3>
+        </div>
+    </div>
+</div>
+
 <div class="wrap" style="margin-top: 5px;">
     <?php
     NavBar::begin([
@@ -128,10 +196,17 @@ AppAsset::register($this);
     // $leftMenu[] = ['label' => 'Пользователи', 'url' => ['/user/list']];
 
     $leftMenu = [
-        ['label' => 'Books', 'url' => ['/book/list']],
+        ['label' => 'Books', 'url' => ['/books']],
     ];
 
-    $leftMenu[] = ['label' => 'About', 'url' => ['/site/about']];
+    $leftMenu[] = ['label' => 'About', 'url' => ['/about']];
+    
+    $leftMenu[] = '<li>'
+    .'<a class="search-icon" href="#search">'
+    .'<span class="glyphicon glyphicon-search"></span>'
+    .'</a>'
+    .'</li>';
+    
     //$leftMenu[] = ['label' => 'DONATE', 'url' => ['/site/donate']];
 
     // if (Yii::$app->user->can('godmode'))
@@ -144,8 +219,8 @@ AppAsset::register($this);
 
     $menuItems = [];
     if (Yii::$app->user->isGuest) {
-        $menuItems[] = ['label' => 'Sign up', 'url' => ['/site/signup']];
-        $menuItems[] = ['label' => 'Sign in', 'url' => ['/site/login']];
+        $menuItems[] = ['label' => 'Sign up', 'url' => ['/signup'], 'options' => ['class' => 'signup']];
+        $menuItems[] = ['label' => 'Login', 'url' => ['/login']];
     } else {
 
         Html::a('<span class="glyphicon glyphicon-pencil"></span> Publish',
@@ -177,7 +252,7 @@ AppAsset::register($this);
 
 
         $menuItems[] = '<li id="user-name_lnk">'
-        .'<a href="'. Yii::$app->getUrlManager()->createAbsoluteUrl(['user/index']) .'" style="width: 30px; height: 30px;">'
+        .'<a href="'. Yii::$app->getUrlManager()->createAbsoluteUrl(['/me']) .'" style="width: 30px; height: 30px;">'
         .'<div style="background: url(/images/users/'. Yii::$app->user->identity->image .')' 
         .'no-repeat center; background-size: cover; width: 30px; height: 30px;'
         .'border-radius: 100px; margin-top: -5px;"></div></li>'
@@ -209,66 +284,48 @@ AppAsset::register($this);
              <button class="opinion-button btn btn-success" data-id="1">Да</button>
              <button class="opinion-button btn btn-danger" data-id="0">Нет</button>
          </p>
+         <p class="op-close" style="position: absolute; right: 10px; bottom: 2px; border-radius: 100px; border: 1px solid #ececec; padding: 4px 7px; cursor: pointer;">
+             <span class="glyphicon glyphicon-remove"></span>
+         </p>
     </div>
 
     <?php if (!Yii::$app->user->getId()): ?>
 
     <div class="container-fluid promo" style="background: url(/images/promo-bg9.jpg) no-repeat; background-size: cover; color: #f6f6f6; margin-top: -14px;background-attachment: fixed; margin-bottom: 15px;">
         <br>
-        <h3 class="text-center" style="margin: 0">Минутку внимания!</h3>
+        <h3 class="text-center" style="margin-top: 20px;">Какой-то слоган красивый</h3>
         <br>
         <div class="promo-text">
-            <h4>Что такое Viebook?</h4>
+            
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus vel quam in quam finibus finibus. Vestibulum id condimentum ipsum, at interdum justo. Fusce et turpis id lectus egestas lacinia. Nullam id velit sed neque porta porttitor at non risus. Sed finibus congue arcu, non dignissim sem cursus sed. Ut commodo dolor a commodo fringilla. Morbi ut malesuada urna. Nam mollis lorem et tellus ullamcorper faucibus. Curabitur id mattis diam.
 
-            <p>
-                Сервис, создающий для Вас персональный план развития в выбранной сфере с помощью книг. Мы используем алгоритм, который учитывает Ваши интересы, опыт работы, цели, генерирует список книг и предоставляет обзоры книг. 
-            </p>
-
-            <br>
-
-            <h4>Зачем нужны обзоры?</h4>
-
-            <p>
-                Обзоры объясняют основные идеи, кому стоит прочитать книгу, рассматривают примеры из книг, расписывают применимо ли это у нас (СНГ). 
-                <br>
-                Цель обзоров - ответить на два основных вопроса. Стоит ли читать данную книгу конкретно Вам и что конкретно вы получите после прочтения.
-            </p>
-
-            <br>
-
-            Сейчас на главной странице вы видите тестовые обзоры, которые добавлены, чтобы показать как это работает. Мы ищем людей, которые будут готовы уделить время написанию обзоров. Если вы хотите присоединиться и помочь развитию сайта - пишите на <a href="mailto:vgurachek@gmail.com" style="color: #eee777;">vgurachek@gmail.com</a>.<br>
-
-            <br>
-            <br>
             <p class="text-center">Сайт ориентирован на три направления деятельности</p>
             <br>
             <div class="row">
                 <div class="col-md-4 text-center" style="padding-bottom: 20px;">
-                    <?= Html::a('<img src="/images/code.png" width="150" height="150">', ['/category/', 'id' => 1]) ?>
+                    <?= Html::a('<img src="/images/code.png" width="100" height="100">', ['/category/', 'id' => 1]) ?>
                     <br>
-                    <h3>Программирование</h3>
+                    <h4>Программирование</h4>
                 </div>
                 <div class="col-md-4 text-center" style="padding-bottom: 20px;">
-                    <?= Html::a('<img src="/images/design.png" width="150" height="150">', ['/category/', 'id' => 2]) ?>
+                    <?= Html::a('<img src="/images/design.png" width="100" height="100">', ['/category/', 'id' => 2]) ?>
                     <br>
-                    <h3>Дизайн</h3>
+                    <h4>Дизайн</h4>
                 </div>
                 <div class="col-md-4 text-center">
-                    <?= Html::a('<img src="/images/business.png" width="150" height="150">', ['/category/', 'id' => 3]) ?>
+                    <?= Html::a('<img src="/images/business.png" width="100" height="100">', ['/category/', 'id' => 3]) ?>
                     <br>
-                    <h3>Бизнес</h3>
+                    <h4>Бизнес</h4>
                 </div>
             </div>
             <br>
-            <br>
             <div class="row">
                 <div class="col-md-12 text-center">
-                    <?= Html::a('Бесплатная регистрация', ['site/signup'], ['class' => 'btn viebutton', 'style' => 'float: none; margin-top: -40px;']) ?>
+                    <?= Html::a('Попробовать бесплатно', ['site/signup'], ['class' => 'btn', 'style' => 'background: #E64354; float: none; margin-top: -40px; color: white;']) ?>
                     
                 </div>
             </div>
         </div>
-        <br>
         <div class="close-promo" style="margin-bottom: 10px; color: #444;">
             <a style="color: whitesmoke !important; text-decoration: underline;" class="sure">Закрыть</a>
         </div>
@@ -276,7 +333,7 @@ AppAsset::register($this);
 
     <?php endif; ?>
 
-    <div class="container main-block">
+    <div class="container layout">
         <?php Alert::widget() ?>
 
         <?= $content ?>
@@ -291,18 +348,16 @@ AppAsset::register($this);
         <div class="row">
             <div class="col-md-4 text-center">
                 <p class="text-left">
-                    <a href="http://viebook.ru/site/about" style="color: #444 !important;">О проекте</a>
+                    <a href="http://blog.viebook.ru/" target="_blank" style="color: #444 !important;">Blog</a>
                     <br>
-                    <a href="http://blog.viebook.ru/" target="_blank" style="color: #444 !important;">Блог</a>
-                    <br>
-                    <a href="https://spark.ru/startup/viebook" target="_blank" style="color: #444 !important;">Мы на спарке</a>
+                    <a href="http://viebook.ru/site/pricing" target="_blank" style="color: #444 !important;">Pricing</a>
                 </p>
             </div>
             <div class="col-md-4 text-center"></div>
             <div class="col-md-4">
                 &copy; Viebook <?= date('Y') ?>. All rights reserved.
                 <br>
-                По всем вопросам: <a href="mailto:vgurachek@gmail.com">vgurachek@gmail.com</a>   
+                Send us feedback: <a href="mailto:vgurachek@gmail.com">contact@viebook.ru</a> 
             </div>
         </div>
     </div>

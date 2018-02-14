@@ -2,6 +2,7 @@
 use yii\helpers\Html;
 
 $this->title = "Восстановление пароля";
+$this->registerJs("jQuery('.layout').addClass('main-block')");
 ?>
 <br>
 <p class="text-center">
