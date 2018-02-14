@@ -11,8 +11,6 @@ $title .= ' на Viebook';
 
 $this->title = $title;
 
-$this->registerJs("jQuery('.layout').addClass('main-block')");
-
 ?>
 
 <h3 class="text-left">
@@ -28,7 +26,7 @@ $this->registerJs("jQuery('.layout').addClass('main-block')");
 
 <?php if ($books): ?>
 
-	<?= $this->render('@frontend/views/parts/book', ['books' => $books]) ?>
+	<?= $this->render('/parts/_book', ['books' => $books]) ?>
 
 	<?php else: ?>
 
