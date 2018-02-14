@@ -291,7 +291,7 @@ AppAsset::register($this);
 
     <?php if (!Yii::$app->user->getId()): ?>
 
-    <div class="container-fluid promo" style="background: url(/images/promo-bg9.jpg) no-repeat; background-size: cover; color: #f6f6f6; margin-top: -14px;background-attachment: fixed; margin-bottom: 15px;">
+    <div class="container-fluid promo" style="background: url(/images/promo-bg9.jpg) no-repeat; background-size: cover; color: #f6f6f6; margin-top: -14px;background-attachment: fixed; margin-bottom: 15px; display: none;">
         <br>
         <h3 class="text-center" style="margin-top: 20px;">Какой-то слоган красивый</h3>
         <br>
