@@ -19,26 +19,32 @@ $this->title = Yii::$app->user->identity->getName() . ' | Viebook';
 		<p class="text-center" style="font-size: 17px;">
 			<?= $user->getName(); ?>
 			<br>
-			<small style="color: gray;">Rating: <?= $user->rating ?></small>
+			<small style="color: gray;">Рейтинг: <?= $user->rating ?></small>
 		</p>
 
 		<ul class="user_menu" style="width: 80%; margin: 0 auto;">
 
 			<li>
-				<span class="glyphicon glyphicon-bell"></span>
-				<?= Html::a('Feed list', ['user/index']) ?>
+				<span class="glyphicon glyphicon-list-alt"></span>
+				<?= Html::a('Обучение', ['user/index']) ?>
 			</li>
 			<li>
 				<span class="glyphicon glyphicon-pushpin"></span>
-				<?= Html::a('Pinned', ['user/index', 'content' => 'pinned']) ?>
+				<?= Html::a('Закрепленные', ['user/index', 'content' => 'pinned']) ?>
 			</li>
-			<li>
-				<span class="glyphicon glyphicon-list-alt"></span>
-				<?= Html::a('My Reviews', ['user/index', 'content' => 'reviews']) ?>
-			</li>
+			
+			<?php if (@$user->reviews[0]): ?>
+				
+				<li>
+					<span class="glyphicon glyphicon-pencil"></span>
+					<?= Html::a('Мои обзоры', ['user/index', 'content' => 'reviews']) ?>
+				</li>
+			
+			<?php endif; ?>
+			
 			<li>
 				<span class="glyphicon glyphicon-cog"></span>
-				<?= Html::a('Settings', ['user/index', 'content' => 'settings']) ?>		
+				<?= Html::a('Настройки', ['user/index', 'content' => 'settings']) ?>		
 			</li>
 
 		</ul>

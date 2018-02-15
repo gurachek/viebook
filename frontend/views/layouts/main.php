@@ -196,10 +196,10 @@ AppAsset::register($this);
     // $leftMenu[] = ['label' => 'Пользователи', 'url' => ['/user/list']];
 
     $leftMenu = [
-        ['label' => 'Books', 'url' => ['/books']],
+        ['label' => 'Книги', 'url' => ['/books']],
     ];
 
-    $leftMenu[] = ['label' => 'About', 'url' => ['/about']];
+    $leftMenu[] = ['label' => 'О проекте', 'url' => ['/about']];
     
     $leftMenu[] = '<li>'
     .'<a class="search-icon" href="#search">'
@@ -219,11 +219,11 @@ AppAsset::register($this);
 
     $menuItems = [];
     if (Yii::$app->user->isGuest) {
-        $menuItems[] = ['label' => 'Sign up', 'url' => ['/signup'], 'options' => ['class' => 'signup']];
-        $menuItems[] = ['label' => 'Login', 'url' => ['/login']];
+        $menuItems[] = ['label' => 'Зарегистрироваться', 'url' => ['/signup'], 'options' => ['class' => 'signup']];
+        $menuItems[] = ['label' => 'Войти', 'url' => ['/login']];
     } else {
 
-        Html::a('<span class="glyphicon glyphicon-pencil"></span> Publish',
+        Html::a('<span class="glyphicon glyphicon-pencil"></span> Написать',
                     ['/search/mycomment'], 
                     [
                         'title' => 'View Feed Comments',
@@ -233,7 +233,7 @@ AppAsset::register($this);
                    );
 
         $menuItems[] = '<li>'
-        .Html::a('&nbsp;<span class="glyphicon glyphicon-pencil"></span> Publish &nbsp;',
+        .Html::a('&nbsp;<span class="glyphicon glyphicon-pencil"></span> Написать &nbsp;',
                     ['/app/find-book'], 
                     [
                         'class' => 'btn write-review',
@@ -280,9 +280,14 @@ AppAsset::register($this);
 
     <div class="opinion">
          <p>
-             Вам нравится новый дизайн?
-             <button class="opinion-button btn btn-success" data-id="1">Да</button>
-             <button class="opinion-button btn btn-danger" data-id="0">Нет</button>
+             Оцените, пожалуйста, новый дизайн
+             <br>
+             <span class="opinion-button" data-id="1">
+                <span class="glyphicon glyphicon-heart-empty" style="color: #ececec; font-size: 20px; margin-right: 15px; cursor: pointer;"></span>
+             </span>
+             <span class="opinion-button" data-id="0">
+                 <span class="glyphicon glyphicon-thumbs-down" style="color: #ececec; font-size: 20px; margin-right: 15px; cursor: pointer;"></span>
+             </span>
          </p>
          <p class="op-close" style="position: absolute; right: 10px; bottom: 2px; border-radius: 100px; border: 1px solid #ececec; padding: 4px 7px; cursor: pointer;">
              <span class="glyphicon glyphicon-remove"></span>
@@ -348,16 +353,16 @@ AppAsset::register($this);
         <div class="row">
             <div class="col-md-4 text-center">
                 <p class="text-left">
-                    <a href="http://blog.viebook.ru/" target="_blank" style="color: #444 !important;">Blog</a>
+                    <a href="http://blog.viebook.ru/" target="_blank" style="color: #444 !important;">Блог</a>
                     <br>
-                    <a href="http://viebook.ru/site/pricing" target="_blank" style="color: #444 !important;">Pricing</a>
+                    <a href="http://viebook.ru/site/pricing" target="_blank" style="color: #444 !important;">Цены</a>
                 </p>
             </div>
             <div class="col-md-4 text-center"></div>
             <div class="col-md-4">
-                &copy; Viebook <?= date('Y') ?>. All rights reserved.
+                &copy; Viebook <?= date('Y') ?>. Ол райтс ресёрвд.
                 <br>
-                Send us feedback: <a href="mailto:vgurachek@gmail.com">contact@viebook.ru</a> 
+                Писать сюда: <a href="mailto:vgurachek@gmail.com">contact@viebook.ru</a> 
             </div>
         </div>
     </div>

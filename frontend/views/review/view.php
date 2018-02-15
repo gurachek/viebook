@@ -29,9 +29,9 @@ jQuery.ajax({
 // Estimate review
 
 jQuery(document).ready(function () {
-	jQuery('.estimate .like').css('cursor', 'pointer');
-	jQuery('.estimate .dislike').css('cursor', 'pointer');
-	jQuery('.estimate span').click(function () {
+	jQuery('.estimate-mobile .like').css('cursor', 'pointer');
+	jQuery('.estimate-mobile .dislike').css('cursor', 'pointer');
+	jQuery('.estimate-mobile span').click(function () {
 		var id = parseInt(jQuery(this).data('id'));
 		var isLeft = parseInt(jQuery(this).data('left'));
 
@@ -71,7 +71,7 @@ jQuery(document).ready(function () {
 
 				jQuery('.ty_for_estimate').animate({'opacity':'0.1'}, 2100, function () {
 					jQuery('.ty_for_estimate').slideUp(450);
-					jQuery('.estimate').css('display', 'block');
+					jQuery('.estimate-mobile').css('display', 'block');
 				});
 			},
 		});
@@ -136,7 +136,7 @@ window.onscroll = function() {
   } else {
   	jQuery('.social-buttons').hide();
   	
-  	if (scrolled >= 350) {
+  	if (scrolled >= 300) {
   		jQuery('.estimate-mobile').show();
   	} else {
   		jQuery('.estimate-mobile').hide();
@@ -149,9 +149,9 @@ JS;
 $nonauthJS = <<<JS
 
 jQuery(document).ready(function () {
-	jQuery('.estimate .like').css('cursor', 'pointer');
-	jQuery('.estimate .dislike').css('cursor', 'pointer');
-	jQuery('.estimate span').click(function () {
+	jQuery('.estimate-mobile .like').css('cursor', 'pointer');
+	jQuery('.estimate-mobile .dislike').css('cursor', 'pointer');
+	jQuery('.estimate-mobile span').click(function () {
 		alert("Вам нужно авторизоваться, чтобы оценить обзор.");
 	});
 });

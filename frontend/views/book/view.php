@@ -67,7 +67,7 @@ function nl2br(str) {
             <div class="image" style="text-align: center;">
                 <div style="background: url(/images/books/<?= $book->image ?>) no-repeat; background-size: cover; width: 100%; height: 400px; background-position: center center; margin-top: 10px;"></div>
                 <br>
-                <?= Html::a("Write review", ['review/write', 'bookid' => $book->id], ['class' => 'btn']); ?>
+                <?= Html::a("Написать обзор", ['review/write', 'bookid' => $book->id], ['class' => 'btn']); ?>
             </div>
         </div>
 
@@ -78,7 +78,7 @@ function nl2br(str) {
             <div class="image" style="text-align: center;">
                 <div style="background: url(/images/authors/<?= $book->author['image'] ?>) no-repeat; background-size: contain; width: 100%; height: 315px; background-position: center center; margin-top: 10px;"></div>
                 <br>
-                <?= Html::a("Author page", ['author/view', 'id' => $book->author['id']], ['class' => 'btn btn-default']); ?>
+                <?= Html::a("Страница автора", ['author/view', 'id' => $book->author['id']], ['class' => 'btn btn-default']); ?>
             </div>
         </div>
     </div>
@@ -112,7 +112,7 @@ function nl2br(str) {
                         </div>
                         <br>
                         <div class="text-right" style="line-height: 30px;">
-                            <?= Html::a('Read', ['review/view', 'id' => $review->id], ['class' => 'go-read-label read-button']) ?>
+                            <?= Html::a('Читать', ['review/view', 'id' => $review->id], ['class' => 'go-read-label read-button']) ?>
                         </div>
                     </div>
 

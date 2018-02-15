@@ -21,7 +21,7 @@ use yii\helpers\Html;
                     <div class="short-info text-center">
                         
                         <span class="glyphicon glyphicon-tags"></span>
-                        <?= Html::a($book->cat['name'], ['/category', 'id' => $book->cat['id']], ['class' => 'dark-link']) ?>
+                        <?= Html::a($book->cat['name'], ['category/index', 'id' => $book->cat['id']], ['class' => 'dark-link']) ?>
                         &nbsp;&nbsp;
                         <span class="glyphicon glyphicon-scale"></span>
                         <?= Html::a($book->level['name'], ['level', 'id' => $book->level['id'], 'catid' => $book->cat['id']], ['class' => 'dark-link']) ?>
@@ -29,13 +29,13 @@ use yii\helpers\Html;
                         <!-- <span class="glyphicon glyphicon-pencil"></span> -->
                         <?php count($book->reviews) ?>
                     </div>
-                    <div class="title"><h3 class="text-center">Good to great</h3></div>
+                    <div class="title"><h3 class="text-center"><?= $book->name ?></h3></div>
                     <div class="view">
                         <?php if (@$book->reviews[0]): ?>
                             <span class="glyphicon glyphicon-link"></span>
-                            <?= Html::a('View best review', ['review/view', 'id' => $book->reviews[0]['id']]); ?>
+                            <?= Html::a('Открыть лучший обзор', ['review/view', 'id' => $book->reviews[0]['id']]); ?>
                         <?php else: ?>
-                            No reviews for this book yet.
+                            Пока нет обзоров на эту книгу.
                         <?php endif; ?>
                     </div>
                 </div>

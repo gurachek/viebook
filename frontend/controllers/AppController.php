@@ -16,6 +16,7 @@ use frontend\models\Book;
 use frontend\models\Tag;
 use frontend\models\Email;
 use common\models\User;
+use frontend\models\Topic;
 
 class AppController extends Controller
 {
