@@ -14,7 +14,7 @@ $this->title = 'Тема "'. $tag_name .'" на Viebook';
         
             <a class="btn btn-default follow_topic">Подписаться <span class="glyphicon glyphicon-plus"></span></a>
 
-            <a class="btn btn-default unfollow_topic">Вы подписаны <span class="glyphicon glyphicon-ok"></span></a>
+           <!--  <a class="btn btn-default unfollow_topic">Вы подписаны <span class="glyphicon glyphicon-ok"></span></a> -->
 
         </h1>
 

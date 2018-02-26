@@ -11,7 +11,12 @@ body {
   box-shadow: 0 1px 4px 0 rgba(0,0,0,0.37);
   transition: box-shadow 0.28s cubic-bezier(0.4,0,0.2,1);
   margin-bottom: 20px;
+  transition: all .5s ease;
   border-radius: 2px;
+}
+
+.main-block:hover {
+  box-shadow: 0 2px 2px 0 rgba(0,0,0,0.2), 0 6px 10px 0 rgba(0,0,0,0.3);
 }
 
 .wrap {
@@ -1030,6 +1035,7 @@ li.display_on_mobile_book_block {
     color: #444;
     margin-bottom: 15px;
     background: white;
+    border-radius: 2px;
 }
 
 .book-list:hover {

@@ -13,6 +13,7 @@ $this->title = $title;
 
 ?>
 
+<div class="main-block" style="padding: 5px 15px;">
 <h3 class="text-left">
 	<?= $level->name ?>
 	<small>
@@ -23,6 +24,7 @@ $this->title = $title;
 
 <p><?= $level->description ?></p>
 <br>
+</div>
 
 <?php if ($books): ?>
 

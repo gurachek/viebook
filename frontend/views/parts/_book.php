@@ -24,7 +24,7 @@ use yii\helpers\Html;
                         <?= Html::a($book->cat['name'], ['category/index', 'id' => $book->cat['id']], ['class' => 'dark-link']) ?>
                         &nbsp;&nbsp;
                         <span class="glyphicon glyphicon-scale"></span>
-                        <?= Html::a($book->level['name'], ['level', 'id' => $book->level['id'], 'catid' => $book->cat['id']], ['class' => 'dark-link']) ?>
+                        <?= Html::a($book->level['name'], ['book/level', 'id' => $book->level['id'], 'catid' => $book->cat['id']], ['class' => 'dark-link']) ?>
                         &nbsp;&nbsp;&nbsp;
                         <!-- <span class="glyphicon glyphicon-pencil"></span> -->
                         <?php count($book->reviews) ?>
