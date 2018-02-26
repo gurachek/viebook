@@ -29,9 +29,9 @@ jQuery.ajax({
 // Estimate review
 
 jQuery(document).ready(function () {
-	jQuery('.estimate-mobile .like').css('cursor', 'pointer');
-	jQuery('.estimate-mobile .dislike').css('cursor', 'pointer');
-	jQuery('.estimate-mobile span').click(function () {
+	jQuery('.estimate .like').css('cursor', 'pointer');
+	jQuery('.estimate .dislike').css('cursor', 'pointer');
+	jQuery('.estimate span').click(function () {
 		var id = parseInt(jQuery(this).data('id'));
 		var isLeft = parseInt(jQuery(this).data('left'));
 
@@ -71,7 +71,7 @@ jQuery(document).ready(function () {
 
 				jQuery('.ty_for_estimate').animate({'opacity':'0.1'}, 2100, function () {
 					jQuery('.ty_for_estimate').slideUp(450);
-					jQuery('.estimate-mobile').css('display', 'block');
+					jQuery('.estimate').css('display', 'block');
 				});
 			},
 		});
@@ -220,14 +220,14 @@ $negative = !empty($review->estimates) ? @$review->estimates[0]->numberOfNegativ
 			</li>
 		</ul>
 
-		<h3><?= $review->title ?>
+		<h1><?= $review->title ?>
 			<?php if (Yii::$app->user->getId() == $review->author['id']): ?>
 			<?= Html::a('
 			<small title="Редактировать" style="color: gray;">
 				<span class="glyphicon glyphicon-edit"></span>
 			</small>', ['review/edit', 'id' => $review->book['id']]) ?>
 			<?php endif; ?>
-		</h3>
+		</h1>
 		
 		<p style="font-size: 17px; line-height: 1.6em;">
 			<?= $review->preview ?>
@@ -249,7 +249,7 @@ $negative = !empty($review->estimates) ? @$review->estimates[0]->numberOfNegativ
 			</span>
 		</div>
 
-		<div class="estimate-mobile">
+		<div class="estimate estimate-mobile">
 			<span title="Понравилось" class="glyphicon glyphicon-heart-empty like" data-id="1"></span><span class="like-count"><?= $positive ?></span>
 
 			&nbsp;&nbsp;&nbsp;&nbsp;

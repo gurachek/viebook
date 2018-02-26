@@ -53,27 +53,27 @@ class AppController extends Controller
 
         // Daily Books
 
-        $pastWeekTime = strtotime("-1 week");
+        $pastMonthTime = strtotime("-1 month");
         $currentTime = time();
 
-        $duringWeekReviews = Review::find()->where(['between', 'created_at', $pastWeekTime, $currentTime])->where(['active' => 1])->all();
+        $duringMonthReviews = Review::find()->where(['between', 'created_at', $pastMonthTime, $currentTime])->where(['active' => 1])->orderBy('rating ASC')->all();
 
         $weeklyReviews = [];
         
-        if ($duringWeekReviews != null) {
+        if ($duringMonthReviews != null) {
 
             $averageRating = 0;
 
-            foreach($duringWeekReviews as $review) {
+            foreach($duringMonthReviews as $review) {
                 $averageRating += $review->rating;
             }
 
-            $averageRating /= count($duringWeekReviews);
+            $averageRating /= count($duringMonthReviews);
 
-            foreach($duringWeekReviews as $review) {
-                // if ($review->rating >= $averageRating) {
+            foreach($duringMonthReviews as $review) {
+                if ($review->rating >= $averageRating) {
                     $weeklyReviews[] = $review;
-                // }
+                }
             }
 
         }

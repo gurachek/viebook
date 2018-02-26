@@ -50,14 +50,7 @@ class AddbookModel extends Model
 			if (!$issetBook) {
 				$book = new Book();
 
-				if (!$authorId = $book->getAuthorIdByName($this->author)) {
-					$author = new Author();
-					$author->name = $this->author;
-					$author->image = 'no-photo.gif'; 
-					$author->save();
-
-					$authorId = $author->id;
-				}
+				$authorId = $this->getAuthorId($book);
 
 				$image = time() . '.' . $this->image->extension;
 
@@ -66,47 +59,70 @@ class AddbookModel extends Model
 				$book->name = htmlspecialchars($this->name);
 				$book->image = $image;
 				$book->pages = intval($this->pages);
-				$book->level = intval($this->level);
+				$book->level_id = intval($this->level);
 				$book->author_id = $authorId;
 				$book->publish_date = $this->publish_date;
 				$book->category = $this->category;
 
 				$book->active = 0;
 
-				$book->save();
-
-				$tags = explode(',', $this->tags);
-
-				foreach($tags as $tag) {
-					$tag = trim($tag);
-
-					if (!$tag) {
-						continue;
-					}
-
-					if (!$issetTag = Tag::findOne(['name' => $tag])) {
-						$issetTag = new Tag();
-						$issetTag->name = $tag;
-						$issetTag->save();
-					}
-
-					$bookTag = new BookTags();
-					$bookTag->book_id = $book->id;
-					$bookTag->tag_id = $issetTag->id;
-
-					$bookTag->save();
-				}
-
-				$track = new BookTrack();
-				$track->user_id = Yii::$app->user->getId();
-				$track->book_id = $book->id;
-				$track->time = time();
-				$track->save();
-
-				Yii::$app->user->identity->increaseRating(2);
-
-				return true;
+				if ($book->save())
+					if ($this->addTags($book))
+						if ($this->track($book))
+							return true;
 			}
+		}
+
+		return false;
+	}
+
+	private function getAuthorId(Book $book)
+	{
+		if (!$authorId = $book->getAuthorIdByName($this->author)) {
+			$author = new Author();
+			$author->name = $this->author;
+			$author->image = 'no-photo.gif'; 
+			$author->save();
+
+			return $author->id;
+		}
+
+		return false;
+	}
+
+	private function track(Book $book)
+	{
+		$track = new BookTrack();
+		$track->user_id = Yii::$app->user->getId();
+		$track->book_id = $book->id;
+		$track->time = time();
+
+		Yii::$app->user->identity->increaseRating(2);
+
+		return $track->save() ?? false;
+	}
+
+	private function addTags(Book $book)
+	{
+		$tags = explode(',', $this->tags);
+		foreach($tags as $tag) {
+			$tag = trim($tag);
+
+			if (!$tag) {
+				continue;
+			}
+
+			if (!$issetTag = Tag::findOne(['name' => $tag])) {
+				$issetTag = new Tag();
+				$issetTag->name = $tag;
+				$issetTag->save();
+			}
+
+			$bookTag = new BookTags();
+			$bookTag->book_id = $book->id;
+			$bookTag->tag_id = $issetTag->id;
+
+			return $bookTag->save();
 		}
 
 		return false;

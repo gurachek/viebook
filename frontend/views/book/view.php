@@ -1,7 +1,7 @@
 <?php
 use yii\helpers\Html;
 
-$this->title = '"'. $book->name .'" '. $book->author['name'];
+$this->title = '"'. $book->name .'" '. $book->author['name'] .' | Viebook';
 
 $url = Yii::$app->getUrlManager()->createAbsoluteUrl(['review/ajax']);
 $bookVisitUrl = Yii::$app->getUrlManager()->createAbsoluteUrl(['book/visit']);
