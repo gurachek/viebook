@@ -85,9 +85,10 @@ class AddbookModel extends Model
 			$author->save();
 
 			return $author->id;
+		} else {
+			return $authorId;
 		}
 
-		return false;
 	}
 
 	private function track(Book $book)

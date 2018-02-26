@@ -155,7 +155,7 @@ AppAsset::register($this);
 
 <div class="search-input-block">
     <div class="row">
-        <div class="col-md-8 col-md-offset-2">
+        <div class="col-md-8 col-md-offset-3 col-xs-11 col-xs-offset-1">
             <form name="search-form" id="searchform" class="search-form">
 
                 <div style="width: 80%; float: left; padding-right: 5px;">
@@ -355,7 +355,7 @@ AppAsset::register($this);
                 <p class="text-left">
                     <a href="http://blog.viebook.ru/" target="_blank" style="color: #444 !important;">Блог</a>
                     <br>
-                    <a href="http://viebook.ru/site/pricing" target="_blank" style="color: #444 !important;">Цены</a>
+                    <a href="http://viebook.ru/pricing" target="_blank" style="color: #444 !important;">Цены</a>
                 </p>
             </div>
             <div class="col-md-4 text-center"></div>

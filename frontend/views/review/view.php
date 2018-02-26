@@ -32,6 +32,10 @@ jQuery(document).ready(function () {
 	jQuery('.estimate .like').css('cursor', 'pointer');
 	jQuery('.estimate .dislike').css('cursor', 'pointer');
 	jQuery('.estimate span').click(function () {
+
+		if (jQuery(this).hasClass('pushpin'))
+			return false;
+		
 		var id = parseInt(jQuery(this).data('id'));
 		var isLeft = parseInt(jQuery(this).data('left'));
 

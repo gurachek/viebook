@@ -2,6 +2,7 @@
 
 namespace frontend\models;
 
+use Yii;
 use yii\base\Model;
 use frontend\models\Review;
 
@@ -30,6 +31,9 @@ class EditReviewModel extends Model
 		$review->preview = $this->preview;
 		$review->text = $this->text;
 		$review->active = 0;
+
+		if (Yii::$app->user->identity->verified)
+			$review->active = 1;
 
 		if ($review->save()) {
 			return true;

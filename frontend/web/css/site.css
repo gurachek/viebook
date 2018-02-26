@@ -277,10 +277,10 @@ a.write-review {
 }
 
 .review_page .estimate-mobile .pushpin {
-  color: orange;
+  color: gray;
   border-radius: 100px;
-  border: 1px solid orange;
-  padding: 5px;
+  border: 1px solid gray;
+  padding: 7px;
   cursor: pointer;
   font-size: 20px;
   margin-right: 10px;
@@ -1042,14 +1042,14 @@ li.display_on_mobile_book_block {
 }
 
 .short-info {
-    padding: 7px 0px;
+    padding-top: 15px;
 }
 
 .book-list .view {
     width: 100%;
     line-height: 30px;
     border-top: 1px solid #ececec;
-
+    cursor: pointer;
     margin: 0;
     text-align: center;
     margin-top: 10px;

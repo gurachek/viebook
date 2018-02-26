@@ -18,7 +18,7 @@ $this->registerJs($js);
 <?php if ($books): ?>
 
 	<div class="text-center">
-        <h3>
+        <h1>
             <?= $books[0]->cat['name'] ?>
             <?php if (Yii::$app->user->getId()): ?>
         
@@ -27,7 +27,7 @@ $this->registerJs($js);
             </a>
 
         <?php endif; ?>
-        </h3>
+        </h1>
 
     </div>
 

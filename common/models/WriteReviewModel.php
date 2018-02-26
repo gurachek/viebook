@@ -42,8 +42,12 @@ class WritereviewModel extends Model
     	$review->title = $this->title;
     	$review->user_id = $this->userid;
     	$review->created_at = time();
-    	$review->active = 0;
-    	$review->book_id = $this->bookid;
+        $review->active = 0;
+
+        if (Yii::$app->user->identity->verified)
+            $review->active = 1;
+        
+        $review->book_id = $this->bookid;
         $review->preview = $this->preview;
     	$review->text = $this->text;
 

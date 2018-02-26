@@ -9,14 +9,14 @@ $this->title = 'Тема "'. $tag_name .'" на Viebook';
 
 
 <div class="text-center">
-        <h3>
+        <h1>
             <?= $tag_name ?>
         
             <a class="btn btn-default follow_topic">Подписаться <span class="glyphicon glyphicon-plus"></span></a>
 
-           <!--  <a class="btn btn-default unfollow_topic">Вы подписаны <span class="glyphicon glyphicon-ok"></span></a> -->
+            <a class="btn btn-default unfollow_topic">Вы подписаны <span class="glyphicon glyphicon-ok"></span></a>
 
-        </h3>
+        </h1>
 
     </div>
 <br>
