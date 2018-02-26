@@ -14,7 +14,22 @@ $this->registerJs("jQuery('.layout').addClass('main-block')");
     <h3 class="text-center">Регистрация</h3>
     <br>
     <div class="row">
-        <div class="col-md-4 col-md-offset-4">
+        <div class="col-md-4 col-md-offset-2">
+            <?php $form = ActiveForm::begin(['id' => 'form-signup']); ?>
+
+                <?= $form->field($model, 'username')->textInput(['placeholder' => 'Придумайте себе никнейм', 'autofocus' => true])->label(false) ?>
+
+                <?= $form->field($model, 'email')->textInput(['placeholder' => 'Введите email-адрес'])->label(false) ?>
+
+                <?= $form->field($model, 'password')->passwordInput(['placeholder' => 'Придумайте пароль'])->label(false) ?>
+                
+                <div class="form-group">
+                    <?= Html::submitButton('Зарегистрироваться', ['class' => 'btn btn-danger', 'name' => 'signup-button']) ?>
+                </div>
+
+            <?php ActiveForm::end(); ?>
+        </div>
+        <div class="col-md-4">
             <?php $form = ActiveForm::begin(['id' => 'form-signup']); ?>
 
                 <?= $form->field($model, 'username')->textInput(['placeholder' => 'Придумайте себе никнейм', 'autofocus' => true])->label(false) ?>

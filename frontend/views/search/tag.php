@@ -1,12 +1,17 @@
 <?php
 use yii\helpers\Html;
 
-$tag_name = mb_strtoupper(mb_substr($tag->name, 0, 1, 'UTF-8'), 'UTF-8') . mb_substr($tag->name, 1, null,'UTF-8');
+$tag_name = '';
+
+if (@$tag->name)
+	$tag_name = mb_strtoupper(mb_substr(@$tag->name, 0, 1, 'UTF-8'), 'UTF-8') . mb_substr(@$tag->name, 1, null,'UTF-8');
+
 
 $this->title = 'Тема "'. $tag_name .'" на Viebook';
 
 ?>
 
+<?php if ($tag_name): ?>
 
 <div class="text-center">
         <h1>
@@ -21,12 +26,14 @@ $this->title = 'Тема "'. $tag_name .'" на Viebook';
     </div>
 <br>
 
+<?php endif; ?>
+
 <?php if ($books): ?>
 
 	<?= $this->render('/parts/_book', ['books' => $books]); ?>
 
 	<?php else: ?>
 
-	<h4>На сайте нет подходящих книг</h4>
+	<h1 class="text-center">На сайте нет подходящих книг</h1>
 
 <?php endif; ?>

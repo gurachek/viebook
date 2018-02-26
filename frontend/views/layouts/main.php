@@ -26,9 +26,9 @@ jQuery(document).ready(function () {
         $.session.set('promo_closed', true);
     });
 
-    if ($.session.get('design_opinion')) {
+    // if ($.session.get('design_opinion')) {
         jQuery('.opinion').css('display', 'none');
-    }    
+    // }    
     
     jQuery('.opinion .opinion-button').click(function () {
 
@@ -296,29 +296,33 @@ AppAsset::register($this);
 
     <?php if (!Yii::$app->user->getId()): ?>
 
-    <div class="container-fluid promo-disable" style="background: url(/images/promo-bg9.jpg) no-repeat; background-size: cover; color: #f6f6f6; margin-top: -14px;background-attachment: fixed; margin-bottom: 15px; display: none;">
+    <div class="container-fluid promo" style="background: url(/images/promo-bg9.jpg) no-repeat; background-size: cover; color: #f6f6f6; margin-top: -14px;background-attachment: fixed; margin-bottom: 15px; display: none;">
         <br>
-        <h3 class="text-center" style="margin-top: 20px;">Какой-то слоган красивый</h3>
+        <br>
+        <h3 class="text-center" style="margin-top: 20px;">Платформа для создания персонализированного пути развития в выбранной сфере</h3>
         <br>
         <div class="promo-text">
             
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus vel quam in quam finibus finibus. Vestibulum id condimentum ipsum, at interdum justo. Fusce et turpis id lectus egestas lacinia. Nullam id velit sed neque porta porttitor at non risus. Sed finibus congue arcu, non dignissim sem cursus sed. Ut commodo dolor a commodo fringilla. Morbi ut malesuada urna. Nam mollis lorem et tellus ullamcorper faucibus. Curabitur id mattis diam.
+            Сервис создает для вас и корректирует в процессе изучения план развития на основе ваших интересов, характера, способности обучаться. Помогает с дисциплиной и отслеживает прогрес при изучении. 
+
+            <br>
+            <br>
 
             <p class="text-center">Сайт ориентирован на три направления деятельности</p>
             <br>
             <div class="row">
                 <div class="col-md-4 text-center" style="padding-bottom: 20px;">
-                    <?= Html::a('<img src="/images/code.png" width="100" height="100">', ['/category/', 'id' => 1]) ?>
+                    <?= Html::a('<img src="/images/code.png" width="100" height="100">', ['/category/index', 'id' => 1]) ?>
                     <br>
                     <h4>Программирование</h4>
                 </div>
                 <div class="col-md-4 text-center" style="padding-bottom: 20px;">
-                    <?= Html::a('<img src="/images/design.png" width="100" height="100">', ['/category/', 'id' => 2]) ?>
+                    <?= Html::a('<img src="/images/design.png" width="100" height="100">', ['/category/index', 'id' => 2]) ?>
                     <br>
                     <h4>Дизайн</h4>
                 </div>
                 <div class="col-md-4 text-center">
-                    <?= Html::a('<img src="/images/business.png" width="100" height="100">', ['/category/', 'id' => 3]) ?>
+                    <?= Html::a('<img src="/images/business.png" width="100" height="100">', ['/category/index', 'id' => 3]) ?>
                     <br>
                     <h4>Бизнес</h4>
                 </div>

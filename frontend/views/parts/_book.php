@@ -20,10 +20,9 @@ use yii\helpers\Html;
                     ?>
                     <div class="short-info text-center">
                         
-                        <span class="glyphicon glyphicon-tags"></span>
+                        <span class="glyphicon glyphicon-menu-hamburger"></span>
                         <?= Html::a($book->cat['name'], ['category/index', 'id' => $book->cat['id']], ['class' => 'dark-link']) ?>
                         &nbsp;&nbsp;
-                        <span class="glyphicon glyphicon-scale"></span>
                         <?= Html::a($book->level['name'], ['book/level', 'id' => $book->level['id'], 'catid' => $book->cat['id']], ['class' => 'dark-link']) ?>
                         &nbsp;&nbsp;&nbsp;
                         <!-- <span class="glyphicon glyphicon-pencil"></span> -->
