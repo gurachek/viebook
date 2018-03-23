@@ -180,8 +180,8 @@ AppAsset::register($this);
 <div class="wrap" style="margin-top: 5px;">
     <?php
     NavBar::begin([
-        'brandLabel' => '<img src="/images/logo.png" width="40" height="40" style="margin-top: -9px; float: left">
-            <img src="/images/logo_text.svg" width="130" height="30" style="margin-top: -7px;">',
+        'brandLabel' => '<img src="/images/logo.png" width="40" height="40" style="margin-top: -9px; float: left;">
+            <img src="/images/logo_text.svg" width="130" height="30" style="margin-top: -7px; float: right;">',
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
             'class' => 'navbar-inverse navbar-fixed-top',
