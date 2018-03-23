@@ -18,8 +18,9 @@ $this->registerJs("jQuery('.layout').addClass('main-block')");
         <?= nl2br(Html::encode($message)) ?>
     </div>
 
+    <p>Debug data:</p>
     <pre>
-        <?php print_r($exception) ?>
+        <?php print_r($exception); ?>
     </pre>
 
     <p>
