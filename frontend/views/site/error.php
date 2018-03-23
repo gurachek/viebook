@@ -18,6 +18,10 @@ $this->registerJs("jQuery('.layout').addClass('main-block')");
         <?= nl2br(Html::encode($message)) ?>
     </div>
 
+    <pre>
+        <?php print_r($exception) ?>
+    </pre>
+
     <p>
         The above error occurred while the Web server was processing your request.
     </p>
